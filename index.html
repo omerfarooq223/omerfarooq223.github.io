@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Muhammad Umar Farooq — AI Engineer</title>
+<title>Muhammad Umar Farooq — AI & ML Student | Agentic AI Developer</title>
+<meta name="description" content="Muhammad Umar Farooq — BS Artificial Intelligence student at UMT, Lahore. Building autonomous AI agents, ML pipelines, and intelligent automation. 3.82 CGPA, 70% merit scholar, Dean's & Rector's Award recipient." />
+<meta name="keywords" content="Muhammad Umar Farooq, AI developer, machine learning, agentic AI, UMT Lahore, Python, computer vision, NLP" />
+<meta name="author" content="Muhammad Umar Farooq" />
+<meta property="og:title" content="Muhammad Umar Farooq — AI & ML Student" />
+<meta property="og:description" content="Building autonomous AI agents, ML pipelines, and intelligent automation. BS AI student at UMT with 3.82 CGPA." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://omerfarooq223.github.io/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Muhammad Umar Farooq — AI & ML Student" />
+<meta name="twitter:description" content="Building autonomous AI agents, ML pipelines, and intelligent automation." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
@@ -182,9 +193,23 @@
   @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
 
+  .hamburger { display: none; background: none; border: none; cursor: none; padding: 8px; z-index: 101; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; transition: all 0.3s; }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(7,8,15,0.95); backdrop-filter: blur(20px); z-index: 99; flex-direction: column; justify-content: center; align-items: center; gap: 28px; }
+  .mobile-overlay.active { display: flex; }
+  .mobile-overlay a { color: var(--text); text-decoration: none; font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; letter-spacing: 0.05em; transition: color 0.2s; }
+  .mobile-overlay a:hover { color: var(--cyan); }
+
+  .btn-resume { padding: 14px 32px; background: linear-gradient(135deg, var(--purple), #7c3aed); color: #fff; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.9rem; border: none; border-radius: 6px; cursor: none; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-resume:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(168,85,247,0.3); }
+
   @media(max-width:900px){
     nav{padding:18px 20px;}
     .nav-links{display:none;}
+    .hamburger{display:block;}
     .hero,section{padding-left:22px;padding-right:22px;}
     .about-grid{grid-template-columns:1fr;gap:48px;}
     footer{flex-direction:column;gap:10px;text-align:center;padding:28px 22px;}
@@ -207,7 +232,18 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-overlay" id="mobileOverlay">
+  <a href="#about" class="mobile-nav-link">About</a>
+  <a href="#education" class="mobile-nav-link">Education</a>
+  <a href="#experience" class="mobile-nav-link">Experience</a>
+  <a href="#projects" class="mobile-nav-link">Projects</a>
+  <a href="#skills" class="mobile-nav-link">Skills</a>
+  <a href="#contact" class="mobile-nav-link">Contact</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -233,6 +269,7 @@
   <div class="hero-cta">
     <a href="#projects" class="btn-primary">View My Work</a>
     <a href="https://github.com/omerfarooq223" target="_blank" class="btn-ghost">GitHub ↗</a>
+    <a href="CV.pdf" download class="btn-resume">⬇ Download Resume</a>
   </div>
   <div class="scroll-hint">
     <div class="scroll-line"></div>
@@ -290,7 +327,7 @@
       </div>
       <div class="stat-card">
         <div class="stat-accent" style="background:var(--purple)"></div>
-        <div class="stat-num" style="color:var(--purple)">6+</div>
+        <div class="stat-num" style="color:var(--purple)">9+</div>
         <div class="stat-desc">Projects Shipped</div>
       </div>
       <div class="stat-card">
@@ -321,6 +358,23 @@
         <span style="color:var(--green)">Dean's Award</span> — top 10% SGPA in the department &nbsp;·&nbsp;
         <span style="color:var(--pink)">Rector's Award</span> — achieved a perfect 4.0 SGPA
       </p>
+    </div>
+    <div class="edu-card ec-purple reveal d2">
+      <div class="edu-year">Sep 2021 – Jun 2023</div>
+      <div class="edu-school">Punjab Group of Colleges (PGC), Lahore</div>
+      <div class="edu-degree">FSc Pre-Medical</div>
+      <div class="edu-badges">
+        <span class="edu-badge badge-purple">970/1100 (88.2%)</span>
+        <span class="edu-badge badge-amber">50% Merit Scholarship</span>
+      </div>
+    </div>
+    <div class="edu-card ec-amber reveal d3">
+      <div class="edu-year">Jun 2019 – Jun 2021</div>
+      <div class="edu-school">Matric (Science)</div>
+      <div class="edu-degree">Biology (A+), Chemistry (A+), Physics (A+)</div>
+      <div class="edu-badges">
+        <span class="edu-badge badge-amber">1085/1100 (98.6%)</span>
+      </div>
     </div>
 
   </div>
@@ -424,6 +478,27 @@
       <div class="project-name">Course Registration System</div>
       <p class="project-desc">Full-featured course registration system in C++ — implementing OOP principles, data structures, and CLI-driven interaction for complete university course management.</p>
       <div class="project-stack"><span class="stack-pill">C++</span><span class="stack-pill">OOP</span><span class="stack-pill">Data Structures</span></div>
+    </a>
+    <a href="https://github.com/omerfarooq223/YOLO_Vehicle_Detection" target="_blank" class="project-card pc-purple reveal d1">
+      <div class="project-arrow">↗</div>
+      <div class="project-tag tag-purple">Computer Vision</div>
+      <div class="project-name">YOLO Vehicle Detection</div>
+      <p class="project-desc">Vehicle detection pipeline using YOLOv8 for real-time object detection and tracking on video feeds — leveraging deep learning for accurate vehicle identification.</p>
+      <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">YOLOv8</span><span class="stack-pill">Computer Vision</span></div>
+    </a>
+    <a href="https://github.com/omerfarooq223/n8n-jira-slack" target="_blank" class="project-card pc-amber reveal d2">
+      <div class="project-arrow">↗</div>
+      <div class="project-tag tag-amber">Automation</div>
+      <div class="project-name">Jira-Slack Integration</div>
+      <p class="project-desc">Automated workflow integrating Jira project management with Slack notifications — streamlining team communication and issue tracking via n8n.</p>
+      <div class="project-stack"><span class="stack-pill">n8n</span><span class="stack-pill">Jira</span><span class="stack-pill">Slack</span><span class="stack-pill">REST APIs</span></div>
+    </a>
+    <a href="https://github.com/omerfarooq223/DSA_CPP" target="_blank" class="project-card pc-green reveal d3">
+      <div class="project-arrow">↗</div>
+      <div class="project-tag tag-green">Data Structures</div>
+      <div class="project-name">DSA in C++</div>
+      <p class="project-desc">Comprehensive collection of data structures and algorithms implemented in C++ — sorting, searching, stacks, linked lists, and binary search trees.</p>
+      <div class="project-stack"><span class="stack-pill">C++</span><span class="stack-pill">Algorithms</span><span class="stack-pill">Data Structures</span></div>
     </a>
   </div>
 
@@ -555,6 +630,22 @@
 
   window.addEventListener('scroll',()=>{
     document.getElementById('nav').style.padding=window.scrollY>50?'14px 60px':'22px 60px';
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileOverlay.classList.toggle('active');
+    document.body.style.overflow = mobileOverlay.classList.contains('active') ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      mobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
   });
 </script>
 </body>
