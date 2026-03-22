@@ -6,7 +6,7 @@
 <title>Muhammad Umar Farooq — AI Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 :root{
   --bg:#07080f;--surface:#0c0d18;--card:#0f1020;--border:rgba(255,255,255,0.07);
@@ -118,10 +118,22 @@ nav.scrolled{padding:14px 48px;}
 
 /* ── SECTION BASE ── */
 .sec{padding:110px 48px;position:relative;}
-.inn{max-width:var(--cw);margin:0 auto;}
+.inn{max-width:var(--cw);margin:0 auto;position:relative;}
 .sl{font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;margin-bottom:10px;font-weight:600;}
 .st{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(1.6rem,4vw,2.8rem);letter-spacing:-.025em;line-height:1.15;margin-bottom:52px;}
 .surf{background:var(--surface);}
+/* Section top line — animates on scroll into view */
+.sec::after{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),transparent 45%,var(--purple) 85%,transparent);
+  transform:scaleX(0);
+  transform-origin:left center;
+  opacity:.75;
+  pointer-events:none;
+  transition:transform 1s cubic-bezier(.16,1,.3,1);
+}
+.sec.sec-visible::after{transform:scaleX(1);}
 
 /* ── 3D PERSPECTIVE CONTAINER ── */
 .persp{perspective:1000px;}
@@ -222,6 +234,82 @@ nav.scrolled{padding:14px 48px;}
 .edu-dg{color:var(--muted2);font-size:.82rem;margin-bottom:14px;}
 .edu-bs{display:flex;flex-wrap:wrap;gap:6px;}
 .edu-note{margin-top:12px;font-size:.72rem;color:var(--muted2);line-height:1.6;}
+
+/* ── EDUCATION (dossier cards — matches portfolio reference) ── */
+#education{
+  position:relative;
+  background:radial-gradient(ellipse 85% 55% at 50% -10%,rgba(0,229,255,.06),transparent 55%),radial-gradient(ellipse 60% 40% at 90% 30%,rgba(168,85,247,.05),transparent 50%);
+}
+#education .edu-grid{
+  counter-reset:edu-rec;
+  gap:18px;
+  grid-template-columns:repeat(auto-fit,minmax(288px,1fr));
+}
+#education .edu-card{
+  counter-increment:edu-rec;
+  padding:26px 24px 28px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.09);
+  background:linear-gradient(155deg,rgba(22,24,42,.97) 0%,rgba(11,12,22,.98) 50%,rgba(8,9,18,1) 100%);
+  box-shadow:0 18px 48px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.06);
+  overflow:hidden;
+}
+#education .edu-card::before{
+  content:'REC · ' counter(edu-rec,decimal-leading-zero);
+  display:block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.52rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  color:rgba(160,162,190,.65);
+  margin-bottom:8px;
+}
+#education .edu-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 28px 56px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08);
+}
+#education .edu-yr{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.58rem;
+  letter-spacing:.12em;
+  color:rgba(136,138,170,.85);
+  margin-bottom:16px;
+}
+#education .edu-sc{
+  font-size:clamp(1.02rem,2.4vw,1.14rem);
+  font-weight:800;
+  color:var(--text);
+  line-height:1.25;
+  margin-bottom:6px;
+}
+#education .edu-dg{
+  font-size:.84rem;
+  color:var(--muted2);
+  margin-bottom:16px;
+}
+#education .edu-bs{gap:8px;}
+#education .edu-note{
+  margin-top:14px;
+  padding-top:12px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+#education .edu-card::after{
+  height:3px;
+  border-radius:0;
+  transition:width .75s cubic-bezier(.16,1,.3,1) .15s,box-shadow .45s ease .55s;
+}
+#education .stg.in .edu-card.ec-c::after{
+  background:linear-gradient(90deg,var(--cyan),#22d3ee);
+  box-shadow:0 0 32px rgba(0,229,255,.5),0 0 12px rgba(0,229,255,.35);
+}
+#education .stg.in .edu-card.ec-p::after{
+  background:linear-gradient(90deg,var(--purple),#c084fc);
+  box-shadow:0 0 32px rgba(168,85,247,.45),0 0 12px rgba(168,85,247,.3);
+}
+#education .stg.in .edu-card.ec-a::after{
+  background:linear-gradient(90deg,var(--amber),#fcd34d);
+  box-shadow:0 0 32px rgba(251,191,36,.4),0 0 12px rgba(251,191,36,.28);
+}
 
 /* ── EXPERIENCE ── */
 .exp-wrap{position:relative;padding-left:28px;}
@@ -367,6 +455,7 @@ nav.scrolled{padding:14px 48px;}
 
 /* ── CONTACT ── */
 .ct-wrap{text-align:center;position:relative;overflow:hidden;}
+.ct-wrap.ct-play{animation:ctIn 1s cubic-bezier(.16,1,.3,1) both;}
 .ct-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:360px;background:radial-gradient(ellipse,rgba(168,85,247,.12) 0%,transparent 70%);pointer-events:none;animation:ctPulse 8s ease-in-out infinite;}
 .ct-big{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(2rem,5.5vw,5rem);letter-spacing:-.035em;line-height:1.05;margin-bottom:16px;}
 .ot{-webkit-text-stroke:1.5px rgba(255,255,255,.16);color:transparent;}
@@ -403,6 +492,7 @@ footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:
 @keyframes umarShine{0%,100%{background-position:0% 40%;}50%{background-position:100% 60%;}}
 @keyframes gridDrift{to{background-position:60px 60px;}}
 @keyframes ctPulse{0%,100%{opacity:.85;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.04);}}
+@keyframes ctIn{0%{opacity:0;transform:translateY(32px) scale(.98);}100%{opacity:1;transform:translateY(0) scale(1);}}
 
 /* Reduced motion */
 @media(prefers-reduced-motion:reduce){
@@ -412,6 +502,9 @@ footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:
   .orb{animation:none!important;}
   .hero-eyebrow::before{animation:none!important;}
   .scroll-cue .line::after{animation:none!important;}
+  .ct-wrap.ct-play{animation:none!important;}
+  .sec::after{transition:none!important;}
+  .sec.sec-visible::after{transform:scaleX(1)!important;}
 }
 
 /* ── MOBILE ── */
@@ -578,7 +671,7 @@ footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:
 <!-- EDUCATION -->
 <section class="sec" id="education">
   <div class="inn">
-    <p class="sl sl-l" style="color:var(--purple)">Education</p>
+    <p class="sl sl-l" style="color:var(--cyan)">Education</p>
     <h2 class="st wr">
       <span class="w"><span class="wi">Academic</span></span>
       <span class="w"><span class="wi"><span class="gt2">Background</span></span></span>
@@ -863,6 +956,26 @@ window.addEventListener('scroll',()=>{
 // ── NAV ──
 const nav = document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+
+// ── SECTION TOP LINE (scroll reveal) ──
+const secObs=new IntersectionObserver(ents=>{
+  ents.forEach(e=>{if(e.isIntersecting)e.target.classList.add('sec-visible');});
+},{threshold:0.1,rootMargin:'0px 0px -24px 0px'});
+document.querySelectorAll('section.sec').forEach(s=>secObs.observe(s));
+
+// ── CONTACT BLOCK (entrance when in view) ──
+const ctW=document.querySelector('#contact .ct-wrap');
+if(ctW&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const ctObs=new IntersectionObserver(ents=>{
+    ents.forEach(e=>{
+      if(e.isIntersecting){
+        ctW.classList.add('ct-play');
+        ctObs.disconnect();
+      }
+    });
+  },{threshold:0.15});
+  ctObs.observe(document.getElementById('contact'));
+}
 
 // ── HAMBURGER ──
 const ham = document.getElementById('ham');
