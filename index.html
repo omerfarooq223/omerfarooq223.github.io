@@ -12,6 +12,13 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Muhammad Umar Farooq — AI Engineer" />
   <meta name="twitter:description" content="AI engineer building autonomous agentic systems, ML pipelines, and intelligent automation. Selected projects include agentic grading, research assistants, and a YOLOv8 smart parking system with an AI assistant." />
+  <script>
+    (function () {
+      try {
+        document.documentElement.dataset.theme = 'dark';
+      } catch (e) { /* no-op */ }
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -32,6 +39,200 @@
       --muted: #44455a;
       --muted2: #8888aa;
       --cw: 1080px;
+
+      --navBg: rgba(7, 8, 15, .75);
+      --mobBg: rgba(7, 8, 15, .97);
+      --projCardGradA: rgba(18, 20, 38, .65);
+      --projCardAfterLine: rgba(255, 255, 255, .12);
+      --termBg: rgba(10, 11, 21, 0.65);
+      --termTbBg: rgba(255, 255, 255, 0.03);
+
+      --eduCardBorder: rgba(255, 255, 255, .09);
+      --eduCardGradA: rgba(22, 24, 42, .6);
+      --eduCardGradB: rgba(11, 12, 22, .65);
+      --eduCardGradC: rgba(8, 9, 18, .7);
+      --eduCardShadow: rgba(0, 0, 0, .38);
+      --eduCardInset: rgba(255, 255, 255, .06);
+      --eduCardHoverShadow: rgba(0, 0, 0, .45);
+      --eduCardHoverInset: rgba(255, 255, 255, .08);
+      --eduCardBeforeColor: rgba(160, 162, 190, .65);
+      --eduYearLabel: rgba(136, 138, 170, .85);
+      --eduNoteBorderTop: rgba(255, 255, 255, .05);
+
+      --themeToggleBg: rgba(255, 255, 255, .04);
+      --themeToggleBgHover: rgba(0, 229, 255, .07);
+    }
+
+    html[data-theme="light"] {
+      --bg: #fdfbff;
+      --surface: #f9fafb;
+      --card: rgba(15, 23, 42, 0.04);
+      --border: rgba(15, 23, 42, 0.08);
+
+      /* Softer, brighter accent system */
+      --cyan: #0ea5e9;
+      --purple: #6366f1;
+      --pink: #ec4899;
+      --amber: #f59e0b;
+      --green: #10b981;
+
+      --text: #020617;
+      --muted: #64748b;
+      --muted2: #6b7280;
+
+      --navBg: rgba(249, 250, 251, 0.92);
+      --mobBg: rgba(249, 250, 251, 0.98);
+
+      --projCardGradA: rgba(255, 255, 255, 0.98);
+      --projCardAfterLine: rgba(148, 163, 184, 0.55);
+
+      --termBg: rgba(255, 255, 255, 0.88);
+      --termTbBg: rgba(15, 23, 42, 0.03);
+
+      --eduCardBorder: rgba(148, 163, 184, 0.45);
+      --eduCardGradA: rgba(255, 255, 255, 0.98);
+      --eduCardGradB: rgba(244, 244, 255, 0.98);
+      --eduCardGradC: rgba(235, 243, 255, 0.98);
+      --eduCardShadow: rgba(15, 23, 42, 0.08);
+      --eduCardInset: rgba(255, 255, 255, 0.90);
+      --eduCardHoverShadow: rgba(15, 23, 42, 0.16);
+      --eduCardHoverInset: rgba(255, 255, 255, 0.96);
+      --eduCardBeforeColor: rgba(100, 116, 139, 0.9);
+      --eduYearLabel: rgba(100, 116, 139, 0.95);
+      --eduNoteBorderTop: rgba(148, 163, 184, 0.4);
+
+      --themeToggleBg: rgba(15, 23, 42, 0.02);
+      --themeToggleBgHover: rgba(14, 165, 233, 0.14);
+    }
+
+    /* ── LIGHT MODE STYLING LAYER ── */
+    html[data-theme="light"] body {
+      background:
+        radial-gradient(900px 520px at 10% -12%, rgba(14, 165, 233, 0.10), transparent 62%),
+        radial-gradient(900px 520px at 90% -10%, rgba(99, 102, 241, 0.09), transparent 62%),
+        var(--bg);
+    }
+
+    html[data-theme="light"] body::before {
+      opacity: .12;
+    }
+
+    html[data-theme="light"] nav {
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      border-bottom-color: rgba(148, 163, 184, 0.35);
+    }
+
+    html[data-theme="light"] .surf {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.52), rgba(249, 250, 251, 0.74));
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+
+    html[data-theme="light"] .mq-wrap {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.92), rgba(245, 247, 255, 0.96));
+      border-top-color: rgba(148, 163, 184, 0.28);
+      border-bottom-color: rgba(148, 163, 184, 0.28);
+    }
+
+    html[data-theme="light"] .orb1 {
+      background: rgba(14, 165, 233, 0.14);
+      filter: blur(110px);
+    }
+
+    html[data-theme="light"] .orb2 {
+      background: rgba(99, 102, 241, 0.14);
+      filter: blur(105px);
+    }
+
+    html[data-theme="light"] .orb3 {
+      background: rgba(236, 72, 153, 0.12);
+      filter: blur(92px);
+    }
+
+    html[data-theme="light"] .name-umar {
+      background: linear-gradient(125deg, #0369a1 0%, #0ea5e9 36%, #6366f1 66%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 16px rgba(14, 165, 233, .22));
+    }
+
+    html[data-theme="light"] .ot {
+      background: linear-gradient(125deg, #0ea5e9 0%, #6366f1 58%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      -webkit-text-stroke: 1px rgba(15, 23, 42, 0.18);
+      text-shadow: 0 4px 14px rgba(99, 102, 241, 0.20);
+    }
+
+    html[data-theme="light"] .btn-a {
+      color: #fff;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      box-shadow: 0 12px 26px rgba(37, 99, 235, 0.25);
+    }
+
+    html[data-theme="light"] .btn-a:hover {
+      box-shadow: 0 18px 36px rgba(124, 58, 237, 0.26);
+    }
+
+    html[data-theme="light"] .btn-b {
+      background: rgba(255, 255, 255, 0.85);
+      border-color: rgba(148, 163, 184, 0.45);
+      color: var(--text);
+    }
+
+    html[data-theme="light"] .btn-b:hover {
+      background: rgba(255, 255, 255, 1);
+      border-color: rgba(99, 102, 241, 0.55);
+    }
+
+    html[data-theme="light"] .proj-card,
+    html[data-theme="light"] .sk-grp,
+    html[data-theme="light"] .stat {
+      border-color: rgba(148, 163, 184, 0.34);
+      box-shadow: 0 8px 26px rgba(15, 23, 42, 0.06);
+    }
+
+    html[data-theme="light"] .proj-card:hover,
+    html[data-theme="light"] .sk-grp:hover,
+    html[data-theme="light"] .stat:hover {
+      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+    }
+
+    html[data-theme="light"] .pill {
+      background: rgba(15, 23, 42, 0.04);
+      border-color: rgba(148, 163, 184, 0.35);
+      color: #475569;
+    }
+
+    html[data-theme="light"] .pnum {
+      color: rgba(71, 85, 105, 0.78);
+    }
+
+    html[data-theme="light"] .pfeat {
+      border-color: rgba(245, 158, 11, 0.35);
+      background: rgba(245, 158, 11, 0.12);
+      color: #b45309;
+    }
+
+    html[data-theme="light"] #contact .ct-wrap {
+      background: linear-gradient(155deg, rgba(255, 255, 255, 0.95), rgba(243, 246, 255, 0.94));
+      border: 1px solid rgba(148, 163, 184, 0.42);
+      border-radius: 16px;
+      padding: 58px 32px 48px;
+      box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12);
+    }
+
+    html[data-theme="light"] #contact .cl {
+      background: rgba(255, 255, 255, 0.78);
+      border-color: rgba(148, 163, 184, 0.36);
+      color: #334155;
+    }
+
+    html[data-theme="light"] .ct-glow {
+      background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, .22), transparent 55%);
     }
 
     *,
@@ -148,7 +349,7 @@
       align-items: center;
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
-      background: rgba(7, 8, 15, .75);
+      background: var(--navBg);
       border-bottom: 1px solid var(--border);
       transition: padding .3s, transform .4s cubic-bezier(.16, 1, .3, 1);
     }
@@ -211,6 +412,33 @@
       width: 100%;
     }
 
+    /* ── THEME TOGGLE ── */
+    #themeToggle {
+      background: var(--themeToggleBg);
+      border: 1px solid var(--border);
+      color: var(--muted2);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: .72rem;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: background .2s, border-color .2s, color .2s, transform .2s;
+      user-select: none;
+    }
+
+    #themeToggle:hover {
+      background: var(--themeToggleBgHover);
+      border-color: rgba(0, 229, 255, .45);
+      color: var(--text);
+    }
+
+    #themeToggle:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
+    }
+
     .ham {
       display: none;
       flex-direction: column;
@@ -244,7 +472,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(7, 8, 15, .97);
+      background: var(--mobBg);
       z-index: 600;
       flex-direction: column;
       justify-content: center;
@@ -1044,11 +1272,11 @@
       counter-increment: edu-rec;
       padding: 26px 24px 28px;
       border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, .09);
-      background: linear-gradient(155deg, rgba(22, 24, 42, .6) 0%, rgba(11, 12, 22, .65) 50%, rgba(8, 9, 18, .7) 100%);
+      border: 1px solid var(--eduCardBorder);
+      background: linear-gradient(155deg, var(--eduCardGradA) 0%, var(--eduCardGradB) 50%, var(--eduCardGradC) 100%);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 18px 48px rgba(0, 0, 0, .38), inset 0 1px 0 rgba(255, 255, 255, .06);
+      box-shadow: 0 18px 48px var(--eduCardShadow), inset 0 1px 0 var(--eduCardInset);
       overflow: hidden;
     }
 
@@ -1059,20 +1287,20 @@
       font-size: .52rem;
       font-weight: 600;
       letter-spacing: .2em;
-      color: rgba(160, 162, 190, .65);
+      color: var(--eduCardBeforeColor);
       margin-bottom: 8px;
     }
 
     #education .edu-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 28px 56px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .08);
+      box-shadow: 0 28px 56px var(--eduCardHoverShadow), inset 0 1px 0 var(--eduCardHoverInset);
     }
 
     #education .edu-yr {
       font-family: 'IBM Plex Mono', monospace;
       font-size: .58rem;
       letter-spacing: .12em;
-      color: rgba(136, 138, 170, .85);
+      color: var(--eduYearLabel);
       margin-bottom: 16px;
     }
 
@@ -1097,7 +1325,7 @@
     #education .edu-note {
       margin-top: 14px;
       padding-top: 12px;
-      border-top: 1px solid rgba(255, 255, 255, .05);
+      border-top: 1px solid var(--eduNoteBorderTop);
     }
 
     #education .edu-card::after {
@@ -1264,7 +1492,7 @@
 
     .proj-card {
       grid-column: 1/-1;
-      background: linear-gradient(165deg, rgba(18, 20, 38, .65) 0%, var(--card) 45%);
+      background: linear-gradient(165deg, var(--projCardGradA) 0%, var(--card) 45%);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border);
@@ -1297,7 +1525,7 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .12), transparent);
+      background: linear-gradient(90deg, transparent, var(--projCardAfterLine), transparent);
       opacity: 0;
       transition: opacity .35s ease;
     }
@@ -2062,7 +2290,7 @@
     }
 
     .term {
-      background: rgba(10, 11, 21, 0.65);
+      background: var(--termBg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border);
@@ -2075,7 +2303,7 @@
     }
 
     .tb {
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--termTbBg);
       padding: 10px 16px;
       display: flex;
       align-items: center;
@@ -2175,6 +2403,9 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button id="themeToggle" type="button" aria-label="Toggle theme" aria-pressed="false">
+      <span id="themeLabel">Dark</span>
+    </button>
     <div class="ham" id="ham"><span></span><span></span><span></span></div>
   </nav>
 
@@ -2645,9 +2876,28 @@
       });
     }
 
+    // ── THEME TOGGLE ──
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLabel = document.getElementById('themeLabel');
+    if (themeToggle && themeLabel) {
+      const applyTheme = (theme, persist = true) => {
+        document.documentElement.dataset.theme = theme;
+        themeLabel.textContent = theme === 'light' ? 'Light' : 'Dark';
+        themeToggle.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+      };
+
+      const current = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+      applyTheme(current, false);
+
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+        applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+      });
+    }
+
     // ── MAGNETIC BUTTONS ──
     if (window.matchMedia('(pointer:fine)').matches) {
-      document.querySelectorAll('.btn-a, .btn-b, .cl, .nav-logo').forEach(btn => {
+      document.querySelectorAll('.btn-a, .btn-b, .cl, .nav-logo, #themeToggle').forEach(btn => {
         let magTicking = false;
         btn.addEventListener('mousemove', e => {
           if (!magTicking) {
