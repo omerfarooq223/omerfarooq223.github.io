@@ -5,6 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Muhammad Umar Farooq — AI Engineer</title>
+  <meta name="description" content="AI engineer building autonomous agentic systems, ML pipelines, and intelligent automation. Selected projects include agentic grading, research assistants, and a YOLOv8 smart parking system with an AI assistant." />
+  <meta property="og:title" content="Muhammad Umar Farooq — AI Engineer" />
+  <meta property="og:description" content="AI engineer building autonomous agentic systems, ML pipelines, and intelligent automation. Selected projects include agentic grading, research assistants, and a YOLOv8 smart parking system with an AI assistant." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Muhammad Umar Farooq — AI Engineer" />
+  <meta name="twitter:description" content="AI engineer building autonomous agentic systems, ML pipelines, and intelligent automation. Selected projects include agentic grading, research assistants, and a YOLOv8 smart parking system with an AI assistant." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -1744,6 +1751,7 @@
       cursor: pointer;
       z-index: 400;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
       transform: translateY(12px);
       transition: opacity .3s, transform .3s;
@@ -1755,8 +1763,14 @@
 
     #btt.show {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
       transform: translateY(0);
+    }
+
+    #btt:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
     }
 
     /* GRADIENT TEXTS */
@@ -2126,6 +2140,21 @@
         font-size: clamp(2.4rem, 11vw, 4rem);
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      * , *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      #cur, #curRing {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 
@@ -2447,8 +2476,7 @@
           <div class="parr" aria-hidden="true">↗</div>
           <div class="ptg-row"><span class="ptg tpk">Computer Vision</span></div>
           <div class="pnm">Parking Detection System</div>
-          <p class="pdsc">Real-time CV pipeline that monitors lots and classifies occupied vs vacant slots from live or
-            recorded footage using OpenCV.</p>
+          <p class="pdsc">Real-time parking detection using a YOLOv8-trained model to detect empty vs occupied slots. Includes a chatbot powered by the Hugging Face API.</p>
           <div class="pstk"><span class="pill">YOLO</span><span class="pill">OpenCV</span><span class="pill">Image
               Processing</span></div>
         </a>
@@ -2584,7 +2612,7 @@
     <span>© 2026 · Built with intention.</span>
   </footer>
 
-  <button id="btt">↑</button>
+  <button id="btt" type="button" aria-label="Back to top">↑</button>
 
   <script>
     // ── CURSOR & PARALLAX ──
