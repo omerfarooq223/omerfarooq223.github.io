@@ -24,6 +24,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
   <style>
     :root {
       --bg: #07080f;
@@ -39,6 +41,11 @@
       --muted: #44455a;
       --muted2: #8888aa;
       --cw: 1080px;
+
+      --card: rgba(15, 16, 32, 0.45);
+      --border: rgba(255, 255, 255, 0.08);
+      --cardGlow: rgba(0, 229, 255, 0.05);
+      --cardGrad: linear-gradient(165deg, rgba(18, 20, 38, 0.65) 0%, rgba(15, 16, 32, 0.4) 45%);
 
       --navBg: rgba(7, 8, 15, .75);
       --mobBg: rgba(7, 8, 15, .97);
@@ -77,8 +84,8 @@
       --green: #10b981;
 
       --text: #020617;
-      --muted: #64748b;
-      --muted2: #6b7280;
+      --muted: #334155;
+      --muted2: #475569;
 
       --navBg: rgba(249, 250, 251, 0.92);
       --mobBg: rgba(249, 250, 251, 0.98);
@@ -101,6 +108,10 @@
       --eduYearLabel: rgba(100, 116, 139, 0.95);
       --eduNoteBorderTop: rgba(148, 163, 184, 0.4);
 
+      --card: rgba(15, 23, 42, 0.03);
+      --border: rgba(15, 23, 42, 0.12);
+      --cardGlow: rgba(14, 165, 233, 0.08);
+      --cardGrad: linear-gradient(165deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.8) 45%);
       --themeToggleBg: rgba(15, 23, 42, 0.02);
       --themeToggleBgHover: rgba(14, 165, 233, 0.14);
     }
@@ -709,13 +720,13 @@
 
     .btn-a {
       padding: 13px 28px;
-      background: linear-gradient(135deg, var(--cyan), #0088bb);
+      background: linear-gradient(135deg, var(--cyan), #0099cc);
       color: #000;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 600;
       font-size: .85rem;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       text-decoration: none;
       display: inline-block;
       transition: transform .2s, box-shadow .2s;
@@ -734,7 +745,7 @@
       font-weight: 400;
       font-size: .85rem;
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 8px;
       text-decoration: none;
       display: inline-block;
       transition: border-color .2s, background .2s;
@@ -1270,14 +1281,15 @@
 
     #education .edu-card {
       counter-increment: edu-rec;
-      padding: 26px 24px 28px;
-      border-radius: 14px;
+      padding: 30px 28px 32px;
+      border-radius: 18px;
       border: 1px solid var(--eduCardBorder);
-      background: linear-gradient(155deg, var(--eduCardGradA) 0%, var(--eduCardGradB) 50%, var(--eduCardGradC) 100%);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: var(--cardGrad);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       box-shadow: 0 18px 48px var(--eduCardShadow), inset 0 1px 0 var(--eduCardInset);
       overflow: hidden;
+      transition: all .45s cubic-bezier(.16, 1, .3, 1);
     }
 
     #education .edu-card::before {
@@ -1492,12 +1504,12 @@
 
     .proj-card {
       grid-column: 1/-1;
-      background: linear-gradient(165deg, var(--projCardGradA) 0%, var(--card) 45%);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: var(--cardGrad);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 26px 24px 24px;
+      border-radius: 16px;
+      padding: 32px 28px 28px;
       position: relative;
       overflow: hidden;
       text-decoration: none;
@@ -1505,8 +1517,9 @@
       display: flex;
       flex-direction: column;
       min-height: 100%;
-      transition: transform .45s cubic-bezier(.16, 1, .3, 1), border-color .35s ease, box-shadow .45s ease;
+      transition: all .45s cubic-bezier(.16, 1, .3, 1);
       transform-style: preserve-3d;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
     }
 
     .proj-card::before {
@@ -2164,9 +2177,16 @@
         animation: none !important;
       }
 
-      .sec::after {
-        transition: none !important;
-      }
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
       .sec.sec-visible::after {
         transform: scaleX(1) !important;
@@ -2443,7 +2463,7 @@
       <div class="hero-cta">
         <a href="#projects" class="btn-a">View My Work</a>
         <a href="https://github.com/omerfarooq223" target="_blank" class="btn-b">GitHub ↗</a>
-        <a href="CV.pdf" download class="btn-a" style="background:linear-gradient(135deg,var(--purple),#7c22d4);">⬇
+        <a href="CV.pdf" download class="btn-a" style="background:linear-gradient(135deg,var(--purple),#7c22d4); color: #fff;">⬇
           Download Resume</a>
       </div>
       <div class="scroll-cue">
@@ -2480,7 +2500,7 @@
   </div>
 
   <!-- ABOUT -->
-  <section class="sec surf" id="about">
+  <section class="sec surf reveal" id="about">
     <div class="inn">
       <p class="sl sl-l" style="color:var(--cyan)">About</p>
       <h2 class="st wr">
@@ -2637,7 +2657,7 @@
   </section>
 
   <!-- PROJECTS -->
-  <section class="sec" id="projects">
+  <section class="sec reveal" id="projects">
     <div class="inn">
       <p class="sl sl-l" style="color:var(--cyan)">Selected Work</p>
       <h2 class="st wr">
@@ -2817,7 +2837,7 @@
   </section>
 
   <!-- CONTACT -->
-  <section class="sec" id="contact">
+  <section class="sec reveal" id="contact">
     <div class="inn ct-wrap">
       <div class="ct-glow"></div>
       <p class="sl r3d" style="color:var(--purple)">Contact</p>
@@ -3055,14 +3075,22 @@
 
     // ── 3D CARD TILT ──
     if (window.matchMedia('(pointer:fine)').matches && !window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
-      document.querySelectorAll('.proj-card').forEach(c => {
-        c.addEventListener('mousemove', e => {
-          const r = c.getBoundingClientRect();
-          const x = ((e.clientX - r.left) / r.width - .5) * 9;
-          const y = ((e.clientY - r.top) / r.height - .5) * 9;
-          c.style.transform = `translateY(-4px) perspective(900px) rotateY(${x}deg) rotateX(${-y}deg)`;
-        });
-        c.addEventListener('mouseleave', () => { c.style.transform = ''; });
+      VanillaTilt.init(document.querySelectorAll(".proj-card"), {
+        max: 8,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.25,
+        scale: 1.02,
+        perspective: 1200,
+        gyroscope: true
+      });
+      // Also for stats and edu cards
+      VanillaTilt.init(document.querySelectorAll(".stat, .edu-card"), {
+        max: 5,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.15,
+        scale: 1.01
       });
     }
 
@@ -3077,64 +3105,118 @@
 
 
 
-    // ── NEURAL NETWORK CANVAS ──
-    const cvs = document.getElementById('nw');
-    if (cvs && window.matchMedia('(pointer:fine)').matches) {
-      const ctx = cvs.getContext('2d');
-      let w, h;
-      let pts = [];
-      function rz() {
-        w = cvs.width = window.innerWidth;
-        h = cvs.height = window.innerHeight;
-        pts = [];
-        for (let i = 0; i < (w < 800 ? 30 : 70); i++) {
-          pts.push({
-            x: Math.random() * w, y: Math.random() * h,
-            vx: (Math.random() - .5) * .5, vy: (Math.random() - .5) * .5,
-            r: Math.random() * 1.5 + 0.5
-          });
-        }
+    // ── THREE.JS NEURAL NETWORK ──
+    const cvsNode = document.getElementById('nw');
+    if (cvsNode && window.matchMedia('(pointer:fine)').matches) {
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas: cvsNode, alpha: true, antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      const count = window.innerWidth < 800 ? 50 : 120;
+      const positions = new Float32Array(count * 3);
+      const velocities = new Float32Array(count * 3);
+      for (let i = 0; i < count * 3; i++) {
+        positions[i] = (Math.random() - 0.5) * 10;
+        velocities[i] = (Math.random() - 0.5) * 0.01;
       }
-      window.addEventListener('resize', rz);
-      rz();
-      function animNw() {
-        ctx.clearRect(0, 0, w, h);
-        const cMx = window.mx || 0, cMy = window.my || 0;
-        for (let i = 0; i < pts.length; i++) {
-          const p = pts[i];
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0 || p.x > w) p.vx *= -1;
-          if (p.y < 0 || p.y > h) p.vy *= -1;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(0,229,255,0.4)';
-          ctx.fill();
-          for (let j = i + 1; j < pts.length; j++) {
-            const p2 = pts[j];
-            const d = Math.hypot(p.x - p2.x, p.y - p2.y);
-            if (d < 100) {
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = `rgba(0,229,255,${0.15 - d / 100 * 0.15})`;
-              ctx.stroke();
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+      const particleColor = () => document.documentElement.dataset.theme === 'light' ? 0x0ea5e9 : 0x00e5ff;
+      const lineColor = () => document.documentElement.dataset.theme === 'light' ? 0x6366f1 : 0xa855f7;
+
+      const material = new THREE.PointsMaterial({
+        size: 0.05,
+        color: particleColor(),
+        transparent: true,
+        opacity: 0.6
+      });
+
+      const points = new THREE.Points(geometry, material);
+      group.add(points);
+
+      // Lines
+      const lineGeometry = new THREE.BufferGeometry();
+      const lineMaterial = new THREE.LineBasicMaterial({
+        color: lineColor(),
+        transparent: true,
+        opacity: 0.15
+      });
+      const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
+      group.add(lineMesh);
+
+      camera.position.z = 5;
+
+      let mouseX = 0, mouseY = 0;
+      document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        
+        // Particles Drift
+        const posArray = geometry.attributes.position.array;
+        for (let i = 0; i < count * 3; i++) {
+          posArray[i] += velocities[i];
+          if (posArray[i] > 5 || posArray[i] < -5) velocities[i] *= -1;
+        }
+        geometry.attributes.position.needsUpdate = true;
+
+        // Dynamic color update based on theme
+        material.color.setHex(particleColor());
+        lineMaterial.color.setHex(lineColor());
+
+        group.rotation.y += 0.001;
+        group.rotation.x += 0.0005;
+
+        // Subtle parallax
+        group.rotation.y += (mouseX * 0.1 - group.rotation.y) * 0.05;
+        group.rotation.x += (-mouseY * 0.1 - group.rotation.x) * 0.05;
+
+        // Update lines
+        const linePos = [];
+        for (let i = 0; i < count; i++) {
+          for (let j = i + 1; j < count; j++) {
+            const dx = posArray[i * 3] - posArray[j * 3];
+            const dy = posArray[i * 3 + 1] - posArray[j * 3 + 1];
+            const dz = posArray[i * 3 + 2] - posArray[j * 3 + 2];
+            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+            if (dist < 1.8) {
+              linePos.push(posArray[i * 3], posArray[i * 3 + 1], posArray[i * 3 + 2]);
+              linePos.push(posArray[j * 3], posArray[j * 3 + 1], posArray[j * 3 + 2]);
             }
           }
-          if (cMx || cMy) {
-            const dMx = Math.hypot(p.x - cMx, p.y - cMy);
-            if (dMx < 150) {
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(cMx, cMy);
-              ctx.strokeStyle = `rgba(168,85,247,${0.2 - dMx / 150 * 0.2})`;
-              ctx.stroke();
-            }
-          }
         }
-        requestAnimationFrame(animNw);
+        lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePos, 3));
+        
+        renderer.render(scene, camera);
       }
-      animNw();
+      animate();
     }
+
+    // ── SCROLL REVEAL ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     // ── TERMINAL TYPING ──
     const tw = document.getElementById('tw');
