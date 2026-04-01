@@ -5,13 +5,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Muhammad Umar Farooq — AI Engineer</title>
-  <meta name="description" content="AI engineer building autonomous agentic systems, ML pipelines, and intelligent automation. Selected projects include agentic grading, research assistants, and a YOLOv8 smart parking system with an AI assistant." />
+  <meta name="description"
+    content="AI engineer building autonomous agentic systems, ML pipelines, and intelligent automation. Selected projects include agentic grading, research assistants, and a YOLOv8 smart parking system with an AI assistant." />
   <meta property="og:title" content="Muhammad Umar Farooq — AI Engineer" />
-  <meta property="og:description" content="AI engineer building autonomous agentic systems, ML pipelines, and intelligent automation. Selected projects include agentic grading, research assistants, and a YOLOv8 smart parking system with an AI assistant." />
+  <meta property="og:description"
+    content="AI engineer building autonomous agentic systems, ML pipelines, and intelligent automation. Selected projects include agentic grading, research assistants, and a YOLOv8 smart parking system with an AI assistant." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Muhammad Umar Farooq — AI Engineer" />
-  <meta name="twitter:description" content="AI engineer building autonomous agentic systems, ML pipelines, and intelligent automation. Selected projects include agentic grading, research assistants, and a YOLOv8 smart parking system with an AI assistant." />
+  <meta name="twitter:description"
+    content="AI engineer building autonomous agentic systems, ML pipelines, and intelligent automation. Selected projects include agentic grading, research assistants, and a YOLOv8 smart parking system with an AI assistant." />
   <script>
     (function () {
       try {
@@ -42,10 +45,13 @@
       --muted2: #8888aa;
       --cw: 1080px;
 
-      --card: rgba(15, 16, 32, 0.45);
-      --border: rgba(255, 255, 255, 0.08);
+      --beam: #00e5ff;
+      --beam-fade: rgba(0, 229, 255, 0.15);
+
+      --card: rgb(13, 14, 28);
+      --border: rgba(255, 255, 255, 0.09);
       --cardGlow: rgba(0, 229, 255, 0.05);
-      --cardGrad: linear-gradient(165deg, rgba(18, 20, 38, 0.65) 0%, rgba(15, 16, 32, 0.4) 45%);
+      --cardGrad: linear-gradient(165deg, rgb(16, 18, 35) 0%, rgb(13, 14, 28) 45%);
 
       --navBg: rgba(7, 8, 15, .75);
       --mobBg: rgba(7, 8, 15, .97);
@@ -108,12 +114,14 @@
       --eduYearLabel: rgba(100, 116, 139, 0.95);
       --eduNoteBorderTop: rgba(148, 163, 184, 0.4);
 
-      --card: rgba(15, 23, 42, 0.03);
+      --card: rgb(240, 242, 248);
       --border: rgba(15, 23, 42, 0.12);
       --cardGlow: rgba(14, 165, 233, 0.08);
-      --cardGrad: linear-gradient(165deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.8) 45%);
+      --cardGrad: linear-gradient(165deg, rgb(255, 255, 255) 0%, rgb(245, 246, 252) 45%);
       --themeToggleBg: rgba(15, 23, 42, 0.02);
       --themeToggleBgHover: rgba(14, 165, 233, 0.14);
+      --beam: #2563eb;
+      --beam-fade: rgba(37, 99, 235, 0.15);
     }
 
     /* ── LIGHT MODE STYLING LAYER ── */
@@ -204,6 +212,12 @@
     html[data-theme="light"] .stat {
       border-color: rgba(148, 163, 184, 0.34);
       box-shadow: 0 8px 26px rgba(15, 23, 42, 0.06);
+    }
+
+    html[data-theme="light"] .proj-card:hover,
+    html[data-theme="light"] .sk-grp:hover,
+    html[data-theme="light"] .stat {
+      cursor: auto !important;
     }
 
     html[data-theme="light"] .proj-card:hover,
@@ -323,6 +337,82 @@
         height: 0;
       }
     }
+
+    #nw {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    /* ── ANIMATED GRADIENT BORDER ── */
+    @property --border-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    @keyframes rotateBorder {
+      to {
+        --border-angle: 360deg;
+      }
+    }
+
+    .glow-border {
+      position: relative;
+      z-index: 1;
+      border: none !important;
+    }
+
+    .border-glow {
+      position: absolute;
+      inset: -3px;
+      border-radius: inherit;
+      padding: 3px;
+      background: conic-gradient(from var(--border-angle),
+          transparent 0deg,
+          transparent 180deg,
+          var(--beam-fade) 230deg,
+          var(--beam) 280deg,
+          var(--beam) 320deg,
+          var(--beam-fade) 345deg,
+          transparent 360deg);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      animation: rotateBorder 4.8s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Subtle static base border so the card always has an outline */
+    .glow-border-base {
+      position: absolute;
+      inset: -1.5px;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: rgba(255, 255, 255, 0.08);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+
 
     /* NOISE */
     body::before {
@@ -511,7 +601,7 @@
     /* ── HERO ── */
     .hero-wrap {
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       min-height: 100vh;
     }
 
@@ -590,6 +680,37 @@
       color: var(--cyan);
       margin-bottom: 32px;
       font-weight: 500;
+    }
+
+    .eb-wrap {
+      height: 16px;
+      overflow: hidden;
+      display: inline-flex;
+    }
+
+    .eb-slider {
+      display: flex;
+      flex-direction: column;
+      animation: ebScroll 5s cubic-bezier(0.8, 0, 0.2, 1) infinite alternate;
+    }
+
+    .eb-slider span {
+      height: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    @keyframes ebScroll {
+
+      0%,
+      40% {
+        transform: translateY(0);
+      }
+
+      60%,
+      100% {
+        transform: translateY(-16px);
+      }
     }
 
     .hero-eyebrow::before {
@@ -874,7 +995,7 @@
     }
 
     .surf {
-      background: var(--surface);
+      background: transparent;
     }
 
     /* Section top line — animates on scroll into view */
@@ -1129,7 +1250,7 @@
     .stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2px;
+      gap: 14px;
     }
 
     .stat {
@@ -1139,8 +1260,7 @@
       position: relative;
       overflow: hidden;
       transition: border-color .3s, transform .3s;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      border-radius: 12px;
     }
 
     .stat:hover {
@@ -1178,16 +1298,17 @@
     .edu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 2px;
+      gap: 18px;
     }
 
     .edu-card {
       background: var(--card);
-      border: 1px solid var(--border);
+      border: none;
       padding: 30px 26px;
       position: relative;
-      overflow: hidden;
-      transition: border-color .3s, transform .35s cubic-bezier(.16, 1, .3, 1);
+      overflow: visible;
+      transition: transform .35s cubic-bezier(.16, 1, .3, 1);
+      border-radius: 14px;
     }
 
     .edu-card:hover {
@@ -1270,7 +1391,6 @@
     /* ── EDUCATION (dossier cards — matches portfolio reference) ── */
     #education {
       position: relative;
-      background: radial-gradient(ellipse 85% 55% at 50% -10%, rgba(0, 229, 255, .06), transparent 55%), radial-gradient(ellipse 60% 40% at 90% 30%, rgba(168, 85, 247, .05), transparent 50%);
     }
 
     #education .edu-grid {
@@ -1283,12 +1403,10 @@
       counter-increment: edu-rec;
       padding: 30px 28px 32px;
       border-radius: 18px;
-      border: 1px solid var(--eduCardBorder);
+      border: none;
       background: var(--cardGrad);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
       box-shadow: 0 18px 48px var(--eduCardShadow), inset 0 1px 0 var(--eduCardInset);
-      overflow: hidden;
+      overflow: visible;
       transition: all .45s cubic-bezier(.16, 1, .3, 1);
     }
 
@@ -1505,13 +1623,11 @@
     .proj-card {
       grid-column: 1/-1;
       background: var(--cardGrad);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border: 1px solid var(--border);
+      border: none;
       border-radius: 16px;
       padding: 32px 28px 28px;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       text-decoration: none;
       color: inherit;
       display: flex;
@@ -1803,12 +1919,11 @@
 
     .sk-grp {
       background: var(--card);
-      border: 1px solid var(--border);
+      border: none;
       padding: 26px 22px;
       position: relative;
-      overflow: hidden;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      overflow: visible;
+      border-radius: 12px;
     }
 
     .sg-bar {
@@ -2177,16 +2292,17 @@
         animation: none !important;
       }
 
-    /* ── SCROLL ANIMATIONS ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+      /* ── SCROLL ANIMATIONS ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
       .sec.sec-visible::after {
         transform: scaleX(1) !important;
@@ -2299,15 +2415,7 @@
       opacity: 1;
     }
 
-    /* ── NEW FEATURES CSS ── */
-    #nw {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
+    /* ── (canvas #nw is styled globally as fixed) ── */
 
     .term {
       background: var(--termBg);
@@ -2393,13 +2501,18 @@
       html {
         scroll-behavior: auto;
       }
-      * , *::before, *::after {
+
+      *,
+      *::before,
+      *::after {
         animation-duration: 0.001ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.001ms !important;
         scroll-behavior: auto !important;
       }
-      #cur, #curRing {
+
+      #cur,
+      #curRing {
         display: none !important;
       }
     }
@@ -2407,10 +2520,6 @@
 </head>
 
 <body>
-
-  <div id="bar"></div>
-  <div id="cur"></div>
-  <div id="curRing"></div>
 
   <!-- NAV -->
   <nav id="nav">
@@ -2440,17 +2549,22 @@
 
   <!-- HERO -->
   <div class="hero-wrap">
-    <canvas id="nw"></canvas>
     <div class="grid-bg"></div>
     <div class="orb orb1"></div>
     <div class="orb orb2"></div>
     <div class="orb orb3"></div>
     <div class="hero">
-      <p class="hero-eyebrow">Available for opportunities · Lahore, Pakistan</p>
+      <div class="hero-eyebrow">
+        <div class="eb-wrap">
+          <div class="eb-slider">
+            <span>Agentic AI/ML Engineer</span>
+            <span>Available for opportunities · Lahore, Pakistan</span>
+          </div>
+        </div>
+      </div>
       <h1 class="hero-title">
         <span class="ln ln1"><span class="wd">Muhammad</span></span>
-        <span class="ln ln2"><span class="wd name-umar">Umar</span></span>
-        <span class="ln ln3"><span class="wd grd">Farooq</span></span>
+        <span class="ln ln2"><span class="wd name-umar">Umar</span> <span class="wd grd">Farooq</span></span>
       </h1>
       <p class="hero-sub">BS Artificial Intelligence student at <strong style="color:var(--text)">UMT</strong> —
         building autonomous AI agents, ML pipelines, and intelligent automation that ships beyond the classroom.</p>
@@ -2463,7 +2577,8 @@
       <div class="hero-cta">
         <a href="#projects" class="btn-a">View My Work</a>
         <a href="https://github.com/omerfarooq223" target="_blank" class="btn-b">GitHub ↗</a>
-        <a href="CV.pdf" download class="btn-a" style="background:linear-gradient(135deg,var(--purple),#7c22d4); color: #fff;">⬇
+        <a href="CV.pdf" download class="btn-a"
+          style="background:linear-gradient(135deg,var(--purple),#7c22d4); color: #fff;">⬇
           Download Resume</a>
       </div>
       <div class="scroll-cue">
@@ -2727,7 +2842,8 @@
           <div class="parr" aria-hidden="true">↗</div>
           <div class="ptg-row"><span class="ptg tpk">Computer Vision</span></div>
           <div class="pnm">Parking Detection System</div>
-          <p class="pdsc">Real-time parking detection using a YOLOv8-trained model to detect empty vs occupied slots. Includes a chatbot powered by the Hugging Face API.</p>
+          <p class="pdsc">Real-time parking detection using a YOLOv8-trained model to detect empty vs occupied slots.
+            Includes a chatbot powered by the Hugging Face API.</p>
           <div class="pstk"><span class="pill">YOLO</span><span class="pill">OpenCV</span><span class="pill">Image
               Processing</span></div>
         </a>
@@ -2842,7 +2958,7 @@
       <div class="ct-glow"></div>
       <p class="sl r3d" style="color:var(--purple)">Contact</p>
       <div class="ct-big r3d">
-        Let's <span class="ot">build</span><br />
+        Let's <span class="ot" style="-webkit-text-fill-color: var(--text); -webkit-text-stroke: 0">build</span><br />
         something <span class="grd2">great</span>
       </div>
       <p class="ct-sub r3d">Open to internships, freelance projects, and collaborations in AI, ML, and automation. Based
@@ -2864,6 +2980,10 @@
   </footer>
 
   <button id="btt" type="button" aria-label="Back to top">↑</button>
+  <div id="bar"></div>
+  <div id="cur"></div>
+  <div id="curRing"></div>
+  <canvas id="nw"></canvas>
 
   <script>
     // ── CURSOR & PARALLAX ──
@@ -2893,6 +3013,18 @@
       document.querySelectorAll('a,button').forEach(el => {
         el.addEventListener('mouseenter', () => { ring.classList.add('hov'); cur.classList.add('hov'); });
         el.addEventListener('mouseleave', () => { ring.classList.remove('hov'); cur.classList.remove('hov'); });
+      });
+
+      // Hide custom cursor on cards to show default system cursor
+      document.querySelectorAll('.proj-card, .edu-card, .sk-grp, .stat').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cur.style.opacity = '0';
+          ring.style.opacity = '0';
+        });
+        el.addEventListener('mouseleave', () => {
+          cur.style.opacity = '1';
+          ring.style.opacity = '1';
+        });
       });
     }
 
@@ -2954,6 +3086,19 @@
         });
       });
     }
+
+    // ── ANIMATED GRADIENT BORDERS ──
+    document.querySelectorAll('.proj-card, .edu-card, .sk-grp').forEach(card => {
+      card.classList.add('glow-border');
+      // Static subtle base border
+      const base = document.createElement('div');
+      base.className = 'glow-border-base';
+      card.insertBefore(base, card.firstChild);
+      // Animated tracing beam
+      const glow = document.createElement('div');
+      glow.className = 'border-glow';
+      card.insertBefore(glow, card.firstChild);
+    });
 
     // ── PROGRESS BAR ──
     const bar = document.getElementById('bar');
@@ -3117,25 +3262,25 @@
       const group = new THREE.Group();
       scene.add(group);
 
-      const count = window.innerWidth < 800 ? 50 : 120;
+      const count = window.innerWidth < 800 ? 80 : 250;
       const positions = new Float32Array(count * 3);
       const velocities = new Float32Array(count * 3);
       for (let i = 0; i < count * 3; i++) {
-        positions[i] = (Math.random() - 0.5) * 10;
-        velocities[i] = (Math.random() - 0.5) * 0.01;
+        positions[i] = (Math.random() - 0.4) * 15;
+        velocities[i] = (Math.random() - 0.5) * 0.008;
       }
 
       const geometry = new THREE.BufferGeometry();
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-      const particleColor = () => document.documentElement.dataset.theme === 'light' ? 0x0ea5e9 : 0x00e5ff;
-      const lineColor = () => document.documentElement.dataset.theme === 'light' ? 0x6366f1 : 0xa855f7;
+      const particleColor = () => document.documentElement.dataset.theme === 'light' ? 0x0369a1 : 0x00e5ff;
+      const lineColor = () => document.documentElement.dataset.theme === 'light' ? 0x4338ca : 0xa855f7;
 
       const material = new THREE.PointsMaterial({
         size: 0.05,
         color: particleColor(),
         transparent: true,
-        opacity: 0.6
+        opacity: document.documentElement.dataset.theme === 'light' ? 0.9 : 0.6
       });
 
       const points = new THREE.Points(geometry, material);
@@ -3167,7 +3312,7 @@
 
       function animate() {
         requestAnimationFrame(animate);
-        
+
         // Particles Drift
         const posArray = geometry.attributes.position.array;
         for (let i = 0; i < count * 3; i++) {
@@ -3178,7 +3323,9 @@
 
         // Dynamic color update based on theme
         material.color.setHex(particleColor());
+        material.opacity = document.documentElement.dataset.theme === 'light' ? 1.0 : 0.6;
         lineMaterial.color.setHex(lineColor());
+        lineMaterial.opacity = document.documentElement.dataset.theme === 'light' ? 0.45 : 0.15;
 
         group.rotation.y += 0.001;
         group.rotation.x += 0.0005;
@@ -3202,7 +3349,7 @@
           }
         }
         lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePos, 3));
-        
+
         renderer.render(scene, camera);
       }
       animate();
@@ -3251,8 +3398,6 @@
       if (ents[0].isIntersecting) { typeTw(); twObs.disconnect(); }
     });
     if (tw) twObs.observe(tw);
-
-
   </script>
 </body>
 
