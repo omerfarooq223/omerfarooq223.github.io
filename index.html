@@ -268,8 +268,10 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
+    html,
+    body {
+      overflow-x: hidden;
+      width: 100%;
     }
 
     body {
@@ -278,7 +280,6 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 300;
       line-height: 1.6;
-      overflow-x: hidden;
     }
 
     /* SCROLLBAR */
@@ -2349,15 +2350,24 @@
       }
 
       .stats {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .proj-bento {
-        gap: 12px;
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
 
       .sk-grid {
         grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .exp-hd {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .exp-per {
+        align-self: flex-start;
       }
 
       .ct-links {
@@ -2485,7 +2495,7 @@
       }
 
       .stats {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
       }
 
       .ct-big {
@@ -3252,7 +3262,7 @@
 
     // ── THREE.JS NEURAL NETWORK ──
     const cvsNode = document.getElementById('nw');
-    if (cvsNode && window.matchMedia('(pointer:fine)').matches) {
+    if (cvsNode) {
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       const renderer = new THREE.WebGLRenderer({ canvas: cvsNode, alpha: true, antialias: true });
