@@ -726,8 +726,8 @@
       align-items: center;
       gap: 10px;
       --eb-line-h: 1.4em;
-      font-size: .68rem;
-      letter-spacing: .28em;
+      font-size: .75rem;
+      letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--cyan);
       margin-bottom: 32px;
@@ -744,33 +744,25 @@
       max-width: 100%;
     }
 
-    .eb-slider {
-      display: flex;
-      flex-direction: column;
-      animation: ebScroll 5s cubic-bezier(0.8, 0, 0.2, 1) infinite alternate;
-    }
-
-    .eb-slider span {
-      height: var(--eb-line-h);
-      display: flex;
+    .eb-ticker {
+      display: inline-flex;
       align-items: center;
       white-space: nowrap;
+      max-width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 100%;
+      transform: translateY(0);
+      opacity: 1;
+      transition: transform .26s ease, opacity .26s ease;
     }
 
-    @keyframes ebScroll {
+    .eb-ticker.is-out {
+      transform: translateY(-36%);
+      opacity: 0;
+    }
 
-      0%,
-      40% {
-        transform: translateY(0);
-      }
-
-      60%,
-      100% {
-        transform: translateY(calc(-1 * var(--eb-line-h)));
-      }
+    .eb-meta {
+      letter-spacing: .1em;
     }
 
     .hero-eyebrow::before {
@@ -939,6 +931,28 @@
     .btn-b:hover {
       border-color: rgba(168, 85, 247, .5);
       background: rgba(168, 85, 247, .05);
+    }
+
+    .hero-cta .hero-github-btn {
+      background: #fff;
+      color: #05070f;
+      border-color: #fff;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-cta .hero-github-btn svg {
+      width: 17px;
+      height: 17px;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .hero-cta .hero-github-btn:hover {
+      background: #f2f4f8;
+      border-color: #f2f4f8;
     }
 
     .scroll-cue {
@@ -1316,6 +1330,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
+      margin-top: 5px;
     }
 
     .stat {
@@ -3432,7 +3447,7 @@
     @media(max-width:480px) {
       .hero-eyebrow {
         --eb-line-h: 1.65em;
-        font-size: .52rem;
+        font-size: .57rem;
         letter-spacing: .08em;
       }
 
@@ -3483,7 +3498,7 @@
     @media(max-width:380px) {
       .hero-eyebrow {
         --eb-line-h: 1.75em;
-        font-size: .44rem;
+        font-size: .48rem;
         letter-spacing: .04em;
         text-transform: none;
       }
@@ -3502,7 +3517,7 @@
       }
     @media(max-width:340px) {
       .hero-eyebrow {
-        font-size: .4rem;
+        font-size: .44rem;
         letter-spacing: .02em;
       }
     }
@@ -3601,10 +3616,7 @@
     <div class="hero">
       <div class="hero-eyebrow">
         <div class="eb-wrap">
-          <div class="eb-slider">
-            <span>Agentic AI/ML Engineer</span>
-            <span>Available for opportunities · Lahore, Pakistan</span>
-          </div>
+          <span id="ebTicker" class="eb-ticker eb-role">Agentic AI/ML Engineer</span>
         </div>
       </div>
       <h1 class="hero-title">
@@ -3622,7 +3634,13 @@
       </div>
       <div class="hero-cta">
         <a href="#projects" class="btn-a">View My Work</a>
-        <a href="https://github.com/omerfarooq223" target="_blank" class="btn-b">GitHub ↗</a>
+        <a href="https://github.com/omerfarooq223" target="_blank" class="btn-b hero-github-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg>
+          <span>GitHub</span>
+        </a>
         <a href="CV.pdf" download class="btn-a"
           style="background:linear-gradient(135deg,var(--purple),#7c22d4); color: #fff;">⬇
           Download Resume</a>
@@ -3660,7 +3678,7 @@
             (Basic)</p>
         </div>
         <div class="ab-right sl-r"
-          style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 40px;">
+          style="display: flex; flex-direction: column; justify-content: flex-start; height: 100%; gap: 28px;">
           <div class="ab-right-top">
             <h3
               style="font-family:'Unbounded', sans-serif; font-size:1.5rem; margin-bottom:14px; font-weight:700; letter-spacing:-0.02em; color:var(--text);">
@@ -4549,6 +4567,23 @@
       if (ents[0].isIntersecting) { typeTw(); twObs.disconnect(); }
     });
     if (tw) twObs.observe(tw);
+
+    // ── HERO EYEBROW TICKER ──
+    const ebTicker = document.getElementById('ebTicker');
+    const ebPhrases = ['Agentic AI/ML Engineer', 'Open for opportunities'];
+    let ebIdx = 0;
+    if (ebTicker && !window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+      setInterval(() => {
+        ebTicker.classList.add('is-out');
+        setTimeout(() => {
+          ebIdx = (ebIdx + 1) % ebPhrases.length;
+          ebTicker.textContent = ebPhrases[ebIdx];
+          ebTicker.classList.toggle('eb-meta', ebIdx === 1);
+          ebTicker.classList.toggle('eb-role', ebIdx === 0);
+          ebTicker.classList.remove('is-out');
+        }, 260);
+      }, 3200);
+    }
   </script>
 
   <!-- PROJECT MODAL -->
