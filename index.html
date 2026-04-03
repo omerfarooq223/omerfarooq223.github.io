@@ -170,11 +170,13 @@
     }
 
     html[data-theme="light"] .name-umar {
-      background: linear-gradient(125deg, #0369a1 0%, #0ea5e9 36%, #6366f1 66%, #ec4899 100%);
+      background: linear-gradient(110deg, #0ea5e9 20%, #6366f1 40%, #ffffff 50%, #6366f1 60%, #0ea5e9 80%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       filter: drop-shadow(0 0 16px rgba(14, 165, 233, .22));
+      animation: textShine 5s linear infinite;
     }
 
     html[data-theme="light"] .ot {
@@ -306,9 +308,10 @@
         top: 0;
         left: 0;
         pointer-events: none;
-        z-index: 9999;
+        z-index: 20000;
         mix-blend-mode: exclusion;
         transition: width 0.2s, height 0.2s, transform 0.1s;
+        margin: -4px 0 0 -4px;
       }
 
       #curRing {
@@ -320,15 +323,16 @@
         top: 0;
         left: 0;
         pointer-events: none;
-        z-index: 9998;
+        z-index: 19999;
         transition: width .25s, height .25s, border-color .25s, background .25s, transform 0.15s ease-out;
         mix-blend-mode: exclusion;
+        margin: -16px 0 0 -16px;
       }
 
       #curRing.hov {
         width: 64px;
         height: 64px;
-        transform: translate(-32px, -32px) !important;
+        margin: -32px 0 0 -32px;
         border-color: rgba(0, 229, 255, 0);
         background: rgba(255, 255, 255, 1);
       }
@@ -370,16 +374,16 @@
 
     .border-glow {
       position: absolute;
-      inset: -3px;
+      inset: -5px;
       border-radius: inherit;
-      padding: 3px;
+      padding: 5px;
       background: conic-gradient(from var(--border-angle),
           transparent 0deg,
           transparent 180deg,
-          var(--beam-fade) 230deg,
-          var(--beam) 280deg,
-          var(--beam) 320deg,
-          var(--beam-fade) 345deg,
+          var(--beam-fade, rgba(0, 229, 255, 0.15)) 230deg,
+          var(--beam, #00e5ff) 280deg,
+          var(--beam, #00e5ff) 320deg,
+          var(--beam-fade, rgba(0, 229, 255, 0.15)) 345deg,
           transparent 360deg);
       -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
@@ -389,9 +393,55 @@
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
       mask-composite: exclude;
-      animation: rotateBorder 4.8s linear infinite;
+      animation: rotateBorder 8s linear infinite;
       pointer-events: none;
       z-index: -1;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Color Overrides for Border Glows */
+    .pcc,
+    .ec-c,
+    .sk-c {
+      --beam: var(--cyan);
+      --beam-fade: rgba(0, 229, 255, 0.15);
+    }
+
+    .pcp,
+    .ec-p,
+    .sk-p {
+      --beam: var(--purple);
+      --beam-fade: rgba(168, 85, 247, 0.15);
+    }
+
+    .pcpk,
+    .ec-pk,
+    .sk-pk {
+      --beam: var(--pink);
+      --beam-fade: rgba(244, 114, 182, 0.15);
+    }
+
+    .pca,
+    .ec-a,
+    .sk-a {
+      --beam: var(--amber);
+      --beam-fade: rgba(251, 191, 36, 0.15);
+    }
+
+    .pcg,
+    .ec-g,
+    .sk-g {
+      --beam: var(--green);
+      --beam-fade: rgba(52, 211, 153, 0.15);
+    }
+
+    .hover-glow-only .border-glow {
+      opacity: 0;
+    }
+
+    .hover-glow-only:hover .border-glow {
+      opacity: 1;
     }
 
     /* Subtle static base border so the card always has an outline */
@@ -759,17 +809,21 @@
 
     .name-umar {
       display: inline-block;
-      background: linear-gradient(125deg, #f0fdff 0%, var(--cyan) 28%, #38bdf8 55%, #a5f3fc 78%, #fff 100%);
+      background: linear-gradient(110deg, var(--cyan) 20%, #38bdf8 40%, #ffffff 50%, #38bdf8 60%, var(--cyan) 80%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: textShine 5s linear infinite;
     }
 
     .grd {
-      background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 60%, var(--pink) 100%);
+      background: linear-gradient(110deg, var(--cyan) 20%, var(--purple) 40%, #ffffff 50%, var(--purple) 60%, var(--cyan) 80%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: textShine 5s linear infinite;
     }
 
     .hero-sub {
@@ -1317,39 +1371,19 @@
       transform: translateY(-5px);
     }
 
-    .edu-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      transition: width .6s cubic-bezier(.16, 1, .3, 1) .2s;
-    }
 
-    .stg.in .edu-card::after {
-      width: 100%;
-    }
-
-    .ec-c::after {
-      background: var(--cyan);
-    }
 
     .ec-c:hover {
       border-color: rgba(0, 229, 255, .3);
     }
 
-    .ec-p::after {
-      background: var(--purple);
-    }
+
 
     .ec-p:hover {
       border-color: rgba(168, 85, 247, .3);
     }
 
-    .ec-a::after {
-      background: var(--amber);
-    }
+
 
     .ec-a:hover {
       border-color: rgba(251, 191, 36, .3);
@@ -1460,26 +1494,7 @@
       border-top: 1px solid var(--eduNoteBorderTop);
     }
 
-    #education .edu-card::after {
-      height: 3px;
-      border-radius: 0;
-      transition: width .75s cubic-bezier(.16, 1, .3, 1) .15s, box-shadow .45s ease .55s;
-    }
 
-    #education .stg.in .edu-card.ec-c::after {
-      background: linear-gradient(90deg, var(--cyan), #22d3ee);
-      box-shadow: 0 0 32px rgba(0, 229, 255, .5), 0 0 12px rgba(0, 229, 255, .35);
-    }
-
-    #education .stg.in .edu-card.ec-p::after {
-      background: linear-gradient(90deg, var(--purple), #c084fc);
-      box-shadow: 0 0 32px rgba(168, 85, 247, .45), 0 0 12px rgba(168, 85, 247, .3);
-    }
-
-    #education .stg.in .edu-card.ec-a::after {
-      background: linear-gradient(90deg, var(--amber), #fcd34d);
-      box-shadow: 0 0 32px rgba(251, 191, 36, .4), 0 0 12px rgba(251, 191, 36, .28);
-    }
 
     /* ── EXPERIENCE ── */
     .exp-wrap {
@@ -1573,18 +1588,42 @@
 
     .exp-ttl {
       font-family: 'Unbounded', sans-serif;
-      font-size: .88rem;
+      font-size: .93rem;
       font-weight: 700;
     }
 
     .exp-per {
       font-size: .7rem;
       letter-spacing: .06em;
-      color: var(--muted2);
-      padding: 3px 10px;
-      border: 1px solid var(--border);
+      padding: 3px 12px;
+      border: 1px solid;
       border-radius: 100px;
       white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .ep-c {
+      background: rgba(0, 229, 255, .08);
+      border-color: rgba(0, 229, 255, .3);
+      color: var(--cyan);
+    }
+
+    .ep-p {
+      background: rgba(168, 85, 247, .08);
+      border-color: rgba(168, 85, 247, .3);
+      color: var(--purple);
+    }
+
+    .ep-pk {
+      background: rgba(244, 114, 182, .08);
+      border-color: rgba(244, 114, 182, .3);
+      color: var(--pink);
+    }
+
+    .ep-a {
+      background: rgba(251, 191, 36, .08);
+      border-color: rgba(251, 191, 36, .3);
+      color: var(--amber);
     }
 
     .exp-role {
@@ -1599,7 +1638,7 @@
     }
 
     .exp-ul li {
-      font-size: .84rem;
+      font-size: .93rem;
       color: var(--muted2);
       padding: 4px 0 4px 16px;
       position: relative;
@@ -1661,6 +1700,23 @@
       transition: opacity .35s ease;
     }
 
+    .proj-vid {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 16px;
+    }
+
+    .proj-card:hover .proj-vid {
+      opacity: 0.15;
+    }
+
     .proj-card:hover {
       box-shadow: 0 24px 48px rgba(0, 0, 0, .38);
     }
@@ -1679,6 +1735,38 @@
 
     .pcc:hover {
       border-color: rgba(0, 229, 255, .35);
+    }
+
+    /* PREMIUM GLOW FOR AUTOGRADER - Permanent Effect */
+    .premium-glow-card::before {
+      background: radial-gradient(ellipse 120% 80% at 0% 0%,
+          rgba(0, 229, 255, .15) 0%,
+          rgba(168, 85, 247, .12) 40%,
+          rgba(244, 114, 182, .1) 80%,
+          transparent 100%) !important;
+      opacity: 0.8 !important;
+      /* Visible by default */
+      transition: opacity 1s ease-in-out, background .3s;
+    }
+
+    .premium-glow-card:hover::before {
+      opacity: 1 !important;
+      filter: brightness(1.2);
+    }
+
+    .premium-glow-card {
+      border-color: rgba(168, 85, 247, .25) !important;
+      /* Base visible border */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+    }
+
+    .premium-glow-card:hover {
+      border-color: rgba(168, 85, 247, .45) !important;
+      box-shadow: 0 32px 64px rgba(0, 0, 0, .45), 0 0 20px rgba(0, 229, 255, 0.15);
+    }
+
+    #autograder-card .pill {
+      font-size: 0.78rem;
     }
 
     .pcp::before {
@@ -1801,6 +1889,7 @@
       line-height: 1.75;
       margin-bottom: 24px;
       flex: 1 1 auto;
+      text-align: justify;
     }
 
     .pstk {
@@ -1858,6 +1947,630 @@
       border-color: rgba(168, 85, 247, .4);
     }
 
+    /* ── PREVIEW BADGE ON CARD ── */
+    .preview-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 20px;
+      color: var(--cyan);
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: auto;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      z-index: 5;
+      align-self: flex-start;
+      margin-bottom: 4px;
+      backdrop-filter: blur(4px);
+    }
+
+    .preview-badge:hover {
+      background: rgba(0, 229, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.25);
+      border-color: rgba(0, 229, 255, 0.5);
+    }
+
+    .p-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--cyan);
+      animation: pulse 2s infinite;
+    }
+
+    /* ── MODAL SYSTEM ── */
+    #proj-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    #proj-modal.open {
+      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .m-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: -1;
+    }
+
+    .m-card {
+      background: var(--cardGrad);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      width: 100%;
+      max-width: 1000px;
+      height: auto;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 42px 84px rgba(0, 0, 0, 0.6);
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #proj-modal.open .m-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .m-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 20;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+
+    .m-close:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    .m-body {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    @media (max-width: 900px) {
+      .m-body {
+        grid-template-columns: 1fr;
+        overflow-y: auto;
+      }
+
+      .m-card {
+        max-height: 92vh;
+      }
+    }
+
+    .m-vid-sec {
+      background: #000;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+    }
+
+    @media (max-width: 900px) {
+      .m-vid-sec {
+        aspect-ratio: 16/9;
+      }
+    }
+
+    .m-vid-sec video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .m-info-sec {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .m-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    .m-tabs {
+      display: flex;
+      gap: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .m-tab {
+      padding: 12px 0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted2);
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .m-tab.active {
+      color: var(--cyan);
+    }
+
+    .m-tab::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--cyan);
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px var(--cyan);
+    }
+
+    .m-tab.active::after {
+      width: 100%;
+    }
+
+    .m-pane {
+      display: none;
+      animation: mFadeIn 0.5s ease;
+      line-height: 1.75;
+      font-size: 0.98rem;
+      color: var(--muted2);
+    }
+
+    .m-pane.active {
+      display: block;
+    }
+
+    @keyframes mFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .m-footer {
+      margin-top: auto;
+      padding-top: 10px;
+    }
+
+    .m-btn-github {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--text);
+      color: var(--bg);
+      padding: 16px 32px;
+      border-radius: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      font-size: 0.9rem;
+    }
+
+    .m-btn-github:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      filter: brightness(1.1);
+    }
+
+    /* ── FEATURED SPLIT CARD ── */
+    .proj-card-featured {
+      grid-column: 1 / -1 !important;
+      display: flex !important;
+      flex-direction: row !important;
+      padding: 0 !important;
+      min-height: 357px !important;
+      overflow: visible !important;
+      border: none !important;
+    }
+
+    @media (max-width: 992px) {
+      .proj-card-featured {
+        flex-direction: column !important;
+        height: auto !important;
+      }
+    }
+
+    .p-visual {
+      flex: 1.25;
+      position: relative;
+      background: #000;
+      overflow: hidden;
+      min-height: 340px;
+    }
+
+    .p-visual video,
+    .p-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .proj-card-featured:hover .p-visual video {
+      opacity: 0.8;
+      transform: scale(1.04);
+    }
+
+    .badge-featured {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      padding: 10px 20px;
+      background: rgba(255, 165, 0, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 165, 0, 0.3);
+      border-radius: 100px;
+      color: #ffa500;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 3;
+    }
+
+    .badge-featured::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #ffa500;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #ffa500;
+    }
+
+    .badge-year {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      padding: 8px 16px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'IBM Plex Mono', monospace;
+      z-index: 3;
+    }
+
+    .p-info {
+      flex: 1;
+      padding: 45px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.03), transparent);
+      position: relative;
+      z-index: 2;
+      justify-content: center;
+    }
+
+    @media (max-width: 992px) {
+      .p-info {
+        padding: 40px;
+      }
+    }
+
+    .p-tags-top {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tag-bubble {
+      padding: 7px 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--muted2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .p-title-large {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 1.05;
+      margin: 0;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 480px) {
+      .p-title-large {
+        font-size: 2.4rem;
+      }
+    }
+
+    .p-desc-large {
+      font-size: 1.15rem;
+      line-height: 1.65;
+      color: var(--muted2);
+      max-width: 95%;
+      text-align: justify;
+    }
+
+    .p-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    /* ── SHIMMER BUTTON ── */
+    .shimmer-btn {
+      position: relative;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      padding: 18px 36px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(217, 119, 6, 0.35);
+    }
+
+    .shimmer-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to right,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.4) 50%,
+          rgba(255, 255, 255, 0) 100%);
+      transform: rotate(30deg);
+      animation: shimmerEffect 4s infinite;
+    }
+
+    @keyframes shimmerEffect {
+      0% {
+        transform: translateX(-150%) rotate(30deg);
+      }
+
+      20% {
+        transform: translateX(150%) rotate(30deg);
+      }
+
+      100% {
+        transform: translateX(150%) rotate(30deg);
+      }
+    }
+
+    .shimmer-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(217, 119, 6, 0.45);
+      filter: brightness(1.15);
+    }
+
+    .github-icon-btn {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 1.4rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .github-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-3px) scale(1.05);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* ── MODAL REFINEMENT ── */
+    .m-header-premium {
+      padding: 50px 50px 30px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .m-title-premium {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      margin-bottom: 15px;
+      line-height: 1;
+    }
+
+    .m-subtitle-premium {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted2);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .m-accent-icon {
+      color: var(--cyan);
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .m-desc-section {
+      margin-top: 50px;
+      border-left: 4px solid var(--cyan);
+      padding-left: 30px;
+      margin-bottom: 40px;
+    }
+
+    .m-desc-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+    }
+
+    .m-card-premium {
+      max-width: 1250px !important;
+      max-height: 90vh !important;
+    }
+
+    .m-body-premium {
+      display: block !important;
+      overflow-y: auto !important;
+      padding-bottom: 60px;
+    }
+
+    .m-vid-box-premium {
+      width: 90%;
+      margin: 30px auto;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .m-info-content-premium {
+      width: 90%;
+      margin: 0 auto;
+      padding: 0 !important;
+      background: none !important;
+    }
+
+    .m-pane ul {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .m-pane li {
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .m-pane li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+      font-weight: 800;
+    }
+
+    .m-pane strong {
+      color: var(--text);
+    }
+
+    .m-pane-static {
+      display: block;
+      line-height: 1.8;
+      font-size: 1.05rem;
+      color: var(--muted2);
+    }
+
+    .m-pane-static p {
+      margin-bottom: 16px;
+    }
+
+    .m-pane-static strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 600px) {
+      .m-title-premium {
+        font-size: 2rem;
+      }
+
+      .m-header-premium {
+        padding: 30px 20px 20px;
+      }
+
+      .m-vid-box-premium {
+        width: 100%;
+        border-radius: 0;
+      }
+
+      .m-desc-section {
+        padding-left: 20px;
+      }
+    }
+
     .pcpk:hover .parr {
       background: rgba(244, 114, 182, .15);
       color: var(--pink);
@@ -1894,6 +2607,167 @@
       }
     }
 
+    @keyframes rotate-bg {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    .premium-glow {
+      position: relative;
+      background: var(--bg) !important;
+      z-index: 1;
+      overflow: hidden !important;
+      border: none !important;
+    }
+
+    .premium-glow::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 150%;
+      height: 150%;
+      background: conic-gradient(from 0deg,
+          transparent 0%,
+          var(--cyan) 15%,
+          transparent 30%,
+          var(--purple) 50%,
+          transparent 65%,
+          var(--pink) 85%,
+          transparent 100%);
+      animation: rotate-bg 5s linear infinite;
+      z-index: -2;
+    }
+
+    .premium-glow::after {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      background: var(--cardGrad);
+      border-radius: 15px;
+      z-index: -1;
+    }
+
+    /* Modal Unified Content Styles */
+    .m-tag-cloud-premium {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      width: 90%;
+      margin: 0 auto 40px;
+    }
+
+    .m-tag-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--muted2);
+      letter-spacing: 0.03em;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    /* COLORIZED MODAL TAGS */
+    .mt-c {
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.3);
+      color: var(--cyan);
+    }
+
+    .mt-p {
+      background: rgba(168, 85, 247, 0.1);
+      border-color: rgba(168, 85, 247, 0.3);
+      color: var(--purple);
+    }
+
+    .mt-a {
+      background: rgba(251, 191, 36, 0.1);
+      border-color: rgba(251, 191, 36, 0.3);
+      color: var(--amber);
+    }
+
+    .mt-g {
+      background: rgba(52, 211, 153, 0.1);
+      border-color: rgba(52, 211, 153, 0.3);
+      color: var(--green);
+    }
+
+    .mt-pk {
+      background: rgba(244, 114, 182, 0.1);
+      border-color: rgba(244, 114, 182, 0.3);
+      color: var(--pink);
+    }
+
+    .m-tag-pill:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      filter: brightness(1.2);
+    }
+
+    .m-unified-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .m-unified-list li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 18px;
+      line-height: 1.7;
+      font-size: 1.05rem;
+      color: var(--muted2);
+    }
+
+    .m-unified-list li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+      font-size: 0.9rem;
+    }
+
+    .m-unified-list.stack li::before {
+      color: var(--purple);
+    }
+
+    .m-footer-premium {
+      padding: 60px 30px 40px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .m-btn-github-center {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--text);
+      color: var(--bg);
+      padding: 18px 40px;
+      border-radius: 16px;
+      font-weight: 800;
+      text-decoration: none;
+      font-size: 1.05rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .m-btn-github-center:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      background: #fff;
+    }
+
     @keyframes featGlow {
 
       0%,
@@ -1928,13 +2802,7 @@
       border-radius: 12px;
     }
 
-    .sg-bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-    }
+
 
     .sk-grp h3 {
       font-family: 'Unbounded', sans-serif;
@@ -2010,10 +2878,12 @@
     }
 
     .grd2 {
-      background: linear-gradient(135deg, var(--purple), var(--pink));
+      background: linear-gradient(110deg, var(--purple) 20%, var(--pink) 40%, #ffffff 50%, var(--pink) 60%, var(--purple) 80%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: textShine 5s linear infinite;
     }
 
     .ct-sub {
@@ -2133,34 +3003,48 @@
 
     /* GRADIENT TEXTS */
     .gt1 {
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      background: linear-gradient(110deg, var(--cyan) 20%, var(--purple) 40%, #ffffff 50%, var(--purple) 60%, var(--cyan) 80%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: textShine 5s linear infinite;
     }
 
     .gt2 {
-      background: linear-gradient(135deg, var(--purple), var(--pink));
+      background: linear-gradient(110deg, var(--purple) 20%, var(--pink) 40%, #ffffff 50%, var(--pink) 60%, var(--purple) 80%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: textShine 5s linear infinite;
     }
 
     .gt3 {
-      background: linear-gradient(135deg, var(--pink), var(--amber));
+      background: linear-gradient(110deg, var(--pink) 20%, var(--amber) 40%, #ffffff 50%, var(--amber) 60%, var(--pink) 80%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: textShine 5s linear infinite;
     }
 
     .gt4 {
-      background: linear-gradient(135deg, var(--cyan), var(--green));
+      background: linear-gradient(110deg, var(--cyan) 20%, var(--green) 40%, #ffffff 50%, var(--green) 60%, var(--cyan) 80%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: textShine 5s linear infinite;
     }
 
     /* ── KEYFRAMES ── */
+    @keyframes textShine {
+      to {
+        background-position: -200% center;
+      }
+    }
+
     @keyframes wordIn {
       0% {
         transform: translateY(110%) rotateX(40deg);
@@ -2270,6 +3154,12 @@
 
       .grid-bg,
       .name-umar,
+      .grd,
+      .grd2,
+      .gt1,
+      .gt2,
+      .gt3,
+      .gt4,
       .ct-glow {
         animation: none !important;
       }
@@ -2575,7 +3465,8 @@
       </div>
       <h1 class="hero-title">
         <span class="ln ln1"><span class="wd">Muhammad</span></span>
-        <span class="ln ln2"><span class="wd name-umar">Umar</span> <span class="wd grd">Farooq</span></span>
+        <span class="ln ln2"><span class="wd"><span class="name-umar">Umar</span></span> <span class="wd"><span
+              class="grd">Farooq</span></span></span>
       </h1>
       <p class="hero-sub">BS Artificial Intelligence student at <strong style="color:var(--text)">UMT</strong> —
         building autonomous AI agents, ML pipelines, and intelligent automation that ships beyond the classroom.</p>
@@ -2599,41 +3490,17 @@
     </div>
   </div>
 
-  <!-- MARQUEE -->
-  <div class="mq-wrap">
-    <div class="mq-track">
-      <div class="mi mc">Agentic AI <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mp">Machine Learning <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mpk">n8n Automation <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi ma">LLM Integration <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mg">Computer Vision <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mc">Python <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mp">Groq · LLaMA <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mpk">Blockchain <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi ma">C++ <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mg">Data Mining <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mc">Agentic AI <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mp">Machine Learning <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mpk">n8n Automation <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi ma">LLM Integration <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mg">Computer Vision <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mc">Python <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mp">Groq · LLaMA <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mpk">Blockchain <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi ma">C++ <span style="opacity:.35;font-size:.45rem">✦</span></div>
-      <div class="mi mg">Data Mining <span style="opacity:.35;font-size:.45rem">✦</span></div>
-    </div>
-  </div>
+
 
   <!-- ABOUT -->
   <section class="sec surf reveal" id="about">
     <div class="inn">
       <p class="sl sl-l" style="color:var(--cyan)">About</p>
       <h2 class="st wr">
-        <span class="w"><span class="wi">Turning</span></span>
-        <span class="w"><span class="wi">ideas</span></span>
-        <span class="w"><span class="wi">into</span></span>
-        <span class="w"><span class="wi"><span class="gt1">intelligent systems</span></span></span>
+        <span class="w"><span class="wi">Building</span></span>
+        <span class="w"><span class="wi">systems</span></span>
+        <span class="w"><span class="wi">that</span></span>
+        <span class="w"><span class="wi"><span class="gt1">actually ship</span></span></span>
       </h2>
       <div class="ab-grid">
         <div class="ab-text sl-l">
@@ -2653,7 +3520,7 @@
           <div class="ab-right-top">
             <h3
               style="font-family:'Unbounded', sans-serif; font-size:1.5rem; margin-bottom:14px; font-weight:700; letter-spacing:-0.02em; color:var(--text);">
-              AI Engineer <span style="color:var(--cyan)">.</span> Builder</h3>
+              AI Engineer &nbsp; <span style="color:var(--cyan)">.</span> &nbsp; Builder</h3>
             <p class="grd" style="font-size:1.25rem; font-weight:500; line-height:1.6; letter-spacing:-0.01em;">
               Production minded AI-Engineer building autonomous systems that are useful, not just impressive.</p>
           </div>
@@ -2738,7 +3605,7 @@
         <div class="exp-item">
           <div class="exp-dot"></div>
           <div class="exp-hd">
-            <div class="exp-ttl">UMT — Peer Tutoring</div><span class="exp-per">Mar 2025 – Jul 2025</span>
+            <div class="exp-ttl">UMT — Peer Tutoring</div><span class="exp-per ep-c">Mar 2025 – Jul 2025</span>
           </div>
           <div class="exp-role">Academic Tutor · Lahore, Pakistan</div>
           <ul class="exp-ul">
@@ -2751,7 +3618,7 @@
         <div class="exp-item">
           <div class="exp-dot"></div>
           <div class="exp-hd">
-            <div class="exp-ttl">Shopify Store</div><span class="exp-per">Nov 2024 – Jan 2025</span>
+            <div class="exp-ttl">Shopify Store</div><span class="exp-per ep-p">Nov 2024 – Jan 2025</span>
           </div>
           <div class="exp-role">Customer Services · Remote</div>
           <ul class="exp-ul">
@@ -2764,7 +3631,7 @@
         <div class="exp-item">
           <div class="exp-dot"></div>
           <div class="exp-hd">
-            <div class="exp-ttl">Grasp Solutions (Pvt) Ltd</div><span class="exp-per">Jun 2024 – Sep 2024</span>
+            <div class="exp-ttl">Grasp Solutions (Pvt) Ltd</div><span class="exp-per ep-pk">Jun 2024 – Sep 2024</span>
           </div>
           <div class="exp-role">Operations & Client Communication · Lahore</div>
           <ul class="exp-ul">
@@ -2777,7 +3644,7 @@
         <div class="exp-item">
           <div class="exp-dot"></div>
           <div class="exp-hd">
-            <div class="exp-ttl">SMZ Dispatch Services</div><span class="exp-per">Feb 2024 – Apr 2024</span>
+            <div class="exp-ttl">SMZ Dispatch Services</div><span class="exp-per ep-c">Feb 2024 – Apr 2024</span>
           </div>
           <div class="exp-role">Sales & Cross-Cultural Communication · Lahore</div>
           <ul class="exp-ul">
@@ -2801,21 +3668,64 @@
         <span class="w"><span class="wi"><span class="gt4">built</span></span></span>
       </h2>
       <div class="proj-bento stg">
-        <a href="https://github.com/omerfarooq223/AutoGrader-Agent" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcc proj-span-7">
-          <span class="pnum">001</span>
-          <div class="parr" aria-hidden="true">↗</div>
-          <div class="ptg-row"><span class="ptg tc">Agentic AI</span><span class="pfeat">Featured</span></div>
-          <div class="pnm">AutoGrader Agent</div>
-          <p class="pdsc">AI agent that grades student assignments from a ZIP — generates rubrics, detects plagiarism,
-            and outputs a styled Excel report with color-coded per-student feedback.</p>
-          <div class="pstk"><span class="pill">Python</span><span class="pill">Groq LLaMA 3.3</span><span
-              class="pill">PyMuPDF</span><span class="pill">openpyxl</span></div>
+        <div class="proj-card pcc proj-card-featured proj-featured premium-glow-card" id="autograder-card">
+          <div class="p-visual">
+            <video preload="auto" muted loop playsinline src="autograder.mp4"></video>
+            <div class="badge-featured">Featured Project</div>
+            <div class="badge-year">2026</div>
+          </div>
+          <div class="p-info">
+            <div class="p-tags-top">
+              <span class="tag-bubble">AI</span>
+              <span class="tag-bubble">Academic Agents</span>
+              <span class="tag-bubble">Automation</span>
+            </div>
+            <h3 class="p-title-large">AutoGrader Agent</h3>
+            <p class="p-desc-large">AI agent that grades student assignments from a ZIP — generates rubrics, detects
+              plagiarism, and outputs a styled Excel report with color-coded per-student feedback.</p>
+            <div class="pstk">
+              <span class="pill">Python</span><span class="pill">Groq LLaMA 3.3</span><span
+                class="pill">PyMuPDF</span><span class="pill">openpyxl</span>
+            </div>
+            <div class="p-actions-row">
+              <button class="shimmer-btn" onclick="openModal(event)">View Details</button>
+              <a href="https://github.com/omerfarooq223/AutoGrader-Agent" target="_blank" class="github-icon-btn"
+                aria-label="GitHub Repository">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <a href="https://github.com/omerfarooq223/personal-ai-employee" target="_blank" rel="noopener noreferrer"
+          class="proj-card pcp proj-span-6">
+          <video class="proj-vid" preload="none" muted loop playsinline></video>
+          <span class="pnum">002</span>
+          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </div>
+          <div class="ptg-row"><span class="ptg tpp">Agentic AI</span></div>
+          <div class="pnm">Personal AI Employee</div>
+          <p class="pdsc">Autonomous Gmail monitoring with a reasoning loop, human-in-the-loop approval, and LinkedIn
+            posting — built around MCP-style tooling and real workflows.</p>
+          <div class="pstk"><span class="pill">Claude</span><span class="pill">MCP</span><span class="pill">Gmail
+              API</span><span class="pill">Automation</span></div>
         </a>
         <a href="https://github.com/omerfarooq223/autoresearch-agent" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcp proj-span-5">
-          <span class="pnum">002</span>
-          <div class="parr" aria-hidden="true">↗</div>
+          class="proj-card pcp proj-span-6">
+          <video class="proj-vid" preload="none" muted loop playsinline></video>
+          <span class="pnum">003</span>
+          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </div>
           <div class="ptg-row"><span class="ptg tpp">Agentic AI</span></div>
           <div class="pnm">AutoResearch Agent</div>
           <p class="pdsc">Autonomous research agent that searches the web and generates professional PDF reports in
@@ -2825,8 +3735,14 @@
         </a>
         <a href="https://github.com/omerfarooq223/CareerPilot-Agent" target="_blank" rel="noopener noreferrer"
           class="proj-card pcc proj-span-7">
-          <span class="pnum">003</span>
-          <div class="parr" aria-hidden="true">↗</div>
+          <video class="proj-vid" preload="none" muted loop playsinline></video>
+          <span class="pnum">004</span>
+          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </div>
           <div class="ptg-row"><span class="ptg tc">Agentic AI</span><span class="pfeat">Featured</span></div>
           <div class="pnm">CareerPilot Agent</div>
           <p class="pdsc">Personal AI CTO: audits your code, suggests gap-filling projects, and tracks hirability scores
@@ -2834,21 +3750,16 @@
           <div class="pstk"><span class="pill">Skills</span><span class="pill">FastAPI</span><span class="pill">GitHub
               Action</span><span class="pill">MCP</span><span class="pill">SQLite</span></div>
         </a>
-        <a href="https://github.com/omerfarooq223/personal-ai-employee" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcp proj-span-5">
-          <span class="pnum">004</span>
-          <div class="parr" aria-hidden="true">↗</div>
-          <div class="ptg-row"><span class="ptg tpp">Agentic AI</span></div>
-          <div class="pnm">Personal AI Employee</div>
-          <p class="pdsc">Autonomous Gmail monitoring with a reasoning loop, human-in-the-loop approval, and LinkedIn
-            posting — built around MCP-style tooling and real workflows.</p>
-          <div class="pstk"><span class="pill">Claude</span><span class="pill">MCP</span><span class="pill">Gmail
-              API</span><span class="pill">Automation</span></div>
-        </a>
         <a href="https://github.com/omerfarooq223/UrduPlanner-Agent" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcp proj-span-4">
+          class="proj-card pcp proj-span-5">
+          <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">005</span>
-          <div class="parr" aria-hidden="true">↗</div>
+          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </div>
           <div class="ptg-row"><span class="ptg tpp">Agentic AI</span></div>
           <div class="pnm">UrduPlanner Agent</div>
           <p class="pdsc">Urdu lesson planner that generates weekly Word documents from textbook PDFs — OCR, LLM
@@ -2857,9 +3768,15 @@
               class="pill">python-docx</span><span class="pill">NLP</span></div>
         </a>
         <a href="https://github.com/omerfarooq223/parking-detection-system" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcpk proj-span-4">
+          class="proj-card pcpk proj-span-6">
+          <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">006</span>
-          <div class="parr" aria-hidden="true">↗</div>
+          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </div>
           <div class="ptg-row"><span class="ptg tpk">Computer Vision</span></div>
           <div class="pnm">Parking Detection System</div>
           <p class="pdsc">Real-time parking detection using a YOLOv8-trained model to detect empty vs occupied slots.
@@ -2868,9 +3785,15 @@
               Processing</span></div>
         </a>
         <a href="https://github.com/omerfarooq223/language-recognition-logistic-regression" target="_blank"
-          rel="noopener noreferrer" class="proj-card pca proj-span-4">
+          rel="noopener noreferrer" class="proj-card pca proj-span-6">
+          <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">007</span>
-          <div class="parr" aria-hidden="true">↗</div>
+          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </div>
           <div class="ptg-row"><span class="ptg ta">Machine Learning</span></div>
           <div class="pnm">Language Recognition</div>
           <p class="pdsc">Logistic regression classifier built from scratch to identify languages from text — custom
@@ -2880,8 +3803,14 @@
         </a>
         <a href="https://github.com/omerfarooq223/solana-trading-agent-skills" target="_blank" rel="noopener noreferrer"
           class="proj-card pcp proj-span-6">
+          <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">008</span>
-          <div class="parr" aria-hidden="true">↗</div>
+          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </div>
           <div class="ptg-row"><span class="ptg tpp">Agentic AI</span></div>
           <div class="pnm">Solana Trading Agent</div>
           <p class="pdsc">Modular skills-based trading agent for Solana — agentic decision-making with extensible skill
@@ -2891,8 +3820,14 @@
         </a>
         <a href="https://github.com/omerfarooq223/n8n-jira-slack" target="_blank" rel="noopener noreferrer"
           class="proj-card pca proj-span-6">
+          <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">009</span>
-          <div class="parr" aria-hidden="true">↗</div>
+          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </div>
           <div class="ptg-row"><span class="ptg ta">Automation</span></div>
           <div class="pnm">Jira–Slack Integration</div>
           <p class="pdsc">n8n workflows connecting Jira and Slack — automated notifications and tighter issue tracking
@@ -2924,8 +3859,7 @@
         <div class="tw" id="tw"><span class="tw-cur" id="tw-c"></span></div>
       </div>
       <div class="sk-grid stg">
-        <div class="sk-grp">
-          <div class="sg-bar" style="background:linear-gradient(90deg,var(--cyan),transparent)"></div>
+        <div class="sk-grp sk-c">
           <h3 style="color:var(--cyan)">AI & ML</h3>
           <ul class="sk-ul">
             <li><span class="sdot" style="background:var(--cyan)"></span>LLM Integration (Groq, LLaMA)</li>
@@ -2936,8 +3870,7 @@
             <li><span class="sdot" style="background:var(--cyan)"></span>Scikit-learn</li>
           </ul>
         </div>
-        <div class="sk-grp">
-          <div class="sg-bar" style="background:linear-gradient(90deg,var(--purple),transparent)"></div>
+        <div class="sk-grp sk-p">
           <h3 style="color:var(--purple)">Languages</h3>
           <ul class="sk-ul">
             <li><span class="sdot" style="background:var(--purple)"></span>Python (Advanced)</li>
@@ -2946,8 +3879,7 @@
             <li><span class="sdot" style="background:var(--purple)"></span>HTML / CSS / JavaScript</li>
           </ul>
         </div>
-        <div class="sk-grp">
-          <div class="sg-bar" style="background:linear-gradient(90deg,var(--amber),transparent)"></div>
+        <div class="sk-grp sk-a">
           <h3 style="color:var(--amber)">Tools & Automation</h3>
           <ul class="sk-ul">
             <li><span class="sdot" style="background:var(--amber)"></span>n8n Workflow Automation</li>
@@ -2958,8 +3890,7 @@
             <li><span class="sdot" style="background:var(--amber)"></span>VS Code / Jupyter</li>
           </ul>
         </div>
-        <div class="sk-grp">
-          <div class="sg-bar" style="background:linear-gradient(90deg,var(--green),transparent)"></div>
+        <div class="sk-grp sk-g">
           <h3 style="color:var(--green)">In Progress</h3>
           <ul class="sk-ul">
             <li><span class="sdot" style="background:var(--green)"></span>Multi-agent Systems</li>
@@ -2984,7 +3915,8 @@
       <p class="ct-sub r3d">Open to internships, freelance projects, and collaborations in AI, ML, and automation. Based
         in Lahore — happy to work remotely.</p>
       <div class="ct-links stg">
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=momerfarooq223@gmail.com" target="_blank" class="cl clc">✉
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=momerfarooq223@gmail.com" target="_blank"
+          class="cl clc">✉
           Email</a>
         <a href="https://www.linkedin.com/in/omerfarooq223/" target="_blank" class="cl clp">in
           LinkedIn</a>
@@ -3005,7 +3937,52 @@
   <div id="curRing"></div>
   <canvas id="nw"></canvas>
 
+  <canvas id="nw"></canvas>
+
   <script>
+    // ── MODAL LOGIC ──
+    function openModal(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+      }
+      const modal = document.getElementById('proj-modal');
+      const vid = document.getElementById('m-video');
+      if (modal) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      if (vid) {
+        vid.currentTime = 0;
+        vid.play().catch(err => console.log('Modal video play failed:', err));
+      }
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('proj-modal');
+      const vid = document.getElementById('m-video');
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      if (vid) {
+        vid.pause();
+      }
+    }
+
+    function switchTab(e, tabId) {
+      const tabs = document.querySelectorAll('.m-tab');
+      const panes = document.querySelectorAll('.m-pane');
+      tabs.forEach(t => t.classList.remove('active'));
+      panes.forEach(p => p.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Close modal on ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
     // ── CURSOR & PARALLAX ──
     const cur = document.getElementById('cur');
     const ring = document.getElementById('curRing');
@@ -3035,18 +4012,26 @@
         el.addEventListener('mouseleave', () => { ring.classList.remove('hov'); cur.classList.remove('hov'); });
       });
 
-      // Hide custom cursor on cards to show default system cursor
-      document.querySelectorAll('.proj-card, .edu-card, .sk-grp, .stat').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          cur.style.opacity = '0';
-          ring.style.opacity = '0';
-        });
-        el.addEventListener('mouseleave', () => {
-          cur.style.opacity = '1';
-          ring.style.opacity = '1';
-        });
-      });
+
     }
+
+    // ── PROJECT VIDEOS ──
+    document.querySelectorAll('.proj-card').forEach(card => {
+      const vid = card.querySelector('.proj-vid');
+      if (vid) {
+        card.addEventListener('mouseenter', () => {
+          if (vid.src && vid.src !== window.location.href) {
+            vid.play().catch(e => console.log('Video play failed:', e));
+          }
+        });
+        card.addEventListener('mouseleave', () => {
+          if (vid.src && vid.src !== window.location.href) {
+            vid.pause();
+          }
+        });
+      }
+    });
+
 
     // ── THEME TOGGLE ──
     const themeToggle = document.getElementById('themeToggle');
@@ -3110,6 +4095,9 @@
     // ── ANIMATED GRADIENT BORDERS ──
     document.querySelectorAll('.proj-card, .edu-card, .sk-grp').forEach(card => {
       card.classList.add('glow-border');
+      if (card.classList.contains('proj-card') && !card.classList.contains('proj-featured')) {
+        card.classList.add('hover-glow-only');
+      }
       // Static subtle base border
       const base = document.createElement('div');
       base.className = 'glow-border-base';
@@ -3198,16 +4186,15 @@
 
         } else {
           // Leaving viewport
-          e.target.classList.remove('in');
-
-          // Apply exit direction
           const rect = e.target.getBoundingClientRect();
           if (rect.top > 0) {
-            // Left from bottom (scrolled back up) — use out-up
+            // Left from bottom (scrolled back up) — use out-up AND remove in
+            e.target.classList.remove('in');
             e.target.classList.add('out-up');
           } else {
-            // Left from top (scrolled past) — reset to default hidden state
-            e.target.classList.remove('out-up');
+            // Left from top (scrolled past) — stay revealed to avoid flicker
+            // We only remove 'in' if it's below the viewport to allow re-triggering from bottom.
+            // If it's above the viewport, we keep it revealed.
           }
         }
       });
@@ -3287,7 +4274,7 @@
       const velocities = new Float32Array(count * 3);
       for (let i = 0; i < count * 3; i++) {
         positions[i] = (Math.random() - 0.4) * 15;
-        velocities[i] = (Math.random() - 0.5) * 0.008;
+        velocities[i] = (Math.random() - 0.5) * 0.024;
       }
 
       const geometry = new THREE.BufferGeometry();
@@ -3347,8 +4334,8 @@
         lineMaterial.color.setHex(lineColor());
         lineMaterial.opacity = document.documentElement.dataset.theme === 'light' ? 0.45 : 0.15;
 
-        group.rotation.y += 0.001;
-        group.rotation.x += 0.0005;
+        group.rotation.y += 0.003;
+        group.rotation.x += 0.0015;
 
         // Subtle parallax
         group.rotation.y += (mouseX * 0.1 - group.rotation.y) * 0.05;
@@ -3356,13 +4343,14 @@
 
         // Update lines
         const linePos = [];
+        const breathingDist = Math.sin(Date.now() * 0.0015) * 0.4 + 1.8;
         for (let i = 0; i < count; i++) {
           for (let j = i + 1; j < count; j++) {
             const dx = posArray[i * 3] - posArray[j * 3];
             const dy = posArray[i * 3 + 1] - posArray[j * 3 + 1];
             const dz = posArray[i * 3 + 2] - posArray[j * 3 + 2];
             const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-            if (dist < 1.8) {
+            if (dist < breathingDist) {
               linePos.push(posArray[i * 3], posArray[i * 3 + 1], posArray[i * 3 + 2]);
               linePos.push(posArray[j * 3], posArray[j * 3 + 1], posArray[j * 3 + 2]);
             }
@@ -3387,18 +4375,17 @@
 
     // ── TERMINAL TYPING ──
     const tw = document.getElementById('tw');
-    const twLines = [
-      { t: "> systemctl start ai_agent", d: 30, k: "cmd" },
-      { t: "[OK] Neural pathways mapped...", d: 10, k: "cmt" },
-      { t: "> fetch --skills --all", d: 30, k: "cmd" },
-      { t: "[ Python, Groq, n8n, OpenCV, Multi-Agent ]", d: 10, k: "str" },
-      { t: "> Agentic engine initialized and standing by.", d: 20, k: "cmt" }
+    const twLinesText = [
+      { t: "> initializing Umar_Agent...", d: 30, k: "cmd" },
+      { t: "> Loading skills matrix... [Python, LLMs, Computer Vision]", d: 15, k: "cmt" },
+      { t: "> Injecting workflows...", d: 30, k: "cmd" },
+      { t: "> Status: ready for deployment.", d: 20, k: "str" }
     ];
     let lIdx = 0, cIdx = 0;
     function typeTw() {
       if (!tw) return;
-      if (lIdx >= twLines.length) return;
-      const ln = twLines[lIdx];
+      if (lIdx >= twLinesText.length) return;
+      const ln = twLinesText[lIdx];
       if (cIdx === 0) {
         const p = document.createElement('div');
         if (ln.k) p.className = ln.k;
@@ -3419,6 +4406,84 @@
     });
     if (tw) twObs.observe(tw);
   </script>
+
+  <!-- PROJECT MODAL -->
+  <div id="proj-modal">
+    <div class="m-overlay" onclick="closeModal()"></div>
+    <div class="m-card m-card-premium">
+      <button class="m-close" onclick="closeModal()" aria-label="Close modal">&times;</button>
+      <div class="m-header-premium">
+        <h3 class="m-title-premium">AutoGrader Agent</h3>
+        <div class="m-subtitle-premium">
+          <span class="m-accent-icon">✦</span>
+          <span>AI / Agentic Engineering / Python · 2026</span>
+        </div>
+      </div>
+      <div class="m-body m-body-premium">
+        <div class="m-vid-box-premium">
+          <video id="m-video" muted loop playsinline src="autograder.mp4"></video>
+        </div>
+
+        <!-- NEW CENTRALIZED TAGS -->
+        <div class="m-tag-cloud-premium">
+          <span class="m-tag-pill mt-c">AI Agents</span>
+          <span class="m-tag-pill mt-p">LLM Engineering</span>
+          <span class="m-tag-pill mt-g">Python</span>
+          <span class="m-tag-pill mt-a">Academic Tech</span>
+          <span class="m-tag-pill mt-pk">Automation</span>
+          <span class="m-tag-pill mt-c">Data Analysis</span>
+        </div>
+
+        <div class="m-info-content-premium">
+          <div class="m-desc-section">
+            <h4 class="m-desc-title">Project Overview</h4>
+            <div id="m-overview-inner" class="m-pane-static">
+              <p>Autonomous AI agent designed to revolutionize the academic grading workflow. <strong>AutoGrader
+                  Agent</strong> eliminates manual effort by processing bulk student submissions with high precision and
+                speed.</p>
+              <p>It acts as a primary interface between raw assignment data and final reporting, ensuring consistency
+                and fairness across all evaluations.</p>
+
+              <h4 class="m-desc-title" style="margin-top:40px;">Detailed Features</h4>
+              <ul class="m-unified-list">
+                <li><strong>Smart Submissions:</strong> Accepts a ZIP of student submissions alongside an assignment
+                  brief for context-aware grading.</li>
+                <li><strong>Dynamic Rubrics:</strong> Generates structured grading rubrics via LLM (Groq / Gemini) —
+                  supports auto-detection from templates or instant AI-formatting of raw pasted text into JSON.</li>
+                <li><strong>Solution Intelligence:</strong> Supports manual, uploaded, or AI-generated answer keys for
+                  pinpoint accurate evaluation.</li>
+                <li><strong>Automated Evaluation:</strong> Grades each submission against the rubric while Python
+                  handles all math (totals, deductions, formatting).</li>
+                <li><strong>Plagiarism Engine:</strong> Detects academic dishonesty using dual similarity analysis
+                  (TF-IDF + character n-gram) with a sidebar toggle.</li>
+                <li><strong>Analytical Reports:</strong> Outputs styled Excel reports featuring per-criterion breakdowns
+                  and class-wide statistics.</li>
+              </ul>
+
+              <h4 class="m-desc-title" style="margin-top:40px;">Technology Stack</h4>
+              <ul class="m-unified-list stack">
+                <li><strong>Groq / LLaMA 3.3:</strong> Powers high-speed reasoning and evaluation logic.</li>
+                <li><strong>PyMuPDF:</strong> Advanced document parsing and text extraction.</li>
+                <li><strong>openpyxl:</strong> Professional styled Excel report generation.</li>
+                <li><strong>Python Core:</strong> Modular architecture for reliability and extensibility.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="m-footer-premium">
+          <a href="https://github.com/omerfarooq223/AutoGrader-Agent" target="_blank" class="m-btn-github-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="margin-right:12px;">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            View Source on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 </body>
 
 </html>
