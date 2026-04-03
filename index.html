@@ -725,18 +725,23 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      --eb-line-h: 1.4em;
       font-size: .68rem;
       letter-spacing: .28em;
       text-transform: uppercase;
       color: var(--cyan);
       margin-bottom: 32px;
       font-weight: 500;
+      line-height: var(--eb-line-h);
+      max-width: 100%;
     }
 
     .eb-wrap {
-      height: 16px;
+      height: var(--eb-line-h);
       overflow: hidden;
       display: inline-flex;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .eb-slider {
@@ -746,9 +751,13 @@
     }
 
     .eb-slider span {
-      height: 16px;
+      height: var(--eb-line-h);
       display: flex;
       align-items: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
 
     @keyframes ebScroll {
@@ -760,7 +769,7 @@
 
       60%,
       100% {
-        transform: translateY(-16px);
+        transform: translateY(calc(-1 * var(--eb-line-h)));
       }
     }
 
@@ -2222,6 +2231,20 @@
         flex-direction: column !important;
         height: auto !important;
       }
+
+      .p-visual {
+        min-height: 240px;
+      }
+
+      .p-title-large {
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      .p-actions-row {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
     }
 
     .p-visual {
@@ -3223,6 +3246,13 @@
         padding: 90px 20px 60px;
       }
 
+      .hero-eyebrow {
+        gap: 8px;
+        --eb-line-h: 1.55em;
+        font-size: .58rem;
+        letter-spacing: .18em;
+      }
+
       .scroll-cue {
         left: 20px;
       }
@@ -3295,6 +3325,18 @@
       #btt {
         bottom: 18px;
         right: 18px;
+      }
+
+      .p-info {
+        padding: 32px 24px;
+      }
+
+      .p-title-large {
+        font-size: clamp(1.8rem, 8.5vw, 2.4rem);
+      }
+
+      .p-desc-large {
+        max-width: 100%;
       }
     }
 
@@ -3377,6 +3419,12 @@
     }
 
     @media(max-width:480px) {
+      .hero-eyebrow {
+        --eb-line-h: 1.65em;
+        font-size: .52rem;
+        letter-spacing: .14em;
+      }
+
       .sk-grid {
         grid-template-columns: 1fr;
       }
@@ -3395,6 +3443,86 @@
 
       .hero-title {
         font-size: clamp(2.4rem, 11vw, 4rem);
+      }
+
+      .p-visual {
+        min-height: 200px;
+      }
+
+      .p-info {
+        padding: 24px 16px;
+      }
+
+      .tag-bubble {
+        font-size: 0.62rem;
+        padding: 6px 12px;
+      }
+
+      .shimmer-btn {
+        width: 100%;
+        min-height: 52px;
+      }
+
+      .github-icon-btn {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    @media(max-width:380px) {
+      .hero-eyebrow {
+        --eb-line-h: 1.75em;
+        font-size: .48rem;
+        letter-spacing: .06em;
+        text-transform: none;
+      }
+
+      .p-visual {
+        min-height: 180px;
+      }
+
+      .badge-featured {
+        top: 14px;
+        left: 14px;
+        padding: 7px 12px;
+        font-size: 0.58rem;
+        letter-spacing: 0.05em;
+        gap: 6px;
+      }
+
+      .badge-featured::before {
+        width: 6px;
+        height: 6px;
+      }
+
+      .badge-year {
+        bottom: 14px;
+        left: 14px;
+        font-size: 0.8rem;
+        padding: 6px 10px;
+      }
+
+      .p-title-large {
+        font-size: clamp(1.5rem, 9.2vw, 1.9rem);
+      }
+
+      .p-desc-large {
+        font-size: 0.95rem;
+        line-height: 1.55;
+      }
+
+      .p-actions-row {
+        gap: 10px;
+      }
+
+      .shimmer-btn {
+        padding: 14px 18px;
+        font-size: 0.9rem;
+      }
+
+      .github-icon-btn {
+        width: 46px;
+        height: 46px;
       }
     }
 
