@@ -2577,20 +2577,31 @@
 
     @media (max-width: 600px) {
       .m-title-premium {
-        font-size: 2rem;
+        font-size: clamp(1.4rem, 8vw, 1.8rem);
       }
 
       .m-header-premium {
-        padding: 30px 20px 20px;
+        padding: 24px 16px 16px;
       }
 
       .m-vid-box-premium {
         width: 100%;
         border-radius: 0;
+        margin: 15px 0;
+      }
+
+      .m-info-content-premium {
+        width: 100%;
       }
 
       .m-desc-section {
-        padding-left: 20px;
+        padding-left: 16px;
+        margin-top: 30px;
+      }
+
+      .m-subtitle-premium {
+        font-size: 0.85rem;
+        gap: 10px;
       }
     }
 
@@ -3249,8 +3260,8 @@
       .hero-eyebrow {
         gap: 8px;
         --eb-line-h: 1.55em;
-        font-size: .58rem;
-        letter-spacing: .18em;
+        font-size: .56rem;
+        letter-spacing: .12em;
       }
 
       .scroll-cue {
@@ -3332,7 +3343,7 @@
       }
 
       .p-title-large {
-        font-size: clamp(1.8rem, 8.5vw, 2.4rem);
+        font-size: clamp(1.6rem, 7.5vw, 2.2rem);
       }
 
       .p-desc-large {
@@ -3422,7 +3433,7 @@
       .hero-eyebrow {
         --eb-line-h: 1.65em;
         font-size: .52rem;
-        letter-spacing: .14em;
+        letter-spacing: .08em;
       }
 
       .sk-grid {
@@ -3450,7 +3461,7 @@
       }
 
       .p-info {
-        padding: 24px 16px;
+        padding: 20px 14px;
       }
 
       .tag-bubble {
@@ -3472,8 +3483,8 @@
     @media(max-width:380px) {
       .hero-eyebrow {
         --eb-line-h: 1.75em;
-        font-size: .48rem;
-        letter-spacing: .06em;
+        font-size: .44rem;
+        letter-spacing: .04em;
         text-transform: none;
       }
 
@@ -3489,7 +3500,12 @@
         letter-spacing: 0.05em;
         gap: 6px;
       }
-
+    @media(max-width:340px) {
+      .hero-eyebrow {
+        font-size: .4rem;
+        letter-spacing: .02em;
+      }
+    }
       .badge-featured::before {
         width: 6px;
         height: 6px;
