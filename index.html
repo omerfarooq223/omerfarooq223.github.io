@@ -73,6 +73,10 @@
 
       --themeToggleBg: rgba(255, 255, 255, .04);
       --themeToggleBgHover: rgba(0, 229, 255, .07);
+
+      --fs-body: 16px;
+      --fs-body-lg: 1.08rem;
+      --fs-section-title: clamp(1.75rem, 4vw, 2.95rem);
     }
 
     html[data-theme="light"] {
@@ -316,6 +320,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: var(--fs-body);
       font-weight: 300;
       line-height: 1.6;
     }
@@ -386,7 +391,7 @@
       animation: rotateBorder 8s linear infinite;
       pointer-events: none;
       z-index: -1;
-      opacity: 1;
+      opacity: .72;
       transition: opacity 0.4s ease;
     }
 
@@ -811,9 +816,9 @@
 
     .hero-sub {
       margin-top: 32px;
-      font-size: 1.05rem;
+      font-size: var(--fs-body-lg);
       color: var(--muted2);
-      max-width: 480px;
+      max-width: 690px;
       line-height: 1.8;
       font-weight: 300;
       opacity: 0;
@@ -889,6 +894,11 @@
       text-decoration: none;
       display: inline-block;
       transition: transform .2s, box-shadow .2s;
+    }
+
+    .hero-cta .btn-a {
+      min-width: 220px;
+      text-align: center;
     }
 
     .btn-a:hover {
@@ -1050,7 +1060,7 @@
     .st {
       font-family: 'Unbounded', sans-serif;
       font-weight: 700;
-      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-size: var(--fs-section-title);
       letter-spacing: -.025em;
       line-height: 1.15;
       margin-bottom: 52px;
@@ -2217,7 +2227,6 @@
     }
 
     .m-btn-github:hover {
-      transform: translateY(-4px) scale(1.02);
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
       filter: brightness(1.1);
     }
@@ -2358,6 +2367,24 @@
       letter-spacing: 0.05em;
     }
 
+    .tag-bubble.tb-c {
+      border-color: rgba(0, 229, 255, 0.42);
+      background: rgba(0, 229, 255, 0.1);
+      color: var(--cyan);
+    }
+
+    .tag-bubble.tb-p {
+      border-color: rgba(168, 85, 247, 0.42);
+      background: rgba(168, 85, 247, 0.1);
+      color: var(--purple);
+    }
+
+    .tag-bubble.tb-a {
+      border-color: rgba(251, 191, 36, 0.42);
+      background: rgba(251, 191, 36, 0.1);
+      color: var(--amber);
+    }
+
     .p-title-large {
       font-family: 'Unbounded', sans-serif;
       font-size: 2.8rem;
@@ -2438,7 +2465,6 @@
     }
 
     .shimmer-btn:hover {
-      transform: translateY(-5px);
       box-shadow: 0 15px 35px rgba(217, 119, 6, 0.45);
       filter: brightness(1.15);
     }
@@ -2460,31 +2486,30 @@
 
     .github-icon-btn:hover {
       background: rgba(255, 255, 255, 0.08);
-      transform: translateY(-3px) scale(1.05);
       border-color: rgba(255, 255, 255, 0.25);
     }
 
     .m-header-premium {
-      padding: 50px 50px 30px;
+      padding: 28px 34px 18px;
       border-bottom: 1px solid var(--border);
       position: relative;
     }
 
     .m-title-premium {
       font-family: 'Unbounded', sans-serif;
-      font-size: 2.8rem;
+      font-size: clamp(1.65rem, 3.2vw, 2.35rem);
       font-weight: 800;
       letter-spacing: -0.05em;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       line-height: 1;
     }
 
     .m-subtitle-premium {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
       color: var(--muted2);
-      font-size: 1rem;
+      font-size: .9rem;
       font-weight: 700;
       letter-spacing: 0.02em;
     }
@@ -2497,7 +2522,7 @@
     }
 
     .m-desc-section {
-      margin-top: 50px;
+      margin-top: 22px;
       border-left: 4px solid var(--cyan);
       padding-left: 30px;
       margin-bottom: 40px;
@@ -2515,22 +2540,31 @@
 
     .m-card-premium {
       max-width: 1250px !important;
-      max-height: 90vh !important;
+      max-height: 92vh !important;
     }
 
     .m-body-premium {
       display: block !important;
       overflow-y: auto !important;
-      padding-bottom: 60px;
+      padding-bottom: 26px;
     }
 
     .m-vid-box-premium {
-      width: 90%;
-      margin: 30px auto;
+      width: 88%;
+      margin: 14px auto 10px;
       border-radius: 20px;
       overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      aspect-ratio: 16 / 9;
+      max-height: 42vh;
+    }
+
+    .m-vid-box-premium video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .m-tag-cloud-premium {
@@ -2538,12 +2572,12 @@
       flex-wrap: wrap;
       gap: 10px;
       justify-content: center;
-      width: 90%;
-      margin: 0 auto 40px;
+      width: 88%;
+      margin: 0 auto 20px;
     }
 
     .m-info-content-premium {
-      width: 90%;
+      width: 88%;
       margin: 0 auto;
       padding: 0 !important;
       background: none !important;
@@ -2799,7 +2833,6 @@
     }
 
     .m-btn-github-center:hover {
-      transform: translateY(-5px) scale(1.02);
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
       background: #fff;
     }
@@ -3012,7 +3045,6 @@
     }
 
     .ct-card-actions .cl:hover {
-      transform: translateY(-3px);
       border-color: rgba(255, 255, 255, 0.22);
       background: rgba(255, 255, 255, 0.07);
     }
@@ -3205,7 +3237,6 @@
     }
 
     #contact .ct-primary:hover {
-      transform: translateY(-2px);
       box-shadow: 0 18px 34px rgba(0, 229, 255, 0.33);
       filter: brightness(1.03);
     }
@@ -3234,7 +3265,6 @@
     }
 
     #contact .ct-card-actions .cl:hover {
-      transform: translateY(-3px);
       box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18);
       filter: brightness(1.02);
     }
@@ -4117,9 +4147,9 @@
           </div>
           <div class="p-info">
             <div class="p-tags-top">
-              <span class="tag-bubble">AI</span>
-              <span class="tag-bubble">Academic Agents</span>
-              <span class="tag-bubble">Automation</span>
+              <span class="tag-bubble tb-c">Agentic AI</span>
+              <span class="tag-bubble tb-p">Academic Agents</span>
+              <span class="tag-bubble tb-a">Automation</span>
             </div>
             <h3 class="p-title-large">AutoGrader Agent</h3>
             <p class="p-desc-large">AI agent that grades student assignments from a ZIP  generates rubrics, detects
@@ -4516,7 +4546,7 @@
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
     if (hasFinePointer && !prefersReducedMotion) {
-      document.querySelectorAll('.btn-a, .btn-b, .cl, .nav-logo, #themeToggle').forEach(btn => {
+      document.querySelectorAll('.hero-cta .btn-a, .hero-cta .btn-b').forEach(btn => {
         let magTicking = false;
         btn.addEventListener('mousemove', e => {
           if (!magTicking) {
