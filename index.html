@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muhammad Umar Farooq — AI Engineer</title>
+  <title>Muhammad Umar Farooq | AI Engineer</title>
   <meta name="description"
     content="AI engineer building autonomous agentic systems, ML pipelines and intelligent automation. Selected projects include agentic grading, research assistants and a YOLOv8 smart parking system with an AI assistant." />
   <meta property="og:title" content="Muhammad Umar Farooq — AI Engineer" />
@@ -12,7 +12,7 @@
     content="AI engineer building autonomous agentic systems, ML pipelines and intelligent automation. Selected projects include agentic grading, research assistants and a YOLOv8 smart parking system with an AI assistant." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Muhammad Umar Farooq — AI Engineer" />
+  <meta name="twitter:title" content="Muhammad Umar Farooq | AI Engineer" />
   <meta name="twitter:description"
     content="AI engineer building autonomous agentic systems, ML pipelines and intelligent automation. Selected projects include agentic grading, research assistants and a YOLOv8 smart parking system with an AI assistant." />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300e5ff'/%3E%3Cstop offset='55%25' stop-color='%23a855f7'/%3E%3Cstop offset='100%25' stop-color='%23f472b6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='%2307080f'/%3E%3Cpath d='M18 48V16h9.2l9 18.1L45.2 16H46v32h-7V31.7l-6.2 12.1h-1.7l-6.2-12.1V48z' fill='url(%23g)'/%3E%3C/svg%3E" />
@@ -1690,6 +1690,7 @@
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       gap: 14px;
+      align-items: start;
     }
 
     .proj-card {
@@ -1737,15 +1738,52 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0;
+      opacity: 0.16;
       transition: opacity 0.4s ease;
       pointer-events: none;
       z-index: 0;
       border-radius: 16px;
+      filter: saturate(0.95) contrast(1.04);
     }
 
     .proj-card:hover .proj-vid {
-      opacity: 0.15;
+      opacity: 0.28;
+    }
+
+    .parking-media-stack {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .parking-media-stack img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    .parking-media-stack .parking-primary {
+      opacity: 0.84;
+    }
+
+    .parking-media-stack .parking-secondary {
+      inset: auto 18px 18px auto;
+      width: 42%;
+      height: 42%;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+      opacity: 0.96;
+      transform: rotate(-2deg);
+      object-fit: cover;
+    }
+
+    .proj-card:hover .parking-media-stack .parking-secondary {
+      transform: translateY(-2px) rotate(0deg) scale(1.03);
+      opacity: 1;
     }
 
     .proj-card:hover {
@@ -1843,7 +1881,7 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
     }
 
     .ptg {
@@ -1906,7 +1944,7 @@
       font-size: clamp(1.05rem, 2.1vw, 1.2rem);
       font-weight: 800;
       letter-spacing: -.02em;
-      margin-bottom: 10px;
+      margin-bottom: 0;
       line-height: 1.2;
       flex: 0 0 auto;
     }
@@ -1915,7 +1953,7 @@
       color: var(--muted2);
       font-size: 0.88rem;
       line-height: 1.75;
-      margin-bottom: 24px;
+      margin-bottom: 0;
       flex: 1 1 auto;
       text-align: justify;
     }
@@ -1924,7 +1962,9 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: auto;
+      margin-top: 10px;
+      justify-content: center;
+      width: 100%;
     }
 
     .pill {
@@ -2236,13 +2276,26 @@
       display: flex !important;
       flex-direction: row !important;
       padding: 0 !important;
-      min-height: 357px !important;
+      min-height: 286px !important;
       overflow: visible !important;
       border: none !important;
     }
 
+    .proj-card-preview {
+      grid-column: span 6 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      padding: 14px !important;
+      min-height: 0 !important;
+      overflow: visible !important;
+      border: none !important;
+      cursor: pointer;
+      align-self: start;
+    }
+
     @media (max-width: 992px) {
-      .proj-card-featured {
+      .proj-card-featured,
+      .proj-card-preview {
         flex-direction: column !important;
         height: auto !important;
       }
@@ -2267,7 +2320,205 @@
       position: relative;
       background: #000;
       overflow: hidden;
-      min-height: 340px;
+      min-height: 314px;
+    }
+
+    .proj-card-preview .p-visual {
+      flex: 0 0 auto !important;
+      height: 240px;
+      min-height: 240px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .proj-card-preview .p-info {
+      flex: 0 0 auto !important;
+      width: 100%;
+      padding: 12px 6px 0;
+      box-sizing: border-box;
+      min-width: 0;
+      overflow: visible;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left;
+      gap: 0;
+      background: transparent;
+    }
+
+    .proj-card-preview .p-tags-top {
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .proj-card-preview .p-title-large {
+      font-size: clamp(1.45rem, 2.4vw, 2rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      text-align: left;
+      transition: color 0.3s ease;
+    }
+
+    .pcc.proj-card-preview:hover .p-title-large {
+      color: var(--cyan);
+    }
+
+    .pcc.proj-card-featured:hover .p-title-large {
+      color: var(--cyan);
+    }
+
+    .pcpk.proj-card-preview:hover .p-title-large {
+      color: #f472b6;
+    }
+
+    .pca.proj-card-preview:hover .p-title-large {
+      color: var(--amber);
+    }
+
+    .pcp.proj-card-preview:hover .p-title-large {
+      color: var(--purple);
+    }
+
+    .proj-card-preview .p-desc-large {
+      font-size: 1.02rem;
+      text-align: left;
+      max-width: none;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .proj-card-preview .pstk {
+      justify-content: flex-start;
+      margin-top: 8px;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .proj-card-preview .pill {
+      padding: 6px 12px;
+      font-size: 0.72rem;
+    }
+
+    .proj-card-preview .github-icon-btn {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      margin-left: auto;
+    }
+
+    .proj-card-preview .preview-hover-btn {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0.96);
+      padding: 12px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(18, 22, 39, 0.72);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .proj-card-preview:hover .preview-hover-btn,
+    .proj-card-preview .p-visual:hover .preview-hover-btn,
+    .proj-card-preview .preview-hover-btn:focus-visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .proj-card-preview .preview-hover-btn:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    .proj-card-preview .badge-year {
+      top: 16px;
+      right: 16px;
+      left: auto;
+      bottom: auto;
+      font-size: 0.9rem;
+      padding: 6px 12px;
+    }
+
+    .proj-card-preview .image-label {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 6px 12px;
+      background: rgba(0, 0, 0, 0.32);
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 6px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 2;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .proj-card-preview .image-label.cyan {
+      background: rgba(0, 229, 255, 0.2);
+      color: #00e5ff;
+      border: 1px solid rgba(0, 229, 255, 0.35);
+    }
+
+    .proj-card-preview .image-label.agentic {
+      background: rgba(168, 85, 247, 0.2);
+      color: #a855f7;
+      border: 1px solid rgba(168, 85, 247, 0.35);
+    }
+
+    .proj-card-preview .image-label.pink {
+      background: rgba(244, 114, 182, 0.2);
+      color: #f472b6;
+      border: 1px solid rgba(244, 114, 182, 0.35);
+    }
+
+    .proj-card-preview .image-label.amber {
+      background: rgba(251, 191, 36, 0.2);
+      color: var(--amber);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+    }
+
+    .proj-card-preview .pill.pill-cyan {
+      background: rgba(0, 229, 255, 0.12);
+      color: #00e5ff;
+      border: 1px solid rgba(0, 229, 255, 0.25);
+    }
+
+    .proj-card-preview .pill.pill-purple {
+      background: rgba(168, 85, 247, 0.12);
+      color: #a855f7;
+      border: 1px solid rgba(168, 85, 247, 0.25);
+    }
+
+    .proj-card-preview .pill.pill-pink {
+      background: rgba(244, 114, 182, 0.12);
+      color: #f472b6;
+      border: 1px solid rgba(244, 114, 182, 0.25);
+    }
+
+    .proj-card-preview .pill.pill-amber {
+      background: rgba(251, 191, 36, 0.12);
+      color: var(--amber);
+      border: 1px solid rgba(251, 191, 36, 0.25);
     }
 
     .p-visual video,
@@ -2279,7 +2530,9 @@
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    .proj-card-featured:hover .p-visual video {
+    .proj-card-featured:hover .p-visual video,
+    .proj-card-featured:hover .p-visual img,
+    .proj-card-preview:hover .p-visual img {
       opacity: 0.8;
       transform: scale(1.04);
     }
@@ -2333,14 +2586,16 @@
 
     .p-info {
       flex: 1;
-      padding: 45px;
+      padding: 28px 30px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
       background: linear-gradient(165deg, rgba(255, 255, 255, 0.03), transparent);
       position: relative;
       z-index: 2;
-      justify-content: center;
+      text-align: center;
     }
 
     @media (max-width: 992px) {
@@ -2353,6 +2608,7 @@
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     .tag-bubble {
@@ -2393,7 +2649,8 @@
       line-height: 1.05;
       margin: 0;
       color: var(--text);
-      white-space: nowrap;
+      white-space: normal;
+      max-width: 100%;
     }
 
     @media (max-width: 480px) {
@@ -2406,8 +2663,25 @@
       font-size: 1.15rem;
       line-height: 1.65;
       color: var(--muted2);
-      max-width: 95%;
-      text-align: justify;
+      max-width: 100%;
+      text-align: center;
+      margin: 0;
+    }
+
+    @media (max-width: 992px) {
+      .proj-card-preview {
+        padding: 14px !important;
+      }
+
+      .proj-card-preview .p-visual {
+        flex: 0 0 auto !important;
+        height: 210px;
+        min-height: 210px;
+      }
+
+      .proj-card-preview .p-info {
+        padding: 16px 4px 4px;
+      }
     }
 
     .p-actions-row {
@@ -2415,6 +2689,9 @@
       align-items: center;
       gap: 20px;
       margin-top: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
     }
 
     .shimmer-btn {
@@ -2550,21 +2827,127 @@
     }
 
     .m-vid-box-premium {
-      width: 88%;
+      width: 92%;
       margin: 14px auto 10px;
       border-radius: 20px;
       overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
       aspect-ratio: 16 / 9;
-      max-height: 42vh;
+      max-height: 62vh;
+      min-height: 320px;
+    }
+
+    .m-media-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #05070f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .m-vid-box-premium video,
+    .m-vid-box-premium img {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
     .m-vid-box-premium video {
-      width: 100%;
-      height: 100%;
       object-fit: cover;
-      display: block;
+    }
+
+    .m-vid-box-premium img {
+      object-fit: contain;
+      object-position: center;
+      background: #05070f;
+    }
+
+    .m-vid-box-premium img.m-media-slide {
+      object-fit: contain !important;
+      object-position: center;
+      background: #05070f;
+    }
+
+    .m-media-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      object-fit: contain;
+      object-position: center;
+      background: #05070f;
+    }
+
+    .m-media-slide.is-active {
+      opacity: 1;
+    }
+
+    .m-media-controls {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .m-media-nav {
+      pointer-events: auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.32);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .m-media-nav:hover {
+      background: rgba(0, 0, 0, 0.45);
+    }
+
+    .m-media-dots {
+      pointer-events: auto;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+
+
+    .m-media-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      border: 0;
+      background: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+    }
+
+    .m-media-dot.active {
+      background: var(--cyan);
+      box-shadow: 0 0 0 4px rgba(0, 229, 255, 0.18);
     }
 
     .m-tag-cloud-premium {
@@ -2642,6 +3025,8 @@
         width: 100%;
         border-radius: 0;
         margin: 15px 0;
+        min-height: 240px;
+        max-height: 50vh;
       }
 
       .m-info-content-premium {
@@ -4139,9 +4524,9 @@
         <span class="w"><span class="wi"><span class="gt4">built</span></span></span>
       </h2>
       <div class="proj-bento stg">
-        <div class="proj-card pcc proj-card-featured proj-featured premium-glow-card" id="autograder-card">
+        <div class="proj-card pcc proj-card-featured proj-featured premium-glow-card" id="autograder-card" style="order: 0;">
           <div class="p-visual">
-            <video preload="auto" muted loop playsinline src="autograder.mp4"></video>
+            <img src="images/autograder.png" alt="AutoGrader Agent preview" />
             <div class="badge-featured">Featured Project</div>
             <div class="badge-year">2026</div>
           </div>
@@ -4170,10 +4555,33 @@
             </div>
           </div>
         </div>
+        <div class="proj-card pcp proj-card-preview premium-glow-card" style="order: 4;" data-project="urduplanner" onclick="openProjectModal('urduplanner', event)">
+          <div class="p-visual">
+            <img src="images/urduplanner.png" alt="UrduPlanner Agent preview" loading="lazy" decoding="async" />
+            <div class="image-label agentic">Agentic AI</div>
+            <div class="badge-year">2026</div>
+            <button class="preview-hover-btn" type="button" onclick="openProjectModal('urduplanner', event)">View Details</button>
+          </div>
+          <div class="p-info">
+            <h3 class="p-title-large">UrduPlanner Agent</h3>
+            <p class="p-desc-large">Urdu lesson planner that generates weekly Word documents from textbook PDFs using OCR, LLM
+              generation and RTL handling via Groq.</p>
+            <div class="pstk">
+              <span class="pill pill-purple">OCR</span><span class="pill pill-purple">Groq</span><span class="pill pill-purple">python-docx</span><span class="pill pill-purple">NLP</span>
+              <a href="https://github.com/omerfarooq223/UrduPlanner-Agent" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"
+                class="github-icon-btn" aria-label="GitHub Repository">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
         <a href="https://github.com/omerfarooq223/personal-ai-employee" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcp proj-span-6">
+          class="proj-card pcp proj-span-6" style="order: 5;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">002</span>
+          <span class="pnum">006</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -4187,76 +4595,77 @@
           <div class="pstk"><span class="pill">Claude</span><span class="pill">MCP</span><span class="pill">Gmail
               API</span><span class="pill">Automation</span></div>
         </a>
-        <a href="https://github.com/omerfarooq223/autoresearch-agent" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcp proj-span-6">
-          <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">003</span>
-          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
+        <div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 1;" data-project="careerpilot" onclick="openProjectModal('careerpilot', event)">
+          <div class="p-visual">
+            <img src="images/careerpilot.png" alt="CareerPilot Agent preview" loading="lazy" decoding="async" />
+            <div class="image-label cyan">Agentic AI</div>
+            <div class="badge-year">2026</div>
+            <button class="preview-hover-btn" type="button" onclick="openProjectModal('careerpilot', event)">View Details</button>
           </div>
-          <div class="ptg-row"><span class="ptg tpp">Agentic AI</span></div>
-          <div class="pnm">AutoResearch Agent</div>
-          <p class="pdsc">Autonomous research agent that searches the web and generates professional PDF reports in
-            under a minute powered by LLaMA 3.3 70B and Tavily Search.</p>
-          <div class="pstk"><span class="pill">LLMs</span><span class="pill">Groq</span><span
-              class="pill">Tavily</span><span class="pill">PDF</span></div>
-        </a>
-        <a href="https://github.com/omerfarooq223/CareerPilot-Agent" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcc proj-span-7">
-          <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">004</span>
-          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
+          <div class="p-info">
+            <h3 class="p-title-large">CareerPilot Agent</h3>
+            <p class="p-desc-large">Personal AI CTO that audits your code, suggests gap-filling projects and tracks
+              hirability scores through a modular agentic workflow.</p>
+            <div class="pstk">
+              <span class="pill pill-cyan">FastAPI</span><span class="pill pill-cyan">SQLite</span><span class="pill pill-cyan">GitHub Actions</span><span class="pill pill-cyan">MCP</span>
+              <a href="https://github.com/omerfarooq223/CareerPilot-Agent" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"
+                class="github-icon-btn" aria-label="GitHub Repository">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+            </div>
           </div>
-          <div class="ptg-row"><span class="ptg tc">Agentic AI</span><span class="pfeat">Featured</span></div>
-          <div class="pnm">CareerPilot Agent</div>
-          <p class="pdsc">Personal AI CTO: audits your code, suggests gap-filling projects and tracks hirability scores
-            through a modular agentic workflow; FastAPI, SQLite and GitHub Actions.</p>
-          <div class="pstk"><span class="pill">Skills</span><span class="pill">FastAPI</span><span class="pill">GitHub
-              Action</span><span class="pill">MCP</span><span class="pill">SQLite</span></div>
-        </a>
-        <a href="https://github.com/omerfarooq223/UrduPlanner-Agent" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcp proj-span-5">
-          <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">005</span>
-          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
+        </div>
+        <div class="proj-card pca proj-card-preview premium-glow-card" style="order: 2;" data-project="parking" onclick="openProjectModal('parking', event)">
+          <div class="p-visual">
+            <img src="images/parkingdetection2.png" alt="Parking Detection System preview" loading="lazy" decoding="async" />
+            <div class="image-label amber">Machine Learning</div>
+            <div class="badge-year">2026</div>
+            <button class="preview-hover-btn" type="button" onclick="openProjectModal('parking', event)">View Details</button>
           </div>
-          <div class="ptg-row"><span class="ptg tpp">Agentic AI</span></div>
-          <div class="pnm">UrduPlanner Agent</div>
-          <p class="pdsc">Urdu lesson planner that generates weekly Word documents from textbook PDFs using OCR, LLM
-            generation and RTL handling via Groq.</p>
-          <div class="pstk"><span class="pill">OCR</span><span class="pill">Groq</span><span
-              class="pill">python-docx</span><span class="pill">NLP</span></div>
-        </a>
-        <a href="https://github.com/omerfarooq223/parking-detection-system" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcpk proj-span-6">
-          <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">006</span>
-          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
+          <div class="p-info">
+            <h3 class="p-title-large">Parking Detection System</h3>
+            <p class="p-desc-large">Real-time parking detection using a YOLOv8-trained model to detect empty versus
+              occupied slots, with a chatbot powered by the Hugging Face API.</p>
+            <div class="pstk">
+              <span class="pill pill-amber">YOLO</span><span class="pill pill-amber">Gradio</span><span class="pill pill-amber">OpenCV</span><span class="pill pill-amber">Image Processing</span>
+              <a href="https://github.com/omerfarooq223/parking-detection-system" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"
+                class="github-icon-btn" aria-label="GitHub Repository">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+            </div>
           </div>
-          <div class="ptg-row"><span class="ptg tpk">Computer Vision</span></div>
-          <div class="pnm">Parking Detection System</div>
-          <p class="pdsc">Real-time parking detection using a YOLOv8-trained model to detect empty vs occupied slots.
-            Includes a chatbot powered by the Hugging Face API.</p>
-          <div class="pstk"><span class="pill">YOLO</span><span class="pill">OpenCV</span><span class="pill">Image
-              Processing</span></div>
-        </a>
+        </div>
+        <div class="proj-card pcp proj-card-preview premium-glow-card" style="order: 3;" data-project="autoresearch" onclick="openProjectModal('autoresearch', event)">
+          <div class="p-visual">
+            <img src="images/autoresearchagent.png" alt="AutoResearch Agent preview" loading="lazy" decoding="async" />
+            <div class="image-label agentic">Agentic AI</div>
+            <div class="badge-year">2026</div>
+            <button class="preview-hover-btn" type="button" onclick="openProjectModal('autoresearch', event)">View Details</button>
+          </div>
+          <div class="p-info">
+            <h3 class="p-title-large">AutoResearch Agent</h3>
+            <p class="p-desc-large">Autonomous research agent that searches the web and generates professional PDF
+              reports in under a minute powered by LLaMA 3.3 70B and Tavily Search.</p>
+            <div class="pstk">
+              <span class="pill pill-purple">LLMs</span><span class="pill pill-purple">Groq</span><span class="pill pill-purple">Tavily</span><span class="pill pill-purple">PDF</span>
+              <a href="https://github.com/omerfarooq223/autoresearch-agent" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"
+                class="github-icon-btn" aria-label="GitHub Repository">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
         <a href="https://github.com/omerfarooq223/language-recognition-logistic-regression" target="_blank"
-          rel="noopener noreferrer" class="proj-card pca proj-span-6">
+          rel="noopener noreferrer" class="proj-card pca proj-span-6" style="order: 6;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">007</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
@@ -4273,7 +4682,7 @@
               class="pill">Jupyter</span><span class="pill">NLP</span></div>
         </a>
         <a href="https://github.com/omerfarooq223/solana-trading-agent-skills" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcp proj-span-6">
+          class="proj-card pcp proj-span-6" style="order: 7;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">008</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
@@ -4290,7 +4699,7 @@
               class="pill">Web3</span></div>
         </a>
         <a href="https://github.com/omerfarooq223/n8n-jira-slack" target="_blank" rel="noopener noreferrer"
-          class="proj-card pca proj-span-6">
+          class="proj-card pca proj-span-6" style="order: 8;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">009</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
@@ -4436,31 +4845,253 @@
 
   <script>
     function openModal(e) {
+      openProjectModal('autograder', e);
+    }
+
+    let modalMediaSources = [];
+    let modalMediaIndex = 0;
+    let modalMediaAutoplay = null;
+
+    function updateModalMedia() {
+      const firstSlide = document.getElementById('m-media-0');
+      const secondSlide = document.getElementById('m-media-1');
+      const dots = document.getElementById('m-media-dots');
+
+      if (!firstSlide || !secondSlide) return;
+
+      const hasMultipleSlides = modalMediaSources.length > 1;
+      const firstSource = modalMediaSources[0] || 'images/autograder.png';
+      const secondSource = modalMediaSources[1] || firstSource;
+
+      firstSlide.src = firstSource;
+      secondSlide.src = secondSource;
+      firstSlide.classList.toggle('is-active', modalMediaIndex === 0 || !hasMultipleSlides);
+      secondSlide.classList.toggle('is-active', hasMultipleSlides && modalMediaIndex === 1);
+      secondSlide.style.display = hasMultipleSlides ? 'block' : 'none';
+
+
+
+      if (dots) {
+        dots.innerHTML = modalMediaSources
+          .map((_, index) => `<button type="button" class="m-media-dot${index === modalMediaIndex ? ' active' : ''}" aria-label="Show image ${index + 1}" data-index="${index}"></button>`)
+          .join('');
+        dots.querySelectorAll('.m-media-dot').forEach(dot => {
+          dot.addEventListener('click', () => {
+            modalMediaIndex = parseInt(dot.dataset.index, 10) || 0;
+            updateModalMedia();
+          });
+        });
+      }
+    }
+
+    function stepModalMedia(direction) {
+      if (modalMediaSources.length < 2) return;
+      modalMediaIndex = (modalMediaIndex + direction + modalMediaSources.length) % modalMediaSources.length;
+      updateModalMedia();
+    }
+
+    const projectModalData = {
+      autograder: {
+        title: 'AutoGrader Agent',
+        subtitle: 'AI / Agentic Engineering / Python · 2026',
+        media: 'images/autograder.png',
+        alt: 'AutoGrader Agent preview',
+        tags: ['AI Agents', 'LLM Engineering', 'Python', 'Academic Tech', 'Automation', 'Data Analysis'],
+        overview: [
+          'Autonomous AI agent designed to revolutionize the academic grading workflow. <strong>AutoGrader Agent</strong> eliminates manual effort by processing bulk student submissions with high precision and speed.',
+          'It acts as a primary interface between raw assignment data and final reporting, ensuring consistency and fairness across all evaluations.'
+        ],
+        featuresTitle: 'Detailed Features',
+        features: [
+          '<strong>Smart Submissions:</strong> Accepts a ZIP of student submissions alongside an assignment brief for context-aware grading.',
+          '<strong>Dynamic Rubrics:</strong> Generates structured grading rubrics via LLM (Groq / Gemini) - supports auto-detection from templates or instant AI-formatting of raw pasted text into JSON.',
+          '<strong>Solution Intelligence:</strong> Supports manual, uploaded or AI-generated answer keys for pinpoint accurate evaluation.',
+          '<strong>Automated Evaluation:</strong> Grades each submission against the rubric while Python handles all math (totals, deductions, formatting).',
+          '<strong>Plagiarism Engine:</strong> Detects academic dishonesty using dual similarity analysis (TF-IDF + character n-gram) with a sidebar toggle.',
+          '<strong>Analytical Reports:</strong> Outputs styled Excel reports featuring per-criterion breakdowns and class-wide statistics.'
+        ],
+        stackTitle: 'Technology Stack',
+        stack: [
+          '<strong>Groq / LLaMA 3.3:</strong> Powers high-speed reasoning and evaluation logic.',
+          '<strong>PyMuPDF:</strong> Advanced document parsing and text extraction.',
+          '<strong>openpyxl:</strong> Professional styled Excel report generation.',
+          '<strong>Python Core:</strong> Modular architecture for reliability and extensibility.'
+        ],
+        github: 'https://github.com/omerfarooq223/AutoGrader-Agent'
+      },
+      careerpilot: {
+        title: 'CareerPilot Agent',
+        subtitle: 'AI / Career Systems / Python · 2026',
+        media: 'images/careerpilot.png',
+        alt: 'CareerPilot Agent preview',
+        tags: ['Agentic AI', 'Career Systems', 'Automation', 'FastAPI', 'SQLite', 'MCP'],
+        overview: [
+          'Personal AI CTO that audits your code, suggests gap-filling projects and tracks hirability scores through a modular agentic workflow.',
+          'It keeps the feedback loop practical: assess the current portfolio, identify gaps, and surface the next best project to build.'
+        ],
+        featuresTitle: 'Detailed Features',
+        features: [
+          '<strong>Code Audit:</strong> Reviews repositories and highlights missing skills or project coverage gaps.',
+          '<strong>Project Suggestions:</strong> Recommends focused build ideas based on detected portfolio gaps and career direction.',
+          '<strong>Hirability Tracking:</strong> Maintains scoring signals over time so progress is visible across project iterations.',
+          '<strong>Workflow Automation:</strong> Uses modular agent steps to keep analysis, planning and tracking separated.'
+        ],
+        stackTitle: 'Technology Stack',
+        stack: [
+          '<strong>FastAPI:</strong> Serves the agent workflow and supporting API endpoints.',
+          '<strong>SQLite:</strong> Stores project and scoring state locally.',
+          '<strong>GitHub Actions:</strong> Supports automated checks and workflow execution.',
+          '<strong>MCP:</strong> Connects tools and agent capabilities together.'
+        ],
+        github: 'https://github.com/omerfarooq223/CareerPilot-Agent'
+      },
+      parking: {
+        title: 'Parking Detection System',
+        subtitle: 'Computer Vision / YOLOv8 / Python · 2026',
+        media: ['images/parkingdetection2.png', 'images/parkingdetection1.png'],
+        alt: 'Parking Detection System preview',
+        tags: ['Computer Vision', 'YOLOv8', 'Real Time', 'OpenCV', 'Automation', 'Chatbot'],
+        overview: [
+          'Real-time parking detection system that identifies empty versus occupied slots using a YOLOv8-trained model.',
+          'The project also includes a chatbot powered by the Hugging Face API for quick interaction and status queries.'
+        ],
+        featuresTitle: 'Detailed Features',
+        features: [
+          '<strong>Slot Detection:</strong> Detects parking occupancy in live or recorded scenes with a trained object detection model.',
+          '<strong>Visual Monitoring:</strong> Presents the parking state in a way that is easy to scan during live operation.',
+          '<strong>Assistant Layer:</strong> Adds a chatbot interface for basic user interaction around the parking workflow.'
+        ],
+        stackTitle: 'Technology Stack',
+        stack: [
+          '<strong>YOLOv8:</strong> Core detection model for occupancy recognition.',
+          '<strong>OpenCV:</strong> Handles image and frame processing.',
+          '<strong>Python:</strong> Orchestrates the computer-vision pipeline.',
+          '<strong>Hugging Face API:</strong> Powers the chatbot layer.'
+        ],
+        github: 'https://github.com/omerfarooq223/parking-detection-system'
+      },
+      autoresearch: {
+        title: 'AutoResearch Agent',
+        subtitle: 'AI / Research Automation / Python · 2026',
+        media: 'images/autoresearchagent.png',
+        alt: 'AutoResearch Agent preview',
+        tags: ['Agentic AI', 'Research', 'PDF Reports', 'Groq', 'Tavily', 'LLMs'],
+        overview: [
+          'Autonomous research agent that searches the web and generates professional PDF reports in under a minute.',
+          'It is designed for fast, structured research workflows with concise output and minimal manual coordination.'
+        ],
+        featuresTitle: 'Detailed Features',
+        features: [
+          '<strong>Web Search:</strong> Uses Tavily to gather current, relevant sources quickly.',
+          '<strong>Report Generation:</strong> Produces polished PDF output ready for sharing or review.',
+          '<strong>Fast Reasoning:</strong> Uses Groq / LLaMA 3.3 70B for the research synthesis loop.'
+        ],
+        stackTitle: 'Technology Stack',
+        stack: [
+          '<strong>Groq / LLaMA 3.3 70B:</strong> Research reasoning and synthesis.',
+          '<strong>Tavily:</strong> Search and source retrieval.',
+          '<strong>PDF:</strong> Report export format.',
+          '<strong>Python:</strong> Orchestration and automation glue.'
+        ],
+        github: 'https://github.com/omerfarooq223/autoresearch-agent'
+      },
+      urduplanner: {
+        title: 'UrduPlanner Agent',
+        subtitle: 'Agentic AI / NLP / Python · 2026',
+        media: ['images/urduplanner.png', 'images/urduplanner2.png'],
+        alt: 'UrduPlanner Agent preview',
+        tags: ['Agentic AI', 'OCR', 'NLP', 'Document Automation', 'Groq', 'python-docx'],
+        overview: [
+          'Urdu lesson planner that converts textbook content into structured weekly plans and export-ready Word documents.',
+          'It combines OCR, LLM generation and right-to-left content handling so teachers can produce usable plans quickly.'
+        ],
+        featuresTitle: 'Detailed Features',
+        features: [
+          '<strong>OCR Pipeline:</strong> Extracts text from textbook PDFs for downstream planning workflows.',
+          '<strong>Weekly Planning:</strong> Structures the extracted content into practical week-by-week lesson plans.',
+          '<strong>RTL Support:</strong> Preserves Urdu right-to-left formatting in generated documents.',
+          '<strong>Document Export:</strong> Produces editable Word output for easy classroom use.'
+        ],
+        stackTitle: 'Technology Stack',
+        stack: [
+          '<strong>Groq:</strong> LLM-powered generation and planning logic.',
+          '<strong>OCR:</strong> PDF text extraction from source material.',
+          '<strong>python-docx:</strong> Styled Word document generation.',
+          '<strong>Python:</strong> End-to-end orchestration for the pipeline.'
+        ],
+        github: 'https://github.com/omerfarooq223/UrduPlanner-Agent'
+      }
+    };
+
+    function renderProjectModalContent(projectId) {
+      const data = projectModalData[projectId] || projectModalData.autograder;
+      const title = document.getElementById('m-title-premium');
+      const subtitle = document.getElementById('m-subtitle-premium');
+      const tags = document.querySelector('.m-tag-cloud-premium');
+      const overview = document.getElementById('m-overview-inner');
+      const githubLink = document.getElementById('m-github-link');
+
+      modalMediaSources = Array.isArray(data.media) ? data.media : [data.media];
+      modalMediaIndex = 0;
+
+      if (title) title.textContent = data.title;
+      if (subtitle) subtitle.textContent = data.subtitle;
+      if (tags) {
+        tags.innerHTML = data.tags.map(tag => `<span class="m-tag-pill mt-c">${tag}</span>`).join('');
+      }
+      if (overview) {
+        overview.innerHTML = `
+          ${data.overview.map(paragraph => `<p>${paragraph}</p>`).join('')}
+          <h4 class="m-desc-title" style="margin-top:40px;">${data.featuresTitle}</h4>
+          <ul class="m-unified-list">
+            ${data.features.map(feature => `<li>${feature}</li>`).join('')}
+          </ul>
+          <h4 class="m-desc-title" style="margin-top:40px;">${data.stackTitle}</h4>
+          <ul class="m-unified-list stack">
+            ${data.stack.map(item => `<li>${item}</li>`).join('')}
+          </ul>
+        `;
+      }
+      if (githubLink) {
+        githubLink.href = data.github;
+      }
+
+      updateModalMedia();
+    }
+
+    function openProjectModal(projectId = 'autograder', e) {
       if (e) {
         e.preventDefault();
         e.stopPropagation();
         if (e.stopImmediatePropagation) e.stopImmediatePropagation();
       }
       const modal = document.getElementById('proj-modal');
-      const vid = document.getElementById('m-video');
+      renderProjectModalContent(projectId);
+      if (modalMediaAutoplay) {
+        clearInterval(modalMediaAutoplay);
+        modalMediaAutoplay = null;
+      }
+      if (modalMediaSources.length > 1) {
+        modalMediaAutoplay = setInterval(() => {
+          stepModalMedia(1);
+        }, 2500);
+      }
       if (modal) {
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
-      }
-      if (vid) {
-        vid.currentTime = 0;
-        vid.play().catch(err => console.log('Modal video play failed:', err));
       }
     }
 
     function closeModal() {
       const modal = document.getElementById('proj-modal');
-      const vid = document.getElementById('m-video');
-      modal.classList.remove('open');
-      document.body.style.overflow = '';
-      if (vid) {
-        vid.pause();
+      if (modal) {
+        modal.classList.remove('open');
       }
+      if (modalMediaAutoplay) {
+        clearInterval(modalMediaAutoplay);
+        modalMediaAutoplay = null;
+      }
+      document.body.style.overflow = '';
     }
 
     function switchTab(e, tabId) {
@@ -4508,7 +5139,7 @@
     }
 
     document.querySelectorAll('.proj-card').forEach(card => {
-      const vid = card.querySelector('.proj-vid');
+      const vid = card.querySelector('video.proj-vid');
       if (vid) {
         card.addEventListener('mouseenter', () => {
           if (vid.src && vid.src !== window.location.href) {
@@ -4880,15 +5511,23 @@
     <div class="m-card m-card-premium">
       <button class="m-close" onclick="closeModal()" aria-label="Close modal">&times;</button>
       <div class="m-header-premium">
-        <h3 class="m-title-premium">AutoGrader Agent</h3>
+        <h3 id="m-title-premium" class="m-title-premium">AutoGrader Agent</h3>
         <div class="m-subtitle-premium">
           <span class="m-accent-icon">✦</span>
-          <span>AI / Agentic Engineering / Python · 2026</span>
+          <span id="m-subtitle-premium">AI / Agentic Engineering / Python · 2026</span>
         </div>
       </div>
       <div class="m-body m-body-premium">
         <div class="m-vid-box-premium">
-          <video id="m-video" muted loop playsinline src="autograder.mp4"></video>
+          <div id="m-media-stage" class="m-media-stage">
+            <img id="m-media-0" class="m-media-slide is-active" src="images/autograder.png" alt="AutoGrader Agent preview" />
+            <img id="m-media-1" class="m-media-slide" src="images/autograder.png" alt="AutoGrader Agent preview" />
+            <div class="m-media-controls">
+              <button type="button" class="m-media-nav m-media-prev" onclick="stepModalMedia(-1)" aria-label="Previous image">‹</button>
+              <div id="m-media-dots" class="m-media-dots"></div>
+              <button type="button" class="m-media-nav m-media-next" onclick="stepModalMedia(1)" aria-label="Next image">›</button>
+            </div>
+          </div>
         </div>
 
         <div class="m-tag-cloud-premium">
@@ -4903,42 +5542,12 @@
         <div class="m-info-content-premium">
           <div class="m-desc-section">
             <h4 class="m-desc-title">Project Overview</h4>
-            <div id="m-overview-inner" class="m-pane-static">
-              <p>Autonomous AI agent designed to revolutionize the academic grading workflow. <strong>AutoGrader
-                  Agent</strong> eliminates manual effort by processing bulk student submissions with high precision and
-                speed.</p>
-              <p>It acts as a primary interface between raw assignment data and final reporting, ensuring consistency
-                and fairness across all evaluations.</p>
-
-              <h4 class="m-desc-title" style="margin-top:40px;">Detailed Features</h4>
-              <ul class="m-unified-list">
-                <li><strong>Smart Submissions:</strong> Accepts a ZIP of student submissions alongside an assignment
-                  brief for context-aware grading.</li>
-                <li><strong>Dynamic Rubrics:</strong> Generates structured grading rubrics via LLM (Groq / Gemini) —
-                  supports auto-detection from templates or instant AI-formatting of raw pasted text into JSON.</li>
-                <li><strong>Solution Intelligence:</strong> Supports manual, uploaded or AI-generated answer keys for
-                  pinpoint accurate evaluation.</li>
-                <li><strong>Automated Evaluation:</strong> Grades each submission against the rubric while Python
-                  handles all math (totals, deductions, formatting).</li>
-                <li><strong>Plagiarism Engine:</strong> Detects academic dishonesty using dual similarity analysis
-                  (TF-IDF + character n-gram) with a sidebar toggle.</li>
-                <li><strong>Analytical Reports:</strong> Outputs styled Excel reports featuring per-criterion breakdowns
-                  and class-wide statistics.</li>
-              </ul>
-
-              <h4 class="m-desc-title" style="margin-top:40px;">Technology Stack</h4>
-              <ul class="m-unified-list stack">
-                <li><strong>Groq / LLaMA 3.3:</strong> Powers high-speed reasoning and evaluation logic.</li>
-                <li><strong>PyMuPDF:</strong> Advanced document parsing and text extraction.</li>
-                <li><strong>openpyxl:</strong> Professional styled Excel report generation.</li>
-                <li><strong>Python Core:</strong> Modular architecture for reliability and extensibility.</li>
-              </ul>
-            </div>
+            <div id="m-overview-inner" class="m-pane-static"></div>
           </div>
         </div>
 
         <div class="m-footer-premium">
-          <a href="https://github.com/omerfarooq223/AutoGrader-Agent" target="_blank" class="m-btn-github-center">
+          <a id="m-github-link" href="https://github.com/omerfarooq223/AutoGrader-Agent" target="_blank" class="m-btn-github-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="margin-right:12px;">
               <path
                 d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
