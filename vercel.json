@@ -1,7 +1,11 @@
 {
+  "buildCommand": "pip install -r requirements.txt",
   "functions": {
     "api/chat.py": {
       "runtime": "python3.11"
     }
+  },
+  "env": {
+    "GROQ_API_KEY": "@groq_api_key"
   }
 }
