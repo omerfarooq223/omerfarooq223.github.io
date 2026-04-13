@@ -25,7 +25,7 @@
     }
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('https://omerfarooq223-github-io-git-main-omerfarooq223s-projects.vercel.app/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: query })
