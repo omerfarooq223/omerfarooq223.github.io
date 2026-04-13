@@ -39,7 +39,7 @@
       return data.answer || "I'm sorry, I couldn't generate a response. Please try again.";
     } catch (error) {
       console.error('Chatbot API Error:', error);
-      return "I'm having trouble connecting to my brain right now. 🧠 Please make sure the Vercel backend is deployed and GROQ_API_KEY is set!";
+      return `I'm having trouble connecting to my brain. 🧠\n\n**Error:** ${error.message}\n\nMake sure you have set **GROQ_API_KEY** in Vercel and redeployed!`;
     }
   }
 

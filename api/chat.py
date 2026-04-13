@@ -18,6 +18,15 @@ app.add_middleware(
 class ChatRequest(BaseModel):
     message: str
 
+@app.get("/api/health")
+async def health():
+    key = os.environ.get("GROQ_API_KEY")
+    return {
+        "status": "online",
+        "groq_key_detected": key is not None and len(key) > 0,
+        "key_prefix": key[:4] + "..." if key else None
+    }
+
 def load_portfolio_data():
     """Load the knowledge base from embeddings.json."""
     try:
