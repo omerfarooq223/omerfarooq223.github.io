@@ -1,174 +1,64 @@
-// Portfolio Chatbot Widget - 100% Client-Side (IMPROVED)
-// Better response generation, conversational, no APIs needed
+// Portfolio Chatbot Widget - FIXED VERSION
+// Fixes: name consistency, markdown rendering, XSS, dark mode, variable shadowing, reasoning bar
 
-(function() {
+(function () {
   let embeddingsData = null;
   let isLoading = false;
 
-  // Load embeddings on page load
-  async function loadEmbeddings() {
-    try {
-      const response = await fetch('./embeddings.json');
-      if (!response.ok) throw new Error('Failed to load embeddings');
-      embeddingsData = await response.json();
-      console.log('✅ Loaded', embeddingsData.chunks.length, 'chunks');
-    } catch (error) {
-      console.error('⚠️ Could not load embeddings:', error);
-      embeddingsData = null;
+
+  async function generateAgentResponse(query) {
+    const reasoningContainer = document.getElementById('portfolio-chatbot-reasoning');
+    
+    const steps = [
+      { msg: 'Connecting to Groq reasoning engine...', delay: 350 },
+      { msg: 'Scanning portfolio knowledge base...', delay: 500 },
+      { msg: 'Composing AI response...', delay: 400 }
+    ];
+
+    if (reasoningContainer) {
+      reasoningContainer.classList.remove('hidden');
+      for (const step of steps) {
+        reasoningContainer.innerHTML = `<span class="reason-dot"></span> ${step.msg}`;
+        await new Promise(r => setTimeout(r, step.delay));
+      }
+      reasoningContainer.classList.add('hidden');
     }
-  }
 
-  // Simple TF-IDF similarity search
-  function search(query, topK = 5) {
-    if (!embeddingsData) return [];
-
-    const queryTokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 2);
-    const scores = [];
-
-    embeddingsData.chunks.forEach((chunk, idx) => {
-      const chunkText = chunk.content.toLowerCase();
-      const chunkTokens = chunkText.split(/\s+/);
-
-      // Calculate similarity
-      let matchCount = 0;
-      let totalWeight = 0;
-
-      queryTokens.forEach(qToken => {
-        const regex = new RegExp(`\\b${qToken}\\b`, 'g');
-        const matches = (chunkText.match(regex) || []).length;
-        matchCount += Math.min(matches, 2);
-        totalWeight += 1;
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: query })
       });
 
-      const similarity = totalWeight > 0 ? matchCount / (totalWeight * 2) : 0;
-
-      // Boost repository matches
-      if (chunk.repo_name && queryTokens.some(t => chunk.repo_name.toLowerCase().includes(t))) {
-        scores.push({ ...chunk, similarity: Math.min(similarity + 0.3, 1) });
-      } else {
-        scores.push({ ...chunk, similarity });
+      if (!response.ok) {
+        throw new Error('API request failed');
       }
-    });
 
-    return scores
-      .sort((a, b) => b.similarity - a.similarity)
-      .slice(0, topK)
-      .filter(r => r.similarity > 0.1);
-  }
-
-  // IMPROVED: Better response generation
-  function generateResponse(query, results) {
-    if (results.length === 0) {
-      return getOffTopicResponse(query);
+      const data = await response.json();
+      return data.answer || "I'm sorry, I couldn't generate a response. Please try again.";
+    } catch (error) {
+      console.error('Chatbot API Error:', error);
+      return "I'm having trouble connecting to my brain right now. 🧠 Please make sure the Vercel backend is deployed and GROQ_API_KEY is set!";
     }
-
-    const topResult = results[0];
-    const confidence = topResult.similarity;
-
-    if (confidence < 0.2) {
-      return getOffTopicResponse(query);
-    }
-
-    let response = '';
-
-    switch (topResult.type) {
-      case 'repository':
-        response = generateRepoResponse(topResult);
-        break;
-      case 'skills':
-        response = generateSkillsResponse();
-        break;
-      case 'experience':
-        response = generateExperienceResponse();
-        break;
-      case 'education':
-        response = generateEducationResponse();
-        break;
-      case 'profile':
-        response = generateProfileResponse();
-        break;
-      default:
-        response = topResult.content.substring(0, 300);
-    }
-
-    // Add relevant sources
-    const relevantSources = results.slice(0, 2).map(r => r.repo_name || r.type);
-    const uniqueSources = [...new Set(relevantSources)].filter(s => s);
-    if (uniqueSources.length > 0) {
-      response += '\n\n_Sources: ' + uniqueSources.join(', ') + '_';
-    }
-
-    return response;
   }
 
-  function generateRepoResponse(repo) {
-    const name = repo.repo_name;
-    const content = repo.content;
 
-    // Extract key info
-    const descMatch = content.match(/Description:([^Problem]*)/);
-    const desc = descMatch ? descMatch[1].trim().substring(0, 150) : '';
-
-    const problemMatch = content.match(/Problem Solved:([^Key]*)/);
-    const problem = problemMatch ? problemMatch[1].trim().substring(0, 150) : '';
-
-    const featuresMatch = content.match(/Key Features:([^Tech]*)/);
-    const features = featuresMatch ? featuresMatch[1].trim().split(',').slice(0, 2).join(', ') : '';
-
-    const techMatch = content.match(/Tech Stack:([^GitHub]*)/);
-    const tech = techMatch ? techMatch[1].trim().split(',').slice(0, 3).join(', ') : '';
-
-    const templates = [
-      `**${name}** is one of my key projects. It solves this problem: ${problem}. I built it using ${tech}, and it includes features like ${features}. You can check out the code on GitHub!`,
-      
-      `I built **${name}**, which ${desc}. The main problem it solves: ${problem}. Tech stack includes ${tech}. It's a project I'm proud of!`,
-      
-      `Let me tell you about **${name}** — ${desc}. It helps with: ${problem}. Built with ${tech}. Check it out on GitHub!`
-    ];
-
-    return templates[Math.floor(Math.random() * templates.length)];
+  // Lightweight markdown renderer for chat messages
+  function renderMarkdown(text) {
+    return text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')    // **bold**
+      .replace(/(?<!\w)_(.+?)_(?!\w)/g, '<em>$1</em>')       // _italic_ (not mid-word underscores)
+      .replace(/\n/g, '<br>');                                // newlines
   }
 
-  function generateSkillsResponse() {
-    const templates = [
-      `I specialize in **AI/ML Engineering**. My core skills: Python (Advanced), FastAPI, Streamlit, and LLM integration (Groq, Claude). I also work with Computer Vision (YOLO, OpenCV), NLP, and automation tools like n8n and Docker. On the web side: React, HTML/CSS/JavaScript. Data: Pandas, NumPy, MySQL, SQLite, Parquet.`,
-
-      `My technical stack spans: **Languages** — Python (Advanced), C++, SQL, JavaScript. **AI/ML** — Agentic AI, LLM integration, computer vision, NLP, machine learning pipelines. **Frameworks** — FastAPI, Flask, Streamlit, Gradio. **Tools** — Docker, Git, n8n, Jupyter, PyMuPDF, Playwright. **Databases** — MySQL, SQLite, MongoDB.`,
-
-      `I'm skilled in full-stack AI engineering: Python (my main language), FastAPI for backends, Streamlit for data apps, React for frontends. Deep expertise in agentic AI systems, LLM integration, computer vision with YOLO, and NLP. I also handle DevOps (Docker), automation (n8n), and data engineering (Pandas, SQL, Parquet).`
-    ];
-
-    return templates[Math.floor(Math.random() * templates.length)];
+  // Sanitize text to prevent XSS
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
   }
 
-  function generateExperienceResponse() {
-    return `I have diverse professional experience that shaped my work ethic and communication skills. I've worked in customer services (resolving inquiries, managing post-purchase support), operations and dispatch coordination (handling high-volume interactions), and academic tutoring (helping peers grasp complex concepts). Each role taught me discipline, reliability, and how to communicate effectively under pressure. All while maintaining a 3.81 GPA in my AI degree!`;
-  }
-
-  function generateEducationResponse() {
-    return `I'm currently pursuing my **BS in Artificial Intelligence** at the University of Management & Technology (UMT) in Lahore, Pakistan. I maintain a **3.81 GPA** on a **70% merit scholarship** and was recognized with the **Dean's Award** for being in the top 10% of my department by SGPA. I'm also enrolled in the **Panaversity Agentic AI Program** to stay at the cutting edge of AI engineering.`;
-  }
-
-  function generateProfileResponse() {
-    return `I'm **Muhammad Umar Farooq**, a BS Artificial Intelligence student at UMT Lahore. I maintain a 3.81 CGPA on a 70% merit scholarship and earned the Dean's Award. I specialize in building **production-grade autonomous AI agents** and have shipped **14+ projects** including multiple agentic systems. My focus: LLMs, agentic AI architecture, multi-agent systems, and practical ML pipelines that solve real problems. Currently learning through the Panaversity Agentic AI Program. 🚀`;
-  }
-
-  function getOffTopicResponse(query) {
-    const templates = [
-      `I'm not sure about that! 😄 But I'd love to tell you about my AI projects, technical skills, or professional background. What interests you?`,
-
-      `That's outside my knowledge base! 🤔 Feel free to ask me about my portfolio — my projects, experience in AI/ML, or what I've built.`,
-
-      `Good question, but I'm here to help you learn about my work! 😊 Ask me about my projects, skills, or how I got into AI.`,
-
-      `I'm not an expert on that! 😅 But I know everything about my portfolio. Want to hear about my agentic AI projects or my skills?`,
-
-      `Hmm, I'm not equipped to answer that. 🤔 But I'd love to chat about my projects, experience, or AI/ML background instead!`
-    ];
-    return templates[Math.floor(Math.random() * templates.length)];
-  }
-
-  // UI Styles (same as before)
   const styles = `
     .portfolio-chatbot-icon {
       position: fixed;
@@ -205,35 +95,51 @@
       right: 24px;
       width: 384px;
       height: 600px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+      background: #0f172a;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
       display: flex;
       flex-direction: column;
       z-index: 99999;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      overflow: hidden;
+      animation: slideIn 0.3s ease;
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
     }
 
     .portfolio-chatbot-header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: white;
       padding: 16px;
-      border-radius: 12px 12px 0 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .portfolio-chatbot-header h2 {
       margin: 0;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .portfolio-chatbot-header h2::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
     }
 
     .portfolio-chatbot-close {
       background: none;
       border: none;
-      color: white;
+      color: rgba(255, 255, 255, 0.6);
       font-size: 24px;
       cursor: pointer;
       padding: 0;
@@ -242,11 +148,31 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.2s;
+      transition: color 0.2s;
     }
 
     .portfolio-chatbot-close:hover {
-      opacity: 0.8;
+      color: white;
+    }
+
+    .portfolio-chatbot-reasoning {
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 8px 16px;
+      font-size: 11px;
+      color: #a78bfa;
+      font-family: 'JetBrains Mono', 'SF Mono', monospace;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .reason-dot {
+      width: 6px;
+      height: 6px;
+      background: #a78bfa;
+      border-radius: 50%;
+      animation: pulse 1s infinite;
     }
 
     .portfolio-chatbot-messages {
@@ -256,6 +182,20 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
+      background: #0f172a;
+    }
+
+    .portfolio-chatbot-messages::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .portfolio-chatbot-messages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .portfolio-chatbot-messages::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
     }
 
     .portfolio-chatbot-message {
@@ -269,22 +209,32 @@
     }
 
     .portfolio-chatbot-message-content {
-      max-width: 75%;
+      max-width: 85%;
       padding: 10px 14px;
       border-radius: 12px;
       font-size: 14px;
       line-height: 1.5;
-      word-wrap: break-word;
     }
 
     .portfolio-chatbot-message.bot .portfolio-chatbot-message-content {
-      background: #f1f5f9;
-      color: #1e293b;
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .portfolio-chatbot-message.user .portfolio-chatbot-message-content {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
       color: white;
+    }
+
+    .portfolio-chatbot-message-content strong {
+      color: #a78bfa;
+      font-weight: 600;
+    }
+
+    .portfolio-chatbot-message-content em {
+      color: #94a3b8;
+      font-style: italic;
     }
 
     .portfolio-chatbot-typing {
@@ -297,7 +247,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #cbd5e1;
+      background: #475569;
       animation: pulse 1.4s infinite;
     }
 
@@ -310,34 +260,42 @@
     }
 
     .portfolio-chatbot-form {
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
       padding: 12px;
       display: flex;
       gap: 8px;
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .portfolio-chatbot-input {
       flex: 1;
-      border: 1px solid #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
       padding: 10px 12px;
       font-size: 14px;
       font-family: inherit;
       outline: none;
       transition: border-color 0.2s;
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+    }
+
+    .portfolio-chatbot-input::placeholder {
+      color: #64748b;
     }
 
     .portfolio-chatbot-input:focus {
-      border-color: #667eea;
+      border-color: #6366f1;
     }
 
     .portfolio-chatbot-input:disabled {
-      background: #f1f5f9;
+      background: rgba(255, 255, 255, 0.02);
       cursor: not-allowed;
+      color: #475569;
     }
 
     .portfolio-chatbot-send {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
       color: white;
       border: none;
       border-radius: 8px;
@@ -391,7 +349,6 @@
     }
   `;
 
-  // HTML
   const chatHTML = `
     <button class="portfolio-chatbot-icon" id="portfolio-chatbot-toggle" aria-label="Open chat">
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -401,14 +358,18 @@
 
     <div class="portfolio-chatbot-window hidden" id="portfolio-chatbot-window">
       <div class="portfolio-chatbot-header">
-        <h2>Omer's Portfolio</h2>
+        <h2>Portfolio Agent</h2>
         <button class="portfolio-chatbot-close" id="portfolio-chatbot-close">✕</button>
+      </div>
+
+      <div class="portfolio-chatbot-reasoning hidden" id="portfolio-chatbot-reasoning">
+        <span class="reason-dot"></span> Thinking...
       </div>
 
       <div class="portfolio-chatbot-messages" id="portfolio-chatbot-messages">
         <div class="portfolio-chatbot-message bot">
           <div class="portfolio-chatbot-message-content">
-            Hi! 👋 I'm Omer's portfolio chatbot. Ask me anything about his projects, skills, or experience.
+            Hi! 👋 I'm Umar's portfolio agent. Ask me about his projects, skills, education, or experience — I'm here to help!
           </div>
         </div>
       </div>
@@ -418,7 +379,7 @@
           type="text"
           class="portfolio-chatbot-input"
           id="portfolio-chatbot-input"
-          placeholder="Ask about projects, skills..."
+          placeholder="Ask a question..."
           autocomplete="off"
         />
         <button type="submit" class="portfolio-chatbot-send">Send</button>
@@ -426,7 +387,6 @@
     </div>
   `;
 
-  // Initialize
   function init() {
     const styleSheet = document.createElement('style');
     styleSheet.textContent = styles;
@@ -439,20 +399,20 @@
     loadEmbeddings();
 
     const toggle = document.getElementById('portfolio-chatbot-toggle');
-    const window = document.getElementById('portfolio-chatbot-window');
+    const chatWindow = document.getElementById('portfolio-chatbot-window');
     const closeBtn = document.getElementById('portfolio-chatbot-close');
     const form = document.getElementById('portfolio-chatbot-form');
     const input = document.getElementById('portfolio-chatbot-input');
     const messagesContainer = document.getElementById('portfolio-chatbot-messages');
 
     toggle.addEventListener('click', () => {
-      window.classList.toggle('hidden');
+      chatWindow.classList.toggle('hidden');
       toggle.classList.toggle('hidden');
       input.focus();
     });
 
     closeBtn.addEventListener('click', () => {
-      window.classList.add('hidden');
+      chatWindow.classList.add('hidden');
       toggle.classList.remove('hidden');
     });
 
@@ -479,24 +439,13 @@
 
       isLoading = true;
 
-      setTimeout(() => {
+      generateAgentResponse(message).then(response => {
         typingDiv.remove();
-
-        if (!embeddingsData) {
-          addMessage('bot', '⚠️ Could not load knowledge base. Please refresh the page.');
-          input.disabled = false;
-          isLoading = false;
-          return;
-        }
-
-        const results = search(message);
-        const response = generateResponse(message, results);
         addMessage('bot', response);
-
         input.disabled = false;
         input.focus();
         isLoading = false;
-      }, 300);
+      });
     });
 
     function addMessage(type, text) {
@@ -505,7 +454,14 @@
 
       const content = document.createElement('div');
       content.className = 'portfolio-chatbot-message-content';
-      content.innerHTML = text;
+
+      if (type === 'user') {
+        // User messages: escape HTML to prevent XSS
+        content.textContent = text;
+      } else {
+        // Bot messages: render markdown safely
+        content.innerHTML = renderMarkdown(text);
+      }
 
       messageDiv.appendChild(content);
       messagesContainer.appendChild(messageDiv);

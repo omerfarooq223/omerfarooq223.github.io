@@ -1,1 +1,5 @@
-requests==2.31.0
+fastapi
+uvicorn
+groq
+# For reading local json in the API
+# requests is usually pre-installed but good to have if needed for other things

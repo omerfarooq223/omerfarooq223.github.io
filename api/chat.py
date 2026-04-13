@@ -1,94 +1,95 @@
-import json
-from http.server import BaseHTTPRequestHandler
-import sys
 import os
+import json
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from groq import Groq
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+app = FastAPI()
 
-import requests
+# Enable CORS for the portfolio site
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all for now, can be restricted to your domain
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-class handler(BaseHTTPRequestHandler):
-    def do_OPTIONS(self):
-        """Handle CORS preflight"""
-        self.send_response(200)
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-        self.end_headers()
+class ChatRequest(BaseModel):
+    message: str
 
-    def do_POST(self):
-        """Handle chat requests"""
-        self.send_response(200)
-        self.send_header('Content-Type', 'application/json')
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.end_headers()
+def load_portfolio_data():
+    """Load the knowledge base from embeddings.json."""
+    try:
+        # On Vercel, the file is usually in the root, so one level up from /api
+        filepath = os.path.join(os.getcwd(), 'embeddings.json')
+        if not os.path.exists(filepath):
+            # Fallback for different environments
+            filepath = 'embeddings.json'
+            
+        with open(filepath, 'r') as f:
+            data = json.load(f)
+            return data.get('chunks', [])
+    except Exception as e:
+        print(f"Error loading data: {e}")
+        return []
 
-        try:
-            content_length = int(self.headers.get('Content-Length', 0))
-            body = self.rfile.read(content_length).decode('utf-8')
-            data = json.loads(body)
-            message = data.get('message', '')
+@app.post("/api/chat")
+async def chat(request: ChatRequest):
+    api_key = os.environ.get("GROQ_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="GROQ_API_KEY not configured in Vercel")
 
-            if not message:
-                response = {'error': 'No message provided'}
-                self.wfile.write(json.dumps(response).encode('utf-8'))
-                return
+    client = Groq(api_key=api_key)
+    chunks = load_portfolio_data()
+    
+    # Prepare the context from chunks
+    context_text = "\n\n".join([
+        f"Type: {c.get('type')}\n" + 
+        (f"Project: {c.get('repo_name')}\n" if c.get('repo_name') else "") + 
+        f"Content: {c.get('content')}"
+        for c in chunks
+    ])
 
-            groq_key = os.environ.get('GROQ_API_KEY')
-            if not groq_key:
-                response = {'error': 'GROQ_API_KEY not configured'}
-                self.wfile.write(json.dumps(response).encode('utf-8'))
-                return
+    system_prompt = f"""
+You are Muhammad Umar Farooq's AI Portfolio Agent. Your goal is to help visitors (recruiters, engineers, etc.) learn about Umar.
 
-            groq_response = requests.post(
-                'https://api.groq.com/openai/v1/chat/completions',
-                headers={
-                    'Authorization': f'Bearer {groq_key}',
-                    'Content-Type': 'application/json'
-                },
-                json={
-                    'model': 'mixtral-8x7b-32768',
-                    'messages': [
-                        {
-                            'role': 'system',
-                            'content': '''You are Omer's portfolio chatbot. You help recruiters and visitors learn about Omer's experience, projects, and skills.
+### CRITICAL INFO ABOUT UMAR:
+- Full Name: Muhammad Umar Farooq
+- Education: BS Artificial Intelligence (6th Semester) at UMT Lahore.
+- Stats: 3.81 CGPA, 70% Merit Scholarship, Dean's Award (Top 10%).
+- Projects: 14+ shipped projects, specialization in Agentic AI and ML pipelines.
+- Persona: Professional, confident, helpful, and technically precise.
 
-Omer is a BS Artificial Intelligence student at UMT Lahore with a 3.81 CGPA. He has built 14+ projects including:
-- Personal AI Employee: Gmail monitoring agent with human-in-the-loop approval
-- AutoGrader: AI-powered grading system with plagiarism detection
-- CareerPilot: AI coach that tracks GitHub and suggests projects
-- UrduPlanner: Lesson planner that generates Word docs from PDFs
-- And 10+ more projects in agentic AI, ML, and automation
+### KNOWLEDGE BASE:
+{context_text}
 
-Skills: Python (Advanced), FastAPI, Streamlit, LLMs (Groq, Claude), Computer Vision, NLP, n8n automation, and more.
+### INSTRUCTIONS:
+1. Use the provided KNOWLEDGE BASE to answer. If the answer isn't there, say you aren't sure based on his portfolio but offer to talk about his AI skills or projects instead.
+2. Keep answers concise (2-4 sentences max).
+3. Use Markdown formatting for emphasis (e.g., **bold** for project names).
+4. Always refer to him as "Umar".
+5. If asked about contact info, mention his LinkedIn (in profile) or his email (momerfarooq223@gmail.com).
 
-Answer questions directly and confidently. Keep answers concise (2-3 sentences). Be conversational but professional.'''
-                        },
-                        {
-                            'role': 'user',
-                            'content': message
-                        }
-                    ],
-                    'temperature': 0.7,
-                    'max_tokens': 500
-                },
-                timeout=30
-            )
+Answer the following user query:
+"""
 
-            if groq_response.status_code == 200:
-                answer = groq_response.json()['choices'][0]['message']['content'].strip()
-                response = {
-                    'answer': answer,
-                    'sources': ['Omer\'s Portfolio Data']
-                }
-            else:
-                response = {
-                    'error': f'Groq API error: {groq_response.status_code}',
-                    'answer': 'Sorry, I\'m having trouble responding right now. Try again in a moment.'
-                }
+    try:
+        completion = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": request.message}
+            ],
+            temperature=0.7,
+            max_tokens=512,
+        )
 
-            self.wfile.write(json.dumps(response).encode('utf-8'))
+        answer = completion.choices[0].message.content
+        return {"answer": answer}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-        except Exception as e:
-            response = {'error': str(e), 'answer': 'An error occurred. Please try again.'}
-            self.wfile.write(json.dumps(response).encode('utf-8'))
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -2,7 +2,7 @@
   "chunks": [
     {
       "type": "profile",
-      "content": "Muhammad Umar Farooq - BS AI Student | Agentic AI Developer\nLocation: Park View City, Lahore, Pakistan\nContact: momerfarooq223@gmail.com\nBS Artificial Intelligence student (6th semester) at the University of Management & Technology, Lahore, maintaining a 3.81 CGPA on a 70% merit scholarship with Dean's Award (top 10% department SGPA). Currently enrolled in the Panaversity Agentic AI Program, building production-grade autonomous agents using LLMs, Groq and multi-agent architectures. Experienced in computer vision, NLP, workflow automation (n8n) and full-stack ML pipelines with 13+ shipped projects including 6+ autonomous AI agents."
+      "content": "Muhammad Umar Farooq - BS AI Student | Agentic AI Developer\nLocation: Park View City, Lahore, Pakistan\nContact: momerfarooq223@gmail.com\nBS Artificial Intelligence student (6th semester) at the University of Management & Technology, Lahore, maintaining a 3.81 CGPA on a 70% merit scholarship with Dean's Award (top 10% department SGPA). Currently enrolled in the Panaversity Agentic AI Program, building production-grade autonomous agents using LLMs, Groq and multi-agent architectures. Experienced in computer vision, NLP, workflow automation (n8n) and full-stack ML pipelines with 14+ shipped projects including 6+ autonomous AI agents."
     },
     {
       "type": "education",
@@ -37,76 +37,67 @@
       "content": "Skills:\n\nai_ml: LLM Integration (Groq, LLaMA), Agentic AI Architecture, Machine Learning, Computer Vision (OpenCV, YOLO), NLP & Text Classification, Scikit-learn, MCP (Model Context Protocol)\nlanguages: Python (Advanced), C++, SQL, HTML/CSS/JavaScript\nframeworks: FastAPI, Flask, Streamlit, Gradio\ntools: n8n Workflow Automation, Git/GitHub, Docker, PyMuPDF, openpyxl, python-docx, Jupyter, VS Code, Playwright\ndata_engineering: Pandas, NumPy, MySQL, SQLite, Parquet\ndeep_learning: PyTorch, TensorFlow/Keras, DistilBERT, Transformers (Hugging Face)\nspoken_languages: Urdu (Native), English (Advanced), Turkish (Basic)\ninterests: Competitive Programming (LeetCode), Open-source AI projects, Agentic AI development"
     },
     {
+      "repo_name": "Personal AI Employee",
       "type": "repository",
-      "content": "Project: Personal AI Employee\nDescription: A fully autonomous Personal AI Employee that monitors your Gmail, reasons about incoming tasks, waits for your approval, and takes real-world actions \u2014 all while you stay in control. Built for the Panaversity Hackathon 0.\nProblem Solved: Eliminates manual email triage and response drafting by creating an autonomous agent that monitors Gmail, reasons about incoming tasks using LLMs, generates contextual replies, and auto-posts LinkedIn content \u2014 all with human-in-the-loop approval to keep the user in control.\nKey Features: Gmail auto-monitoring with launchd cron (every 2 minutes), AI reasoning loop using Claude Code + Groq LLaMA 3.3 70B, Human-in-the-loop (HITL) approval workflow via file system\nTech Stack: Python 3.13, Claude Code, Groq LLaMA 3.3 70B, Gmail API, Playwright\nGitHub: https://github.com/omerfarooq223/AI_Employee_Vault",
-      "repo_name": "Personal AI Employee"
+      "content": "Description: Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation, featuring a continuous reasoning loop and MCP-style tool integration. Tech Stack: Claude, MCP, Gmail API, Automation.",
+      "year": "2026"
     },
     {
+      "repo_name": "Language Recognition",
       "type": "repository",
-      "content": "Project: AutoGrader Agent\nDescription: AI-powered grading agent that automates assignment evaluation using LLMs. Available as both a CLI tool and a Streamlit web UI. Accepts a ZIP of student submissions and an assignment brief, generates structured rubrics, grades each submission, detects plagiarism, and outputs styled Excel reports.\nProblem Solved: Eliminates the tedious, time-consuming manual grading process for educators by automating rubric generation, per-criterion grading with LLMs, plagiarism detection (TF-IDF + n-gram), and producing color-coded Excel reports with class statistics and insights.\nKey Features: Auto-generates structured grading rubrics via LLM (Groq/Gemini), Concurrent LLM-based grading with per-criterion scoring, Dual plagiarism detection (TF-IDF cosine + character n-gram Jaccard)\nTech Stack: Python, Groq (LLaMA 3.1 8B Instant), Gemini API (Vision fallback), Streamlit, PyMuPDF\nGitHub: https://github.com/omerfarooq223/AutoGrader",
-      "repo_name": "AutoGrader Agent"
+      "content": "Description: Logistic regression classifier built from scratch with custom feature engineering and preprocessing to identify languages from text, featuring an interactive inference UI. Tech Stack: Python, Scikit-learn, Jupyter, NLP.",
+      "year": "2026"
     },
     {
+      "repo_name": "Solana Trading Agent",
       "type": "repository",
-      "content": "Project: CareerPilot Agent\nDescription: A fully autonomous AI agent that watches your GitHub, tracks your skill gaps and coaches you toward landing your target internship, week over week. Features a premium glassmorphism web dashboard, floating chat widget, and 10 modular skills.\nProblem Solved: Most students send applications without knowing where they stand. CareerPilot reads your GitHub, scores your profile against your target role, identifies specific skill gaps, and nudges you weekly to close them \u2014 turning vague career anxiety into structured, actionable coaching.\nKey Features: Continuous agentic loop: Observe \u2192 Analyze \u2192 Remember \u2192 Plan \u2192 Act, 10 modular skills (audit_repo, suggest_project, rewrite_readme, dev_card, mock_interview_prep, weekly_nudge, linkedin_writer, update_goals, gap_analyzer, github_observer), Premium glassmorphism web dashboard with floating chat widget\nTech Stack: Python, FastAPI, Groq (LLaMA 3.3 70B), Pydantic, SQLite\nGitHub: https://github.com/omerfarooq223/CareerPilot-Agent",
-      "repo_name": "CareerPilot Agent"
+      "content": "Description: Modular skills-based trading agent for the Solana ecosystem, featuring automated risk management math, price sentinel monitoring, and secure trade logging. Tech Stack: Claude Code, Solana, Web3.",
+      "year": "2026"
     },
     {
+      "repo_name": "Jira\u2013Slack Integration",
       "type": "repository",
-      "content": "Project: DSA C++ Core & Semester Archive\nDescription: A comprehensive collection of Data Structures and Algorithms (DSA) in C++, featuring both modernized, template-based implementations (C++17) and original university coursework from the 3rd semester.\nProblem Solved: Provides a well-organized reference library of core DSA implementations in C++ \u2014 both as clean, generic template-based code for reuse and as an archived record of university coursework for study and revision.\nKey Features: Generic programming with C++ templates (works with any data type), Memory-safe manual memory management with recursive destructors, BST, Linked List, Stack, Sorting, Searching, Array Operations\nTech Stack: C++17, g++, Make\nGitHub: https://github.com/omerfarooq223/DSA_CPP",
-      "repo_name": "DSA C++ Core & Semester Archive"
+      "content": "Description: Advanced n8n workflows for cross-platform issue tracking and automated notifications, optimizing team communication through REST API orchestration. Tech Stack: n8n, Jira, Slack, REST APIs.",
+      "year": "2026"
     },
     {
+      "repo_name": "AutoGrader Agent",
       "type": "repository",
-      "content": "Project: UrduPlanner Agent\nDescription: AI-powered Urdu lesson planner that generates weekly lesson plans from textbook PDFs using LLMs. Extracts content via OCR, repairs garbled Urdu text, and fills a structured Word template via a web interface (and optional CLI).\nProblem Solved: Automates the time-consuming process of creating weekly Urdu lesson plans for teachers. Handles PDF text extraction (including scanned pages via OCR), intelligently repairs garbled Urdu text using LLMs, generates structured lesson content, fixes RTL issues, and fills Word templates \u2014 producing ready-to-print planners.\nKey Features: Concurrent processing \u2014 parallelizes PDF extraction, OCR repair, and LLM generation across 3 lessons, Robust page range parsing (e.g., '1, 3, 5-10, 15'), Live progress dashboard with Rich progress bars\nTech Stack: Python, Groq (LLaMA 3.3 70B), python-docx, PyMuPDF, pytesseract\nGitHub: https://github.com/omerfarooq223/UrduPlanner",
-      "repo_name": "UrduPlanner Agent"
+      "content": "Description: Comprehensive academic evaluation agent featuring integrated vision analysis for diagrams, dual-similarity plagiarism detection, and automated rubric generation. It generates well-formatted Excel sheets for students and overall class reports. Tech Stack: Python, Groq LLaMA 3.3, PyMuPDF, openpyxl.",
+      "year": "2026"
     },
     {
+      "repo_name": "UrduPlanner Agent",
       "type": "repository",
-      "content": "Project: YOLO Vehicle Detection\nDescription: A high-performance vehicle detection system using YOLOv10x for images and YOLOv8n for videos. Capable of detecting cars, trucks, buses, and motorbikes with high accuracy and speed.\nProblem Solved: Provides an easy-to-use vehicle detection system that leverages state-of-the-art YOLO models for both static image analysis (high accuracy with YOLOv10x) and real-time video processing (high frame rate with YOLOv8n), with automated output management.\nKey Features: Precise image detection using YOLOv10x, Fast video detection using YOLOv8n for high frame rate, Easy-to-use CLI (detect.py)\nTech Stack: Python, Ultralytics (YOLOv8/v10), PyTorch, torchvision, OpenCV\nGitHub: https://github.com/omerfarooq223/YOLO_Vehicle_Detection",
-      "repo_name": "YOLO Vehicle Detection"
+      "content": "Description: Specialized NLP pipeline performing intelligent OCR reconstruction for mangled text and complex RTL punctuation alignment for automated Urdu lesson planning. Tech Stack: OCR, Groq, python-docx, NLP, Python.",
+      "year": "2026"
     },
     {
+      "repo_name": "CareerPilot: AI CTO",
       "type": "repository",
-      "content": "Project: AutoResearch Agent\nDescription: An autonomous AI research agent that takes any topic, breaks it into targeted sub-questions, searches the live web in parallel, verifies its own claims, and produces a professional research report \u2014 typically in 1-2 minutes.\nProblem Solved: Unlike basic chat tools, AutoResearch provides a multi-step research pipeline that breaks topics into sub-questions, searches in parallel, self-verifies claims against sources, flags low-confidence statements, and generates downloadable branded reports (PDF/Word/HTML/Markdown) \u2014 designed for structured handoff rather than raw chat output.\nKey Features: Breaks any topic into 5 targeted sub-questions automatically, Parallel web search across all sub-questions (~4x faster), Self-critique loop \u2014 flags unsupported or partially supported claims\nTech Stack: Python, Groq (LLaMA 3.3 70B), Tavily (Advanced Web Search), ReportLab (PDF generation), python-docx (Word generation)\nGitHub: https://github.com/omerfarooq223/autoresearch-agent",
-      "repo_name": "AutoResearch Agent"
+      "content": "Description: Autonomous Observe-Analyze-Plan agent that audits repositories, tracks hirability scores, and provides continuous weekly coaching via an interactive chat interface. Tech Stack: FastAPI, SQLite, GitHub Actions, MCP.",
+      "year": "2026"
     },
     {
+      "repo_name": "Parking Detection System",
       "type": "repository",
-      "content": "Project: Course Registration System\nDescription: A terminal-based university course registration system written in C++, modernized for multi-student support and per-course waitlists. Demonstrates BST, Stack, Queue, and Linked List data structures in a practical application.\nProblem Solved: Provides a practical demonstration of multiple data structures (BST, Stack, Queue, Linked List) working together in a real-world scenario \u2014 a university course registration system with student management, waitlists, auto-enrollment, and undo functionality.\nKey Features: BST for department and student management, Per-course waitlists using Queue data structure, Auto-enrollment from waitlist when a student drops a course\nTech Stack: C++17, g++\nGitHub: https://github.com/omerfarooq223/course-registration-system",
-      "repo_name": "Course Registration System"
+      "content": "Description: Real-time vision system using YOLOv8 and DBSCAN spatial clustering to rank available parking spots based on proximity, density, and accessibility. Includes a HuggingFace API Chatbot. Tech Stack: YOLO, Gradio, OpenCV, Image Processing.",
+      "year": "2026"
     },
     {
+      "repo_name": "AutoResearch Agent",
       "type": "repository",
-      "content": "Project: Language Recognition using Logistic Regression\nDescription: A machine learning project that classifies audio recordings into 4 languages \u2014 Urdu, English, Turkish, and Mixed \u2014 using MFCC features and Multinomial Logistic Regression implemented from scratch in NumPy.\nProblem Solved: Demonstrates building a language recognition classifier from scratch using only NumPy \u2014 classifying self-recorded audio data into 4 languages using MFCC feature extraction, softmax, cross-entropy loss, and batch gradient descent with L2 regularization. Achieves ~80.77% accuracy.\nKey Features: Multinomial Logistic Regression built from scratch using only NumPy, MFCC feature extraction (52-dimensional feature vectors), 4 language classification: Urdu, English, Turkish, Mixed\nTech Stack: Python, NumPy, librosa, scikit-learn, Matplotlib\nGitHub: https://github.com/omerfarooq223/language-recognition-logistic-regression",
-      "repo_name": "Language Recognition using Logistic Regression"
+      "content": "Description: Autonomous research engine that performs multi-source web synthesis and generates professional, source-backed PDF reports in under 60 seconds. Tech Stack: LLMs, Groq, Tavily, PDF.",
+      "year": "2026"
     },
     {
+      "repo_name": "NexusML: MLOps",
       "type": "repository",
-      "content": "Project: Multi-Modal AI + NLP + MLOps Pipeline\nDescription: End-to-end implementation of all four Project Nexus assessment challenges: Multi-Modal Inference Pipeline (OpenCV, MediaPipe, spaCy), Transformer-Driven Sentiment Analysis (DistilBERT vs Custom LSTM), Production-Grade MLOps Simulation (Docker, Cloud), and Data Engineering for Scale (Pandas, SQL indexing, Parquet).\nProblem Solved: Provides a comprehensive, production-grade ML pipeline that combines computer vision (MobileNetV2 + OpenCV + MediaPipe), NLP (spaCy + NLTK VADER), transformer fine-tuning (DistilBERT vs custom LSTM comparison), Docker containerization, cloud deployment strategies, and a scalable data ingestion pipeline \u2014 all in a single project.\nKey Features: Multi-modal inference: combined image classification + text analysis via FastAPI, MobileNetV2 ImageNet classifier + OpenCV/MediaPipe visual features, spaCy NLP + NLTK VADER sentiment analysis\nTech Stack: Python 3.11, FastAPI, uvicorn, gunicorn, OpenCV\nGitHub: https://github.com/omerfarooq223/multimodal-mlops-pipeline",
-      "repo_name": "Multi-Modal AI + NLP + MLOps Pipeline"
-    },
-    {
-      "type": "repository",
-      "content": "Project: n8n Jira-Slack Integration\nDescription: Automated workflows connecting Jira and Slack using n8n and OpenRouter AI. Includes Jira status updater, issue creator with AI parsing, and real-time sprint summary \u2014 all triggered via Slack slash commands.\nProblem Solved: Streamlines project management by automating the Jira-Slack communication loop \u2014 letting teams update issue statuses, create new issues with AI-powered parsing, and get real-time sprint summaries directly from Slack slash commands without switching tools.\nKey Features: Jira Status Updater via Slack slash command (/jira-update), Jira Issue Creator with AI parsing (/jira-create), Real-time Kanban board sprint summary (/sprint-summary)\nTech Stack: n8n, Jira Cloud API, Slack API, OpenRouter AI, ngrok\nGitHub: https://github.com/omerfarooq223/n8n-jira-slack",
-      "repo_name": "n8n Jira-Slack Integration"
-    },
-    {
-      "type": "repository",
-      "content": "Project: n8n Workflows Collection\nDescription: A collection of automation workflows built with n8n, OpenRouter AI, and Google Sheets. Includes GitHub API integration, webhook endpoints, custom code logic, and AI-powered customer support bots with automatic issue categorization.\nProblem Solved: Provides a library of reusable n8n workflow templates for common automation tasks \u2014 from GitHub API data fetching to AI-powered customer support bots that categorize tickets and log conversations, reducing manual support workload.\nKey Features: GitHub API Integration workflow, Webhook data response endpoint, Custom JavaScript code logic in n8n\nTech Stack: n8n, OpenRouter AI, Google Sheets API, JavaScript, REST APIs\nGitHub: https://github.com/omerfarooq223/n8n-workflows",
-      "repo_name": "n8n Workflows Collection"
-    },
-    {
-      "type": "repository",
-      "content": "Project: Smart Parking Detection System\nDescription: AI-powered parking lot analysis system using fine-tuned YOLOv8 models to detect occupied and free parking spots from images and video. Features zone-based analysis, weighted spot scoring, entrance-aware recommendations, and an optional AI chatbot.\nProblem Solved: Automates parking lot monitoring by using computer vision to detect occupied vs. free parking spots, score them based on multiple heuristics (confidence, distance to entrance, cluster bonus, spot size), and provide ranked recommendations \u2014 replacing manual lot surveillance.\nKey Features: Fine-tuned YOLOv8 with optional ensemble mode, Image and video analysis support, Zone-based occupancy analysis (quadrant heat map)\nTech Stack: Python, Ultralytics (YOLOv8), OpenCV, NumPy, SciPy\nGitHub: https://github.com/omerfarooq223/parking-detection-system",
-      "repo_name": "Smart Parking Detection System"
-    },
-    {
-      "type": "repository",
-      "content": "Project: Solana (SOL) Trading Agent Skills\nDescription: A suite of 3 custom Agent Skills for Claude Code to automate the repetitive cognitive tasks involved in spot cryptocurrency trading. Transforms manual monitoring and calculation workflows into a streamlined, agentic process.\nProblem Solved: Eliminates tedious manual tasks in crypto trading \u2014 price monitoring (~10 min/day saved), position sizing and risk-to-reward calculations (~5 min/trade saved), and trade journaling (~5 min/trade saved) \u2014 by packaging them as reusable Claude Code agent skills.\nKey Features: SOL Price Sentinel \u2014 instant market briefing via CoinGecko API, Risk Manager \u2014 1% portfolio risk rule position sizing calculator, Trade Logger \u2014 automated CSV-based trade journaling with running balance\nTech Stack: Python, requests, CoinGecko API, Claude Code (Agent Skills), CSV\nGitHub: https://github.com/omerfarooq223/solana_trading_agent",
-      "repo_name": "Solana (SOL) Trading Agent Skills"
+      "content": "Description: Production-ready inference pipeline featuring DistilBERT benchmarks and 1TB scaling strategy. Tech Stack: DistilBERT, FastAPI, Docker, Spark.",
+      "year": "2026"
     }
   ],
+
   "embeddings": [
     [
       -0.019820043817162514,
@@ -8986,5 +8977,6 @@
       -0.0676741674542427,
       0.02989526093006134
     ]
-  ]
+  ],
+  "last_updated": "2026-04-12"
 }
