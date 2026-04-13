@@ -396,8 +396,6 @@
     container.innerHTML = chatHTML;
     document.body.appendChild(container);
 
-    loadEmbeddings();
-
     const toggle = document.getElementById('portfolio-chatbot-toggle');
     const chatWindow = document.getElementById('portfolio-chatbot-window');
     const closeBtn = document.getElementById('portfolio-chatbot-close');
