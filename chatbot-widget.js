@@ -414,6 +414,29 @@
       toggle.classList.remove('hidden');
     });
 
+    // Dynamically adjust chatbot position to stay above the footer
+    const footer = document.querySelector('footer');
+    function updateChatbotPosition() {
+      if (!footer) return;
+      const footerRect = footer.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const baseBottom = 24; // Original bottom: 24px
+
+      if (footerRect.top < windowHeight) {
+        // Footer is visible, shift up by the visible height of the footer
+        const shift = windowHeight - footerRect.top;
+        toggle.style.bottom = (baseBottom + shift) + 'px';
+        chatWindow.style.bottom = (baseBottom + shift) + 'px';
+      } else {
+        toggle.style.bottom = baseBottom + 'px';
+        chatWindow.style.bottom = baseBottom + 'px';
+      }
+    }
+
+    window.addEventListener('scroll', updateChatbotPosition, { passive: true });
+    window.addEventListener('resize', updateChatbotPosition);
+    updateChatbotPosition(); // Run once on init
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const message = input.value.trim();
