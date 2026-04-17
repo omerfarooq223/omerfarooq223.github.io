@@ -27,22 +27,6 @@ async def health():
         "key_prefix": key[:4] + "..." if key else None
     }
 
-def load_portfolio_data():
-    """Load the knowledge base from embeddings.json."""
-    try:
-        # On Vercel, the file is usually in the root, so one level up from /api
-        filepath = os.path.join(os.getcwd(), 'embeddings.json')
-        if not os.path.exists(filepath):
-            # Fallback for different environments
-            filepath = 'embeddings.json'
-            
-        with open(filepath, 'r') as f:
-            data = json.load(f)
-            return data.get('chunks', [])
-    except Exception as e:
-        print(f"Error loading data: {e}")
-        return []
-
 @app.post("/api/chat")
 async def chat(request: ChatRequest):
     api_key = os.environ.get("GROQ_API_KEY")
@@ -50,16 +34,7 @@ async def chat(request: ChatRequest):
         raise HTTPException(status_code=500, detail="GROQ_API_KEY not configured in Vercel")
 
     client = Groq(api_key=api_key)
-    chunks = load_portfolio_data()
     
-    # Prepare the context from chunks
-    context_text = "\n\n".join([
-        f"Type: {c.get('type')}\n" + 
-        (f"Project: {c.get('repo_name')}\n" if c.get('repo_name') else "") + 
-        f"Content: {c.get('content')}"
-        for c in chunks
-    ])
-
     system_prompt = f"""
 You are Muhammad Umar Farooq's AI Portfolio Agent. Your goal is to help visitors (recruiters, engineers, etc.) learn about Umar.
 
@@ -70,11 +45,8 @@ You are Muhammad Umar Farooq's AI Portfolio Agent. Your goal is to help visitors
 - Projects: 14+ shipped projects, specialization in Agentic AI and ML pipelines.
 - Persona: Professional, confident, helpful, and technically precise.
 
-### KNOWLEDGE BASE:
-{context_text}
-
 ### INSTRUCTIONS:
-1. Use the provided KNOWLEDGE BASE to answer. If the answer isn't there, say you aren't sure based on his portfolio but offer to talk about his AI skills or projects instead.
+1. Answer the visitor's questions about Umar's portfolio, skills, and background.
 2. Keep answers concise (2-4 sentences max).
 3. Use Markdown formatting for emphasis (e.g., **bold** for project names).
 4. Always refer to him as "Umar".

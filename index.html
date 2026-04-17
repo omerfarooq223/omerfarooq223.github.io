@@ -390,10 +390,15 @@
         linear-gradient(#fff 0 0);
       mask-composite: exclude;
       animation: rotateBorder 8s linear infinite;
+      animation-play-state: paused;
       pointer-events: none;
       z-index: -1;
       opacity: .72;
       transition: opacity 0.4s ease;
+    }
+
+    .border-glow.is-animating {
+      animation-play-state: running;
     }
 
     .pcc,
@@ -437,6 +442,7 @@
 
     .hover-glow-only:hover .border-glow {
       opacity: 1;
+      animation-play-state: running;
     }
 
     .glow-border-base {
@@ -459,15 +465,6 @@
 
 
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 8000;
-      opacity: .3;
-    }
 
     #bar {
       position: fixed;
@@ -2388,6 +2385,18 @@
       color: var(--purple);
     }
 
+    .proj-card-trio.pcc:hover .p-title-large {
+      color: var(--cyan) !important;
+    }
+
+    .proj-card-trio.pcp:hover .p-title-large {
+      color: var(--purple) !important;
+    }
+
+    .proj-card-trio.pca:hover .p-title-large {
+      color: var(--amber) !important;
+    }
+
     .proj-card-preview .p-desc-large {
       font-size: 1.02rem;
       text-align: left;
@@ -2585,7 +2594,7 @@
       font-size: 1.35rem !important;
       font-weight: 800;
       margin-bottom: 4px !important;
-      color: #fff;
+      color: var(--text);
     }
 
     .proj-card-trio .p-desc-large {
@@ -4423,7 +4432,6 @@
       .github-icon-btn {
         width: 46px;
         height: 46px;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -4438,11 +4446,6 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.001ms !important;
         scroll-behavior: auto !important;
-      }
-
-      #cur,
-      #curRing {
-        display: none !important;
       }
     }
   </style>
@@ -4689,7 +4692,7 @@
         <div class="proj-card pcc proj-card-featured proj-featured premium-glow-card" id="autograder-card"
           style="order: 0;">
           <div class="p-visual" onclick="openProjectModal('autograder', event)">
-            <img src="images/autograder.png" alt="AutoGrader Agent preview" />
+            <img src="images/autograder.webp" alt="AutoGrader Agent preview" width="1400" height="757" fetchpriority="high" />
             <span class="pnum">001</span>
             <div class="badge-featured">Featured Project</div>
             <div class="badge-year">2026</div>
@@ -4726,7 +4729,7 @@
         <div class="proj-card pca proj-card-trio premium-glow-card" style="order: 4;" data-project="urduplanner"
           onclick="openProjectModal('urduplanner', event)">
           <div class="p-visual">
-            <img src="images/urduplanner.png" alt="UrduPlanner Agent preview" loading="lazy" decoding="async" />
+            <img src="images/urduplanner.webp" alt="UrduPlanner Agent preview" loading="lazy" decoding="async" width="1400" height="792" />
             <span class="pnum">005</span>
             <div class="image-label amber">NLP Engineering</div>
             <div class="badge-year">2026</div>
@@ -4740,6 +4743,13 @@
             <div class="pstk">
               <span class="pill">OCR</span><span class="pill">Groq</span><span class="pill">NLP</span><span
                 class="pill">Python</span>
+              <a href="https://github.com/omerfarooq223/UrduPlanner-Agent" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation()" class="github-icon-btn" aria-label="GitHub Repository" style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
@@ -4763,7 +4773,7 @@
         <div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 1;" data-project="careerpilot"
           onclick="openProjectModal('careerpilot', event)">
           <div class="p-visual">
-            <img src="images/careerpilot.png" alt="CareerPilot Agent preview" loading="lazy" decoding="async" />
+            <img src="images/careerpilot.webp" alt="CareerPilot Agent preview" loading="lazy" decoding="async" width="1400" height="795" />
             <span class="pnum">002</span>
             <div class="image-label cyan">Agentic AI</div>
             <div class="badge-year">2026</div>
@@ -4790,8 +4800,8 @@
         <div class="proj-card pca proj-card-preview premium-glow-card" style="order: 2;" data-project="parking"
           onclick="openProjectModal('parking', event)">
           <div class="p-visual">
-            <img src="images/parkingdetection2.png" alt="Parking Detection System preview" loading="lazy"
-              decoding="async" />
+            <img src="images/parkingdetection2.webp" alt="Parking Detection System preview" loading="lazy"
+              decoding="async" width="1400" height="799" />
             <span class="pnum">003</span>
             <div class="image-label amber">Machine Learning</div>
             <div class="badge-year">2026</div>
@@ -4820,7 +4830,7 @@
         <div class="proj-card pcp proj-card-trio premium-glow-card" style="order: 3;" data-project="autoresearch"
           onclick="openProjectModal('autoresearch', event)">
           <div class="p-visual">
-            <img src="images/autoresearchagent.png" alt="AutoResearch Agent preview" loading="lazy" decoding="async" />
+            <img src="images/autoresearchagent.webp" alt="AutoResearch Agent preview" loading="lazy" decoding="async" width="1400" height="654" />
             <span class="pnum">004</span>
             <div class="image-label agentic">Agentic AI</div>
             <div class="badge-year">2026</div>
@@ -4833,7 +4843,14 @@
               professional PDF reports.</p>
             <div class="pstk">
               <span class="pill">LLMs</span><span class="pill">Groq</span><span class="pill">Tavily</span><span
-                class="pill">PDF</span>
+                 class="pill">PDF</span>
+              <a href="https://github.com/omerfarooq223/autoresearch-agent" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation()" class="github-icon-btn" aria-label="GitHub Repository" style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
@@ -4891,7 +4908,7 @@
         <div class="proj-card pcc proj-card-trio premium-glow-card" style="order: 5;" data-project="nexusml"
           onclick="openProjectModal('nexusml', event)">
           <div class="p-visual">
-            <img src="images/nexusml_ui.png" alt="NexusML Pipeline preview" loading="lazy" decoding="async" />
+            <img src="images/nexusml_ui.webp" alt="NexusML Pipeline preview" loading="lazy" decoding="async" width="1400" height="730" />
             <span class="pnum">006</span>
             <div class="image-label cyan">MLOps Systems</div>
             <div class="badge-year">2026</div>
@@ -4904,7 +4921,14 @@
               strategy.</p>
             <div class="pstk">
               <span class="pill">DistilBERT</span><span class="pill">FastAPI</span><span class="pill">Docker</span><span
-                class="pill">Spark</span>
+                 class="pill">Spark</span>
+              <a href="https://github.com/omerfarooq223/multimodal-mlops-pipeline" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation()" class="github-icon-btn" aria-label="GitHub Repository" style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
@@ -5038,7 +5062,8 @@
 
   <footer>
     <span class="fg">Muhammad Umar Farooq</span>
-    <span style="display:flex;align-items:center;gap:12px;">© 2026 · Built with intention.<button id="btt" type="button" aria-label="Back to top">↑</button></span>
+    <span style="display:flex;align-items:center;gap:12px;">© 2026 · Built with intention.<button id="btt" type="button"
+        aria-label="Back to top">↑</button></span>
   </footer>
 
   <div id="bar"></div>
@@ -5061,7 +5086,7 @@
       if (!firstSlide || !secondSlide) return;
 
       const hasMultipleSlides = modalMediaSources.length > 1;
-      const firstSource = modalMediaSources[0] || 'images/autograder.png';
+      const firstSource = modalMediaSources[0] || 'images/autograder.webp';
       const secondSource = modalMediaSources[1] || firstSource;
 
       firstSlide.src = firstSource;
@@ -5095,7 +5120,7 @@
       autograder: {
         title: 'AutoGrader Agent',
         subtitle: 'AI / Multimodal Vision / Python · 2026',
-        media: 'images/autograder.png',
+        media: 'images/autograder.webp',
         alt: 'AutoGrader Agent preview',
         tags: ['Multimodal Vision', 'LLM Engineering', 'Plagiarism Detection', 'Academic Tech', 'Automation', 'Groq'],
         overview: [
@@ -5123,7 +5148,7 @@
       careerpilot: {
         title: 'CareerPilot: AI CTO',
         subtitle: 'Autonomous Agent / Career Systems / Python · 2026',
-        media: 'images/careerpilot.png',
+        media: 'images/careerpilot.webp',
         alt: 'CareerPilot Agent preview',
         tags: ['Autonomous Loop', 'Career Systems', 'Automation', 'FastAPI', 'SQLite', 'MCP'],
         overview: [
@@ -5150,7 +5175,7 @@
       parking: {
         title: 'Parking Detection System',
         subtitle: 'Computer Vision / YOLOv8 / Spatial Clustering · 2026',
-        media: ['images/parkingdetection2.png', 'images/parkingdetection1.png'],
+        media: ['images/parkingdetection2.webp', 'images/parkingdetection1.webp'],
         alt: 'Parking Detection System preview',
         tags: ['Computer Vision', 'YOLOv8', 'DBSCAN', 'Real Time', 'Spatial Analytics', 'Chatbot'],
         overview: [
@@ -5176,7 +5201,7 @@
       autoresearch: {
         title: 'AutoResearch Agent',
         subtitle: 'Agentic AI / Rapid Synthesis / Python · 2026',
-        media: 'images/autoresearchagent.png',
+        media: 'images/autoresearchagent.webp',
         alt: 'AutoResearch Agent preview',
         tags: ['Agentic AI', 'Multi-Source Synthesis', 'PDF Reports', 'Groq', 'Tavily', 'LLM Engineering'],
         overview: [
@@ -5202,7 +5227,7 @@
       urduplanner: {
         title: 'UrduPlanner: Intelligent NLP Agent',
         subtitle: 'Specialized NLP / Document AI / Python · 2026',
-        media: ['images/urduplanner.png', 'images/urduplanner2.png'],
+        media: ['images/urduplanner.webp', 'images/urduplanner2.webp'],
         alt: 'UrduPlanner Agent preview',
         tags: ['Intelligent OCR', 'NLP', 'RTL Handling', 'Document AI', 'Groq', 'Automation'],
         overview: [
@@ -5228,7 +5253,7 @@
       nexusml: {
         title: 'NexusML: MLOps Pipeline',
         subtitle: 'MLOps / Transformer Benchmarking / Python · 2026',
-        media: ['images/nexusml_ui.png', 'images/nexusml.png'],
+        media: ['images/nexusml_ui.webp', 'images/nexusml.webp'],
         alt: 'NexusML Pipeline preview',
         tags: ['DistilBERT', 'MLOps', 'Docker', 'FastAPI', 'Data Engineering', 'Benchmarking'],
         overview: [
@@ -5340,36 +5365,6 @@
       if (e.key === 'Escape') closeModal();
     });
 
-    const cur = document.getElementById('cur');
-    const ring = document.getElementById('curRing');
-    const gridBg = document.querySelector('.grid-bg');
-    if (cur) {
-      let mx = 0, my = 0, rx = 0, ry = 0;
-      let cursorTicking = false;
-      document.addEventListener('mousemove', e => {
-        mx = e.clientX; my = e.clientY;
-        window.mx = mx; window.my = my;
-        if (!cursorTicking) {
-          requestAnimationFrame(() => {
-            cur.style.transform = `translate(${mx}px,${my}px)`;
-            if (gridBg) gridBg.style.transform = `translate(${mx * 0.015}px,${my * 0.015}px)`;
-            cursorTicking = false;
-          });
-          cursorTicking = true;
-        }
-      });
-      (function a() {
-        rx += (mx - rx) * .15; ry += (my - ry) * .15;
-        ring.style.transform = `translate(${rx}px,${ry}px)`;
-        requestAnimationFrame(a);
-      })();
-      document.querySelectorAll('a,button').forEach(el => {
-        el.addEventListener('mouseenter', () => { ring.classList.add('hov'); cur.classList.add('hov'); });
-        el.addEventListener('mouseleave', () => { ring.classList.remove('hov'); cur.classList.remove('hov'); });
-      });
-
-
-    }
 
     document.querySelectorAll('.proj-card').forEach(card => {
       const vid = card.querySelector('video.proj-vid');
@@ -5447,35 +5442,81 @@
       });
     }
 
+    const glowObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const glow = entry.target.querySelector('.border-glow');
+        if (glow) {
+          glow.classList.toggle('is-animating', entry.isIntersecting);
+        }
+      });
+    }, { threshold: 0.05 });
+
     document.querySelectorAll('.proj-card, .edu-card, .sk-grp').forEach(card => {
       card.classList.add('glow-border');
-      if (card.classList.contains('proj-card') && !card.classList.contains('proj-featured')) {
+      const isFeatured = card.classList.contains('proj-featured');
+      if (!isFeatured) {
         card.classList.add('hover-glow-only');
       }
+
       const base = document.createElement('div');
       base.className = 'glow-border-base';
       card.insertBefore(base, card.firstChild);
+
       const glow = document.createElement('div');
       glow.className = 'border-glow';
       card.insertBefore(glow, card.firstChild);
+
+      if (isFeatured) {
+        glowObs.observe(card);
+      }
     });
 
+    // Caching for unified scroll handler
     const bar = document.getElementById('bar');
-    window.addEventListener('scroll', () => {
-      bar.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
-    }, { passive: true });
-
     const nav = document.getElementById('nav');
+    const orb1 = document.querySelector('.orb1');
+    const orb2 = document.querySelector('.orb2');
+    
     let lastNavScroll = 0;
     let hiddenNav = false;
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-      if (window.scrollY > 400 && window.scrollY > lastNavScroll + 10) {
-        if (!hiddenNav) { nav.classList.add('hidden'); hiddenNav = true; }
-      } else if (window.scrollY < lastNavScroll - 10 || window.scrollY < 400) {
-        if (hiddenNav) { nav.classList.remove('hidden'); hiddenNav = false; }
+    let lastScrollY = window.scrollY;
+    let lastScroll = window.scrollY; // Shared for IntersectionObservers
+    let ticking = false;
+
+    function updateScrollLogic() {
+      const y = window.scrollY;
+      
+      // 1. Progress Bar
+      if (bar) {
+        bar.style.width = (y / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
       }
-      lastNavScroll = window.scrollY;
+
+      // 2. Navbar
+      if (nav) {
+        nav.classList.toggle('scrolled', y > 60);
+        if (y > 400 && y > lastNavScroll + 10) {
+          if (!hiddenNav) { nav.classList.add('hidden'); hiddenNav = true; }
+        } else if (y < lastNavScroll - 10 || y < 400) {
+          if (hiddenNav) { nav.classList.remove('hidden'); hiddenNav = false; }
+        }
+        lastNavScroll = y;
+      }
+
+      // 3. Parallax Orbs
+      if (orb1) orb1.style.transform = `translateY(${y * 0.2}px)`;
+      if (orb2) orb2.style.transform = `translateY(${y * 0.12}px)`;
+
+      // Update state for other observers
+      lastScroll = y;
+      lastScrollY = y;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollLogic);
+        ticking = true;
+      }
     }, { passive: true });
 
     const secObs = new IntersectionObserver(ents => {
@@ -5510,7 +5551,6 @@
     const btt = document.getElementById('btt');
     btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    let lastScroll = 0;
 
     const obs = new IntersectionObserver((entries) => {
       const scrollingDown = window.scrollY >= lastScroll;
@@ -5538,7 +5578,6 @@
       lastScroll = window.scrollY;
     }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-    window.addEventListener('scroll', () => { lastScroll = window.scrollY; }, { passive: true });
 
     document.querySelectorAll('.r3d,.sl-l,.sl-r,.stg,.wr,.exp-wrap').forEach(el => obs.observe(el));
 
@@ -5568,13 +5607,6 @@
       });
     }
 
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      const o1 = document.querySelector('.orb1');
-      const o2 = document.querySelector('.orb2');
-      if (o1) o1.style.transform = `translateY(${y * .2}px)`;
-      if (o2) o2.style.transform = `translateY(${y * .12}px)`;
-    }, { passive: true });
 
 
 
@@ -5752,9 +5784,9 @@
       <div class="m-body m-body-premium">
         <div class="m-vid-box-premium">
           <div id="m-media-stage" class="m-media-stage">
-            <img id="m-media-0" class="m-media-slide is-active" src="images/autograder.png"
-              alt="AutoGrader Agent preview" />
-            <img id="m-media-1" class="m-media-slide" src="images/autograder.png" alt="AutoGrader Agent preview" />
+            <img id="m-media-0" class="m-media-slide is-active" src="images/autograder.webp"
+              alt="AutoGrader Agent preview" width="1400" height="757" />
+            <img id="m-media-1" class="m-media-slide" src="images/autograder.webp" alt="AutoGrader Agent preview" width="1400" height="757" />
             <div class="m-media-controls">
               <button type="button" class="m-media-nav m-media-prev" onclick="stepModalMedia(-1)"
                 aria-label="Previous image">‹</button>
