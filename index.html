@@ -1790,6 +1790,7 @@
     }
 
     .proj-card:hover {
+      transform: translateY(-8px);
       box-shadow: 0 24px 48px rgba(0, 0, 0, .38);
     }
 
@@ -5563,33 +5564,21 @@
 
 
     const obs = new IntersectionObserver((entries) => {
-      const scrollingDown = window.scrollY >= lastScroll;
-
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.remove('out-up');
-          e.target.classList.add('in');
+        if (!e.isIntersecting) return;
 
-          if (e.target.classList.contains('stg') || e.target.classList.contains('sl-r')) {
-            e.target.querySelectorAll('[data-target]').forEach(animCount);
-          }
-          if (e.target.hasAttribute('data-target')) animCount(e.target);
+        e.target.classList.remove('out-up');
+        e.target.classList.add('in');
 
-        } else {
-          const rect = e.target.getBoundingClientRect();
-          if (rect.top > 0) {
-            e.target.classList.remove('in');
-            e.target.classList.add('out-up');
-          } else {
-          }
+        if (e.target.classList.contains('stg') || e.target.classList.contains('sl-r')) {
+          e.target.querySelectorAll('[data-target]').forEach(animCount);
         }
+        if (e.target.hasAttribute('data-target')) animCount(e.target);
       });
-
-      lastScroll = window.scrollY;
     }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
 
-    document.querySelectorAll('.r3d,.sl-l,.sl-r,.stg,.wr,.exp-wrap').forEach(el => obs.observe(el));
+    document.querySelectorAll('.r3d,.sl-l,.sl-r,.stg,.wr').forEach(el => obs.observe(el));
 
     function animCount(el) {
       if (!el || el._counted) return;

@@ -12,7 +12,22 @@
         body: JSON.stringify({ message: query })
       });
 
-      if (!response.ok) throw new Error('API request failed');
+      if (!response.ok) {
+        let detail = '';
+        try {
+          const errorData = await response.json();
+          detail = errorData?.detail || '';
+        } catch (_) {
+          // Ignore JSON parse issues and fall back to status-based handling.
+        }
+
+        if (response.status === 429) {
+          return "You're sending messages too quickly. Please wait a few minutes and try again.";
+        }
+
+        throw new Error(detail || `API request failed (${response.status})`);
+      }
+
       const data = await response.json();
       return data.answer || "I'm sorry, I couldn't generate a response. Please try again.";
     } catch (error) {
