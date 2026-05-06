@@ -4,15 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muhammad Umar Farooq | AI Engineer</title>
+  <title>Muhammad Umer Farooq | AI Engineer</title>
   <meta name="description"
     content="AI engineer building autonomous agentic systems, ML pipelines and intelligent automation. Selected projects include agentic grading, research assistants and a YOLOv8 smart parking system with an AI assistant." />
-  <meta property="og:title" content="Muhammad Umar Farooq — AI Engineer" />
+  <meta property="og:title" content="Muhammad Umer Farooq — AI Engineer" />
   <meta property="og:description"
     content="AI engineer building autonomous agentic systems, ML pipelines and intelligent automation. Selected projects include agentic grading, research assistants and a YOLOv8 smart parking system with an AI assistant." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Muhammad Umar Farooq | AI Engineer" />
+  <meta name="twitter:title" content="Muhammad Umer Farooq | AI Engineer" />
   <meta name="twitter:description"
     content="AI engineer building autonomous agentic systems, ML pipelines and intelligent automation. Selected projects include agentic grading, research assistants and a YOLOv8 smart parking system with an AI assistant." />
   <link rel="icon" type="image/svg+xml"
@@ -169,7 +169,7 @@
       filter: blur(92px);
     }
 
-    html[data-theme="light"] .name-umar {
+    html[data-theme="light"] .name-umer {
       background: linear-gradient(110deg, #0ea5e9 20%, #6366f1 40%, #ffffff 50%, #6366f1 60%, #0ea5e9 80%);
       background-size: 200% auto;
       -webkit-background-clip: text;
@@ -461,6 +461,63 @@
       mask-composite: exclude;
       pointer-events: none;
       z-index: -1;
+    }
+
+    /* Show More Projects functionality */
+    .show-more-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+      padding-bottom: 20px;
+      width: 100%;
+    }
+
+    .btn-show-more {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      color: var(--muted2);
+      padding: 14px 38px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .btn-show-more svg {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--cyan);
+    }
+
+    .btn-show-more:hover {
+      background: var(--themeToggleBgHover);
+      border-color: rgba(0, 229, 255, 0.4);
+      color: var(--text);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(0, 229, 255, 0.08);
+    }
+
+    .btn-show-more:hover svg {
+      transform: translateY(2px);
+    }
+
+    .btn-show-more.is-expanded svg {
+      transform: rotate(180deg);
+    }
+
+    .btn-show-more.is-expanded:hover svg {
+      transform: rotate(180deg) translateY(-2px);
+    }
+
+    .hidden-project {
+      display: none !important;
     }
 
 
@@ -793,7 +850,7 @@
       animation-delay: .5s;
     }
 
-    .name-umar {
+    .name-umer {
       display: inline-block;
       background: linear-gradient(110deg, var(--cyan) 20%, #38bdf8 40%, #ffffff 50%, #38bdf8 60%, var(--cyan) 80%);
       background-size: 200% auto;
@@ -4052,7 +4109,7 @@
       }
 
       .grid-bg,
-      .name-umar,
+      .name-umer,
       .grd,
       .grd2,
       .gt1,
@@ -4492,7 +4549,7 @@
       </div>
       <h1 class="hero-title">
         <span class="ln ln1"><span class="wd">Muhammad</span></span>
-        <span class="ln ln2"><span class="wd"><span class="name-umar">Umar</span></span> <span class="wd"><span
+        <span class="ln ln2"><span class="wd"><span class="name-umer">Umer</span></span> <span class="wd"><span
               class="grd">Farooq</span></span></span>
       </h1>
       <p class="hero-sub">BS Artificial Intelligence student at <strong style="color:var(--text)">UMT</strong>
@@ -4562,7 +4619,7 @@
             </div>
             <div class="stat">
               <div class="stat-bar" style="background:var(--purple)"></div>
-              <div class="stat-n" style="color:var(--purple)" data-target="14" data-suf="+">0</div>
+              <div class="stat-n" style="color:var(--purple)" data-target="15" data-suf="+">0</div>
               <div class="stat-d">Projects Shipped</div>
             </div>
             <div class="stat">
@@ -4728,12 +4785,12 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pca proj-card-trio premium-glow-card" style="order: 4;" data-project="urduplanner"
+        <div class="proj-card pca proj-card-trio premium-glow-card" style="order: 6;" data-project="urduplanner"
           onclick="openProjectModal('urduplanner', event)">
           <div class="p-visual">
             <img src="images/urduplanner.webp" alt="UrduPlanner Agent preview" loading="lazy" decoding="async"
               width="1400" height="792" />
-            <span class="pnum">005</span>
+            <span class="pnum">006</span>
             <div class="image-label amber">NLP Engineering</div>
             <div class="badge-year">2026</div>
             <button class="preview-hover-btn" type="button" onclick="openProjectModal('urduplanner', event)">View
@@ -4757,29 +4814,41 @@
             </div>
           </div>
         </div>
-        <a href="https://github.com/omerfarooq223/personal-ai-employee" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcp proj-span-6" style="order: 6;">
-          <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">007</span>
-          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
+        <div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 1;" data-project="aiemployee"
+          onclick="openProjectModal('aiemployee', event)">
+          <div class="p-visual">
+            <img src="images/aiemployee-dashboard.webp" alt="Personal AI Employee dashboard preview" loading="lazy"
+              decoding="async" width="1400" height="800" />
+            <span class="pnum">002</span>
+            <div class="image-label cyan">Agentic AI</div>
+            <div class="badge-year">2026</div>
+            <button class="preview-hover-btn" type="button" onclick="openProjectModal('aiemployee', event)">View
+              Details</button>
           </div>
-          <div class="ptg-row"><span class="ptg tpp">Autonomous Reasoner</span></div>
-          <div class="pnm">Personal AI Employee</div>
-          <p class="pdsc">Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation, featuring a
-            continuous reasoning loop and MCP-style tool integration.</p>
-          <div class="pstk"><span class="pill">Claude</span><span class="pill">MCP</span><span class="pill">Gmail
-              API</span><span class="pill">Automation</span></div>
-        </a>
-        <div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 1;" data-project="careerpilot"
+          <div class="p-info">
+            <h3 class="p-title-large">Personal AI Employee</h3>
+            <p class="p-desc-large">Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation,
+              featuring a continuous reasoning loop and MCP-style tool integration.</p>
+            <div class="pstk">
+              <span class="pill pill-cyan">Claude Code</span><span class="pill pill-cyan">Flask</span><span
+                class="pill pill-cyan">Gmail API</span><span class="pill pill-cyan">Playwright</span>
+              <a href="https://github.com/omerfarooq223/personal-ai-employee" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation()" class="github-icon-btn" aria-label="GitHub Repository"
+                style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 2;" data-project="careerpilot"
           onclick="openProjectModal('careerpilot', event)">
           <div class="p-visual">
             <img src="images/careerpilot.webp" alt="CareerPilot Agent preview" loading="lazy" decoding="async"
               width="1400" height="795" />
-            <span class="pnum">002</span>
+            <span class="pnum">003</span>
             <div class="image-label cyan">Agentic AI</div>
             <div class="badge-year">2026</div>
             <button class="preview-hover-btn" type="button" onclick="openProjectModal('careerpilot', event)">View
@@ -4802,12 +4871,12 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pca proj-card-preview premium-glow-card" style="order: 2;" data-project="parking"
+        <div class="proj-card pca proj-card-preview premium-glow-card" style="order: 3;" data-project="parking"
           onclick="openProjectModal('parking', event)">
           <div class="p-visual">
             <img src="images/parkingdetection2.webp" alt="Parking Detection System preview" loading="lazy"
               decoding="async" width="1400" height="799" />
-            <span class="pnum">003</span>
+            <span class="pnum">004</span>
             <div class="image-label amber">Machine Learning</div>
             <div class="badge-year">2026</div>
             <button class="preview-hover-btn" type="button" onclick="openProjectModal('parking', event)">View
@@ -4832,12 +4901,42 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pcp proj-card-trio premium-glow-card" style="order: 3;" data-project="autoresearch"
+        <div class="proj-card pca proj-card-preview premium-glow-card" style="order: 4;" data-project="firewatch"
+          onclick="openProjectModal('firewatch', event)">
+          <div class="p-visual">
+            <img src="images/firewatch1.webp" alt="FireWatch AI preview" loading="lazy" decoding="async" width="1400"
+              height="800" />
+            <span class="pnum">011</span>
+            <div class="image-label amber">Computer Vision</div>
+            <div class="badge-year">2026</div>
+            <button class="preview-hover-btn" type="button" onclick="openProjectModal('firewatch', event)">View
+              Details</button>
+          </div>
+          <div class="p-info">
+            <h3 class="p-title-large">FireWatch AI</h3>
+            <p class="p-desc-large">Autonomous <strong>YOLOv8-powered</strong> safety system that detects and segments
+              fire/smoke in
+              real-time and triggers agentic incident response protocols along with RAG implemented chatbot.</p>
+            <div class="pstk">
+              <span class="pill pill-amber">FastAPI</span><span class="pill pill-amber">YOLOv8</span><span
+                class="pill pill-amber">React</span><span class="pill pill-amber">RAG</span>
+              <a href="https://github.com/omerfarooq223/Agentic-Fire-Detection" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation()" class="github-icon-btn"
+                aria-label="GitHub Repository" style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="proj-card pcp proj-card-trio premium-glow-card" style="order: 5;" data-project="autoresearch"
           onclick="openProjectModal('autoresearch', event)">
           <div class="p-visual">
             <img src="images/autoresearchagent.webp" alt="AutoResearch Agent preview" loading="lazy" decoding="async"
               width="1400" height="654" />
-            <span class="pnum">004</span>
+            <span class="pnum">005</span>
             <div class="image-label agentic">Agentic AI</div>
             <div class="badge-year">2026</div>
             <button class="preview-hover-btn" type="button" onclick="openProjectModal('autoresearch', event)">View
@@ -4862,7 +4961,7 @@
           </div>
         </div>
         <a href="https://github.com/omerfarooq223/language-recognition-logistic-regression" target="_blank"
-          rel="noopener noreferrer" class="proj-card pca proj-span-6" style="order: 7;">
+          rel="noopener noreferrer" class="proj-card pca proj-span-6 hidden-project" style="order: 8;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">008</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
@@ -4879,7 +4978,7 @@
               class="pill">Jupyter</span><span class="pill">NLP</span></div>
         </a>
         <a href="https://github.com/omerfarooq223/solana-trading-agent-skills" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcp proj-span-6" style="order: 8;">
+          class="proj-card pcp proj-span-6 hidden-project" style="order: 9;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">009</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
@@ -4896,7 +4995,7 @@
               class="pill">Web3</span></div>
         </a>
         <a href="https://github.com/omerfarooq223/n8n-jira-slack" target="_blank" rel="noopener noreferrer"
-          class="proj-card pca proj-span-6" style="order: 9;">
+          class="proj-card pca proj-span-6 hidden-project" style="order: 10;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">010</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
@@ -4912,12 +5011,12 @@
           <div class="pstk"><span class="pill">n8n</span><span class="pill">Jira</span><span
               class="pill">Slack</span><span class="pill">REST APIs</span></div>
         </a>
-        <div class="proj-card pcc proj-card-trio premium-glow-card" style="order: 5;" data-project="nexusml"
-          onclick="openProjectModal('nexusml', event)">
+        <div class="proj-card pcc proj-card-trio premium-glow-card hidden-project" style="order: 7;"
+          data-project="nexusml" onclick="openProjectModal('nexusml', event)">
           <div class="p-visual">
             <img src="images/nexusml_ui.webp" alt="NexusML Pipeline preview" loading="lazy" decoding="async"
               width="1400" height="730" />
-            <span class="pnum">006</span>
+            <span class="pnum">007</span>
             <div class="image-label cyan">MLOps Systems</div>
             <div class="badge-year">2026</div>
             <button class="preview-hover-btn" type="button" onclick="openProjectModal('nexusml', event)">View
@@ -4941,6 +5040,15 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="show-more-wrap">
+        <button id="toggleProjects" class="btn-show-more">
+          <span>View More Projects</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
       </div>
     </div>
   </section>
@@ -4976,23 +5084,24 @@
           </ul>
         </div>
         <div class="sk-grp sk-p">
-          <h3 style="color:var(--purple)">Languages</h3>
+          <h3 style="color:var(--purple)">Languages & Frameworks</h3>
           <ul class="sk-ul">
             <li><span class="sdot" style="background:var(--purple)"></span>Python (Advanced)</li>
-            <li><span class="sdot" style="background:var(--purple)"></span>C++</li>
-            <li><span class="sdot" style="background:var(--purple)"></span>SQL</li>
-            <li><span class="sdot" style="background:var(--purple)"></span>HTML / CSS / JavaScript</li>
+            <li><span class="sdot" style="background:var(--purple)"></span>React / Vite</li>
+            <li><span class="sdot" style="background:var(--purple)"></span>C++ / C</li>
+            <li><span class="sdot" style="background:var(--purple)"></span>SQL (SQLite, PostgreSQL)</li>
+            <li><span class="sdot" style="background:var(--purple)"></span>HTML5 / CSS3 / JavaScript</li>
           </ul>
         </div>
         <div class="sk-grp sk-a">
           <h3 style="color:var(--amber)">Tools & Automation</h3>
           <ul class="sk-ul">
+            <li><span class="sdot" style="background:var(--amber)"></span>Cursor / VS Code</li>
+            <li><span class="sdot" style="background:var(--amber)"></span>Google Antigravity</li>
             <li><span class="sdot" style="background:var(--amber)"></span>n8n Workflow Automation</li>
-            <li><span class="sdot" style="background:var(--amber)"></span>PyMuPDF / openpyxl</li>
-            <li><span class="sdot" style="background:var(--amber)"></span>Python-docx</li>
             <li><span class="sdot" style="background:var(--amber)"></span>Git / GitHub</li>
-            <li><span class="sdot" style="background:var(--amber)"></span>Microsoft Office</li>
-            <li><span class="sdot" style="background:var(--amber)"></span>VS Code / Jupyter</li>
+            <li><span class="sdot" style="background:var(--amber)"></span>PyMuPDF / Openpyxl</li>
+            <li><span class="sdot" style="background:var(--amber)"></span>Docker / Postman</li>
           </ul>
         </div>
         <div class="sk-grp sk-g">
@@ -5001,8 +5110,8 @@
             <li><span class="sdot" style="background:var(--green)"></span>Multi-agent Systems</li>
             <li><span class="sdot" style="background:var(--green)"></span>LangChain / LangGraph</li>
             <li><span class="sdot" style="background:var(--green)"></span>FastAPI</li>
-            <li><span class="sdot" style="background:var(--green)"></span>LeetCode (Active)</li>
-            <li><span class="sdot" style="background:var(--green)"></span>Docker (Active)</li>
+            <li><span class="sdot" style="background:var(--green)"></span>LeetCode</li>
+            <li><span class="sdot" style="background:var(--green)"></span>Docker</li>
           </ul>
         </div>
       </div>
@@ -5071,7 +5180,7 @@
   </section>
 
   <footer>
-    <span class="fg">Muhammad Umar Farooq</span>
+    <span class="fg">Muhammad Umer Farooq</span>
     <span style="display:flex;align-items:center;gap:12px;">© 2026 · Built with intention.<button id="btt" type="button"
         aria-label="Back to top">↑</button></span>
   </footer>
@@ -5182,6 +5291,34 @@
         ],
         github: 'https://github.com/omerfarooq223/CareerPilot-Agent'
       },
+      aiemployee: {
+        title: 'Personal AI Employee',
+        subtitle: 'Human-in-the-Loop Agent / Gmail + LinkedIn Automation · 2026',
+        media: 'images/aiemployee-dashboard.webp',
+        alt: 'Personal AI Employee dashboard preview',
+        tags: ['HITL Approval', 'Gmail Automation', 'LinkedIn Auto-Poster', 'Flask Dashboard', 'Claude Code', 'MCP'],
+        overview: [
+          'A fully autonomous personal AI employee that monitors your Gmail, reasons about incoming tasks, waits for your approval, and then takes real-world actions — all while you stay in control.',
+          'It runs a continuous loop that converts raw emails into structured plans, provides one-click approve/reject in a web dashboard, and can execute actions like sending contextual replies and publishing LinkedIn posts.'
+        ],
+        featuresTitle: 'Detailed Features',
+        features: [
+          '<strong>Gmail Watcher:</strong> Polls your inbox and generates actionable items with metadata and priority.',
+          '<strong>Reasoning Loop:</strong> Produces structured <code>Plan.md</code> files and drafts responses/posts with tool-style integration.',
+          '<strong>HITL Approval:</strong> No sensitive action without approval — approve/reject via dashboard or file move workflow.',
+          '<strong>LinkedIn Auto-Poster:</strong> Generates business-aligned posts and publishes via Playwright automation.',
+          '<strong>Live Command Center:</strong> Flask dashboard showing KPIs, pipeline status, recent activity, and action breakdowns.'
+        ],
+        stackTitle: 'Technology Stack',
+        stack: [
+          '<strong>Claude Code:</strong> Core reasoning and orchestration for plans and execution.',
+          '<strong>Python + Flask:</strong> Agent scripts plus a web dashboard with REST endpoints.',
+          '<strong>Gmail API:</strong> Reads inbox, sends contextual replies, and marks messages.',
+          '<strong>Playwright:</strong> Reliable LinkedIn posting automation.',
+          '<strong>Groq LLaMA 3.3 70B:</strong> Optional high-speed generation for replies and posts.'
+        ],
+        github: 'https://github.com/omerfarooq223/personal-ai-employee'
+      },
       parking: {
         title: 'Parking Detection System',
         subtitle: 'Computer Vision / YOLOv8 / Spatial Clustering · 2026',
@@ -5259,6 +5396,32 @@
           '<strong>Flask & Rich:</strong> Dual web and CLI interfaces for varied user workflows.'
         ],
         github: 'https://github.com/omerfarooq223/UrduPlanner-Agent'
+      },
+      firewatch: {
+        title: 'FireWatch AI: Autonomous Safety System',
+        subtitle: 'Computer Vision / YOLOv8 / Agentic RAG · 2026',
+        media: ['images/firewatch1.webp', 'images/firewatch2.webp'],
+        alt: 'FireWatch AI preview',
+        tags: ['Autonomous Loop', 'Computer Vision', 'YOLOv8', 'Agentic RAG', 'FastAPI', 'Cyber HUD'],
+        overview: [
+          'Production-grade, high-fidelity monitoring ecosystem designed for autonomous fire and smoke detection using YOLOv8.',
+          'Integrates an agentic incident response loop that automatically dispatches alerts and activates suppression systems when risk thresholds are breached.'
+        ],
+        featuresTitle: 'Detailed Features',
+        features: [
+          '<strong>Autonomous Incident Response:</strong> Zero-latency decision engine that dispatches alerts and triggers suppression systems.',
+          '<strong>Cyber HUD Overlay:</strong> Sophisticated canvas-based particle engine for real-time tactical visualization and heat-mapping.',
+          '<strong>Agentic RAG Assistant:</strong> Integrated safety knowledge base built on FAISS and LangChain for context-aware safety protocols.',
+          '<strong>Precision Detection:</strong> YOLOv8-seg model trained on 95,000+ images, achieving 92% segmentation accuracy.'
+        ],
+        stackTitle: 'Technology Stack',
+        stack: [
+          '<strong>Ultralytics YOLOv8:</strong> Real-time high-fidelity fire and smoke segmentation.',
+          '<strong>FastAPI & SQLite:</strong> Robust backend orchestration for incident logging and telemetry.',
+          '<strong>React & Particle Engine:</strong> Premium Cyber HUD dashboard with interactive particle physics.',
+          '<strong>SentenceTransformers & FAISS:</strong> Powers the safety-critical RAG knowledge base.'
+        ],
+        github: 'https://github.com/omerfarooq223/Agentic-Fire-Detection'
       },
       nexusml: {
         title: 'NexusML: MLOps Pipeline',
@@ -5722,7 +5885,7 @@
 
     const tw = document.getElementById('tw');
     const twLinesText = [
-      { t: "> initializing Umar_Agent...", d: 30, k: "cmd" },
+      { t: "> initializing Umer_Agent...", d: 30, k: "cmd" },
       { t: "> Loading skills matrix... [Python, LLMs, Computer Vision]", d: 15, k: "cmt" },
       { t: "> Injecting workflows...", d: 30, k: "cmd" },
       { t: "> Status: ready for deployment.", d: 20, k: "str" }
@@ -5767,6 +5930,39 @@
         }, 260);
       }, 3200);
     }
+
+    // Toggle hidden projects
+    document.getElementById('toggleProjects')?.addEventListener('click', function () {
+      const isExpanded = this.classList.contains('is-expanded');
+      const cards = document.querySelectorAll('.proj-card');
+      const hiddenCards = Array.from(cards).filter(c => c.style.order >= 7);
+      const btnSpan = this.querySelector('span');
+
+      if (!isExpanded) {
+        // Show More
+        hiddenCards.forEach((card, index) => {
+          card.classList.remove('hidden-project');
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, index * 100);
+        });
+        btnSpan.textContent = 'View Less Projects';
+        this.classList.add('is-expanded');
+      } else {
+        // Show Less
+        hiddenCards.forEach(card => {
+          card.classList.add('hidden-project');
+        });
+        btnSpan.textContent = 'View More Projects';
+        this.classList.remove('is-expanded');
+        // Optional: scroll back to projects section
+        document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
   </script>
 
   <div id="proj-modal">
