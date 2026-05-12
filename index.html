@@ -4,15 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muhammad Umer Farooq | AI Engineer</title>
+  <title>Muhammad Umar Farooq | AI Engineer</title>
   <meta name="description"
     content="AI engineer building autonomous agentic systems, ML pipelines and intelligent automation. Selected projects include agentic grading, research assistants and a YOLOv8 smart parking system with an AI assistant." />
-  <meta property="og:title" content="Muhammad Umer Farooq — AI Engineer" />
+  <meta property="og:title" content="Muhammad Umar Farooq — AI Engineer" />
   <meta property="og:description"
     content="AI engineer building autonomous agentic systems, ML pipelines and intelligent automation. Selected projects include agentic grading, research assistants and a YOLOv8 smart parking system with an AI assistant." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Muhammad Umer Farooq | AI Engineer" />
+  <meta name="twitter:title" content="Muhammad Umar Farooq | AI Engineer" />
   <meta name="twitter:description"
     content="AI engineer building autonomous agentic systems, ML pipelines and intelligent automation. Selected projects include agentic grading, research assistants and a YOLOv8 smart parking system with an AI assistant." />
   <link rel="icon" type="image/svg+xml"
@@ -169,7 +169,7 @@
       filter: blur(92px);
     }
 
-    html[data-theme="light"] .name-umer {
+    html[data-theme="light"] .name-Umar {
       background: linear-gradient(110deg, #0ea5e9 20%, #6366f1 40%, #ffffff 50%, #6366f1 60%, #0ea5e9 80%);
       background-size: 200% auto;
       -webkit-background-clip: text;
@@ -850,7 +850,7 @@
       animation-delay: .5s;
     }
 
-    .name-umer {
+    .name-Umar {
       display: inline-block;
       background: linear-gradient(110deg, var(--cyan) 20%, #38bdf8 40%, #ffffff 50%, #38bdf8 60%, var(--cyan) 80%);
       background-size: 200% auto;
@@ -894,7 +894,7 @@
       border-radius: 100px;
       font-size: .68rem;
       letter-spacing: .05em;
-      border: 1px solid;
+      border: 1px solid transparent;
       font-weight: 500;
     }
 
@@ -926,6 +926,33 @@
       background: rgba(244, 114, 182, .07);
       border-color: rgba(244, 114, 182, .22);
       color: var(--pink);
+    }
+
+    .br {
+      position: relative;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.05));
+      color: #ffd700;
+      border-radius: 100px;
+      z-index: 0;
+      font-weight: 700;
+      text-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.15);
+    }
+
+    .br::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 100px;
+      background: linear-gradient(90deg, #ffd700, #ffb700, #fff5cc, #ffb700, #ffd700);
+      background-size: 200% auto;
+      animation: textShine 3s linear infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: -1;
     }
 
     .hero-cta {
@@ -1518,13 +1545,11 @@
     }
 
     #education .edu-grid {
-      counter-reset: edu-rec;
       gap: 18px;
       grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
     }
 
     #education .edu-card {
-      counter-increment: edu-rec;
       padding: 30px 28px 32px;
       border-radius: 18px;
       border: none;
@@ -1532,17 +1557,6 @@
       box-shadow: 0 18px 48px var(--eduCardShadow), inset 0 1px 0 var(--eduCardInset);
       overflow: visible;
       transition: all .45s cubic-bezier(.16, 1, .3, 1);
-    }
-
-    #education .edu-card::before {
-      content: 'REC · ' counter(edu-rec, decimal-leading-zero);
-      display: block;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: .52rem;
-      font-weight: 600;
-      letter-spacing: .2em;
-      color: var(--eduCardBeforeColor);
-      margin-bottom: 8px;
     }
 
     #education .edu-card:hover {
@@ -4109,7 +4123,7 @@
       }
 
       .grid-bg,
-      .name-umer,
+      .name-Umar,
       .grd,
       .grd2,
       .gt1,
@@ -4491,21 +4505,198 @@
         width: 46px;
         height: 46px;
       }
+    }
 
-      @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.001ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.001ms !important;
-          scroll-behavior: auto !important;
-        }
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
       }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Clickable Badges */
+    a.bdg {
+      text-decoration: none !important;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Add a subtle external link or document icon to clickable badges */
+    a.bdg::after {
+      content: "↗";
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.85em;
+      opacity: 0.6;
+      font-weight: 400;
+      margin-left: 2px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    a.bdg:hover {
+      transform: translateY(-3px) scale(1.05);
+      filter: brightness(1.2) drop-shadow(0 4px 10px rgba(255, 255, 255, 0.15));
+    }
+
+    a.bdg:hover::after {
+      opacity: 1;
+      transform: translate(1px, -1px);
+    }
+
+    .ha-link,
+    a[href^="docs/"]:not(.bdg) {
+      text-decoration: none !important;
+      color: inherit;
+      cursor: pointer !important;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+    }
+
+    .ha-link:hover,
+    a[href^="docs/"]:not(.bdg):hover {
+      transform: translateY(-2px);
+      filter: brightness(1.2) drop-shadow(0 4px 10px rgba(255, 255, 255, 0.15));
+    }
+
+    /* Glassmorphic Preview Modal */
+    .doc-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      padding: 20px;
+    }
+
+    .doc-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .doc-modal-content {
+      width: 100%;
+      max-width: 900px;
+      height: 85vh;
+      background: var(--surf);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+      transform: translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .doc-modal.active .doc-modal-content {
+      transform: translateY(0);
+    }
+
+    .doc-modal-header {
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .doc-modal-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .doc-modal-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .doc-modal-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .doc-modal-btn:hover {
+      background: var(--border);
+      transform: translateY(-1px);
+    }
+
+    .doc-modal-body {
+      flex: 1;
+      position: relative;
+      background: #111;
+      overflow: hidden;
+    }
+
+    .doc-modal-body iframe,
+    .doc-modal-body img {
+      width: 100%;
+      height: 100%;
+      border: none;
+      object-fit: contain;
+    }
+
+    .doc-modal-close {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .doc-modal-close:hover {
+      background: var(--pink);
+      border-color: var(--pink);
+      color: white;
+    }
+
+    @media(max-width: 768px) {
+      .doc-modal-content {
+        height: 80vh;
+      }
+
+      .doc-modal-title {
+        font-size: 0.75rem;
+      }
+    }
   </style>
 </head>
 
@@ -4549,16 +4740,17 @@
       </div>
       <h1 class="hero-title">
         <span class="ln ln1"><span class="wd">Muhammad</span></span>
-        <span class="ln ln2"><span class="wd"><span class="name-umer">Umer</span></span> <span class="wd"><span
+        <span class="ln ln2"><span class="wd"><span class="name-Umar">Umar</span></span> <span class="wd"><span
               class="grd">Farooq</span></span></span>
       </h1>
       <p class="hero-sub">BS Artificial Intelligence student at <strong style="color:var(--text)">UMT</strong>
         building autonomous AI agents, ML pipelines and intelligent automation that ships beyond the classroom.</p>
       <div class="hero-badges">
-        <span class="bdg bc">CGPA 3.81 / 4.0</span>
+        <a href="docs/Transcript.pdf" target="_blank" class="bdg bc">CGPA 3.81 / 4.0</a>
         <span class="bdg ba">70% Scholarship</span>
         <span class="bdg bp">Panaversity AI</span>
-        <span class="bdg bg2">Dean's Award</span>
+        <a href="docs/Dean_Award.webp" target="_blank" class="bdg bg2">Dean's Award</a>
+        <a href="docs/Rector_Award.webp" target="_blank" class="bdg br">Rector's Award</a>
       </div>
       <div class="hero-cta">
         <a href="#projects" class="btn-a">View My Work</a>
@@ -4587,9 +4779,11 @@
       <div class="ab-grid">
         <div class="ab-text sl-l">
           <p>I'm a <strong>BS Artificial Intelligence</strong> student at <span class="hc">University of Management &
-              Technology (UMT), Lahore</span> , maintaining a <span class="ha">3.81 / 4.0 CGPA on a 70% merit
-              scholarship</span>, recognized with the <span class="ha">Dean's Award</span> (top 10% SGPA in department).
+              Technology (UMT), Lahore</span> , maintaining a <span class="hc">3.81 / 4.0 CGPA on a 70% merit
+              scholarship</span>, recognized with the <span class="hc">Dean's Award</span> (top 10% SGPA in the
+            department) and a <span class="br">Rector's Award</span> (4.0 SPGA in a semester).
           </p>
+
           <p>I'm enrolled in the <span class="hp">Panaversity Agentic AI Program</span>, building production-grade
             autonomous agents using LLMs, Groq and multi-agent architecture patterns.</p>
           <p>Beyond AI, I bring real-world experience in customer services, US dispatch operations and peer tutoring,
@@ -4645,17 +4839,20 @@
           <div class="edu-sc">BS Artificial Intelligence</div>
           <div class="edu-dg">UMT, Lahore</div>
           <div class="edu-bs">
-            <span class="bdg bc">CGPA 3.81 / 4.0</span><span class="bdg ba">70% Scholarship</span>
-            <span class="bdg bg2">Dean's Award</span>
+            <a href="docs/Transcript.pdf" target="_blank" class="bdg bc">CGPA 3.81 / 4.0</a><span class="bdg ba">70%
+              Scholarship</span>
+            <a href="docs/Dean_Award.pdf" target="_blank" class="bdg bg2">Dean's Award</a><a
+              href="docs/Rector_Award.pdf" target="_blank" class="bdg br">Rector's Award</a>
           </div>
-          <p class="edu-note"><span style="color:var(--green)">Dean's Award</span> — top 10% SGPA in department</p>
+
         </div>
         <div class="edu-card ec-p">
           <div class="edu-yr">Sep 2021 – Jun 2023</div>
           <div class="edu-sc">FSc Pre-Medical</div>
           <div class="edu-dg">Punjab Group of Colleges (PGC)</div>
           <div class="edu-bs">
-            <span class="bdg bp">970 Marks</span><span class="bdg bp">88.2%</span><span class="bdg bp">50%
+            <a href="docs/FSC_Marks.pdf" target="_blank" class="bdg bp">970 Marks</a><span
+              class="bdg bp">88.2%</span><span class="bdg bp">50%
               Scholarship</span>
           </div>
         </div>
@@ -4664,8 +4861,9 @@
           <div class="edu-sc">Matric (Science)</div>
           <div class="edu-dg">Iqra Huffaz Secondary School, Lahore</div>
           <div class="edu-bs">
-            <span class="bdg ba">Biology A+</span><span class="bdg ba">Chemistry A+</span><span class="bdg ba">1085
-              Marks</span><span class="bdg ba">98.6%</span>
+            <span class="bdg ba">Biology A+</span><span class="bdg ba">Chemistry A+</span><a
+              href="docs/Matric_Marks.pdf" target="_blank" class="bdg ba">1085
+              Marks</a><span class="bdg ba">98.6%</span>
           </div>
         </div>
       </div>
@@ -4692,6 +4890,18 @@
             <li>Tutored peers across multiple subjects, improving academic performance and helping students secure
               strong grades.</li>
             <li>Adapted teaching methods to fit different learning styles, honing communication and leadership skills.
+            </li>
+            <li style="list-style:none; margin-top:10px;">
+              <a href="docs/Peer_Tutoring_Certificate.webp" target="_blank" class="ha-link"
+                style="font-size:0.8rem; display:inline-flex; align-items:center; gap:5px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6"></path>
+                  <path d="M10 14L21 3"></path>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                </svg>
+                View Certificate
+              </a>
             </li>
           </ul>
         </div>
@@ -4884,11 +5094,11 @@
           </div>
           <div class="p-info">
             <h3 class="p-title-large">Parking Detection System</h3>
-            <p class="p-desc-large">Real-time vision system using YOLOv8 and <strong>DBSCAN spatial clustering</strong>
+            <p class="p-desc-large">Real-time vision system using YOLOv8m and <strong>DBSCAN spatial clustering</strong>
               to rank available parking spots based on proximity, density, and accessibility. Includes a HuggingFace API
               Chatbot.</p>
             <div class="pstk">
-              <span class="pill pill-amber">YOLO</span><span class="pill pill-amber">Gradio</span><span
+              <span class="pill pill-amber">YOLOv8m</span><span class="pill pill-amber">Gradio</span><span
                 class="pill pill-amber">OpenCV</span><span class="pill pill-amber">Image Processing</span>
               <a href="https://github.com/omerfarooq223/parking-detection-system" target="_blank"
                 rel="noopener noreferrer" onclick="event.stopPropagation()" class="github-icon-btn"
@@ -4918,8 +5128,9 @@
               fire/smoke in
               real-time and triggers agentic incident response protocols along with RAG implemented chatbot.</p>
             <div class="pstk">
-              <span class="pill pill-amber">FastAPI</span><span class="pill pill-amber">YOLOv8</span><span
-                class="pill pill-amber">React</span><span class="pill pill-amber">RAG</span>
+              <span class="pill pill-amber">FastAPI</span><span class="pill pill-amber">YOLOv8l</span><span
+                class="pill pill-amber">React</span><span class="pill pill-amber">RAG</span><span
+                class="pill pill-amber">GmailAPI</span>
               <a href="https://github.com/omerfarooq223/Agentic-Fire-Detection" target="_blank"
                 rel="noopener noreferrer" onclick="event.stopPropagation()" class="github-icon-btn"
                 aria-label="GitHub Repository" style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
@@ -5180,7 +5391,7 @@
   </section>
 
   <footer>
-    <span class="fg">Muhammad Umer Farooq</span>
+    <span class="fg">Muhammad Umar Farooq</span>
     <span style="display:flex;align-items:center;gap:12px;">© 2026 · Built with intention.<button id="btt" type="button"
         aria-label="Back to top">↑</button></span>
   </footer>
@@ -5769,9 +5980,6 @@
       });
     }
 
-
-
-
     // ── THREE.JS NEURAL NETWORK ──
     const cvsNode = document.getElementById('nw');
     if (cvsNode) {
@@ -5885,7 +6093,7 @@
 
     const tw = document.getElementById('tw');
     const twLinesText = [
-      { t: "> initializing Umer_Agent...", d: 30, k: "cmd" },
+      { t: "> initializing Umar_Agent...", d: 30, k: "cmd" },
       { t: "> Loading skills matrix... [Python, LLMs, Computer Vision]", d: 15, k: "cmt" },
       { t: "> Injecting workflows...", d: 30, k: "cmd" },
       { t: "> Status: ready for deployment.", d: 20, k: "str" }
@@ -6022,7 +6230,97 @@
       </div>
     </div>
   </div>
+  <div class="doc-modal" id="docModal">
+    <div class="doc-modal-content">
+      <div class="doc-modal-header">
+        <div class="doc-modal-title" id="docTitle">Document Preview</div>
+        <div class="doc-modal-actions">
+          <a href="#" target="_blank" class="doc-modal-btn" id="fullViewBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"></path>
+            </svg>
+            Open in New Tab
+          </a>
+          <div class="doc-modal-close" id="docClose">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="doc-modal-body" id="docBody"></div>
+    </div>
+  </div>
+
   <script src="chatbot-widget.js"></script>
+  <script>
+    // Document Preview Logic
+    (function () {
+      const docModal = document.getElementById('docModal');
+      const docBody = document.getElementById('docBody');
+      const docTitle = document.getElementById('docTitle');
+      const fullViewBtn = document.getElementById('fullViewBtn');
+      const docClose = document.getElementById('docClose');
+
+      if (!docModal || !docBody || !docClose) {
+        console.error("Document Preview Modal elements not found!");
+        return;
+      }
+
+      function openPreview(url, title, event) {
+        if (event) event.preventDefault();
+
+        docTitle.innerText = title || "Document Preview";
+        fullViewBtn.href = url;
+        docBody.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:white;">Loading...</div>';
+
+        setTimeout(() => {
+          docBody.innerHTML = '';
+          if (url.toLowerCase().endsWith('.pdf')) {
+            const iframe = document.createElement('iframe');
+            iframe.src = url + "#toolbar=0&navpanes=0&scrollbar=0";
+            docBody.appendChild(iframe);
+          } else {
+            const img = document.createElement('img');
+            img.src = url;
+            docBody.appendChild(img);
+          }
+        }, 300);
+
+        docModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closePreview() {
+        docModal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => { docBody.innerHTML = ''; }, 400);
+      }
+
+      docClose.addEventListener('click', closePreview);
+      docModal.addEventListener('click', (e) => {
+        if (e.target === docModal) closePreview();
+      });
+
+      // Delegate click event to document to handle all current and future links
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href^="docs/"], a[href$=".pdf"]');
+        if (link && !link.hasAttribute('download') && !link.classList.contains('doc-modal-btn')) {
+          e.preventDefault();
+          const title = link.getAttribute('data-title') || link.innerText.trim() || "Document Preview";
+          openPreview(link.getAttribute('href'), title, e);
+        }
+      });
+
+      // Handle ESC key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePreview();
+      });
+
+      console.log("Document Preview Logic Initialized");
+    })();
+  </script>
 </body>
 
 </html>
