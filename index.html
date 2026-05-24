@@ -198,17 +198,6 @@
       box-shadow: 0 18px 36px rgba(124, 58, 237, 0.26);
     }
 
-    html[data-theme="light"] .btn-b {
-      background: rgba(255, 255, 255, 0.85);
-      border-color: rgba(148, 163, 184, 0.45);
-      color: var(--text);
-    }
-
-    html[data-theme="light"] .btn-b:hover {
-      background: rgba(255, 255, 255, 1);
-      border-color: rgba(99, 102, 241, 0.55);
-    }
-
     html[data-theme="light"] .proj-card,
     html[data-theme="light"] .sk-grp,
     html[data-theme="light"] .stat {
@@ -986,51 +975,6 @@
     .btn-a:hover {
       transform: translateY(-2px);
       box-shadow: 0 14px 40px rgba(0, 229, 255, .28);
-    }
-
-    .btn-b {
-      padding: 13px 28px;
-      background: transparent;
-      color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 400;
-      font-size: .85rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      text-decoration: none;
-      display: inline-block;
-      transition: border-color .2s, background .2s;
-    }
-
-    .btn-b:hover {
-      border-color: rgba(168, 85, 247, .5);
-      background: rgba(168, 85, 247, .05);
-    }
-
-    .hero-cta .hero-github-btn {
-      background: #fff;
-      color: #05070f;
-      border-color: #fff;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .hero-cta .hero-github-btn svg {
-      width: 17px;
-      height: 17px;
-      display: block;
-      flex-shrink: 0;
-    }
-
-    .hero-cta .hero-github-btn:hover {
-      background: #f2f4f8;
-      border-color: #f2f4f8;
-    }
-
-    .hero-cta .hero-contact-btn {
-      border-color: rgba(255, 255, 255, 0.16);
     }
 
     .scroll-cue {
@@ -2090,45 +2034,6 @@
       border-color: rgba(168, 85, 247, .4);
     }
 
-    .preview-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background: rgba(0, 229, 255, 0.1);
-      border: 1px solid rgba(0, 229, 255, 0.3);
-      border-radius: 20px;
-      color: var(--cyan);
-      font-size: 0.62rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-top: auto;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      z-index: 5;
-      align-self: flex-start;
-      margin-bottom: 4px;
-      backdrop-filter: blur(4px);
-    }
-
-    .preview-badge:hover {
-      background: rgba(0, 229, 255, 0.2);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.25);
-      border-color: rgba(0, 229, 255, 0.5);
-    }
-
-    .p-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--cyan);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--cyan);
-      animation: pulse 2s infinite;
-    }
-
     #proj-modal {
       position: fixed;
       inset: 0;
@@ -2202,148 +2107,10 @@
       transform: rotate(90deg) scale(1.1);
     }
 
-    .m-body {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      height: 100%;
-      overflow: hidden;
-    }
-
     @media (max-width: 900px) {
-      .m-body {
-        grid-template-columns: 1fr;
-        overflow-y: auto;
-      }
-
       .m-card {
         max-height: 92vh;
       }
-    }
-
-    .m-vid-sec {
-      background: #000;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      aspect-ratio: 16/10;
-    }
-
-    @media (max-width: 900px) {
-      .m-vid-sec {
-        aspect-ratio: 16/9;
-      }
-    }
-
-    .m-vid-sec video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .m-info-sec {
-      padding: 48px;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      overflow-y: auto;
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .m-title {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      margin: 0;
-      line-height: 1.1;
-    }
-
-    .m-tabs {
-      display: flex;
-      gap: 28px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .m-tab {
-      padding: 12px 0;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--muted2);
-      cursor: pointer;
-      position: relative;
-      transition: color 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .m-tab.active {
-      color: var(--cyan);
-    }
-
-    .m-tab::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--cyan);
-      transition: width 0.3s ease;
-      box-shadow: 0 0 10px var(--cyan);
-    }
-
-    .m-tab.active::after {
-      width: 100%;
-    }
-
-    .m-pane {
-      display: none;
-      animation: mFadeIn 0.5s ease;
-      line-height: 1.75;
-      font-size: 0.98rem;
-      color: var(--muted2);
-    }
-
-    .m-pane.active {
-      display: block;
-    }
-
-    @keyframes mFadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .m-footer {
-      margin-top: auto;
-      padding-top: 10px;
-    }
-
-    .m-btn-github {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--text);
-      color: var(--bg);
-      padding: 16px 32px;
-      border-radius: 14px;
-      font-weight: 800;
-      text-decoration: none;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      font-size: 0.9rem;
-    }
-
-    .m-btn-github:hover {
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-      filter: brightness(1.1);
     }
 
     .proj-card-featured {
@@ -3222,30 +2989,6 @@
       width: 100%;
     }
 
-    .m-pane ul {
-      list-style: none;
-      padding: 0;
-      margin: 16px 0;
-    }
-
-    .m-pane li {
-      margin-bottom: 12px;
-      position: relative;
-      padding-left: 24px;
-    }
-
-    .m-pane li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--cyan);
-      font-weight: 800;
-    }
-
-    .m-pane strong {
-      color: var(--text);
-    }
-
     .m-pane-static {
       display: block;
       line-height: 1.8;
@@ -3852,29 +3595,6 @@
       font-size: 1rem;
     }
 
-    #contact .ct-primary {
-      width: min(100%, 380px);
-      min-height: 56px;
-      border-radius: 12px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      font-weight: 800;
-      letter-spacing: .02em;
-      color: #02131b;
-      background: linear-gradient(135deg, var(--cyan), #00b8d9);
-      border: 1px solid rgba(0, 229, 255, 0.35);
-      box-shadow: 0 12px 30px rgba(0, 229, 255, 0.28);
-      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-    }
-
-    #contact .ct-primary:hover {
-      box-shadow: 0 18px 34px rgba(0, 229, 255, 0.33);
-      filter: brightness(1.03);
-    }
-
     #contact .ct-card {
       margin: 0;
       width: 100%;
@@ -4402,10 +4122,6 @@
         order: 2;
       }
 
-      #contact .ct-primary {
-        width: 100%;
-      }
-
       .ct-card {
         margin-top: 26px;
         padding: 20px;
@@ -4464,13 +4180,6 @@
         gap: 6px;
       }
 
-      @media(max-width:340px) {
-        .hero-eyebrow {
-          font-size: .44rem;
-          letter-spacing: .02em;
-        }
-      }
-
       .badge-featured::before {
         width: 6px;
         height: 6px;
@@ -4504,6 +4213,13 @@
       .github-icon-btn {
         width: 46px;
         height: 46px;
+      }
+    }
+
+    @media (max-width: 340px) {
+      .hero-eyebrow {
+        font-size: .44rem;
+        letter-spacing: .02em;
       }
     }
 
@@ -5419,10 +5135,6 @@
   <canvas id="nw"></canvas>
 
   <script>
-    function openModal(e) {
-      openProjectModal('autograder', e);
-    }
-
     let modalMediaSources = [];
     let modalMediaIndex = 0;
     let modalMediaAutoplay = null;
@@ -5754,15 +5466,6 @@
       document.body.style.overflow = '';
     }
 
-    function switchTab(e, tabId) {
-      const tabs = document.querySelectorAll('.m-tab');
-      const panes = document.querySelectorAll('.m-pane');
-      tabs.forEach(t => t.classList.remove('active'));
-      panes.forEach(p => p.classList.remove('active'));
-      e.currentTarget.classList.add('active');
-      document.getElementById(tabId).classList.add('active');
-    }
-
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeModal();
     });
@@ -5773,7 +5476,7 @@
       if (vid) {
         card.addEventListener('mouseenter', () => {
           if (vid.src && vid.src !== window.location.href) {
-            vid.play().catch(e => console.log('Video play failed:', e));
+            vid.play().catch(() => { });
           }
         });
         card.addEventListener('mouseleave', () => {
@@ -5788,14 +5491,14 @@
     const themeToggle = document.getElementById('themeToggle');
     const themeLabel = document.getElementById('themeLabel');
     if (themeToggle && themeLabel) {
-      const applyTheme = (theme, persist = true) => {
+      const applyTheme = (theme) => {
         document.documentElement.dataset.theme = theme;
         themeLabel.textContent = theme === 'light' ? 'Light' : 'Dark';
         themeToggle.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
       };
 
       const current = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
-      applyTheme(current, false);
+      applyTheme(current);
 
       themeToggle.addEventListener('click', () => {
         const currentTheme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
@@ -5807,7 +5510,7 @@
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
     if (hasFinePointer && !prefersReducedMotion) {
-      document.querySelectorAll('.hero-cta .btn-a, .hero-cta .btn-b').forEach(btn => {
+      document.querySelectorAll('.hero-cta .btn-a').forEach(btn => {
         let magTicking = false;
         btn.addEventListener('mousemove', e => {
           if (!magTicking) {
@@ -5882,8 +5585,6 @@
 
     let lastNavScroll = 0;
     let hiddenNav = false;
-    let lastScrollY = window.scrollY;
-    let lastScroll = window.scrollY; // Shared for IntersectionObservers
     let ticking = false;
 
     function updateScrollLogic() {
@@ -5909,9 +5610,6 @@
       if (orb1) orb1.style.transform = `translateY(${y * 0.2}px)`;
       if (orb2) orb2.style.transform = `translateY(${y * 0.12}px)`;
 
-      // Update state for other observers
-      lastScroll = y;
-      lastScrollY = y;
       ticking = false;
     }
 
@@ -6283,10 +5981,7 @@
       const fullViewBtn = document.getElementById('fullViewBtn');
       const docClose = document.getElementById('docClose');
 
-      if (!docModal || !docBody || !docClose) {
-        console.error("Document Preview Modal elements not found!");
-        return;
-      }
+      if (!docModal || !docBody || !docClose) return;
 
       function openPreview(url, title, event) {
         if (event) event.preventDefault();
@@ -6337,8 +6032,6 @@
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closePreview();
       });
-
-      console.log("Document Preview Logic Initialized");
     })();
   </script>
 </body>
