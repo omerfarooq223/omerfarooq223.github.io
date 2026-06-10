@@ -347,9 +347,9 @@
     const prompts = [
       { text: "Umar's Background", featured: true },
       { text: "AutoGrader Project", featured: false },
-      { text: "Agentic AI Experience", featured: false },
-      { text: "Skills Audit", featured: false },
-      { text: "Contact Information", featured: false }
+      { text: "SHAP Agentic IDS", featured: false },
+      { text: "FireWatch AI Project", featured: false },
+      { text: "Skills & Tech Stack", featured: false }
     ];
 
     function renderSuggestions() {
