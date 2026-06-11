@@ -29,7 +29,6 @@
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
   <style>
     :root {
@@ -344,7 +343,13 @@
       height: 100vh;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.45;
+      opacity: 0.67;
+      mix-blend-mode: screen;
+    }
+
+    html[data-theme="light"] #nw {
+      opacity: 0.62;
+      mix-blend-mode: normal;
     }
 
     @property --border-angle {
@@ -692,7 +697,7 @@
 
     .hero-wrap {
       position: relative;
-      overflow: visible;
+      overflow: clip;
       min-height: 100vh;
     }
 
@@ -1494,6 +1499,11 @@
 
     #education {
       position: relative;
+    }
+
+    #experience {
+      overflow: clip;
+      contain: paint;
     }
 
     #education .edu-grid {
@@ -4481,7 +4491,7 @@
       <p class="hero-sub">BS Artificial Intelligence student at <strong style="color:var(--text)">UMT</strong>
         building autonomous AI agents, ML pipelines and intelligent automation that ships beyond the classroom.</p>
       <div class="hero-badges">
-        <a href="docs/Transcript.pdf" target="_blank" class="bdg bc">CGPA 3.81 / 4.0</a>
+        <span class="bdg bc">CGPA 3.81 / 4.0</span>
         <span class="bdg ba">70% Scholarship</span>
         <span class="bdg bp">Panaversity AI</span>
         <a href="docs/Dean_Award.webp" target="_blank" class="bdg bg2">Dean's Award</a>
@@ -4574,7 +4584,7 @@
           <div class="edu-sc">BS Artificial Intelligence</div>
           <div class="edu-dg">UMT, Lahore</div>
           <div class="edu-bs">
-            <a href="docs/Transcript.pdf" target="_blank" class="bdg bc">CGPA 3.81 / 4.0</a><span class="bdg ba">70%
+            <span class="bdg bc">CGPA 3.81 / 4.0</span><span class="bdg ba">70%
               Scholarship</span>
             <a href="docs/Dean_Award.webp" target="_blank" class="bdg bg2">Dean's Award</a><a
               href="docs/Rector_Award.webp" target="_blank" class="bdg br">Rector's Award</a>
@@ -4586,7 +4596,7 @@
           <div class="edu-sc">FSc Pre-Medical</div>
           <div class="edu-dg">Punjab Group of Colleges (PGC)</div>
           <div class="edu-bs">
-            <a href="docs/FSC_Marks.pdf" target="_blank" class="bdg bp">970 Marks</a><span
+            <span class="bdg bp">970 Marks</span><span
               class="bdg bp">88.2%</span><span class="bdg bp">50%
               Scholarship</span>
           </div>
@@ -4596,9 +4606,8 @@
           <div class="edu-sc">Matric (Science)</div>
           <div class="edu-dg">Iqra Huffaz Secondary School, Lahore</div>
           <div class="edu-bs">
-            <span class="bdg ba">Biology A+</span><span class="bdg ba">Chemistry A+</span><a
-              href="docs/Matric_Marks.pdf" target="_blank" class="bdg ba">1085
-              Marks</a><span class="bdg ba">98.6%</span>
+            <span class="bdg ba">Biology A+</span><span class="bdg ba">Chemistry A+</span><span class="bdg ba">1085
+              Marks</span><span class="bdg ba">98.6%</span>
           </div>
         </div>
       </div>
@@ -5746,106 +5755,138 @@
       });
     }
 
-    // ── THREE.JS NEURAL NETWORK ──
+    // ── AMBIENT FLOW BACKGROUND ──
     const cvsNode = document.getElementById('nw');
     if (cvsNode) {
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ canvas: cvsNode, alpha: true, antialias: true });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      const ctx = cvsNode.getContext('2d', { alpha: true });
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const pointer = { x: 0, y: 0 };
+      const motes = [];
+      let w = 0;
+      let h = 0;
+      let dpr = 1;
+      let frame = 0;
 
-      const group = new THREE.Group();
-      scene.add(group);
-
-      const count = window.innerWidth < 800 ? 80 : 250;
-      const positions = new Float32Array(count * 3);
-      const velocities = new Float32Array(count * 3);
-      for (let i = 0; i < count * 3; i++) {
-        positions[i] = (Math.random() - 0.4) * 15;
-        velocities[i] = (Math.random() - 0.5) * 0.024;
+      function palette() {
+        const light = document.documentElement.dataset.theme === 'light';
+        return light
+          ? ['rgba(3,105,161,.42)', 'rgba(67,56,202,.34)', 'rgba(190,24,93,.30)', 'rgba(180,83,9,.26)']
+          : ['rgba(0,229,255,.22)', 'rgba(168,85,247,.18)', 'rgba(244,114,182,.14)', 'rgba(251,191,36,.10)'];
       }
 
-      const geometry = new THREE.BufferGeometry();
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      function resetBackground() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        cvsNode.width = Math.floor(w * dpr);
+        cvsNode.height = Math.floor(h * dpr);
+        cvsNode.style.width = `${w}px`;
+        cvsNode.style.height = `${h}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const particleColor = () => document.documentElement.dataset.theme === 'light' ? 0x0369a1 : 0x00e5ff;
-      const lineColor = () => document.documentElement.dataset.theme === 'light' ? 0x4338ca : 0xa855f7;
-
-      const material = new THREE.PointsMaterial({
-        size: 0.05,
-        color: particleColor(),
-        transparent: true,
-        opacity: document.documentElement.dataset.theme === 'light' ? 0.9 : 0.6
-      });
-
-      const points = new THREE.Points(geometry, material);
-      group.add(points);
-
-      // Lines
-      const lineGeometry = new THREE.BufferGeometry();
-      const lineMaterial = new THREE.LineBasicMaterial({
-        color: lineColor(),
-        transparent: true,
-        opacity: 0.15
-      });
-      const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
-      group.add(lineMesh);
-
-      camera.position.z = 5;
-
-      let mouseX = 0, mouseY = 0;
-      document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-      });
-
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-
-      function animate() {
-        requestAnimationFrame(animate);
-
-        const posArray = geometry.attributes.position.array;
-        for (let i = 0; i < count * 3; i++) {
-          posArray[i] += velocities[i];
-          if (posArray[i] > 5 || posArray[i] < -5) velocities[i] *= -1;
+        motes.length = 0;
+        const colors = palette();
+        const light = document.documentElement.dataset.theme === 'light';
+        const moteCount = w < 800 ? (light ? 38 : 24) : (light ? 82 : 52);
+        for (let i = 0; i < moteCount; i++) {
+          motes.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: (light ? 0.9 : 0.7) + Math.random() * (light ? 2.1 : 1.7),
+            vx: -0.08 + Math.random() * 0.16,
+            vy: -0.05 - Math.random() * 0.11,
+            color: colors[i % colors.length],
+            pulse: Math.random() * Math.PI * 2,
+            halo: Math.random() > 0.84
+          });
         }
-        geometry.attributes.position.needsUpdate = true;
+      }
 
-        material.color.setHex(particleColor());
-        material.opacity = document.documentElement.dataset.theme === 'light' ? 1.0 : 0.6;
-        lineMaterial.color.setHex(lineColor());
-        lineMaterial.opacity = document.documentElement.dataset.theme === 'light' ? 0.45 : 0.15;
-
-        group.rotation.y += 0.003;
-        group.rotation.x += 0.0015;
-
-        group.rotation.y += (mouseX * 0.1 - group.rotation.y) * 0.05;
-        group.rotation.x += (-mouseY * 0.1 - group.rotation.x) * 0.05;
-
-        const linePos = [];
-        const breathingDist = Math.sin(Date.now() * 0.0015) * 0.4 + 1.8;
-        for (let i = 0; i < count; i++) {
-          for (let j = i + 1; j < count; j++) {
-            const dx = posArray[i * 3] - posArray[j * 3];
-            const dy = posArray[i * 3 + 1] - posArray[j * 3 + 1];
-            const dz = posArray[i * 3 + 2] - posArray[j * 3 + 2];
-            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-            if (dist < breathingDist) {
-              linePos.push(posArray[i * 3], posArray[i * 3 + 1], posArray[i * 3 + 2]);
-              linePos.push(posArray[j * 3], posArray[j * 3 + 1], posArray[j * 3 + 2]);
-            }
+      function drawMotes(time) {
+        motes.forEach((mote, i) => {
+          mote.x += mote.vx + Math.sin(time * 0.0007 + i) * 0.06;
+          mote.y += mote.vy;
+          if (mote.y < -20) {
+            mote.y = h + 20;
+            mote.x = Math.random() * w;
           }
-        }
-        lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePos, 3));
+          if (mote.x < -20) mote.x = w + 20;
+          if (mote.x > w + 20) mote.x = -20;
 
-        renderer.render(scene, camera);
+          const light = document.documentElement.dataset.theme === 'light';
+          const glow = (light ? 0.62 : 0.34) + Math.sin(time * 0.0014 + mote.pulse) * (light ? 0.22 : 0.16);
+          ctx.beginPath();
+          ctx.fillStyle = mote.color.replace(/[\d.]+\)$/g, `${Math.max(glow, 0.12)})`);
+          ctx.arc(mote.x + pointer.x * 10, mote.y + pointer.y * 6, mote.r, 0, Math.PI * 2);
+          ctx.fill();
+
+          if (mote.halo) {
+            const halo = ctx.createRadialGradient(mote.x, mote.y, 0, mote.x, mote.y, mote.r * 9);
+            halo.addColorStop(0, mote.color.replace(/[\d.]+\)$/g, light ? '.24)' : '.12)'));
+            halo.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.fillStyle = halo;
+            ctx.beginPath();
+            ctx.arc(mote.x, mote.y, mote.r * 9, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        });
       }
-      animate();
+
+      function drawAmbientGlows(time) {
+        const colors = palette();
+        const points = [
+          { x: w * (0.18 + pointer.x * 0.018), y: h * 0.24, r: Math.max(w, h) * 0.36, color: colors[0] },
+          { x: w * (0.78 + pointer.x * 0.014), y: h * 0.18, r: Math.max(w, h) * 0.30, color: colors[1] },
+          { x: w * 0.62, y: h * (0.74 + pointer.y * 0.018), r: Math.max(w, h) * 0.34, color: colors[2] }
+        ];
+
+        points.forEach((point, index) => {
+          const pulse = 1 + Math.sin(time * 0.0007 + index) * 0.08;
+          const glow = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, point.r * pulse);
+          const alphaA = document.documentElement.dataset.theme === 'light' ? '.22)' : '.085)';
+          const alphaB = document.documentElement.dataset.theme === 'light' ? '.09)' : '.032)';
+          glow.addColorStop(0, point.color.replace(/[\d.]+\)$/g, alphaA));
+          glow.addColorStop(0.48, point.color.replace(/[\d.]+\)$/g, alphaB));
+          glow.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = glow;
+          ctx.fillRect(0, 0, w, h);
+        });
+      }
+
+      function draw(time = 0) {
+        frame = requestAnimationFrame(draw);
+        ctx.clearRect(0, 0, w, h);
+
+        const bg = ctx.createRadialGradient(w * 0.58, h * 0.2, 0, w * 0.58, h * 0.2, Math.max(w, h) * 0.82);
+        const light = document.documentElement.dataset.theme === 'light';
+        bg.addColorStop(0, light ? 'rgba(3,105,161,.20)' : 'rgba(0,229,255,.078)');
+        bg.addColorStop(0.45, light ? 'rgba(67,56,202,.105)' : 'rgba(168,85,247,.048)');
+        bg.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, w, h);
+
+        ctx.globalCompositeOperation = 'lighter';
+        drawAmbientGlows(time);
+        drawMotes(time);
+        ctx.globalCompositeOperation = 'source-over';
+
+        if (reducedMotion) {
+          cancelAnimationFrame(frame);
+        }
+      }
+
+      document.addEventListener('mousemove', (event) => {
+        pointer.x = (event.clientX / window.innerWidth - 0.5) * 2;
+        pointer.y = (event.clientY / window.innerHeight - 0.5) * 2;
+      }, { passive: true });
+
+      new MutationObserver(resetBackground).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+      });
+      window.addEventListener('resize', resetBackground);
+      resetBackground();
+      draw();
     }
 
     const observer = new IntersectionObserver((entries) => {
