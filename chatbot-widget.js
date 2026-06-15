@@ -346,7 +346,8 @@
 
     const prompts = [
       { text: "Umar's Background", featured: true },
-      { text: "AutoGrader Project", featured: false },
+      { text: "Personal AI Employee", featured: false },
+      { text: "PhishGuard AI", featured: false },
       { text: "SHAP Agentic IDS", featured: false },
       { text: "FireWatch AI Project", featured: false },
       { text: "Skills & Tech Stack", featured: false }

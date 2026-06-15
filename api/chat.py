@@ -32,7 +32,7 @@ PORTFOLIO_TOPICS = {
     "nexusml", "urduplanner", "solana", "jira", "slack", "n8n",
     "shap", "ids", "intrusion", "langgraph", "langchain",
     "yolo", "opencv", "computer vision", "nlp", "react", "docker",
-    "personal ai employee", "mcp", "gmail", "playwright",
+    "personal ai employee", "ai employee vault", "mcp", "gmail", "playwright",
     "peer tutoring", "grasp", "shopify", "dispatch",
     "resume", "cv", "about", "who", "what", "tell", "describe",
     "help", "hello", "hi", "hey", "thanks", "thank"
@@ -149,17 +149,17 @@ Use ONLY the knowledge provided below. Do NOT fabricate information.
 4. SMZ Dispatch Services (Feb 2024 – Apr 2024): Sales & Cross-Cultural Communication, Lahore. Real-time coordination with US-based clients.
 
 === PROJECTS (ordered by importance) ===
-1. **AutoGrader Agent** [Featured, 2026] — Comprehensive academic evaluation agent with integrated vision analysis for diagrams, dual-similarity plagiarism detection, and automated rubric generation. Generates well-formatted Excel sheets for students and class reports. Tech: Python, Groq LLaMA 3.3, PyMuPDF, openpyxl.
-2. **Personal AI Employee** [2026] — Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation, featuring a continuous reasoning loop and MCP-style tool integration. Tech: Claude Code, Flask, Gmail API, Playwright.
-3. **CareerPilot: AI CTO** [2026] — Autonomous Observe-Analyze-Plan agent that audits repositories, tracks hirability scores, and delivers continuous weekly coaching through an interactive chat interface. Tech: FastAPI, SQLite, GitHub Actions, MCP.
-4. **SHAP-Explained Agentic IDS** [2026] — Hybrid intrusion detection system combining Random Forest classification, SHAP feature explanations, and LangGraph-based verification with autonomous red teaming. Tech: SHAP, LangGraph, Flask, React.
-5. **FireWatch AI** [2026] — Autonomous YOLOv8-powered safety system that detects and segments fire/smoke in real-time and triggers agentic incident response protocols along with RAG implemented chatbot. Tech: FastAPI, YOLOv8l, React, RAG, Gmail API.
-6. **AutoResearch Agent** [2026] — Autonomous research engine that performs multi-source web synthesis and generates professional PDF reports. Tech: LLMs, Groq, Tavily, PDF.
-7. **UrduPlanner Agent** [2026] — Specialized NLP pipeline performing intelligent OCR reconstruction for mangled text and RTL alignment. Tech: OCR, Groq, NLP, Python.
+1. **Personal AI Employee** [Featured, 2026] — Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation, featuring a continuous reasoning loop and MCP-style tool integration. Tech: Claude Code, Flask, Gmail API, Playwright.
+2. **AutoGrader Agent** [2026] — Comprehensive academic evaluation agent with integrated vision analysis for diagrams, dual-similarity plagiarism detection, and automated rubric generation. Generates well-formatted Excel sheets for students and class reports. Tech: Python, Groq LLaMA 3.3, PyMuPDF, openpyxl.
+3. **SHAP-Explained Agentic IDS** [2026] — Hybrid intrusion detection system combining Random Forest classification, SHAP feature explanations, and LangGraph-based verification with autonomous red teaming. Tech: SHAP, LangGraph, Flask, React.
+4. **PhishGuard AI** [2026] — Chrome extension and FastAPI backend that detects phishing emails with heuristic feature extraction, Hugging Face inference support, and Groq LLM risk analysis. Tech: FastAPI, Chrome Extension, Groq, Hugging Face.
+5. **CareerPilot: AI CTO** [2026] — Autonomous Observe-Analyze-Plan agent that audits repositories, tracks hirability scores, and delivers continuous weekly coaching through an interactive chat interface. Tech: FastAPI, SQLite, GitHub Actions, MCP.
+6. **FireWatch AI** [2026] — Autonomous YOLOv8-powered safety system that detects and segments fire/smoke in real-time and triggers agentic incident response protocols along with RAG implemented chatbot. Tech: FastAPI, YOLOv8l, React, RAG, Gmail API.
+7. **AutoResearch Agent** [2026] — Autonomous research engine that performs multi-source web synthesis and generates professional PDF reports. Tech: LLMs, Groq, Tavily, PDF.
 8. **Parking Detection System** [2026] — Real-time vision system using YOLOv8m and DBSCAN spatial clustering to rank available parking spots based on proximity, density, and accessibility. Includes a HuggingFace API Chatbot. Tech: YOLOv8m, Gradio, OpenCV, Image Processing.
-9. **NexusML: MLOps** — Production-ready inference pipeline featuring DistilBERT benchmarks and a 1TB scaling strategy. Tech: DistilBERT, FastAPI, Docker, Spark.
-10. **Language Recognition** — Logistic regression classifier built from scratch with custom feature engineering to identify languages from text, with interactive inference UI. Tech: Python, Scikit-learn, Jupyter, NLP.
-11. **PhishGuard AI** — Chrome extension and FastAPI backend that detects phishing emails with heuristic feature extraction, Hugging Face inference support, and Groq LLM risk analysis. Tech: FastAPI, Chrome Extension, Groq, Hugging Face.
+9. **UrduPlanner Agent** [2026] — Specialized NLP pipeline performing intelligent OCR reconstruction for mangled text and RTL alignment. Tech: OCR, Groq, NLP, Python.
+10. **NexusML: MLOps** — Production-ready inference pipeline featuring DistilBERT benchmarks and a 1TB scaling strategy. Tech: DistilBERT, FastAPI, Docker, Spark.
+11. **Language Recognition** — Logistic regression classifier built from scratch with custom feature engineering to identify languages from text, with interactive inference UI. Tech: Python, Scikit-learn, Jupyter, NLP.
 12. **Solana Trading Agent** — Modular skills-based trading agent for the Solana ecosystem, featuring automated risk management math, price sentinel monitoring, and secure trade logging. Tech: Claude Code, Solana, Web3.
 13. **Jira–Slack Integration** — Advanced n8n workflows for cross-platform issue tracking and automated notifications, optimizing team communication through REST API orchestration. Tech: n8n, Jira, Slack, REST APIs.
 

@@ -1868,7 +1868,7 @@
       box-shadow: 0 32px 64px rgba(0, 0, 0, .45), 0 0 20px rgba(0, 229, 255, 0.15);
     }
 
-    #autograder-card .pill {
+    #aiemployee-card .pill {
       font-size: 0.78rem;
     }
 
@@ -4057,62 +4057,246 @@
     }
 
 
-    .term {
-      background: var(--termBg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      margin-bottom: 40px;
-      overflow: hidden;
-      font-family: 'IBM Plex Mono', monospace;
-      box-shadow: 0 24px 48px rgba(0, 0, 0, .38);
-      transform: translateZ(0);
-    }
-
-    .tb {
-      background: var(--termTbBg);
-      padding: 10px 16px;
+    /* ── Certifications ── */
+    .cert-section-title {
       display: flex;
       align-items: center;
-      gap: 6px;
-      border-bottom: 1px solid var(--border);
+      gap: 12px;
+      margin-bottom: 32px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted2);
+      font-weight: 600;
     }
 
-    .t-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
+    .cert-section-title::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
       flex-shrink: 0;
     }
 
-    .tw {
-      padding: 20px;
-      color: var(--text);
-      font-size: 0.8rem;
-      line-height: 1.6;
-      min-height: 160px;
-    }
-
-    .tw .cmd {
+    .cert-section-title .cert-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 229, 255, 0.08);
+      border: 1px solid rgba(0, 229, 255, 0.15);
       color: var(--cyan);
+      font-size: 0.62rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 4px;
     }
 
-    .tw .str {
-      color: var(--pink);
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
     }
 
-    .tw .cmt {
+    .cert-card {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--cardGrad);
+      cursor: pointer;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateZ(0);
+    }
+
+    .cert-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 28px 56px rgba(0, 0, 0, 0.35),
+                  0 0 0 1px rgba(0, 229, 255, 0.12);
+    }
+
+    .cert-card-img-wrap {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .cert-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cert-card:hover .cert-card-img {
+      transform: scale(1.04);
+    }
+
+    .cert-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(7, 8, 15, 0.85) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .cert-card:hover .cert-card-overlay {
+      opacity: 1;
+    }
+
+    .cert-card-overlay span {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cert-card-overlay svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--cyan);
+    }
+
+    .cert-card-info {
+      padding: 18px 20px 20px;
+    }
+
+    .cert-card-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+
+    .cert-card-issuer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.74rem;
       color: var(--muted2);
+      font-weight: 500;
     }
 
-    .tw-cur {
-      display: inline-block;
-      width: 8px;
-      height: 14px;
-      background: var(--cyan);
-      vertical-align: middle;
-      animation: pulse 1s infinite;
+    .cert-card-issuer .cert-issuer-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--purple);
+      flex-shrink: 0;
+    }
+
+    /* Lightbox */
+    .cert-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .cert-lightbox.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .cert-lightbox-inner {
+      position: relative;
+      max-width: 88vw;
+      max-height: 86vh;
+      transform: scale(0.92);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cert-lightbox.is-open .cert-lightbox-inner {
+      transform: scale(1);
+    }
+
+    .cert-lightbox-img {
+      max-width: 100%;
+      max-height: 86vh;
+      border-radius: 12px;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.55);
+    }
+
+    .cert-lightbox-close {
+      position: absolute;
+      top: -42px;
+      right: 0;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .cert-lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.16);
+      transform: rotate(90deg);
+    }
+
+    .cert-lightbox-caption {
+      text-align: center;
+      margin-top: 16px;
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    html[data-theme="light"] .cert-card {
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    html[data-theme="light"] .cert-card:hover {
+      box-shadow: 0 22px 48px rgba(15, 23, 42, 0.14),
+                  0 0 0 1px rgba(14, 165, 233, 0.18);
+    }
+
+    html[data-theme="light"] .cert-card-overlay {
+      background: linear-gradient(180deg, transparent 40%, rgba(255, 255, 255, 0.92) 100%);
+    }
+
+    html[data-theme="light"] .cert-card-overlay span {
+      color: #1e293b;
+    }
+
+    html[data-theme="light"] .cert-section-title .cert-count {
+      background: rgba(14, 165, 233, 0.08);
+      border-color: rgba(14, 165, 233, 0.18);
+      color: #0ea5e9;
+    }
+
+    @media (max-width: 480px) {
+      .cert-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media(max-width:480px) {
@@ -4701,35 +4885,33 @@
         <span class="w"><span class="wi"><span class="gt4">built</span></span></span>
       </h2>
       <div class="proj-bento stg">
-        <div class="proj-card pcc proj-card-featured proj-featured premium-glow-card" id="autograder-card"
+<div class="proj-card pcc proj-card-featured proj-featured premium-glow-card" id="aiemployee-card"
           style="order: 0;">
-          <div class="p-visual" onclick="openProjectModal('autograder', event)">
-            <img src="images/autograder.webp" alt="AutoGrader Agent preview" width="1400" height="757"
+          <div class="p-visual" onclick="openProjectModal('aiemployee', event)">
+            <img src="images/aiemployee-dashboard.webp" alt="Personal AI Employee dashboard preview" width="1400" height="800"
               fetchpriority="high" />
             <span class="pnum">001</span>
             <div class="badge-featured">Featured Project</div>
             <div class="badge-year">2026</div>
-            <button class="preview-hover-btn" type="button" onclick="openProjectModal('autograder', event)">View
+            <button class="preview-hover-btn" type="button" onclick="openProjectModal('aiemployee', event)">View
               Details</button>
           </div>
           <div class="p-info">
             <div class="p-tags-top">
               <span class="tag-bubble tb-c">Agentic AI</span>
-              <span class="tag-bubble tb-p">Multimodal Vision</span>
+              <span class="tag-bubble tb-p">HITL Approval</span>
               <span class="tag-bubble tb-a">Automation</span>
             </div>
-            <h3 class="p-title-large">AutoGrader Agent</h3>
-            <p class="p-desc-large">Comprehensive academic evaluation agent featuring <strong>integrated vision
-                analysis</strong> for diagrams, dual-similarity plagiarism detection, and automated rubric generation.
-              It then generates a well-formatted and design excel sheets for the students and overall class report.
-            </p>
+            <h3 class="p-title-large">Personal AI Employee</h3>
+            <p class="p-desc-large">Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation,
+              featuring a continuous reasoning loop and MCP-style tool integration.</p>
             <div class="pstk">
-              <span class="pill">Python</span><span class="pill">Groq LLaMA 3.3</span><span
-                class="pill">PyMuPDF</span><span class="pill">openpyxl</span>
+              <span class="pill">Claude Code</span><span class="pill">Flask</span><span
+                class="pill">Gmail API</span><span class="pill">Playwright</span>
             </div>
             <div class="p-actions-row">
-              <button class="shimmer-btn" onclick="openProjectModal('autograder', event)">View Details</button>
-              <a href="https://github.com/omerfarooq223/AutoGrader-Agent" target="_blank" class="github-icon-btn"
+              <button class="shimmer-btn" onclick="openProjectModal('aiemployee', event)">View Details</button>
+              <a href="https://github.com/omerfarooq223/personal-ai-employee" target="_blank" class="github-icon-btn"
                 aria-label="GitHub Repository">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path
@@ -4739,54 +4921,24 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pca proj-card-trio premium-glow-card" style="order: 6;" data-project="urduplanner"
-          onclick="openProjectModal('urduplanner', event)">
+<div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 1;" data-project="autograder"
+          onclick="openProjectModal('autograder', event)">
           <div class="p-visual">
-            <img src="images/urduplanner.webp" alt="UrduPlanner Agent preview" loading="lazy" decoding="async"
-              width="1400" height="792" />
-            <span class="pnum">007</span>
-            <div class="image-label amber">NLP Engineering</div>
-            <div class="badge-year">2026</div>
-            <button class="preview-hover-btn" type="button" onclick="openProjectModal('urduplanner', event)">View
-              Details</button>
-          </div>
-          <div class="p-info">
-            <h3 class="p-title-large">UrduPlanner Agent</h3>
-            <p class="p-desc-large">Specialized NLP pipeline performing intelligent OCR reconstruction for mangled text
-              and RTL alignment.</p>
-            <div class="pstk">
-              <span class="pill">OCR</span><span class="pill">Groq</span><span class="pill">NLP</span><span
-                class="pill">Python</span>
-              <a href="https://github.com/omerfarooq223/UrduPlanner-Agent" target="_blank" rel="noopener noreferrer"
-                onclick="event.stopPropagation()" class="github-icon-btn" aria-label="GitHub Repository"
-                style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 1;" data-project="aiemployee"
-          onclick="openProjectModal('aiemployee', event)">
-          <div class="p-visual">
-            <img src="images/aiemployee-dashboard.webp" alt="Personal AI Employee dashboard preview" loading="lazy"
-              decoding="async" width="1400" height="800" />
+            <img src="images/autograder.webp" alt="AutoGrader Agent preview" loading="lazy"
+              decoding="async" width="1400" height="757" />
             <span class="pnum">002</span>
             <div class="image-label cyan">Agentic AI</div>
             <div class="badge-year">2026</div>
-            <button class="preview-hover-btn" type="button" onclick="openProjectModal('aiemployee', event)">View
+            <button class="preview-hover-btn" type="button" onclick="openProjectModal('autograder', event)">View
               Details</button>
           </div>
           <div class="p-info">
-            <h3 class="p-title-large">Personal AI Employee</h3>
-            <p class="p-desc-large">Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation,
-              featuring a continuous reasoning loop and MCP-style tool integration.</p>
+            <h3 class="p-title-large">AutoGrader Agent</h3>
+            <p class="p-desc-large">Comprehensive academic evaluation agent featuring integrated vision analysis for diagrams, dual-similarity plagiarism detection, and automated rubric generation.</p>
             <div class="pstk">
-              <span class="pill pill-cyan">Claude Code</span><span class="pill pill-cyan">Flask</span><span
-                class="pill pill-cyan">Gmail API</span><span class="pill pill-cyan">Playwright</span>
-              <a href="https://github.com/omerfarooq223/personal-ai-employee" target="_blank" rel="noopener noreferrer"
+              <span class="pill pill-cyan">Python</span><span class="pill pill-cyan">Groq LLaMA 3.3</span><span
+                class="pill pill-cyan">PyMuPDF</span><span class="pill pill-cyan">openpyxl</span>
+              <a href="https://github.com/omerfarooq223/AutoGrader-Agent" target="_blank" rel="noopener noreferrer"
                 onclick="event.stopPropagation()" class="github-icon-btn" aria-label="GitHub Repository"
                 style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -4797,41 +4949,12 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 2;" data-project="careerpilot"
-          onclick="openProjectModal('careerpilot', event)">
-          <div class="p-visual">
-            <img src="images/careerpilot.webp" alt="CareerPilot Agent preview" loading="lazy" decoding="async"
-              width="1400" height="795" />
-            <span class="pnum">003</span>
-            <div class="image-label cyan">Agentic AI</div>
-            <div class="badge-year">2026</div>
-            <button class="preview-hover-btn" type="button" onclick="openProjectModal('careerpilot', event)">View
-              Details</button>
-          </div>
-          <div class="p-info">
-            <h3 class="p-title-large">CareerPilot: AI CTO</h3>
-            <p class="p-desc-large">Autonomous Observe-Analyze-Plan agent that audits repositories, tracks hirability
-              scores, and delivers continuous weekly coaching through an interactive chat interface.</p>
-            <div class="pstk">
-              <span class="pill pill-cyan">FastAPI</span><span class="pill pill-cyan">SQLite</span><span
-                class="pill pill-cyan">GitHub Actions</span><span class="pill pill-cyan">MCP</span>
-              <a href="https://github.com/omerfarooq223/CareerPilot-Agent" target="_blank" rel="noopener noreferrer"
-                onclick="event.stopPropagation()" class="github-icon-btn" aria-label="GitHub Repository"
-                style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 3;" data-project="shapids"
+<div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 2;" data-project="shapids"
           onclick="openProjectModal('shapids', event)">
           <div class="p-visual">
             <img src="images/shap-ids.webp" alt="SHAP-Explained Agentic IDS preview" loading="lazy"
               decoding="async" width="1400" height="790" />
-            <span class="pnum">004</span>
+            <span class="pnum">003</span>
             <div class="image-label cyan">Explainable Security</div>
             <div class="badge-year">2026</div>
             <button class="preview-hover-btn" type="button" onclick="openProjectModal('shapids', event)">View
@@ -4855,12 +4978,68 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pca proj-card-preview premium-glow-card" style="order: 4;" data-project="firewatch"
+        <div class="proj-card pcc proj-card-trio premium-glow-card" style="order: 3;" data-project="phishguard"
+          onclick="openProjectModal('phishguard', event)">
+          <div class="p-visual">
+            <img src="images/phishguard-ai.webp" alt="PhishGuard AI preview" loading="lazy" decoding="async"
+              width="1400" height="790" />
+            <span class="pnum">004</span>
+            <div class="image-label cyan">Cybersecurity</div>
+            <div class="badge-year">2026</div>
+            <button class="preview-hover-btn" type="button" onclick="openProjectModal('phishguard', event)">View
+              Details</button>
+          </div>
+          <div class="p-info">
+            <h3 class="p-title-large">PhishGuard AI</h3>
+            <p class="p-desc-large">Chrome extension and FastAPI backend that detects phishing emails with heuristic feature extraction and Groq LLM risk analysis.</p>
+            <div class="pstk">
+              <span class="pill">FastAPI</span><span class="pill">Groq</span><span class="pill">Chrome Extension</span>
+              <a href="https://github.com/omerfarooq223/PhishGuard-AI" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation()" class="github-icon-btn" aria-label="GitHub Repository"
+                style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+<div class="proj-card pcc proj-card-trio premium-glow-card" style="order: 4;" data-project="careerpilot"
+          onclick="openProjectModal('careerpilot', event)">
+          <div class="p-visual">
+            <img src="images/careerpilot.webp" alt="CareerPilot Agent preview" loading="lazy" decoding="async"
+              width="1400" height="795" />
+            <span class="pnum">005</span>
+            <div class="image-label cyan">Agentic AI</div>
+            <div class="badge-year">2026</div>
+            <button class="preview-hover-btn" type="button" onclick="openProjectModal('careerpilot', event)">View
+              Details</button>
+          </div>
+          <div class="p-info">
+            <h3 class="p-title-large">CareerPilot: AI CTO</h3>
+            <p class="p-desc-large">Autonomous Observe-Analyze-Plan agent that audits repositories, tracks hirability
+              scores, and delivers continuous weekly coaching through an interactive chat interface.</p>
+            <div class="pstk">
+              <span class="pill">FastAPI</span><span class="pill">SQLite</span><span
+                class="pill">GitHub Actions</span><span class="pill">MCP</span>
+              <a href="https://github.com/omerfarooq223/CareerPilot-Agent" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation()" class="github-icon-btn" aria-label="GitHub Repository"
+                style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+<div class="proj-card pca proj-card-trio premium-glow-card" style="order: 5;" data-project="firewatch"
           onclick="openProjectModal('firewatch', event)">
           <div class="p-visual">
             <img src="images/firewatch1.webp" alt="FireWatch AI preview" loading="lazy" decoding="async" width="1400"
               height="800" />
-            <span class="pnum">005</span>
+            <span class="pnum">006</span>
             <div class="image-label amber">Computer Vision</div>
             <div class="badge-year">2026</div>
             <button class="preview-hover-btn" type="button" onclick="openProjectModal('firewatch', event)">View
@@ -4872,9 +5051,9 @@
               fire/smoke in
               real-time and triggers agentic incident response protocols along with RAG implemented chatbot.</p>
             <div class="pstk">
-              <span class="pill pill-amber">FastAPI</span><span class="pill pill-amber">YOLOv8l</span><span
-                class="pill pill-amber">React</span><span class="pill pill-amber">RAG</span><span
-                class="pill pill-amber">GmailAPI</span>
+              <span class="pill">FastAPI</span><span class="pill">YOLOv8l</span><span
+                class="pill">React</span><span class="pill">RAG</span><span
+                class="pill">GmailAPI</span>
               <a href="https://github.com/omerfarooq223/Agentic-Fire-Detection" target="_blank"
                 rel="noopener noreferrer" onclick="event.stopPropagation()" class="github-icon-btn"
                 aria-label="GitHub Repository" style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
@@ -4886,12 +5065,12 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pcp proj-card-trio premium-glow-card" style="order: 5;" data-project="autoresearch"
+<div class="proj-card pcp proj-card-trio premium-glow-card" style="order: 6;" data-project="autoresearch"
           onclick="openProjectModal('autoresearch', event)">
           <div class="p-visual">
             <img src="images/autoresearchagent.webp" alt="AutoResearch Agent preview" loading="lazy" decoding="async"
               width="1400" height="654" />
-            <span class="pnum">006</span>
+            <span class="pnum">007</span>
             <div class="image-label agentic">Agentic AI</div>
             <div class="badge-year">2026</div>
             <button class="preview-hover-btn" type="button" onclick="openProjectModal('autoresearch', event)">View
@@ -4915,7 +5094,7 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pca proj-card-trio premium-glow-card" style="order: 7;" data-project="parking"
+<div class="proj-card pca proj-card-trio premium-glow-card" style="order: 7;" data-project="parking"
           onclick="openProjectModal('parking', event)">
           <div class="p-visual">
             <img src="images/parkingdetection2.webp" alt="Parking Detection System preview" loading="lazy"
@@ -4946,10 +5125,39 @@
             </div>
           </div>
         </div>
+<div class="proj-card pca proj-card-trio premium-glow-card" style="order: 8;" data-project="urduplanner"
+          onclick="openProjectModal('urduplanner', event)">
+          <div class="p-visual">
+            <img src="images/urduplanner.webp" alt="UrduPlanner Agent preview" loading="lazy" decoding="async"
+              width="1400" height="792" />
+            <span class="pnum">009</span>
+            <div class="image-label amber">NLP Engineering</div>
+            <div class="badge-year">2026</div>
+            <button class="preview-hover-btn" type="button" onclick="openProjectModal('urduplanner', event)">View
+              Details</button>
+          </div>
+          <div class="p-info">
+            <h3 class="p-title-large">UrduPlanner Agent</h3>
+            <p class="p-desc-large">Specialized NLP pipeline performing intelligent OCR reconstruction for mangled text
+              and RTL alignment.</p>
+            <div class="pstk">
+              <span class="pill">OCR</span><span class="pill">Groq</span><span class="pill">NLP</span><span
+                class="pill">Python</span>
+              <a href="https://github.com/omerfarooq223/UrduPlanner-Agent" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation()" class="github-icon-btn" aria-label="GitHub Repository"
+                style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
         <a href="https://github.com/omerfarooq223/nexus-ai-pipeline" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcc proj-span-6 hidden-project" style="order: 8;">
+          class="proj-card pcc proj-span-6 hidden-project" style="order: 10;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">009</span>
+          <span class="pnum">010</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -4964,9 +5172,9 @@
               class="pill">Docker</span><span class="pill">Spark</span></div>
         </a>
         <a href="https://github.com/omerfarooq223/language-recognition-logistic-regression" target="_blank"
-          rel="noopener noreferrer" class="proj-card pca proj-span-6 hidden-project" style="order: 9;">
+          rel="noopener noreferrer" class="proj-card pca proj-span-6 hidden-project" style="order: 11;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">010</span>
+          <span class="pnum">011</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -4981,7 +5189,7 @@
               class="pill">Jupyter</span><span class="pill">NLP</span></div>
         </a>
         <a href="https://github.com/omerfarooq223/solana-trading-agent-skills" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcp proj-span-6 hidden-project" style="order: 11;">
+          class="proj-card pcp proj-span-6 hidden-project" style="order: 12;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">012</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
@@ -4997,25 +5205,9 @@
           <div class="pstk"><span class="pill">Claude Code</span><span class="pill">Solana</span><span
               class="pill">Web3</span></div>
         </a>
-        <a href="https://github.com/omerfarooq223/PhishGuard-AI" target="_blank" rel="noopener noreferrer"
-          class="proj-card pcc proj-span-6 hidden-project" style="order: 10;">
-          <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">011</span>
-          <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-          </div>
-          <div class="ptg-row"><span class="ptg tc">AI Security</span></div>
-          <div class="pnm">PhishGuard AI</div>
-          <p class="pdsc">Chrome extension and FastAPI backend that detects phishing emails with heuristic feature
-            extraction, Hugging Face inference support, and Groq LLM risk analysis.</p>
-          <div class="pstk"><span class="pill">FastAPI</span><span class="pill">Chrome Extension</span><span
-              class="pill">Groq</span><span class="pill">Hugging Face</span></div>
-        </a>
+
         <a href="https://github.com/omerfarooq223/n8n-jira-slack" target="_blank" rel="noopener noreferrer"
-          class="proj-card pca proj-span-6 hidden-project" style="order: 12;">
+          class="proj-card pca proj-span-6 hidden-project" style="order: 13;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
           <span class="pnum">013</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
@@ -5052,15 +5244,65 @@
         <span class="w"><span class="wi">I</span></span>
         <span class="w"><span class="wi"><span class="gt4">work with</span></span></span>
       </h2>
-      <div class="term r3d">
-        <div class="tb">
-          <div class="t-dot" style="background:#ff5f56"></div>
-          <div class="t-dot" style="background:#ffbd2e"></div>
-          <div class="t-dot" style="background:#27c93f"></div>
-          <span
-            style="margin-left:auto;color:var(--muted2);font-size:0.6rem;font-family:'IBM Plex Mono',monospace;">user@agent:~</span>
+      <div class="cert-section-title">Certifications <span class="cert-count">3</span></div>
+      <div class="cert-grid">
+        <div class="cert-card glow-border hover-glow-only sk-p" onclick="openCertLightbox(0)" tabindex="0" role="button" aria-label="View AI Fluency for Students certificate">
+          <div class="border-glow"></div>
+          <div class="cert-card-img-wrap">
+            <img class="cert-card-img" src="images/cert-ai-fluency.png" alt="AI Fluency for Students – Anthropic" loading="lazy" />
+            <div class="cert-card-overlay">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                View Certificate
+              </span>
+            </div>
+          </div>
+          <div class="cert-card-info">
+            <div class="cert-card-name">AI Fluency for Students</div>
+            <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Anthropic</div>
+          </div>
         </div>
-        <div class="tw" id="tw"><span class="tw-cur" id="tw-c"></span></div>
+        <div class="cert-card glow-border hover-glow-only sk-c" onclick="openCertLightbox(1)" tabindex="0" role="button" aria-label="View Claude 101 certificate">
+          <div class="border-glow"></div>
+          <div class="cert-card-img-wrap">
+            <img class="cert-card-img" src="images/cert-claude-101.png" alt="Claude 101 – Anthropic" loading="lazy" />
+            <div class="cert-card-overlay">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                View Certificate
+              </span>
+            </div>
+          </div>
+          <div class="cert-card-info">
+            <div class="cert-card-name">Claude 101</div>
+            <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Anthropic</div>
+          </div>
+        </div>
+        <div class="cert-card glow-border hover-glow-only sk-pk" onclick="openCertLightbox(2)" tabindex="0" role="button" aria-label="View AI Foundations certificate">
+          <div class="border-glow"></div>
+          <div class="cert-card-img-wrap">
+            <img class="cert-card-img" src="images/cert-ai-foundations.png" alt="AI Foundations – OpenAI Academy" loading="lazy" />
+            <div class="cert-card-overlay">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                View Certificate
+              </span>
+            </div>
+          </div>
+          <div class="cert-card-info">
+            <div class="cert-card-name">AI Foundations</div>
+            <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>OpenAI Academy</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certificate Lightbox -->
+      <div class="cert-lightbox" id="certLightbox">
+        <div class="cert-lightbox-inner">
+          <button class="cert-lightbox-close" onclick="closeCertLightbox()" aria-label="Close">✕</button>
+          <img class="cert-lightbox-img" id="certLightboxImg" src="" alt="Certificate" />
+          <div class="cert-lightbox-caption" id="certLightboxCaption"></div>
+        </div>
       </div>
       <div class="sk-grid stg">
         <div class="sk-grp sk-c">
@@ -5319,6 +5561,28 @@
           '<strong>Groq LLaMA 3.3 70B:</strong> Optional high-speed generation for replies and posts.'
         ],
         github: 'https://github.com/omerfarooq223/personal-ai-employee'
+      },
+      phishguard: {
+        title: 'PhishGuard AI',
+        subtitle: 'Chrome Extension / FastAPI / Groq LLM · 2026',
+        media: 'images/phishguard-ai.webp',
+        alt: 'PhishGuard AI preview',
+        tags: ['Cybersecurity', 'FastAPI', 'Groq', 'Hugging Face'],
+        overview: [
+          'A Chrome extension and FastAPI backend that detects phishing emails with heuristic feature extraction, Hugging Face inference support, and Groq LLM risk analysis.'
+        ],
+        featuresTitle: 'Detailed Features',
+        features: [
+          '<strong>Heuristic Analysis:</strong> Extracts key risk features from email headers and body.',
+          '<strong>AI Verification:</strong> Uses Hugging Face models and Groq LLM to verify sender authenticity and content safety.'
+        ],
+        stackTitle: 'Technology Stack',
+        stack: [
+          '<strong>FastAPI:</strong> High-performance backend API.',
+          '<strong>Groq LLM & Hugging Face:</strong> Powers the risk analysis and natural language understanding.',
+          '<strong>Chrome Extension API:</strong> Seamlessly integrates with the user browser.'
+        ],
+        github: 'https://github.com/omerfarooq223/PhishGuard-AI'
       },
       parking: {
         title: 'Parking Detection System',
@@ -5898,37 +6162,34 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    const tw = document.getElementById('tw');
-    const twLinesText = [
-      { t: "> initializing Umar_Agent...", d: 30, k: "cmd" },
-      { t: "> Loading skills matrix... [Python, LLMs, Computer Vision]", d: 15, k: "cmt" },
-      { t: "> Injecting workflows...", d: 30, k: "cmd" },
-      { t: "> Status: ready for deployment.", d: 20, k: "str" }
+    /* ── Certification Lightbox ── */
+    const certData = [
+      { src: 'images/cert-ai-fluency.png', caption: 'AI Fluency for Students — Anthropic' },
+      { src: 'images/cert-claude-101.png', caption: 'Claude 101 — Anthropic' },
+      { src: 'images/cert-ai-foundations.png', caption: 'AI Foundations — OpenAI Academy' }
     ];
-    let lIdx = 0, cIdx = 0;
-    function typeTw() {
-      if (!tw) return;
-      if (lIdx >= twLinesText.length) return;
-      const ln = twLinesText[lIdx];
-      if (cIdx === 0) {
-        const p = document.createElement('div');
-        if (ln.k) p.className = ln.k;
-        tw.insertBefore(p, document.getElementById('tw-c'));
-      }
-      const p = tw.querySelectorAll('div')[lIdx];
-      p.textContent += ln.t[cIdx];
-      cIdx++;
-      if (cIdx >= ln.t.length) {
-        lIdx++; cIdx = 0;
-        setTimeout(typeTw, 400);
-      } else {
-        setTimeout(typeTw, ln.d);
-      }
+    function openCertLightbox(idx) {
+      const lb = document.getElementById('certLightbox');
+      const img = document.getElementById('certLightboxImg');
+      const cap = document.getElementById('certLightboxCaption');
+      if (!lb || !certData[idx]) return;
+      img.src = certData[idx].src;
+      cap.textContent = certData[idx].caption;
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
     }
-    const twObs = new IntersectionObserver(ents => {
-      if (ents[0].isIntersecting) { typeTw(); twObs.disconnect(); }
+    function closeCertLightbox() {
+      const lb = document.getElementById('certLightbox');
+      if (!lb) return;
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('certLightbox')?.addEventListener('click', function(e) {
+      if (e.target === this) closeCertLightbox();
     });
-    if (tw) twObs.observe(tw);
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeCertLightbox();
+    });
 
     const ebTicker = document.getElementById('ebTicker');
     const ebPhrases = ['Agentic AI/ML Engineer', 'Open for opportunities'];
