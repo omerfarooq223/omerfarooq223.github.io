@@ -29,7 +29,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"
+    integrity="sha384-0k1dj5tm+KUH/4vkNk/i90XsjDA8Ltmt+ybcrFoH4t0dgv/WZsPpVBnkhcroX8UL"
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
     :root {
       --bg: #07080f;
@@ -522,8 +524,9 @@
       display: none !important;
     }
 
-
-
+    .hidden-cert {
+      display: none !important;
+    }
 
     #bar {
       position: fixed;
@@ -4094,7 +4097,7 @@
 
     .cert-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 24px;
       margin-bottom: 48px;
     }
@@ -4127,7 +4130,7 @@
     .cert-card-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -4294,6 +4297,18 @@
     }
 
     @media (max-width: 480px) {
+      .cert-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .cert-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
       .cert-grid {
         grid-template-columns: 1fr;
       }
@@ -5244,12 +5259,12 @@
         <span class="w"><span class="wi">I</span></span>
         <span class="w"><span class="wi"><span class="gt4">work with</span></span></span>
       </h2>
-      <div class="cert-section-title">Certifications <span class="cert-count">3</span></div>
+      <div class="cert-section-title">Certifications <span class="cert-count">6</span></div>
       <div class="cert-grid">
         <div class="cert-card glow-border hover-glow-only sk-p" onclick="openCertLightbox(0)" tabindex="0" role="button" aria-label="View AI Fluency for Students certificate">
           <div class="border-glow"></div>
           <div class="cert-card-img-wrap">
-            <img class="cert-card-img" src="images/cert-ai-fluency.png" alt="AI Fluency for Students – Anthropic" loading="lazy" />
+            <img class="cert-card-img" src="docs/cert-new-2.webp" alt="AI Fluency for Students - Anthropic" loading="lazy" />
             <div class="cert-card-overlay">
               <span>
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -5265,7 +5280,7 @@
         <div class="cert-card glow-border hover-glow-only sk-c" onclick="openCertLightbox(1)" tabindex="0" role="button" aria-label="View Claude 101 certificate">
           <div class="border-glow"></div>
           <div class="cert-card-img-wrap">
-            <img class="cert-card-img" src="images/cert-claude-101.png" alt="Claude 101 – Anthropic" loading="lazy" />
+            <img class="cert-card-img" src="docs/cert-new-1.webp" alt="Claude 101 - Anthropic" loading="lazy" />
             <div class="cert-card-overlay">
               <span>
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -5278,10 +5293,26 @@
             <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Anthropic</div>
           </div>
         </div>
-        <div class="cert-card glow-border hover-glow-only sk-pk" onclick="openCertLightbox(2)" tabindex="0" role="button" aria-label="View AI Foundations certificate">
+        <div class="cert-card glow-border hover-glow-only sk-pk" onclick="openCertLightbox(2)" tabindex="0" role="button" aria-label="View Claude Code 101 certificate">
           <div class="border-glow"></div>
           <div class="cert-card-img-wrap">
-            <img class="cert-card-img" src="images/cert-ai-foundations.png" alt="AI Foundations – OpenAI Academy" loading="lazy" />
+            <img class="cert-card-img" src="docs/cert-new-3.webp" alt="Claude Code 101 - Anthropic" loading="lazy" />
+            <div class="cert-card-overlay">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                View Certificate
+              </span>
+            </div>
+          </div>
+          <div class="cert-card-info">
+            <div class="cert-card-name">Claude Code 101</div>
+            <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Anthropic</div>
+          </div>
+        </div>
+        <div class="cert-card glow-border hover-glow-only sk-g" onclick="openCertLightbox(3)" tabindex="0" role="button" aria-label="View AI Foundations certificate">
+          <div class="border-glow"></div>
+          <div class="cert-card-img-wrap">
+            <img class="cert-card-img" src="docs/cert-ai-foundations.webp" alt="AI Foundations - OpenAI Academy" loading="lazy" />
             <div class="cert-card-overlay">
               <span>
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -5294,6 +5325,48 @@
             <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>OpenAI Academy</div>
           </div>
         </div>
+        <div class="cert-card glow-border hover-glow-only sk-a hidden-cert" data-extra-cert onclick="openCertLightbox(4)" tabindex="0" role="button" aria-label="View AI Fluency: Framework & Foundations certificate">
+          <div class="border-glow"></div>
+          <div class="cert-card-img-wrap">
+            <img class="cert-card-img" src="docs/cert-s3jn6owcs6f6.webp" alt="AI Fluency: Framework & Foundations - Anthropic" loading="lazy" />
+            <div class="cert-card-overlay">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                View Certificate
+              </span>
+            </div>
+          </div>
+          <div class="cert-card-info">
+            <div class="cert-card-name">AI Fluency: Framework & Foundations</div>
+            <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Anthropic</div>
+          </div>
+        </div>
+        <div class="cert-card glow-border hover-glow-only sk-g hidden-cert" data-extra-cert onclick="openCertLightbox(5)" tabindex="0" role="button" aria-label="View Applied AI Foundations certificate">
+          <div class="border-glow"></div>
+          <div class="cert-card-img-wrap">
+            <img class="cert-card-img" src="docs/cert-rn2wppq639.webp" alt="Applied AI Foundations - OpenAI Academy" loading="lazy" />
+            <div class="cert-card-overlay">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                View Certificate
+              </span>
+            </div>
+          </div>
+          <div class="cert-card-info">
+            <div class="cert-card-name">Applied AI Foundations</div>
+            <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>OpenAI Academy</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="show-more-wrap">
+        <button class="btn-show-more" id="showMoreCerts" onclick="toggleMoreCerts()" aria-expanded="false">
+          <span>Show More Certificates</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
       </div>
 
       <!-- Certificate Lightbox -->
@@ -6164,9 +6237,12 @@
 
     /* ── Certification Lightbox ── */
     const certData = [
-      { src: 'images/cert-ai-fluency.png', caption: 'AI Fluency for Students — Anthropic' },
-      { src: 'images/cert-claude-101.png', caption: 'Claude 101 — Anthropic' },
-      { src: 'images/cert-ai-foundations.png', caption: 'AI Foundations — OpenAI Academy' }
+      { src: 'docs/cert-new-2.webp', caption: 'AI Fluency for Students - Anthropic' },
+      { src: 'docs/cert-new-1.webp', caption: 'Claude 101 - Anthropic' },
+      { src: 'docs/cert-new-3.webp', caption: 'Claude Code 101 - Anthropic' },
+      { src: 'docs/cert-ai-foundations.webp', caption: 'AI Foundations - OpenAI Academy' },
+      { src: 'docs/cert-s3jn6owcs6f6.webp', caption: 'AI Fluency: Framework & Foundations - Anthropic' },
+      { src: 'docs/cert-rn2wppq639.webp', caption: 'Applied AI Foundations - OpenAI Academy' }
     ];
     function openCertLightbox(idx) {
       const lb = document.getElementById('certLightbox');
@@ -6190,6 +6266,19 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeCertLightbox();
     });
+
+    /* ── Show More Certificates ── */
+    function toggleMoreCerts() {
+      const extraCerts = document.querySelectorAll('[data-extra-cert]');
+      const btn = document.getElementById('showMoreCerts');
+      const btnText = btn?.querySelector('span');
+      if (!btn || !btnText || !extraCerts.length) return;
+
+      const isExpanded = btn.classList.toggle('is-expanded');
+      btn.setAttribute('aria-expanded', String(isExpanded));
+      extraCerts.forEach(cert => cert.classList.toggle('hidden-cert', !isExpanded));
+      btnText.textContent = isExpanded ? 'Show Less' : 'Show More Certificates';
+    }
 
     const ebTicker = document.getElementById('ebTicker');
     const ebPhrases = ['Agentic AI/ML Engineer', 'Open for opportunities'];
@@ -6323,6 +6412,9 @@
     </div>
   </div>
 
+  <script>
+    window.PORTFOLIO_CHAT_API_URL = window.PORTFOLIO_CHAT_API_URL || '/api/chat';
+  </script>
   <script src="chatbot-widget.js"></script>
   <script>
     // Document Preview Logic

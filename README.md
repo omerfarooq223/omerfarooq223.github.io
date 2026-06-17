@@ -18,11 +18,34 @@ The site features a custom-built, highly dynamic user interface with a premium d
 
 ## 🚀 Key Features
 
-- **Interactive 3D Neural Network Background**: Built with **Three.js**, the hero section features a responsive and interactive particle network that reacts to cursor movement.
-- **AI-Powered Portfolio Chatbot**: A custom-built chatbot powered by **Groq API & LLaMA 3**, integrated via a secure FastAPI backend to answer questions about my projects, experience, and education contextually.
+- **Interactive 2D Canvas Ambient Flow Background**: A lightweight, responsive ambient particle flow in the hero section.
+- **AI-Powered Portfolio Chatbot**: A custom-built chatbot powered by **Groq API & LLaMA 3**, integrated via a secure FastAPI backend to answer questions about my projects, experience, education, certifications, and more.
+- **Certification Gallery**: Interactive gallery showcasing 6 professional AI certifications with lightbox preview — images stored as optimized WebP.
 - **Glassmorphism & Neon UI Design**: Uses extensive CSS custom properties, backdrop-filters, and vibrant gradients `(Cyan / Purple / Pink)` to deliver a state-of-the-art visual presentation.
 - **Responsive Layout**: Fluid design built from scratch with Vanilla CSS ensuring perfect rendering across all device sizes.
 - **Light/Dark Mode**: Smooth transition between meticulously crafted dark and light themes.
+
+## 🏆 Featured Projects
+
+A selection of the agentic systems and ML pipelines featured on the site:
+
+1. **Personal AI Employee** — Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation.
+2. **AutoGrader Agent** — Academic evaluation agent with vision analysis for diagrams and plagiarism detection.
+3. **SHAP-Explained Agentic IDS** — Hybrid intrusion detection system combining Random Forest, SHAP feature explanations, and LangGraph verification.
+4. **PhishGuard AI** — Chrome extension and FastAPI backend that detects phishing emails with heuristic feature extraction and Groq LLM risk analysis.
+5. **CareerPilot: AI CTO** — Autonomous Observe-Analyze-Plan agent that audits repositories and delivers continuous weekly coaching.
+6. **FireWatch AI** — Autonomous YOLOv8-powered safety system that detects and segments fire/smoke in real-time.
+
+## 🎓 Certifications
+
+| Certificate | Issuer |
+|---|---|
+| AI Fluency for Students | Anthropic |
+| Claude 101 | Anthropic |
+| Claude Code 101 | Anthropic |
+| AI Foundations | OpenAI Academy |
+| AI Fluency: Framework & Foundations | Anthropic |
+| Applied AI Foundations | OpenAI Academy |
 
 ## 🛠️ Technology Stack
 
@@ -30,7 +53,6 @@ The site features a custom-built, highly dynamic user interface with a premium d
 - **HTML5** (Semantic Structure)
 - **Vanilla CSS3** (Custom Variables, Animations, Glassmorphism, BEM methodologies)
 - **Vanilla JavaScript** (DOM Manipulation, API calls, Application logic)
-- **Three.js** (3D Animations & WebGL rendering)
 - **Vanilla-Tilt.js** (3D Card Hover Effects)
 
 ### Backend Services (For Chatbot)

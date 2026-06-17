@@ -3,10 +3,11 @@
 
 (function () {
   let isLoading = false;
+  const CHAT_API_URL = window.PORTFOLIO_CHAT_API_URL || '/api/chat';
 
   async function generateAgentResponse(query) {
     try {
-      const response = await fetch('https://omerfarooq223-github-io-git-main-omerfarooq223s-projects.vercel.app/api/chat', {
+      const response = await fetch(CHAT_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: query })
@@ -32,12 +33,21 @@
       return data.answer || "I'm sorry, I couldn't generate a response. Please try again.";
     } catch (error) {
       console.error('Chatbot API Error:', error);
-      return `I'm having trouble connecting to my brain. 🧠\n\n**Error:** ${error.message}`;
+      return "I'm having trouble connecting right now. Please try again in a moment.";
     }
   }
 
+  function escapeHTML(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function renderMarkdown(text) {
-    return text
+    return escapeHTML(text)
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/(?<!\w)_(.+?)_(?!\w)/g, '<em>$1</em>')
       .replace(/\n/g, '<br>');
@@ -288,6 +298,25 @@
       50% { transform: scale(1.2); opacity: 0.3; }
       100% { transform: scale(0.95); opacity: 0.8; }
     }
+
+    @media (max-width: 480px) {
+      .portfolio-chatbot-window {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100% !important;
+        max-height: 100% !important;
+        bottom: 0 !important;
+        right: 0 !important;
+        border-radius: 0 !important;
+        border: none !important;
+      }
+      .portfolio-chatbot-icon {
+        bottom: 16px !important;
+        right: 16px !important;
+        width: 50px !important;
+        height: 50px !important;
+      }
+    }
   `;
 
   const chatHTML = `
@@ -386,7 +415,8 @@
       if (!footer) return;
       const footerRect = footer.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      const baseBottom = 24;
+      const isMobile = window.innerWidth <= 480;
+      const baseBottom = isMobile ? 16 : 24;
       let targetBottom = baseBottom;
 
       if (footerRect.top < windowHeight) {
@@ -394,7 +424,14 @@
       }
       
       toggle.style.bottom = targetBottom + 'px';
-      chatWindow.style.bottom = targetBottom + 'px';
+      
+      if (isMobile) {
+        chatWindow.style.bottom = '0px';
+        chatWindow.style.height = '100%';
+      } else {
+        chatWindow.style.bottom = targetBottom + 'px';
+        chatWindow.style.height = '';
+      }
       ticking = false;
     }
 
@@ -416,7 +453,10 @@
       
       const userMsgDiv = document.createElement('div');
       userMsgDiv.className = 'portfolio-chatbot-message user';
-      userMsgDiv.innerHTML = `<div class="portfolio-chatbot-message-content">${message}</div>`;
+      const userMsgContent = document.createElement('div');
+      userMsgContent.className = 'portfolio-chatbot-message-content';
+      userMsgContent.textContent = message;
+      userMsgDiv.appendChild(userMsgContent);
       messagesContainer.appendChild(userMsgDiv);
       
       input.value = '';

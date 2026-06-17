@@ -1,5 +1,4 @@
 import os
-import json
 import re
 import time
 from collections import defaultdict, deque
@@ -13,9 +12,14 @@ app = FastAPI()
 # Enable CORS for the portfolio site
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all for now, can be restricted to your domain
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=[
+        "https://omerfarooq223.github.io",
+        "https://www.omerfarooq223.github.io",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+    ],
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type"],
 )
 
 class ChatRequest(BaseModel):
@@ -34,6 +38,8 @@ PORTFOLIO_TOPICS = {
     "yolo", "opencv", "computer vision", "nlp", "react", "docker",
     "personal ai employee", "ai employee vault", "mcp", "gmail", "playwright",
     "peer tutoring", "grasp", "shopify", "dispatch",
+    "certificate", "certification", "certified", "claude code", "claude 101",
+    "ai fluency", "framework", "foundations", "ai foundations", "applied ai", "openai academy", "anthropic",
     "resume", "cv", "about", "who", "what", "tell", "describe",
     "help", "hello", "hi", "hey", "thanks", "thank"
 }
@@ -87,18 +93,18 @@ def is_rate_limited(client_ip: str) -> bool:
 
 @app.get("/api/health")
 async def health():
-    key = os.environ.get("GROQ_API_KEY")
     return {
         "status": "online",
-        "groq_key_detected": key is not None and len(key) > 0,
-        "key_prefix": key[:4] + "..." if key else None
     }
 
 @app.post("/api/chat")
 async def chat(request: ChatRequest, http_request: Request):
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
-        raise HTTPException(status_code=500, detail="GROQ_API_KEY not configured in Vercel")
+        raise HTTPException(
+            status_code=500,
+            detail="The portfolio assistant is temporarily unavailable.",
+        )
 
     client_ip = get_client_ip(http_request)
     if is_rate_limited(client_ip):
@@ -169,6 +175,15 @@ Languages & Frameworks: Python (Advanced), React/Vite, C++/C, SQL (SQLite, Postg
 Tools & Automation: Cursor/VS Code, Google Antigravity, n8n Workflow Automation, Git/GitHub, PyMuPDF/Openpyxl, Docker/Postman.
 Currently Learning: Multi-agent Systems, LangChain/LangGraph, FastAPI, LeetCode, Docker.
 
+=== CERTIFICATIONS ===
+Umar holds 6 professional AI certifications:
+1. **AI Fluency for Students** — Anthropic (Certificate of Completion)
+2. **Claude 101** — Anthropic (Certificate of Completion)
+3. **Claude Code 101** — Anthropic (Certificate of Completion)
+4. **AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
+5. **AI Fluency: Framework & Foundations** — Anthropic (Certificate of Completion)
+6. **Applied AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
+
 === RESPONSE INSTRUCTIONS ===
 1. Answer visitors' questions about Umar's portfolio, skills, projects, education, experience, and contact.
 2. Keep answers concise (max 3 short sentences).
@@ -194,8 +209,11 @@ Currently Learning: Multi-agent Systems, LangChain/LangGraph, FastAPI, LeetCode,
 
         answer = completion.choices[0].message.content
         return {"answer": answer}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="The portfolio assistant is temporarily unavailable.",
+        )
 
 if __name__ == "__main__":
     import uvicorn

@@ -1,5 +1,3 @@
-fastapi
-uvicorn
-groq
-# For reading local json in the API
-# requests is usually pre-installed but good to have if needed for other things
+fastapi==0.137.1
+uvicorn==0.49.0
+groq==1.4.0
