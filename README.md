@@ -20,7 +20,7 @@ The site features a custom-built, highly dynamic user interface with a premium d
 
 - **Interactive 2D Canvas Ambient Flow Background**: A lightweight, responsive ambient particle flow in the hero section.
 - **AI-Powered Portfolio Chatbot**: A custom-built chatbot powered by **Groq API & LLaMA 3**, integrated via a secure FastAPI backend to answer questions about my projects, experience, education, certifications, and more.
-- **Certification Gallery**: Interactive gallery showcasing 6 professional AI certifications with lightbox preview — images stored as optimized WebP.
+- **Certification Gallery**: Interactive gallery showcasing 8 professional AI certifications with lightbox preview — images stored as optimized WebP.
 - **Glassmorphism & Neon UI Design**: Uses extensive CSS custom properties, backdrop-filters, and vibrant gradients `(Cyan / Purple / Pink)` to deliver a state-of-the-art visual presentation.
 - **Responsive Layout**: Fluid design built from scratch with Vanilla CSS ensuring perfect rendering across all device sizes.
 - **Light/Dark Mode**: Smooth transition between meticulously crafted dark and light themes.
