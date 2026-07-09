@@ -30,8 +30,8 @@
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"
-    integrity="sha384-0k1dj5tm+KUH/4vkNk/i90XsjDA8Ltmt+ybcrFoH4t0dgv/WZsPpVBnkhcroX8UL" crossorigin="anonymous"
-    referrerpolicy="no-referrer"></script>
+    integrity="sha384-0k1dj5tm+KUH/4vkNk/i90XsjDA8Ltmt+ybcrFoH4t0dgv/WZsPpVBnkhcroX8UL"
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
     :root {
       --bg: #07080f;
@@ -235,14 +235,31 @@
     }
 
     html[data-theme="light"] #contact .ct-wrap {
-      background:
-        linear-gradient(135deg, rgba(14, 165, 233, 0.10), transparent 32%),
-        linear-gradient(320deg, rgba(236, 72, 153, 0.10), transparent 34%),
-        linear-gradient(155deg, rgba(255, 255, 255, 0.95), rgba(243, 246, 255, 0.94));
+      background: linear-gradient(155deg, rgba(255, 255, 255, 0.95), rgba(243, 246, 255, 0.94));
       border: 1px solid rgba(148, 163, 184, 0.42);
-      border-radius: 24px;
+      border-radius: 16px;
       padding: 58px 32px 48px;
       box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12);
+    }
+
+    html[data-theme="light"] #contact .ct-card-actions .cl {
+      background: rgba(255, 255, 255, 0.78);
+      border-color: rgba(148, 163, 184, 0.36);
+      color: #334155;
+    }
+
+    html[data-theme="light"] #contact .ct-card-actions .clc {
+      color: #ea4335;
+      border-color: rgba(234, 67, 53, 0.32);
+      background: rgba(234, 67, 53, 0.08);
+    }
+
+    html[data-theme="light"] #contact .ct-card-actions .clp {
+      color: #fff;
+      border-color: #0a66c2;
+      background: #0a66c2;
+      font-weight: 800;
+      box-shadow: none;
     }
 
     .ct-card-actions .clp .cl-ico {
@@ -251,10 +268,33 @@
     }
 
     .ct-card-actions>a.clpk .cl-ico,
-    .ct-card-actions>a.cla .cl-ico,
-    .ct-card-actions>a.clkg .cl-ico {
+    .ct-card-actions>a.cla .cl-ico {
       width: 20px;
       height: 20px;
+    }
+
+    html[data-theme="light"] #contact .ct-card-actions .clpk {
+      color: #111111 !important;
+      border-color: #ffffff !important;
+      background: #ffffff !important;
+      font-weight: 800;
+      box-shadow: none !important;
+    }
+
+    html[data-theme="light"] #contact .ct-card-actions .cla {
+      color: #1f2937 !important;
+      border-color: #fbbf24 !important;
+      background: #fbbf24 !important;
+      font-weight: 800;
+      box-shadow: none !important;
+    }
+
+    html[data-theme="light"] #contact .ct-card-actions .clhf {
+      color: #111827 !important;
+      border-color: #ffcc4d !important;
+      background: #ffcc4d !important;
+      font-weight: 800;
+      box-shadow: none !important;
     }
 
     html[data-theme="light"] .ct-glow {
@@ -353,7 +393,7 @@
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
       mask-composite: exclude;
-      animation: rotateBorder 7.6s linear infinite;
+      animation: rotateBorder 8s linear infinite;
       animation-play-state: paused;
       pointer-events: none;
       z-index: -1;
@@ -407,35 +447,6 @@
     .hover-glow-only:hover .border-glow {
       opacity: 1;
       animation-play-state: running;
-    }
-
-    #projects .proj-card .border-glow {
-      --beam: #38bdf8;
-      --beam-fade: rgba(56, 189, 248, 0.18);
-      background: conic-gradient(from var(--border-angle),
-          transparent 0deg,
-          transparent 155deg,
-          rgba(14, 165, 233, 0.08) 205deg,
-          var(--beam-fade) 238deg,
-          #7dd3fc 284deg,
-          #22d3ee 318deg,
-          var(--beam-fade) 346deg,
-          transparent 360deg);
-      opacity: 0;
-      filter: drop-shadow(0 0 9px rgba(56, 189, 248, 0.35));
-      transition: opacity 0.35s ease, filter 0.35s ease;
-    }
-
-    #projects .proj-card:hover .border-glow {
-      opacity: 1;
-      animation-play-state: running;
-      filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.55));
-    }
-
-    #projects #aiemployee-card .border-glow {
-      opacity: 1;
-      animation-play-state: running;
-      filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.55));
     }
 
     .glow-border-base {
@@ -774,7 +785,7 @@
 
     .eb-wrap {
       height: var(--eb-line-h);
-      overflow: visible;
+      overflow: hidden;
       display: inline-flex;
       min-width: 0;
       max-width: 100%;
@@ -975,31 +986,6 @@
     .hero-cta .btn-a {
       min-width: 220px;
       text-align: center;
-    }
-
-    .hero-cta .btn-github {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: #ffffff;
-      color: #050505;
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 0 14px 36px rgba(255, 255, 255, 0.08);
-    }
-
-    html[data-theme="light"] .hero-cta .btn-github {
-      background: #050505;
-      color: #ffffff;
-      border-color: #050505;
-      box-shadow: 0 14px 36px rgba(2, 6, 23, 0.16);
-    }
-
-    .hero-cta .btn-github svg {
-      width: 18px;
-      height: 18px;
-      color: currentColor;
-      flex-shrink: 0;
     }
 
     .btn-a:hover {
@@ -1745,7 +1731,7 @@
       grid-column: 1/-1;
       background: var(--cardGrad);
       border: none;
-      border-radius: 20px;
+      border-radius: 16px;
       padding: 32px 28px 28px;
       position: relative;
       overflow: visible;
@@ -1758,6 +1744,7 @@
       transition: all .45s cubic-bezier(.16, 1, .3, 1);
       transform-style: preserve-3d;
       box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+      overflow: visible;
     }
 
     .proj-card::before {
@@ -1794,7 +1781,7 @@
       transition: opacity 0.4s ease;
       pointer-events: none;
       z-index: 0;
-      border-radius: inherit;
+      border-radius: 16px;
       filter: saturate(0.95) contrast(1.04);
     }
 
@@ -2197,7 +2184,7 @@
       flex: 1.25;
       position: relative;
       background: #000;
-      overflow: visible;
+      overflow: hidden;
       min-height: 314px;
     }
 
@@ -2215,7 +2202,7 @@
       padding: 12px 6px 0;
       box-sizing: border-box;
       min-width: 0;
-      overflow: hidden;
+      overflow: visible;
       align-items: flex-start;
       justify-content: flex-start;
       text-align: left;
@@ -2423,10 +2410,6 @@
       align-self: stretch;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
       overflow: visible;
-    }
-
-    #projects .proj-card.hidden-project {
-      display: none !important;
     }
 
     .proj-card-trio:hover {
@@ -3380,14 +3363,11 @@
       position: relative;
       max-width: 920px;
       margin: 34px auto 0;
-      padding: clamp(22px, 3vw, 30px);
+      padding: 28px;
       border-radius: 22px;
-      background:
-        linear-gradient(135deg, rgba(0, 229, 255, 0.10), transparent 30%),
-        linear-gradient(315deg, rgba(244, 114, 182, 0.10), transparent 34%),
-        linear-gradient(165deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.035));
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       overflow: hidden;
@@ -3398,17 +3378,8 @@
       content: '';
       position: absolute;
       inset: 0 0 auto 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink), var(--amber));
-    }
-
-    .ct-card::after {
-      content: '';
-      position: absolute;
-      inset: 4px 0 auto 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34), transparent);
-      pointer-events: none;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
     }
 
     .ct-card-hd {
@@ -3416,7 +3387,7 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 18px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       flex-wrap: wrap;
     }
 
@@ -3441,33 +3412,9 @@
     .ct-card-copy {
       max-width: 520px;
       color: var(--muted2);
-      line-height: 1.75;
-      font-size: .94rem;
-      margin: 8px 0 0;
-    }
-
-    .ct-direct {
-      margin-bottom: 18px;
-    }
-
-    .ct-social-label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 18px 0 12px;
-      color: var(--muted2);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .ct-social-label::after {
-      content: '';
-      height: 1px;
-      flex: 1;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.18), transparent);
+      line-height: 1.8;
+      font-size: .98rem;
+      margin: 0;
     }
 
     .ct-card-actions {
@@ -3479,20 +3426,14 @@
     .ct-card-actions .cl {
       justify-content: center;
       min-height: 54px;
-      --cl-bg: rgba(255, 255, 255, 0.04);
-      --cl-border: rgba(255, 255, 255, 0.1);
-      --cl-color: var(--text);
-      background: var(--cl-bg);
-      border-color: var(--cl-border);
-      color: var(--cl-color);
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: var(--text);
       font-weight: 700;
       font-size: .82rem;
       width: 100%;
       gap: 10px;
       white-space: nowrap;
-      position: relative;
-      overflow: hidden;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
     }
 
     .cl-ico {
@@ -3502,100 +3443,46 @@
     }
 
     .ct-card-actions .cl:hover {
-      border-color: var(--cl-border);
-      background: var(--cl-bg);
-      color: var(--cl-color);
+      border-color: rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.07);
     }
 
-    .ct-direct .cl {
-      min-height: 74px;
-      justify-content: flex-start;
-      --cl-bg: rgba(255, 255, 255, 0.04);
-      --cl-border: rgba(255, 255, 255, 0.1);
-      --cl-color: var(--text);
-      background: var(--cl-bg);
-      border-color: var(--cl-border);
-      color: var(--cl-color);
-      padding: 14px 16px;
-      border-radius: 16px;
-      box-shadow: 0 16px 34px rgba(234, 67, 53, 0.22);
-    }
-
-    .cl-copy {
-      display: grid;
-      gap: 3px;
-      min-width: 0;
-    }
-
-    .cl-title {
-      font-size: .94rem;
-      font-weight: 850;
-      line-height: 1.1;
-    }
-
-    .cl-note {
-      overflow: hidden;
-      color: currentColor;
-      font-size: .72rem;
-      font-weight: 650;
-      line-height: 1.25;
-      opacity: .78;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .ct-card-actions .clc,
-    .ct-direct .clc {
-      --cl-bg: #ea4335;
-      --cl-border: #ea4335;
-      --cl-color: #ffffff;
+    .ct-card-actions .clc {
+      color: #ea4335;
+      background: rgba(234, 67, 53, 0.08);
+      border-color: rgba(234, 67, 53, 0.30);
     }
 
     .ct-card-actions>a.clp {
-      --cl-bg: #0a66c2;
-      --cl-border: #0a66c2;
-      --cl-color: #ffffff;
+      color: #fff;
+      background: #0a66c2;
+      border-color: #0a66c2;
       font-weight: 800;
     }
 
     .ct-card-actions>a.clpk {
-      --cl-bg: #ffffff;
-      --cl-border: #ffffff;
-      --cl-color: #111111;
+      color: #111111 !important;
+      background: #ffffff !important;
+      border-color: #ffffff !important;
       font-weight: 800;
+      box-shadow: none !important;
     }
 
     .ct-card-actions>a.cla {
-      --cl-bg: #fbbf24;
-      --cl-border: #fbbf24;
-      --cl-color: #1f2937;
+      color: #1f2937 !important;
+      background: #fbbf24 !important;
+      border-color: #fbbf24 !important;
       font-weight: 800;
-    }
-
-    .ct-card-actions>a.clhf {
-      --cl-bg: #ffcc4d;
-      --cl-border: #ffcc4d;
-      --cl-color: #111827;
-      font-weight: 800;
-    }
-
-    .ct-card-actions>a.clkg {
-      --cl-bg: #20beff;
-      --cl-border: #20beff;
-      --cl-color: #042f3f;
-      font-weight: 800;
+      box-shadow: none !important;
     }
 
     .ct-card-actions .clp .cl-ico,
-    .ct-card-actions .clc .cl-ico,
-    .ct-card-actions .clhf .cl-ico,
-    .ct-card-actions .clkg .cl-ico,
-    .ct-card-actions>a.clc .cl-ico,
+    .ct-card-actions>a.clp,
+    .ct-card-actions>a.clpk,
+    .ct-card-actions>a.cla,
     .ct-card-actions>a.clp .cl-ico,
     .ct-card-actions>a.clpk .cl-ico,
-    .ct-card-actions>a.cla .cl-ico,
-    .ct-card-actions>a.clhf .cl-ico,
-    .ct-card-actions>a.clkg .cl-ico {
+    .ct-card-actions>a.cla .cl-ico {
       color: currentColor;
     }
 
@@ -3623,46 +3510,38 @@
     }
 
     .clc:hover {
-      border-color: var(--cl-border);
-      color: var(--cl-color);
-      background: var(--cl-bg);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(0, 229, 255, .05);
     }
 
     .clp:hover {
-      border-color: var(--cl-border);
-      color: var(--cl-color);
-      background: var(--cl-bg);
+      border-color: var(--purple);
+      color: var(--purple);
+      background: rgba(168, 85, 247, .05);
     }
 
     .clpk:hover {
-      border-color: var(--cl-border);
-      color: var(--cl-color);
-      background: var(--cl-bg);
+      border-color: var(--pink);
+      color: var(--pink);
+      background: rgba(244, 114, 182, .05);
     }
 
     .cla:hover {
-      border-color: var(--cl-border);
-      color: var(--cl-color);
-      background: var(--cl-bg);
+      border-color: var(--amber);
+      color: var(--amber);
+      background: rgba(251, 191, 36, .05);
     }
 
     #contact .ct-wrap {
       text-align: left;
       overflow: visible;
-      padding: clamp(34px, 5vw, 64px);
-      border-radius: 24px;
-      background:
-        linear-gradient(135deg, rgba(0, 229, 255, 0.08), transparent 34%),
-        linear-gradient(315deg, rgba(244, 114, 182, 0.08), transparent 34%),
-        rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.20);
     }
 
     #contact .ct-layout {
       display: grid;
-      grid-template-columns: minmax(0, .92fr) minmax(360px, 1.08fr);
-      gap: clamp(28px, 5vw, 70px);
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 4vw, 54px);
       align-items: center;
       position: relative;
       z-index: 1;
@@ -3686,6 +3565,45 @@
       z-index: -1;
     }
 
+    #contact .ct-avail {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(52, 211, 153, .28);
+      background: rgba(52, 211, 153, .1);
+      color: #8af0c3;
+      font-size: .74rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    #contact .avail-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 0 rgba(52, 211, 153, 0.6);
+      animation: availPulse 1.8s ease-out infinite;
+    }
+
+    @keyframes availPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.56);
+      }
+
+      70% {
+        box-shadow: 0 0 0 12px rgba(52, 211, 153, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+      }
+    }
+
     #contact .ct-big {
       margin-bottom: 12px;
       font-size: clamp(2.1rem, 4.7vw, 4.2rem);
@@ -3698,112 +3616,65 @@
       font-size: 1rem;
     }
 
-    #contact .ct-proof {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      max-width: 540px;
-      margin-top: 26px;
-    }
-
-    #contact .ct-proof span {
-      display: inline-flex;
-      align-items: center;
-      min-height: 36px;
-      padding: 0 13px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.055);
-      color: var(--text);
-      font-size: .78rem;
-      font-weight: 750;
-      letter-spacing: .01em;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    }
-
     #contact .ct-card {
       margin: 0;
       width: 100%;
-      max-width: none;
     }
 
     #contact .ct-card-hd {
-      display: flex;
+      display: none;
     }
 
     #contact .ct-card-actions {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       gap: 11px;
     }
 
     #contact .ct-card-actions .cl {
       min-height: 56px;
       justify-content: flex-start;
-      padding: 0 15px;
-      border-radius: 14px;
+      padding: 0 18px;
       font-size: .9rem;
       letter-spacing: .01em;
-      transition: transform .22s ease, box-shadow .22s ease;
-    }
-
-    #contact .ct-card-actions .clkg {
-      grid-column: 1 / -1;
+      transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
     }
 
     #contact .ct-card-actions .cl:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 24px rgba(0, 0, 0, 0.20);
-      background: var(--cl-bg);
-      border-color: var(--cl-border);
-      color: var(--cl-color);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18);
+      filter: brightness(1.02);
     }
 
-    #contact .ct-direct .cl:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 34px rgba(234, 67, 53, 0.26);
+    #contact .ct-card-actions>a.clpk:hover {
+      color: #111111 !important;
+      background: #ffffff !important;
+      border-color: #ffffff !important;
     }
 
-    #contact .ct-card-actions>a.clc .cl-ico,
-    #contact .ct-card-actions>a.clp .cl-ico,
-    #contact .ct-card-actions>a.clpk .cl-ico,
-    #contact .ct-card-actions>a.cla .cl-ico,
-    #contact .ct-card-actions>a.clhf .cl-ico,
-    #contact .ct-card-actions>a.clkg .cl-ico {
-      color: currentColor;
+    #contact .ct-card-actions>a.cla:hover {
+      color: #1f2937 !important;
+      background: #fbbf24 !important;
+      border-color: #fbbf24 !important;
     }
 
-    html[data-theme="light"] #contact .ct-wrap {
-      background:
-        linear-gradient(135deg, rgba(14, 165, 233, 0.10), transparent 34%),
-        linear-gradient(315deg, rgba(236, 72, 153, 0.10), transparent 34%),
-        linear-gradient(155deg, rgba(255, 255, 255, 0.95), rgba(243, 246, 255, 0.94));
-      border-color: rgba(148, 163, 184, 0.42);
-      box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12);
+    #contact .ct-card-actions>a.clhf:hover {
+      color: #111827 !important;
+      background: #ffcc4d !important;
+      border-color: #ffcc4d !important;
     }
 
-    html[data-theme="light"] #contact .ct-card {
-      background:
-        linear-gradient(135deg, rgba(14, 165, 233, 0.11), transparent 30%),
-        linear-gradient(315deg, rgba(236, 72, 153, 0.10), transparent 34%),
-        linear-gradient(165deg, rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.86));
-      border-color: rgba(148, 163, 184, 0.36);
-      box-shadow: 0 22px 54px rgba(15, 23, 42, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.82);
+    #contact .ct-card-actions>a.clpk .cl-ico {
+      color: #111111 !important;
+      fill: #111111 !important;
     }
 
-    html[data-theme="light"] #contact .ct-proof span {
-      background: rgba(255, 255, 255, 0.72);
-      border-color: rgba(148, 163, 184, 0.30);
-      color: #334155;
+    #contact .ct-card-actions>a.cla .cl-ico {
+      color: #1f2937 !important;
+      fill: #1f2937 !important;
     }
 
-    html[data-theme="light"] #contact .ct-social-label::after {
-      background: linear-gradient(90deg, rgba(100, 116, 139, 0.28), transparent);
-    }
-
-    html[data-theme="light"] #contact .ct-card-actions>a.clpk {
-      --cl-bg: #050505;
-      --cl-border: #050505;
-      --cl-color: #ffffff;
+    #contact .ct-card-actions>a.clhf .cl-ico {
+      color: #111827 !important;
+      fill: #111827 !important;
     }
 
     footer {
@@ -4035,10 +3906,6 @@
         animation: none !important;
       }
 
-      .cert-card .border-glow {
-        animation: none !important;
-      }
-
       .reveal {
         opacity: 0;
         transform: translateY(30px);
@@ -4238,53 +4105,25 @@
     .cert-card {
       position: relative;
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 14px;
       overflow: hidden;
       background: var(--cardGrad);
       cursor: pointer;
       transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-        box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+                  box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
       transform: translateZ(0);
-    }
-
-    .cert-card.hover-glow-only .border-glow,
-    .cert-card .border-glow {
-      inset: -1px;
-      padding: 2px;
-      border-radius: inherit;
-      background: conic-gradient(from var(--border-angle),
-          transparent 0deg,
-          transparent 205deg,
-          rgba(52, 211, 153, 0.12) 232deg,
-          rgba(52, 211, 153, 0.58) 260deg,
-          var(--green) 286deg,
-          var(--green) 296deg,
-          rgba(52, 211, 153, 0.62) 312deg,
-          rgba(52, 211, 153, 0.16) 338deg,
-          transparent 354deg,
-          transparent 360deg);
-      animation: rotateBorder 2.92s linear infinite;
-      animation-play-state: running;
-      opacity: 1;
-      filter: drop-shadow(0 0 8px rgba(52, 211, 153, 0.74)) drop-shadow(0 0 18px rgba(52, 211, 153, 0.34));
-      z-index: 3;
-    }
-
-    .cert-card.hover-glow-only:hover .border-glow {
-      opacity: 1;
     }
 
     .cert-card:hover {
       transform: translateY(-6px) scale(1.01);
       box-shadow: 0 28px 56px rgba(0, 0, 0, 0.35),
-        0 0 0 1px rgba(0, 229, 255, 0.12);
+                  0 0 0 1px rgba(0, 229, 255, 0.12);
     }
 
     .cert-card-img-wrap {
       position: relative;
       aspect-ratio: 4 / 3;
       overflow: hidden;
-      border-radius: 16px 16px 0 0;
       background: rgba(255, 255, 255, 0.02);
     }
 
@@ -4438,26 +4277,9 @@
       box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
     }
 
-    html[data-theme="light"] .cert-card.hover-glow-only .border-glow,
-    html[data-theme="light"] .cert-card .border-glow {
-	      background: conic-gradient(from var(--border-angle),
-	          transparent 0deg,
-	          transparent 205deg,
-	          rgba(5, 150, 105, 0.12) 232deg,
-	          rgba(5, 150, 105, 0.52) 260deg,
-	          rgba(5, 150, 105, 0.96) 286deg,
-	          rgba(5, 150, 105, 0.96) 296deg,
-	          rgba(5, 150, 105, 0.58) 312deg,
-	          rgba(5, 150, 105, 0.16) 338deg,
-	          transparent 354deg,
-	          transparent 360deg);
-	      opacity: 1;
-	      filter: drop-shadow(0 0 7px rgba(5, 150, 105, 0.32)) drop-shadow(0 0 16px rgba(5, 150, 105, 0.14));
-    }
-
     html[data-theme="light"] .cert-card:hover {
       box-shadow: 0 22px 48px rgba(15, 23, 42, 0.14),
-        0 0 0 1px rgba(14, 165, 233, 0.18);
+                  0 0 0 1px rgba(14, 165, 233, 0.18);
     }
 
     html[data-theme="light"] .cert-card-overlay {
@@ -4533,16 +4355,8 @@
         padding: 20px;
       }
 
-      #contact .ct-card-actions {
+      .ct-card-actions {
         grid-template-columns: 1fr;
-      }
-
-      #contact .ct-card-actions .cl {
-        min-height: 58px;
-      }
-
-      #contact .ct-card-actions .clkg {
-        grid-column: auto;
       }
 
       .hero-title {
@@ -4889,13 +4703,6 @@
         <a href="CV.pdf" download class="btn-a"
           style="background:linear-gradient(135deg,var(--purple),#7c22d4); color: #fff;">⬇
           Download Resume</a>
-        <a href="https://github.com/omerfarooq223" target="_blank" rel="noopener noreferrer" class="btn-a btn-github">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path
-              d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.66-.22.66-.48v-1.68c-2.78.62-3.37-1.17-3.37-1.17-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1.01.07 1.54 1.07 1.54 1.07.9 1.58 2.37 1.12 2.95.86.09-.67.35-1.12.64-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.44-1.3.1-2.72 0 0 .84-.28 2.75 1.05.8-.23 1.66-.34 2.52-.35.86.01 1.72.12 2.52.35 1.91-1.33 2.75-1.05 2.75-1.05.54 1.42.2 2.46.1 2.72.64.72 1.03 1.64 1.03 2.76 0 3.94-2.35 4.81-4.58 5.06.36.32.67.96.67 1.94v2.87c0 .26.16.58.67.48A10.01 10.01 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" />
-          </svg>
-          <span>GitHub</span>
-        </a>
       </div>
       <div class="scroll-cue">
         <div class="line"></div>
@@ -4920,7 +4727,7 @@
           <p>I'm a <strong>BS Artificial Intelligence</strong> student at <span class="hc">University of Management &
               Technology (UMT), Lahore</span> , maintaining a <span class="hc">3.81 / 4.0 CGPA on a 70% merit
               scholarship</span>, recognized with the <span class="hc">Dean's Award</span> (top 10% SGPA in the
-            department) and a <span class="br">Rector's Award</span> (4.0 SGPA in a semester).
+            department) and a <span class="br">Rector's Award</span> (4.0 SPGA in a semester).
           </p>
 
           <p>I'm enrolled in the <span class="hp">Panaversity Agentic AI Program</span>, building production-grade
@@ -4990,7 +4797,8 @@
           <div class="edu-sc">FSc Pre-Medical</div>
           <div class="edu-dg">Punjab Group of Colleges (PGC)</div>
           <div class="edu-bs">
-            <span class="bdg bp">970 Marks</span><span class="bdg bp">88.2%</span><span class="bdg bp">50%
+            <span class="bdg bp">970 Marks</span><span
+              class="bdg bp">88.2%</span><span class="bdg bp">50%
               Scholarship</span>
           </div>
         </div>
@@ -5014,21 +4822,15 @@
         <span class="w"><span class="wi">Licenses &</span></span>
         <span class="w"><span class="wi"><span class="gt3">Certifications</span></span></span>
       </h2>
-      <div class="cert-section-title">Verified Credentials <span class="cert-count">10</span></div>
+      <div class="cert-section-title">Verified Credentials <span class="cert-count">8</span></div>
       <div class="cert-grid">
-        <div class="cert-card glow-border hover-glow-only sk-p" onclick="openCertLightbox(0)" tabindex="0" role="button"
-          aria-label="View Google Certificate">
+        <div class="cert-card glow-border hover-glow-only sk-p" onclick="openCertLightbox(0)" tabindex="0" role="button" aria-label="View Google Certificate">
           <div class="border-glow"></div>
           <div class="cert-card-img-wrap">
             <img class="cert-card-img" src="docs/Google Certificate.webp" alt="Google Certificate" loading="lazy" />
             <div class="cert-card-overlay">
               <span>
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  <line x1="11" y1="8" x2="11" y2="14" />
-                  <line x1="8" y1="11" x2="14" y2="11" />
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 View Certificate
               </span>
             </div>
@@ -5038,43 +4840,29 @@
             <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Google</div>
           </div>
         </div>
-        <div class="cert-card glow-border hover-glow-only sk-c" onclick="openCertLightbox(1)" tabindex="0" role="button"
-          aria-label="View AI Fluency: AI Capabilities & Limitations certificate">
+        <div class="cert-card glow-border hover-glow-only sk-c" onclick="openCertLightbox(1)" tabindex="0" role="button" aria-label="View Professional Certificate">
           <div class="border-glow"></div>
           <div class="cert-card-img-wrap">
-            <img class="cert-card-img" src="docs/certificate-fmssrk5frsx3.webp"
-              alt="AI Fluency: AI Capabilities & Limitations" loading="lazy" />
+            <img class="cert-card-img" src="docs/certificate-fmssrk5frsx3.webp" alt="Professional Certificate" loading="lazy" />
             <div class="cert-card-overlay">
               <span>
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  <line x1="11" y1="8" x2="11" y2="14" />
-                  <line x1="8" y1="11" x2="14" y2="11" />
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 View Certificate
               </span>
             </div>
           </div>
           <div class="cert-card-info">
-            <div class="cert-card-name">AI Fluency: AI Capabilities & Limitations</div>
-            <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Anthropic</div>
+            <div class="cert-card-name">Professional Certificate</div>
+            <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Verified Professional</div>
           </div>
         </div>
-        <div class="cert-card glow-border hover-glow-only sk-pk" onclick="openCertLightbox(2)" tabindex="0"
-          role="button" aria-label="View AI Fluency for Students certificate">
+        <div class="cert-card glow-border hover-glow-only sk-pk" onclick="openCertLightbox(2)" tabindex="0" role="button" aria-label="View AI Fluency for Students certificate">
           <div class="border-glow"></div>
           <div class="cert-card-img-wrap">
-            <img class="cert-card-img" src="docs/cert-new-2.webp" alt="AI Fluency for Students - Anthropic"
-              loading="lazy" />
+            <img class="cert-card-img" src="docs/cert-new-2.webp" alt="AI Fluency for Students - Anthropic" loading="lazy" />
             <div class="cert-card-overlay">
               <span>
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  <line x1="11" y1="8" x2="11" y2="14" />
-                  <line x1="8" y1="11" x2="14" y2="11" />
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 View Certificate
               </span>
             </div>
@@ -5084,19 +4872,13 @@
             <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Anthropic</div>
           </div>
         </div>
-        <div class="cert-card glow-border hover-glow-only sk-g" onclick="openCertLightbox(3)" tabindex="0" role="button"
-          aria-label="View Claude 101 certificate">
+        <div class="cert-card glow-border hover-glow-only sk-g" onclick="openCertLightbox(3)" tabindex="0" role="button" aria-label="View Claude 101 certificate">
           <div class="border-glow"></div>
           <div class="cert-card-img-wrap">
             <img class="cert-card-img" src="docs/cert-new-1.webp" alt="Claude 101 - Anthropic" loading="lazy" />
             <div class="cert-card-overlay">
               <span>
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  <line x1="11" y1="8" x2="11" y2="14" />
-                  <line x1="8" y1="11" x2="14" y2="11" />
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 View Certificate
               </span>
             </div>
@@ -5106,19 +4888,13 @@
             <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Anthropic</div>
           </div>
         </div>
-        <div class="cert-card glow-border hover-glow-only sk-a hidden-cert" data-extra-cert
-          onclick="openCertLightbox(4)" tabindex="0" role="button" aria-label="View Claude Code 101 certificate">
+        <div class="cert-card glow-border hover-glow-only sk-a hidden-cert" data-extra-cert onclick="openCertLightbox(4)" tabindex="0" role="button" aria-label="View Claude Code 101 certificate">
           <div class="border-glow"></div>
           <div class="cert-card-img-wrap">
             <img class="cert-card-img" src="docs/cert-new-3.webp" alt="Claude Code 101 - Anthropic" loading="lazy" />
             <div class="cert-card-overlay">
               <span>
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  <line x1="11" y1="8" x2="11" y2="14" />
-                  <line x1="8" y1="11" x2="14" y2="11" />
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 View Certificate
               </span>
             </div>
@@ -5128,20 +4904,13 @@
             <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Anthropic</div>
           </div>
         </div>
-        <div class="cert-card glow-border hover-glow-only sk-p hidden-cert" data-extra-cert
-          onclick="openCertLightbox(5)" tabindex="0" role="button" aria-label="View AI Foundations certificate">
+        <div class="cert-card glow-border hover-glow-only sk-p hidden-cert" data-extra-cert onclick="openCertLightbox(5)" tabindex="0" role="button" aria-label="View AI Foundations certificate">
           <div class="border-glow"></div>
           <div class="cert-card-img-wrap">
-            <img class="cert-card-img" src="docs/cert-ai-foundations.webp" alt="AI Foundations - OpenAI Academy"
-              loading="lazy" />
+            <img class="cert-card-img" src="docs/cert-ai-foundations.webp" alt="AI Foundations - OpenAI Academy" loading="lazy" />
             <div class="cert-card-overlay">
               <span>
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  <line x1="11" y1="8" x2="11" y2="14" />
-                  <line x1="8" y1="11" x2="14" y2="11" />
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 View Certificate
               </span>
             </div>
@@ -5151,21 +4920,13 @@
             <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>OpenAI Academy</div>
           </div>
         </div>
-        <div class="cert-card glow-border hover-glow-only sk-c hidden-cert" data-extra-cert
-          onclick="openCertLightbox(6)" tabindex="0" role="button"
-          aria-label="View AI Fluency: Framework & Foundations certificate">
+        <div class="cert-card glow-border hover-glow-only sk-c hidden-cert" data-extra-cert onclick="openCertLightbox(6)" tabindex="0" role="button" aria-label="View AI Fluency: Framework & Foundations certificate">
           <div class="border-glow"></div>
           <div class="cert-card-img-wrap">
-            <img class="cert-card-img" src="docs/cert-s3jn6owcs6f6.webp"
-              alt="AI Fluency: Framework & Foundations - Anthropic" loading="lazy" />
+            <img class="cert-card-img" src="docs/cert-s3jn6owcs6f6.webp" alt="AI Fluency: Framework & Foundations - Anthropic" loading="lazy" />
             <div class="cert-card-overlay">
               <span>
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  <line x1="11" y1="8" x2="11" y2="14" />
-                  <line x1="8" y1="11" x2="14" y2="11" />
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 View Certificate
               </span>
             </div>
@@ -5175,20 +4936,13 @@
             <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Anthropic</div>
           </div>
         </div>
-        <div class="cert-card glow-border hover-glow-only sk-g hidden-cert" data-extra-cert
-          onclick="openCertLightbox(7)" tabindex="0" role="button" aria-label="View Applied AI Foundations certificate">
+        <div class="cert-card glow-border hover-glow-only sk-g hidden-cert" data-extra-cert onclick="openCertLightbox(7)" tabindex="0" role="button" aria-label="View Applied AI Foundations certificate">
           <div class="border-glow"></div>
           <div class="cert-card-img-wrap">
-            <img class="cert-card-img" src="docs/cert-rn2wppq639.webp" alt="Applied AI Foundations - OpenAI Academy"
-              loading="lazy" />
+            <img class="cert-card-img" src="docs/cert-rn2wppq639.webp" alt="Applied AI Foundations - OpenAI Academy" loading="lazy" />
             <div class="cert-card-overlay">
               <span>
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  <line x1="11" y1="8" x2="11" y2="14" />
-                  <line x1="8" y1="11" x2="14" y2="11" />
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 View Certificate
               </span>
             </div>
@@ -5196,52 +4950,6 @@
           <div class="cert-card-info">
             <div class="cert-card-name">Applied AI Foundations</div>
             <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>OpenAI Academy</div>
-          </div>
-        </div>
-        <div class="cert-card glow-border hover-glow-only sk-pk hidden-cert" data-extra-cert
-          onclick="openCertLightbox(8)" tabindex="0" role="button" aria-label="View Claude Platform 101 certificate">
-          <div class="border-glow"></div>
-          <div class="cert-card-img-wrap">
-            <img class="cert-card-img" src="docs/cert-claude-platform-101.webp" alt="Claude Platform 101 - Anthropic"
-              loading="lazy" />
-            <div class="cert-card-overlay">
-              <span>
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  <line x1="11" y1="8" x2="11" y2="14" />
-                  <line x1="8" y1="11" x2="14" y2="11" />
-                </svg>
-                View Certificate
-              </span>
-            </div>
-          </div>
-          <div class="cert-card-info">
-            <div class="cert-card-name">Claude Platform 101</div>
-            <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>Anthropic</div>
-          </div>
-        </div>
-        <div class="cert-card glow-border hover-glow-only sk-a hidden-cert" data-extra-cert
-          onclick="openCertLightbox(9)" tabindex="0" role="button" aria-label="View Peer Tutoring certificate">
-          <div class="border-glow"></div>
-          <div class="cert-card-img-wrap">
-            <img class="cert-card-img" src="docs/Peer_Tutoring_Certificate.webp" alt="Peer Tutoring Certificate - UMT"
-              loading="lazy" />
-            <div class="cert-card-overlay">
-              <span>
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  <line x1="11" y1="8" x2="11" y2="14" />
-                  <line x1="8" y1="11" x2="14" y2="11" />
-                </svg>
-                View Certificate
-              </span>
-            </div>
-          </div>
-          <div class="cert-card-info">
-            <div class="cert-card-name">Peer Tutoring Certificate</div>
-            <div class="cert-card-issuer"><span class="cert-issuer-dot"></span>UMT</div>
           </div>
         </div>
       </div>
@@ -5354,11 +5062,11 @@
         <span class="w"><span class="wi"><span class="gt4">built</span></span></span>
       </h2>
       <div class="proj-bento stg">
-        <div class="proj-card pcc proj-card-featured proj-featured premium-glow-card" id="aiemployee-card"
+<div class="proj-card pcc proj-card-featured proj-featured premium-glow-card" id="aiemployee-card"
           style="order: 0;">
           <div class="p-visual" onclick="openProjectModal('aiemployee', event)">
-            <img src="images/aiemployee-dashboard.webp" alt="Personal AI Employee dashboard preview" width="1400"
-              height="800" fetchpriority="high" />
+            <img src="images/aiemployee-dashboard.webp" alt="Personal AI Employee dashboard preview" width="1400" height="800"
+              fetchpriority="high" />
             <span class="pnum">001</span>
             <div class="badge-featured">Featured Project</div>
             <div class="badge-year">2026</div>
@@ -5375,8 +5083,8 @@
             <p class="p-desc-large">Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation,
               featuring a continuous reasoning loop and MCP-style tool integration.</p>
             <div class="pstk">
-              <span class="pill">Claude Code</span><span class="pill">Flask</span><span class="pill">Gmail
-                API</span><span class="pill">Playwright</span>
+              <span class="pill">Claude Code</span><span class="pill">Flask</span><span
+                class="pill">Gmail API</span><span class="pill">Playwright</span>
             </div>
             <div class="p-actions-row">
               <button class="shimmer-btn" onclick="openProjectModal('aiemployee', event)">View Details</button>
@@ -5390,11 +5098,11 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 1;" data-project="autograder"
+<div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 1;" data-project="autograder"
           onclick="openProjectModal('autograder', event)">
           <div class="p-visual">
-            <img src="images/autograder.webp" alt="AutoGrader Agent preview" loading="lazy" decoding="async"
-              width="1400" height="757" />
+            <img src="images/autograder.webp" alt="AutoGrader Agent preview" loading="lazy"
+              decoding="async" width="1400" height="757" />
             <span class="pnum">002</span>
             <div class="image-label cyan">Agentic AI</div>
             <div class="badge-year">2026</div>
@@ -5403,8 +5111,7 @@
           </div>
           <div class="p-info">
             <h3 class="p-title-large">AutoGrader Agent</h3>
-            <p class="p-desc-large">Comprehensive academic evaluation agent featuring integrated vision analysis for
-              diagrams, dual-similarity plagiarism detection, and automated rubric generation.</p>
+            <p class="p-desc-large">Comprehensive academic evaluation agent featuring integrated vision analysis for diagrams, dual-similarity plagiarism detection, and automated rubric generation.</p>
             <div class="pstk">
               <span class="pill pill-cyan">Python</span><span class="pill pill-cyan">Groq LLaMA 3.3</span><span
                 class="pill pill-cyan">PyMuPDF</span><span class="pill pill-cyan">openpyxl</span>
@@ -5419,11 +5126,11 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 2;" data-project="shapids"
+<div class="proj-card pcc proj-card-preview premium-glow-card" style="order: 2;" data-project="shapids"
           onclick="openProjectModal('shapids', event)">
           <div class="p-visual">
-            <img src="images/shap-ids.webp" alt="SHAP-Explained Agentic IDS preview" loading="lazy" decoding="async"
-              width="1400" height="790" />
+            <img src="images/shap-ids.webp" alt="SHAP-Explained Agentic IDS preview" loading="lazy"
+              decoding="async" width="1400" height="790" />
             <span class="pnum">003</span>
             <div class="image-label cyan">Explainable Security</div>
             <div class="badge-year">2026</div>
@@ -5461,8 +5168,7 @@
           </div>
           <div class="p-info">
             <h3 class="p-title-large">PhishGuard AI</h3>
-            <p class="p-desc-large">Chrome extension and FastAPI backend that detects phishing emails with heuristic
-              feature extraction and Groq LLM risk analysis.</p>
+            <p class="p-desc-large">Chrome extension and FastAPI backend that detects phishing emails with heuristic feature extraction and Groq LLM risk analysis.</p>
             <div class="pstk">
               <span class="pill">FastAPI</span><span class="pill">Groq</span><span class="pill">Chrome Extension</span>
               <a href="https://github.com/omerfarooq223/PhishGuard-AI" target="_blank" rel="noopener noreferrer"
@@ -5476,7 +5182,7 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pcc proj-card-trio premium-glow-card" style="order: 4;" data-project="careerpilot"
+<div class="proj-card pcc proj-card-trio premium-glow-card" style="order: 4;" data-project="careerpilot"
           onclick="openProjectModal('careerpilot', event)">
           <div class="p-visual">
             <img src="images/careerpilot.webp" alt="CareerPilot Agent preview" loading="lazy" decoding="async"
@@ -5492,8 +5198,8 @@
             <p class="p-desc-large">Autonomous Observe-Analyze-Plan agent that audits repositories, tracks hirability
               scores, and delivers continuous weekly coaching through an interactive chat interface.</p>
             <div class="pstk">
-              <span class="pill">FastAPI</span><span class="pill">SQLite</span><span class="pill">GitHub
-                Actions</span><span class="pill">MCP</span>
+              <span class="pill">FastAPI</span><span class="pill">SQLite</span><span
+                class="pill">GitHub Actions</span><span class="pill">MCP</span>
               <a href="https://github.com/omerfarooq223/CareerPilot-Agent" target="_blank" rel="noopener noreferrer"
                 onclick="event.stopPropagation()" class="github-icon-btn" aria-label="GitHub Repository"
                 style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
@@ -5505,7 +5211,7 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pca proj-card-trio premium-glow-card" style="order: 5;" data-project="firewatch"
+<div class="proj-card pca proj-card-trio premium-glow-card" style="order: 5;" data-project="firewatch"
           onclick="openProjectModal('firewatch', event)">
           <div class="p-visual">
             <img src="images/firewatch1.webp" alt="FireWatch AI preview" loading="lazy" decoding="async" width="1400"
@@ -5522,8 +5228,9 @@
               fire/smoke in
               real-time and triggers agentic incident response protocols along with RAG implemented chatbot.</p>
             <div class="pstk">
-              <span class="pill">FastAPI</span><span class="pill">YOLOv8l</span><span class="pill">React</span><span
-                class="pill">RAG</span><span class="pill">GmailAPI</span>
+              <span class="pill">FastAPI</span><span class="pill">YOLOv8l</span><span
+                class="pill">React</span><span class="pill">RAG</span><span
+                class="pill">GmailAPI</span>
               <a href="https://github.com/omerfarooq223/Agentic-Fire-Detection" target="_blank"
                 rel="noopener noreferrer" onclick="event.stopPropagation()" class="github-icon-btn"
                 aria-label="GitHub Repository" style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
@@ -5535,7 +5242,7 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pcp proj-card-trio premium-glow-card hidden-project" style="order: 6;" data-project="autoresearch"
+<div class="proj-card pcp proj-card-trio premium-glow-card" style="order: 6;" data-project="autoresearch"
           onclick="openProjectModal('autoresearch', event)">
           <div class="p-visual">
             <img src="images/autoresearchagent.webp" alt="AutoResearch Agent preview" loading="lazy" decoding="async"
@@ -5564,7 +5271,7 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pca proj-card-trio premium-glow-card hidden-project" style="order: 7;" data-project="parking"
+<div class="proj-card pca proj-card-trio premium-glow-card" style="order: 7;" data-project="parking"
           onclick="openProjectModal('parking', event)">
           <div class="p-visual">
             <img src="images/parkingdetection2.webp" alt="Parking Detection System preview" loading="lazy"
@@ -5585,7 +5292,8 @@
                 class="pill">Image Processing</span>
               <a href="https://github.com/omerfarooq223/parking-detection-system" target="_blank"
                 rel="noopener noreferrer" onclick="event.stopPropagation()" class="github-icon-btn"
-                aria-label="GitHub Repository" style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
+                aria-label="GitHub Repository"
+                style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path
                     d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
@@ -5594,7 +5302,7 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pca proj-card-trio premium-glow-card hidden-project" style="order: 8;" data-project="urduplanner"
+<div class="proj-card pca proj-card-trio premium-glow-card" style="order: 8;" data-project="urduplanner"
           onclick="openProjectModal('urduplanner', event)">
           <div class="p-visual">
             <img src="images/urduplanner.webp" alt="UrduPlanner Agent preview" loading="lazy" decoding="async"
@@ -5623,39 +5331,10 @@
             </div>
           </div>
         </div>
-        <div class="proj-card pcc proj-card-trio premium-glow-card hidden-project" style="order: 9;" data-project="ospilot"
-          onclick="openProjectModal('ospilot', event)">
-          <div class="p-visual">
-            <img src="images/os-pilot-dashboard.webp" alt="OS Pilot dashboard preview" loading="lazy" decoding="async"
-              width="1400" height="790" />
-            <span class="pnum">010</span>
-            <div class="image-label cyan">Kaggle Capstone</div>
-            <div class="badge-year">2026</div>
-            <button class="preview-hover-btn" type="button" onclick="openProjectModal('ospilot', event)">View
-              Details</button>
-          </div>
-          <div class="p-info">
-            <h3 class="p-title-large">OS Pilot</h3>
-            <p class="p-desc-large">Local-first multi-agent workspace recovery assistant that scans developer projects,
-              ranks safe cleanup opportunities, and quarantines approved rebuildable artifacts.</p>
-            <div class="pstk">
-              <span class="pill">React</span><span class="pill">Tauri</span><span class="pill">FastAPI</span><span
-                class="pill">SQLite</span>
-              <a href="https://github.com/Sobanshahid10/ospilot" target="_blank" rel="noopener noreferrer"
-                onclick="event.stopPropagation()" class="github-icon-btn" aria-label="GitHub Repository"
-                style="margin-left: auto; width: 32px; height: 32px; flex: 0 0 32px;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
         <a href="https://github.com/omerfarooq223/nexus-ai-pipeline" target="_blank" rel="noopener noreferrer"
           class="proj-card pcc proj-span-6 hidden-project" style="order: 10;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">011</span>
+          <span class="pnum">010</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -5672,7 +5351,7 @@
         <a href="https://github.com/omerfarooq223/language-recognition-logistic-regression" target="_blank"
           rel="noopener noreferrer" class="proj-card pca proj-span-6 hidden-project" style="order: 11;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">012</span>
+          <span class="pnum">011</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -5689,7 +5368,7 @@
         <a href="https://github.com/omerfarooq223/solana-trading-agent-skills" target="_blank" rel="noopener noreferrer"
           class="proj-card pcp proj-span-6 hidden-project" style="order: 12;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">013</span>
+          <span class="pnum">012</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -5707,7 +5386,7 @@
         <a href="https://github.com/omerfarooq223/n8n-jira-slack" target="_blank" rel="noopener noreferrer"
           class="proj-card pca proj-span-6 hidden-project" style="order: 13;">
           <video class="proj-vid" preload="none" muted loop playsinline></video>
-          <span class="pnum">014</span>
+          <span class="pnum">013</span>
           <div class="parr" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -5794,26 +5473,19 @@
       <div class="ct-glow"></div>
       <div class="ct-layout">
         <div class="ct-left r3d">
+          <div class="ct-avail"><span class="avail-dot"></span><span>Available for opportunities</span></div>
           <div class="ct-big">Let's build something <span class="grd2">great</span></div>
           <p class="ct-sub">Open to internships, freelance projects and collaborations in AI, ML and automation. Based
             in Lahore - happy to work remotely.</p>
-          <div class="ct-proof" aria-label="Contact highlights">
-            <span>AI & ML projects</span>
-            <span>Agentic systems</span>
-            <span>Remote-ready</span>
-          </div>
         </div>
 
         <div class="ct-card stg">
           <div class="ct-card-hd">
             <div>
-              <div class="ct-card-kicker">Contact hub</div>
               <h3 class="ct-card-title">Let's connect</h3>
-              <p class="ct-card-copy">For internships, freelance work, collaborations, or a quick look through my
-                profiles.</p>
             </div>
           </div>
-          <div class="ct-direct">
+          <div class="ct-card-actions">
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=momerfarooq223@gmail.com&su=Portfolio%20Inquiry"
               target="_blank" rel="noopener noreferrer" class="cl clc">
               <svg class="cl-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -5821,14 +5493,8 @@
                 <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg>
-              <span class="cl-copy">
-                <span class="cl-title">Email me</span>
-                <span class="cl-note">momerfarooq223@gmail.com</span>
-              </span>
+              <span>Gmail</span>
             </a>
-          </div>
-          <div class="ct-social-label">Profiles</div>
-          <div class="ct-card-actions">
             <a href="https://www.linkedin.com/in/omerfarooq223/" target="_blank" rel="noopener noreferrer"
               class="cl clp">
               <svg class="cl-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -5862,19 +5528,14 @@
                 <circle cx="12" cy="12" r="9.5" fill="#ffcc4d" />
                 <circle cx="8.7" cy="10" r="1.25" fill="#111827" />
                 <circle cx="15.3" cy="10" r="1.25" fill="#111827" />
-                <path d="M8.6 14.3c1.7 1.8 5.1 1.8 6.8 0" stroke="#111827" stroke-width="1.8" stroke-linecap="round" />
-                <path d="M5.7 7.2 3.4 5.3M18.3 7.2l2.3-1.9" stroke="#ffcc4d" stroke-width="3" stroke-linecap="round" />
+                <path d="M8.6 14.3c1.7 1.8 5.1 1.8 6.8 0" stroke="#111827" stroke-width="1.8"
+                  stroke-linecap="round" />
+                <path d="M5.7 7.2 3.4 5.3M18.3 7.2l2.3-1.9" stroke="#ffcc4d" stroke-width="3"
+                  stroke-linecap="round" />
                 <path d="M5.7 7.2 3.4 5.3M18.3 7.2l2.3-1.9" stroke="#111827" stroke-width="1.4"
                   stroke-linecap="round" />
               </svg>
               <span>Hugging Face</span>
-            </a>
-            <a href="https://www.kaggle.com/omerfarooq223" target="_blank" rel="noopener noreferrer" class="cl clkg">
-              <svg class="cl-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M6 4h3.2v7.15L15.2 4H19l-6.65 7.62L19.45 20h-3.98l-6.27-7.5V20H6V4Z" />
-              </svg>
-              <span>Kaggle</span>
             </a>
           </div>
         </div>
@@ -6117,36 +5778,6 @@
           '<strong>Flask & Rich:</strong> Dual web and CLI interfaces for varied user workflows.'
         ],
         github: 'https://github.com/omerfarooq223/UrduPlanner-Agent'
-      },
-      ospilot: {
-        title: 'OS Pilot',
-        subtitle: 'Kaggle AI Agents Capstone / Local-First Workspace Recovery · 2026',
-        media: ['images/os-pilot-dashboard.webp', 'images/os-pilot-plan.webp', 'images/os-pilot-report.webp'],
-        alt: 'OS Pilot dashboard preview',
-        tags: ['Kaggle Capstone', 'Multi-Agent System', 'React + Tauri', 'FastAPI', 'SQLite', 'Human Approval'],
-        overview: [
-          'A local-first AI developer workspace recovery agent built for the Kaggle AI Agents Capstone. <strong>OS Pilot</strong> helps developers understand laptop slowdowns, identify workspace pressure, and safely reclaim storage from rebuildable project artifacts.',
-          'The system profiles a selected folder, detects project evidence, ranks cleanup opportunities, compares Conservative, Balanced, and Deep Review plans, then moves only approved items into quarantine with restore history.'
-        ],
-        featuresTitle: 'Detailed Features',
-        features: [
-          '<strong>Multi-Agent Pipeline:</strong> Monitor, Diagnosis, Maintenance Planner, Risk & Safety, and Report agents collaborate on each cleanup plan.',
-          '<strong>Project-Aware Scanning:</strong> Detects Node, Python, Jupyter, Rust, Go, Java, Ruby, PHP, Flutter, and ML-style workspaces from manifest evidence.',
-          '<strong>Safety-First Automation:</strong> Blocks risky paths, revalidates symlinks and file identity, and avoids permanent deletion by using quarantine and restore workflows.',
-          '<strong>Human Approval:</strong> Presents cleanup scenarios before action, keeping the user in control of every meaningful change.',
-          '<strong>Workspace Memory:</strong> Stores scan snapshots locally to explain workspace growth or shrinkage across runs.',
-          '<strong>Desktop-Ready UI:</strong> React + Tauri interface for local scanning, approval, reports, quarantine, and recovery recipes.'
-        ],
-        stackTitle: 'Technology Stack',
-        stack: [
-          '<strong>React, Vite & Tailwind:</strong> Responsive desktop dashboard and approval workflow.',
-          '<strong>Tauri:</strong> Native desktop shell and local folder selection experience.',
-          '<strong>FastAPI:</strong> Backend scan sessions, report generation, and agent orchestration endpoints.',
-          '<strong>Groq AI:</strong> Structured diagnosis with deterministic fallback behavior.',
-          '<strong>SQLite:</strong> Audit logs, quarantine metadata, restore history, feedback, and scan snapshots.',
-          '<strong>Restricted MCP-Style Tools:</strong> Narrow allowlist for scanning, validation, quarantine, restore, and reporting.'
-        ],
-        github: 'https://github.com/Sobanshahid10/ospilot'
       },
       firewatch: {
         title: 'FireWatch AI: Autonomous Safety System',
@@ -6651,15 +6282,13 @@
     /* ── Certification Lightbox ── */
     const certData = [
       { src: 'docs/Google Certificate.webp', caption: 'Google Certificate' },
-      { src: 'docs/certificate-fmssrk5frsx3.webp', caption: 'AI Fluency: AI Capabilities & Limitations' },
+      { src: 'docs/certificate-fmssrk5frsx3.webp', caption: 'Professional Certificate' },
       { src: 'docs/cert-new-2.webp', caption: 'AI Fluency for Students - Anthropic' },
       { src: 'docs/cert-new-1.webp', caption: 'Claude 101 - Anthropic' },
       { src: 'docs/cert-new-3.webp', caption: 'Claude Code 101 - Anthropic' },
       { src: 'docs/cert-ai-foundations.webp', caption: 'AI Foundations - OpenAI Academy' },
       { src: 'docs/cert-s3jn6owcs6f6.webp', caption: 'AI Fluency: Framework & Foundations - Anthropic' },
-      { src: 'docs/cert-rn2wppq639.webp', caption: 'Applied AI Foundations - OpenAI Academy' },
-      { src: 'docs/cert-claude-platform-101.webp', caption: 'Claude Platform 101 - Anthropic' },
-      { src: 'docs/Peer_Tutoring_Certificate.webp', caption: 'Peer Tutoring Certificate - UMT' }
+      { src: 'docs/cert-rn2wppq639.webp', caption: 'Applied AI Foundations - OpenAI Academy' }
     ];
     function openCertLightbox(idx) {
       const lb = document.getElementById('certLightbox');
@@ -6677,10 +6306,10 @@
       lb.classList.remove('is-open');
       document.body.style.overflow = '';
     }
-    document.getElementById('certLightbox')?.addEventListener('click', function (e) {
+    document.getElementById('certLightbox')?.addEventListener('click', function(e) {
       if (e.target === this) closeCertLightbox();
     });
-    document.addEventListener('keydown', function (e) {
+    document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeCertLightbox();
     });
 
@@ -6717,7 +6346,7 @@
     document.getElementById('toggleProjects')?.addEventListener('click', function () {
       const isExpanded = this.classList.contains('is-expanded');
       const cards = document.querySelectorAll('.proj-card');
-      const hiddenCards = Array.from(cards).filter(c => Number(c.style.order) >= 6);
+      const hiddenCards = Array.from(cards).filter(c => c.style.order >= 7);
       const btnSpan = this.querySelector('span');
 
       if (!isExpanded) {
@@ -6737,9 +6366,6 @@
       } else {
         // Show Less
         hiddenCards.forEach(card => {
-          card.style.opacity = '';
-          card.style.transform = '';
-          card.style.transition = '';
           card.classList.add('hidden-project');
         });
         btnSpan.textContent = 'View More Projects';
