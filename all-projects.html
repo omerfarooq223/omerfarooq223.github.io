@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Projects | Muhammad Umar Farooq</title>
+  <meta name="description"
+    content="Complete project browser for Muhammad Umar Farooq's AI engineering portfolio." />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300e5ff'/%3E%3Cstop offset='55%25' stop-color='%23a855f7'/%3E%3Cstop offset='100%25' stop-color='%23f472b6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='%2307080f'/%3E%3Cpath d='M18 48V16h9.2l9 18.1L45.2 16H46v32h-7V31.7l-6.2 12.1h-1.7l-6.2-12.1V48z' fill='url(%23g)'/%3E%3C/svg%3E" />
+  <script>
+    (function () {
+      try {
+        const storedTheme = localStorage.getItem('portfolio-theme');
+        document.documentElement.dataset.theme = storedTheme === 'light' ? 'light' : 'dark';
+      } catch (e) { }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .all-projects-page {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .all-projects-main {
+      width: min(1760px, calc(100vw - 48px));
+      margin: 0 auto;
+      padding: clamp(126px, 12vw, 154px) 0 72px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .all-projects-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .all-projects-kicker {
+      color: var(--cyan);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .all-projects-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(2.35rem, 5vw, 5.85rem);
+      line-height: .96;
+      letter-spacing: -.04em;
+      max-width: 980px;
+      margin: 0;
+    }
+
+    .all-projects-copy {
+      max-width: 760px;
+      color: var(--muted2);
+      margin-top: 18px;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .portfolio-back-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      justify-self: end;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted2);
+      background: var(--themeToggleBg);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: background .2s, border-color .2s, color .2s, transform .2s;
+    }
+
+    .portfolio-back-link:hover {
+      color: var(--text);
+      border-color: rgba(0, 229, 255, .45);
+      background: var(--themeToggleBgHover);
+      transform: translateY(-2px);
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 30px 0 22px;
+    }
+
+    .filter-btn {
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .05);
+      color: var(--muted2);
+      cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: background .2s, border-color .2s, color .2s, transform .2s;
+    }
+
+    .filter-btn.is-active,
+    .filter-btn:hover {
+      color: var(--text);
+      border-color: rgba(0, 229, 255, .45);
+      background: rgba(0, 229, 255, .12);
+    }
+
+    .filter-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .all-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .all-project-card {
+      min-height: 310px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background:
+        linear-gradient(145deg, var(--projCardGradA), rgba(255, 255, 255, .035)),
+        radial-gradient(circle at 0 0, rgba(0, 229, 255, .11), transparent 55%);
+      color: inherit;
+      text-align: left;
+      font: inherit;
+      cursor: pointer;
+      appearance: none;
+      transition: transform .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease;
+    }
+
+    .all-project-card:hover,
+    .all-project-card:focus-visible {
+      transform: translateY(-4px);
+      border-color: rgba(0, 229, 255, .42);
+      box-shadow: 0 22px 42px rgba(0, 0, 0, .26);
+      outline: none;
+    }
+
+    .all-project-card.is-hidden {
+      display: none;
+    }
+
+    .all-project-card.no-image {
+      min-height: 242px;
+    }
+
+    .all-card-media {
+      height: 128px;
+      background:
+        linear-gradient(135deg, rgba(0, 229, 255, .13), transparent),
+        linear-gradient(315deg, rgba(168, 85, 247, .16), transparent),
+        rgba(0, 0, 0, .24);
+      overflow: hidden;
+    }
+
+    .all-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: .86;
+      transition: transform .32s ease, opacity .32s ease;
+    }
+
+    .all-project-card:hover .all-card-media img,
+    .all-project-card:focus-visible .all-card-media img {
+      opacity: 1;
+      transform: scale(1.035);
+    }
+
+    .all-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 13px 14px 0;
+      color: var(--muted2);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .all-card-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(0, 229, 255, 0.08);
+      border: 1px solid rgba(0, 229, 255, 0.45);
+      color: #38bdf8;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.15);
+      transition: all 0.25s ease;
+    }
+
+    .all-project-card:hover .all-card-tag {
+      border-color: #00e5ff;
+      box-shadow: 0 0 14px rgba(0, 229, 255, 0.35);
+      color: #ffffff;
+    }
+
+    .all-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 12px 14px 16px;
+      flex: 1;
+    }
+
+    .all-project-card.no-image .all-card-content {
+      padding-top: 16px;
+    }
+
+    .all-card-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: .98rem;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin: 0;
+    }
+
+    .all-card-copy {
+      color: var(--muted2);
+      font-size: .82rem;
+      line-height: 1.58;
+      flex: 1;
+      margin: 0;
+    }
+
+    .all-card-stack {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .all-card-stack span {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .02em;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      /* Default Cyan Border Pill */
+      background: rgba(0, 229, 255, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      color: #7dd3fc;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Curated Alternating Palette for Stack Pills */
+    .all-card-stack span:nth-child(2) {
+      background: rgba(168, 85, 247, 0.08);
+      border-color: rgba(168, 85, 247, 0.5);
+      color: #d8b4fe;
+    }
+
+    .all-card-stack span:nth-child(3) {
+      background: rgba(52, 211, 153, 0.08);
+      border-color: rgba(52, 211, 153, 0.5);
+      color: #6ee7b7;
+    }
+
+    .all-card-stack span:nth-child(4) {
+      background: rgba(251, 191, 36, 0.08);
+      border-color: rgba(251, 191, 36, 0.5);
+      color: #fcd34d;
+    }
+
+    .all-card-stack span:nth-child(5) {
+      background: rgba(244, 114, 182, 0.08);
+      border-color: rgba(244, 114, 182, 0.5);
+      color: #f9a8d4;
+    }
+
+    .all-project-card:hover .all-card-stack span {
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    html[data-theme="light"] .all-project-card {
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, .98), rgba(244, 247, 255, .9)),
+        radial-gradient(circle at 0 0, rgba(14, 165, 233, .12), transparent 55%);
+      box-shadow: 0 12px 32px rgba(15, 23, 42, .08);
+    }
+
+    html[data-theme="light"] .filter-btn,
+    html[data-theme="light"] .portfolio-back-link {
+      background: rgba(15, 23, 42, .035);
+    }
+
+    html[data-theme="light"] .all-card-tag {
+      background: rgba(14, 165, 233, 0.08);
+      border-color: rgba(14, 165, 233, 0.5);
+      color: #0284c7;
+    }
+
+    html[data-theme="light"] .all-card-stack span {
+      background: rgba(14, 165, 233, 0.07);
+      border-color: rgba(14, 165, 233, 0.45);
+      color: #0369a1;
+    }
+
+    html[data-theme="light"] .all-card-stack span:nth-child(2) {
+      background: rgba(147, 51, 234, 0.07);
+      border-color: rgba(147, 51, 234, 0.45);
+      color: #7e22ce;
+    }
+
+    html[data-theme="light"] .all-card-stack span:nth-child(3) {
+      background: rgba(16, 185, 129, 0.07);
+      border-color: rgba(16, 185, 129, 0.45);
+      color: #047857;
+    }
+
+    html[data-theme="light"] .all-card-stack span:nth-child(4) {
+      background: rgba(217, 119, 6, 0.07);
+      border-color: rgba(217, 119, 6, 0.45);
+      color: #b45309;
+    }
+
+    html[data-theme="light"] .all-card-stack span:nth-child(5) {
+      background: rgba(225, 29, 72, 0.07);
+      border-color: rgba(225, 29, 72, 0.45);
+      color: #be123c;
+    }
+
+    @media (max-width: 1120px) {
+      .all-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 980px) {
+      .all-projects-main {
+        width: min(100% - 40px, 1760px);
+      }
+
+      .all-projects-hero {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .portfolio-back-link {
+        justify-self: start;
+      }
+
+      .all-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .all-projects-main {
+        width: min(100% - 28px, 1760px);
+        padding-top: 112px;
+      }
+
+      .all-projects-title {
+        font-size: clamp(2.05rem, 13vw, 3.1rem);
+      }
+
+      .filters {
+        gap: 8px;
+      }
+
+      .filter-btn {
+        flex: 1 1 calc(50% - 8px);
+        padding: 0 10px;
+      }
+
+      .all-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body class="all-projects-page">
+  <canvas id="nw" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"
+    aria-hidden="true"></canvas>
+
+  <nav id="nav">
+    <a class="nav-logo" href="index.html">MUF<span class="dot">.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#education">Education</a></li>
+      <li><a href="index.html#certificates">Certificates</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <button id="themeToggle" type="button" aria-label="Toggle theme" aria-pressed="false">
+      <span id="themeLabel">Dark</span>
+    </button>
+    <div class="ham" id="ham"><span></span><span></span><span></span></div>
+  </nav>
+
+  <div class="mob" id="mob">
+    <a href="index.html#about">About</a>
+    <a href="index.html#education">Education</a>
+    <a href="index.html#certificates">Certificates</a>
+    <a href="index.html#experience">Experience</a>
+    <a href="index.html#projects">Projects</a>
+    <a href="index.html#skills">Skills</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+
+  <main class="all-projects-main">
+    <section class="all-projects-hero">
+      <div>
+        <div class="all-projects-kicker">All Projects</div>
+        <h1 class="all-projects-title">Project Browser</h1>
+        <p class="all-projects-copy">Browse the complete project set in one focused view. Use the filters to narrow the
+          grid by agentic AI, machine learning, cybersecurity, automation, or deep learning.</p>
+      </div>
+      <a class="portfolio-back-link" href="index.html#projects">Back to Portfolio</a>
+    </section>
+
+    <div class="filters" aria-label="Project filters">
+      <button class="filter-btn is-active" type="button" data-filter="all">All</button>
+      <button class="filter-btn" type="button" data-filter="agentic">Agentic AI</button>
+      <button class="filter-btn" type="button" data-filter="ml">ML / DL</button>
+      <button class="filter-btn" type="button" data-filter="cyber">Cybersecurity</button>
+      <button class="filter-btn" type="button" data-filter="automation">Automation</button>
+    </div>
+
+    <section class="all-grid" id="allProjects" aria-label="All project cards"></section>
+  </main>
+
+  <footer>
+    <span class="fg">Muhammad Umar Farooq</span>
+    <span style="display:flex;align-items:center;gap:12px;">&copy; 2026 · Built with intention.<button id="btt"
+        type="button" aria-label="Back to top">↑</button></span>
+  </footer>
+
+  <div id="bar"></div>
+
+  <div id="proj-modal">
+    <div class="m-overlay" onclick="closeModal()"></div>
+    <div class="m-card m-card-premium">
+      <button class="m-close" onclick="closeModal()" aria-label="Close modal">&times;</button>
+      <div class="m-header-premium">
+        <h3 id="m-title-premium" class="m-title-premium">AutoGrader Agent</h3>
+        <div class="m-subtitle-premium">
+          <span class="m-accent-icon">✦</span>
+          <span id="m-subtitle-premium">AI / Agentic Engineering / Python · 2026</span>
+        </div>
+      </div>
+      <div class="m-body m-body-premium">
+        <div class="m-vid-box-premium">
+          <div id="m-media-stage" class="m-media-stage">
+            <img id="m-media-0" class="m-media-slide is-active" src="images/autograder.webp"
+              alt="AutoGrader Agent preview" width="1400" height="757" />
+            <img id="m-media-1" class="m-media-slide" src="images/autograder.webp" alt="AutoGrader Agent preview"
+              width="1400" height="757" />
+            <img id="m-media-2" class="m-media-slide" src="images/autograder.webp" alt="AutoGrader Agent preview"
+              width="1400" height="757" />
+            <div class="m-media-controls">
+              <button type="button" class="m-media-nav m-media-prev" onclick="stepModalMedia(-1)"
+                aria-label="Previous image">‹</button>
+              <div id="m-media-dots" class="m-media-dots"></div>
+              <button type="button" class="m-media-nav m-media-next" onclick="stepModalMedia(1)"
+                aria-label="Next image">›</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="m-tag-cloud-premium">
+          <span class="m-tag-pill mt-c">AI Agents</span>
+          <span class="m-tag-pill mt-p">LLM Engineering</span>
+          <span class="m-tag-pill mt-g">Python</span>
+          <span class="m-tag-pill mt-a">Academic Tech</span>
+          <span class="m-tag-pill mt-pk">Automation</span>
+          <span class="m-tag-pill mt-c">Data Analysis</span>
+        </div>
+
+        <div class="m-info-content-premium">
+          <div class="m-desc-section">
+            <h4 class="m-desc-title">Project Overview</h4>
+            <div id="m-overview-inner" class="m-pane-static"></div>
+          </div>
+        </div>
+
+        <div class="m-footer-premium">
+          <a id="m-github-link" href="https://github.com/omerfarooq223/AutoGrader-Agent" target="_blank"
+            rel="noopener noreferrer" class="m-btn-github-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="margin-right:12px;">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            View Source on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    const allProjects = [
+      {
+        id: 'aiemployee', n: '001', title: 'Personal AI Employee', tag: 'Agentic AI', cats: 'agentic automation',
+        img: 'images/aiemployee-dashboard.webp',
+        desc: 'Human-in-the-loop AI employee for Gmail monitoring, task planning, approval routing, and LinkedIn automation.',
+        stack: ['Claude Code', 'Flask', 'Gmail API']
+      },
+      {
+        id: 'autograder', n: '002', title: 'AutoGrader Agent', tag: 'Agentic AI', cats: 'agentic automation',
+        img: 'images/autograder.webp',
+        desc: 'Academic evaluation agent with vision analysis, plagiarism checks, rubrics, and reporting automation.',
+        stack: ['Python', 'Groq', 'PyMuPDF']
+      },
+      {
+        id: 'shapids', n: '003', title: 'SHAP-Explained Agentic IDS', tag: 'Cybersecurity', cats: 'agentic ml cyber',
+        img: 'images/shap-ids.webp',
+        desc: 'Intrusion detection system combining Random Forest, SHAP explanations, LangGraph verification, and red teaming.',
+        stack: ['SHAP', 'LangGraph', 'Flask']
+      },
+      {
+        id: 'phishguard', n: '004', title: 'PhishGuard AI', tag: 'Cybersecurity', cats: 'agentic cyber',
+        img: 'images/phishguard-ai.webp',
+        desc: 'Chrome extension and FastAPI backend for phishing email detection with heuristic and LLM analysis.',
+        stack: ['FastAPI', 'Groq', 'Extension']
+      },
+      {
+        id: 'careerpilot', n: '005', title: 'CareerPilot: AI CTO', tag: 'Agentic AI', cats: 'agentic automation',
+        img: 'images/careerpilot.webp',
+        desc: 'Autonomous career coach that audits repositories, tracks growth, and delivers weekly coaching.',
+        stack: ['FastAPI', 'SQLite', 'MCP']
+      },
+      {
+        id: 'firewatch', n: '006', title: 'FireWatch AI', tag: 'Computer Vision', cats: 'agentic ml automation',
+        img: 'images/firewatch1.webp',
+        desc: 'YOLOv8 fire and smoke detection system with autonomous incident response and RAG assistant.',
+        stack: ['YOLOv8', 'React', 'RAG']
+      },
+      {
+        id: 'autoresearch', n: '007', title: 'AutoResearch Agent', tag: 'Agentic AI', cats: 'agentic automation',
+        img: 'images/autoresearchagent.webp',
+        desc: 'Research engine that performs multi-source synthesis and generates professional PDF reports.',
+        stack: ['LLMs', 'Groq', 'Tavily']
+      },
+      {
+        id: 'parking', n: '008', title: 'Parking Detection System', tag: 'Machine Learning', cats: 'ml',
+        img: 'images/parkingdetection2.webp',
+        desc: 'YOLOv8 and DBSCAN vision system for parking spot detection, ranking, and assistant queries.',
+        stack: ['YOLOv8', 'OpenCV', 'Gradio']
+      },
+      {
+        id: 'urduplanner', n: '009', title: 'UrduPlanner Agent', tag: 'NLP', cats: 'agentic ml automation',
+        img: 'images/urduplanner.webp',
+        desc: 'NLP and OCR pipeline for Urdu text reconstruction, RTL alignment, and document automation.',
+        stack: ['OCR', 'Groq', 'Python']
+      },
+      {
+        id: 'ospilot', n: '010', title: 'OS Pilot', tag: 'Agentic AI', cats: 'agentic automation',
+        img: 'images/os-pilot-dashboard.webp',
+        desc: 'Local-first multi-agent workspace recovery assistant for scanning, planning, quarantine, and restore.',
+        stack: ['React', 'Tauri', 'FastAPI']
+      },
+      {
+        id: 'clarityhire', n: '011', title: 'ClarityHire', tag: 'Responsible AI', cats: 'agentic ml cyber automation',
+        img: 'images/clarityhire-dashboard.webp',
+        desc: 'Human-in-the-loop resume screening with blind evaluation, explainable scoring, and synthetic demographic bias auditing.',
+        stack: ['FastAPI', 'React', 'Celery', 'Fairlearn']
+      },
+      {
+        id: 'personadiff', n: '012', title: 'PersonaDiff', tag: 'Browser Systems', cats: 'automation cyber',
+        img: 'images/personadiff-analysis.webp',
+        desc: 'Evidence-first platform for isolated multi-persona web journeys, explainable diffs, tamper-evident capture, and offline replay.',
+        stack: ['Playwright', 'TypeScript', 'Fastify']
+      },
+      {
+        id: 'autoreach', n: '013', title: 'AutoReach Hub', tag: 'Intelligent Automation', cats: 'agentic automation',
+        img: 'images/autoreach-dashboard.webp',
+        desc: 'Smart multi-channel outreach platform with Google Gemini AI copywriting, dynamic variables, Microsoft 365 OAuth2 SSO, and UTF-8 WhatsApp messaging.',
+        stack: ['Flask', 'Gemini AI', 'Microsoft 365', 'WhatsApp']
+      },
+      {
+        id: 'nexus', n: '014', title: 'NexusML: MLOps', tag: 'MLOps', cats: 'ml automation',
+        img: '',
+        desc: 'Production-ready inference pipeline featuring DistilBERT benchmarks and a 1TB scaling strategy.',
+        stack: ['DistilBERT', 'Docker', 'Spark']
+      },
+      {
+        id: 'language', n: '015', title: 'Language Recognition', tag: 'Machine Learning', cats: 'ml',
+        img: '',
+        desc: 'Language classifier built with custom feature engineering, preprocessing, and logistic regression.',
+        stack: ['Python', 'Scikit-learn', 'NLP']
+      },
+      {
+        id: 'solana', n: '016', title: 'Solana Trading Agent', tag: 'Agentic AI', cats: 'agentic automation',
+        img: '',
+        desc: 'Skills-based trading agent for Solana with risk math, monitoring, and secure trade logging.',
+        stack: ['Claude Code', 'Solana', 'Web3']
+      },
+      {
+        id: 'jira', n: '017', title: 'Jira-Slack Integration', tag: 'Automation', cats: 'automation',
+        img: '',
+        desc: 'n8n workflows for issue tracking, automated notifications, and REST API orchestration.',
+        stack: ['n8n', 'Jira', 'Slack']
+      },
+      {
+        id: 'dl', n: '018', title: 'DL Coursework', tag: 'Deep Learning', cats: 'ml',
+        img: '',
+        desc: 'Neural network experiments from scratch, including CNNs, LSTMs, and sequence models.',
+        stack: ['PyTorch', 'TensorFlow', 'NumPy']
+      },
+      {
+        id: 'spatialfx', n: '019', title: 'Spatial-FX', tag: 'Computer Vision', cats: 'ml',
+        img: '',
+        desc: 'MediaPipe-powered hand tracking playground with gesture recognition, air painting, cinematic effects, and full-body invisibility.',
+        stack: ['MediaPipe', 'Canvas 2D', 'JavaScript']
+      },
+      {
+        id: 'pokemon', n: '020', title: 'Pokémon TCG AI Agent', tag: 'Game AI', cats: 'agentic ml',
+        img: '',
+        desc: 'State-aware Kaggle battle agent evolved over 18 versions and certified at a 91.5% local win rate across 294 matches.',
+        stack: ['Python', 'Planning', 'Simulation']
+      }
+    ];
+
+    const allProjectsGrid = document.getElementById('allProjects');
+    allProjectsGrid.innerHTML = allProjects.map(project => `
+      <button class="all-project-card ${project.img ? 'has-image' : 'no-image'}" type="button"
+        data-cats="${project.cats}" data-project="${project.id}"
+        aria-label="Open ${project.title} project details">
+        ${project.img ? `<div class="all-card-media"><img src="${project.img}" alt="${project.title} preview" loading="lazy" /></div>` : ''}
+        <div class="all-card-meta"><span>${project.n}</span><span class="all-card-tag">${project.tag}</span></div>
+        <div class="all-card-content">
+          <h2 class="all-card-title">${project.title}</h2>
+          <p class="all-card-copy">${project.desc}</p>
+          <div class="all-card-stack">${project.stack.map(item => `<span>${item}</span>`).join('')}</div>
+        </div>
+      </button>
+    `).join('');
+
+    document.querySelectorAll('.all-project-card').forEach((card) => {
+      card.addEventListener('click', (event) => {
+        openProjectModal(card.dataset.project || 'autograder', event);
+      });
+    });
+
+    document.querySelectorAll('.filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(item => item.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.all-project-card').forEach((card) => {
+          const show = filter === 'all' || card.dataset.cats.split(/\s+/).includes(filter);
+          card.classList.toggle('is-hidden', !show);
+        });
+      });
+    });
+  </script>
+  <script src="geometric-background.js"></script>
+  <script src="chatbot-widget.js"></script>
+</body>
+
+</html>
