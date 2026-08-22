@@ -1,5 +1,4 @@
-// Portfolio Chatbot Widget - PREMIUM THEME-AWARE VERSION
-// Enhancements: Branded header, sharp typography, unified input bar, 60fps rAF scroll handling
+// Theme-aware portfolio assistant
 
 (function () {
   let isLoading = false;
@@ -328,16 +327,16 @@
 
     <div class="portfolio-chatbot-window hidden" id="portfolio-chatbot-window">
       <div class="portfolio-chatbot-header">
-        <h2><span class="header-accent-dot"></span> Agentic Portfolio Assistant</h2>
+        <h2><span class="header-accent-dot"></span> Umar's Portfolio Assistant</h2>
         <button class="portfolio-chatbot-close" id="portfolio-chatbot-close" aria-label="Close Chat">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
 
-      <div class="portfolio-chatbot-messages" id="portfolio-chatbot-messages">
+      <div class="portfolio-chatbot-messages" id="portfolio-chatbot-messages" role="log" aria-live="polite">
         <div class="portfolio-chatbot-message bot">
           <div class="portfolio-chatbot-message-content">
-            Expertly trained on Umar's work. Ask me about specific projects, technical skills, or professional background.
+            Updated with Umar's current projects, skills, education, certifications, and experience. What would you like to explore?
             <div class="portfolio-chatbot-suggestions" id="portfolio-chatbot-suggestions"></div>
           </div>
         </div>
@@ -345,7 +344,7 @@
 
       <div class="portfolio-chatbot-input-area">
         <form class="unified-input-bar" id="portfolio-chatbot-form">
-          <input type="text" class="portfolio-chatbot-input" id="portfolio-chatbot-input" placeholder="Ask about Umar..." autocomplete="off">
+          <input type="text" class="portfolio-chatbot-input" id="portfolio-chatbot-input" placeholder="Ask about a project, skill, or experience..." autocomplete="off" maxlength="1000">
           <button type="submit" class="portfolio-chatbot-send-btn" aria-label="Send Message">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>
@@ -374,12 +373,12 @@
     const suggestionsContainer = document.getElementById('portfolio-chatbot-suggestions');
 
     const prompts = [
-      { text: "Umar's Background", featured: true },
-      { text: "Personal AI Employee", featured: false },
-      { text: "PhishGuard AI", featured: false },
-      { text: "SHAP Agentic IDS", featured: false },
-      { text: "FireWatch AI Project", featured: false },
-      { text: "Skills & Tech Stack", featured: false }
+      { text: "What are Umar's latest projects?", featured: true },
+      { text: "Tell me about OS Pilot", featured: false },
+      { text: "How does ClarityHire handle bias?", featured: false },
+      { text: "Explain PersonaDiff", featured: false },
+      { text: "Skills & tech stack", featured: false },
+      { text: "What is Umar doing at Techohub?", featured: false }
     ];
 
     function renderSuggestions() {
@@ -410,21 +409,27 @@
 
     const footer = document.querySelector('footer');
     let ticking = false;
+    let footerTop = Number.POSITIVE_INFINITY;
+    let lastBottom = null;
+
+    function refreshChatbotMetrics() {
+      if (!footer) return;
+      footerTop = footer.getBoundingClientRect().top + window.scrollY;
+    }
 
     function updateChatbotPosition() {
       if (!footer) return;
-      const footerRect = footer.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       const isMobile = window.innerWidth <= 480;
       const baseBottom = isMobile ? 16 : 24;
-      let targetBottom = baseBottom;
+      const footerOverlap = Math.max(0, window.scrollY + windowHeight - footerTop);
+      const targetBottom = baseBottom + footerOverlap;
 
-      if (footerRect.top < windowHeight) {
-        targetBottom = baseBottom + (windowHeight - footerRect.top);
+      if (targetBottom !== lastBottom) {
+        toggle.style.bottom = targetBottom + 'px';
+        lastBottom = targetBottom;
       }
-      
-      toggle.style.bottom = targetBottom + 'px';
-      
+
       if (isMobile) {
         chatWindow.style.bottom = '0px';
         chatWindow.style.height = '100%';
@@ -443,14 +448,21 @@
     }, { passive: true });
 
     window.addEventListener('resize', () => {
+      refreshChatbotMetrics();
       window.requestAnimationFrame(updateChatbotPosition);
     });
 
+    window.addEventListener('load', () => {
+      refreshChatbotMetrics();
+      updateChatbotPosition();
+    }, { once: true });
+
+    refreshChatbotMetrics();
     updateChatbotPosition();
 
     async function handleUserInput(message) {
       if (!message || isLoading) return;
-      
+
       const userMsgDiv = document.createElement('div');
       userMsgDiv.className = 'portfolio-chatbot-message user';
       const userMsgContent = document.createElement('div');
@@ -458,7 +470,7 @@
       userMsgContent.textContent = message;
       userMsgDiv.appendChild(userMsgContent);
       messagesContainer.appendChild(userMsgDiv);
-      
+
       input.value = '';
       input.disabled = true;
       if (suggestionsContainer) suggestionsContainer.classList.add('hidden');

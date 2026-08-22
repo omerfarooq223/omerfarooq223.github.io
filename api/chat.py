@@ -4,7 +4,7 @@ import time
 from collections import defaultdict, deque
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from groq import Groq
 
 app = FastAPI()
@@ -23,7 +23,7 @@ app.add_middleware(
 )
 
 class ChatRequest(BaseModel):
-    message: str
+    message: str = Field(min_length=1, max_length=1000)
 
 
 PORTFOLIO_TOPICS = {
@@ -35,13 +35,20 @@ PORTFOLIO_TOPICS = {
     "autoresearch", "careerpilot", "firewatch", "parking", "phishguard",
     "nexusml", "urduplanner", "solana", "jira", "slack", "n8n",
     "shap", "ids", "intrusion", "langgraph", "langchain",
+    "os pilot", "ospilot", "workspace recovery", "tauri", "clarityhire",
+    "resume screening", "fairlearn", "autoreach", "spatial-fx", "spatial fx",
+    "mediapipe", "personadiff", "differential auditing", "pokemon", "tcg",
+    "fastify", "gemini", "browser systems", "responsible ai",
     "yolo", "opencv", "computer vision", "nlp", "react", "docker",
     "personal ai employee", "ai employee vault", "mcp", "gmail", "playwright",
     "peer tutoring", "grasp", "shopify", "dispatch",
+    "techohub", "intern", "internship", "phone", "inboxverity",
+    "panaversity", "turkish", "languages",
     "certificate", "certification", "certified", "claude code", "claude 101",
     "ai fluency", "framework", "foundations", "ai foundations", "applied ai", "openai academy", "anthropic",
     "resume", "cv", "about", "who", "what", "tell", "describe",
-    "help", "hello", "hi", "hey", "thanks", "thank"
+    "help", "hello", "hi", "hey", "thanks", "thank",
+    "dl-coursework", "deep learning", "pytorch", "tensorflow", "numpy"
 }
 
 OFF_TOPIC_FALLBACK = (
@@ -133,66 +140,86 @@ Use ONLY the knowledge provided below. Do NOT fabricate information.
 - Tagline: "Production-minded AI-Engineer building autonomous systems that are useful, not just impressive."
 - Location: Lahore, Pakistan (open to remote work)
 - Email: momerfarooq223@gmail.com
+- Phone: +92 328 6403551
 - LinkedIn: linkedin.com/in/omerfarooq223
 - GitHub: github.com/omerfarooq223
 - Status: Available for internships, freelance projects, and collaborations in AI, ML and automation.
 
 === STATS ===
-- CGPA: 3.81 / 4.0 at UMT
+- CGPA: 3.85 / 4.0 at UMT
 - Scholarship: 70% Merit Scholarship
-- Projects Shipped: 17+
-- AI Agents Built: 8+
+- Projects Shipped: 24+
+- Autonomous AI Agents Built: 12+
 
 === EDUCATION ===
-1. BS Artificial Intelligence (Oct 2023 – Present) — UMT, Lahore. CGPA 3.81/4.0, 70% Merit Scholarship, Dean's Award (Top 10%), Rector's Award.
+1. BS Artificial Intelligence, 7th semester (Oct 2023 – Present) — UMT, Lahore. CGPA 3.85/4.0, 70% Merit Scholarship, Dean's Award (Top 10%), Rector's Award.
 2. FSc Pre-Medical (Sep 2021 – Jun 2023) — Punjab Group of Colleges (PGC). 970 Marks, 88.2%, 50% Scholarship.
 3. Matric Science (Jun 2019 – Jun 2021) — Iqra Huffaz Secondary School, Lahore. 1085 Marks, 98.6%, Biology A+, Chemistry A+.
 
 === EXPERIENCE ===
-1. UMT — Peer Tutoring (Mar 2025 – Jul 2025): Academic Tutor in Lahore. Tutored peers across multiple subjects, improving academic performance. Adapted teaching methods to fit different learning styles.
-2. Shopify Store (Nov 2024 – Jan 2025): Customer Services, Remote. Resolved customer inquiries via email and chat, managed post-purchase support.
-3. Grasp Solutions Pvt Ltd (Jun 2024 – Sep 2024): Operations & Client Communication, Lahore. High-volume client interactions under strict time constraints.
-4. SMZ Dispatch Services (Feb 2024 – Apr 2024): Sales & Cross-Cultural Communication, Lahore. Real-time coordination with US-based clients.
+1. Techohub — Agentic AI Developer Intern (Jun 2026 – Present), hybrid in Lahore. Builds and supports a domain-aware decision-intelligence platform for research, evidence-backed analysis, and structured reports; also supports deployment, client technical assistance, and AI/data solution implementation.
+2. UMT — Peer Tutoring (Mar 2025 – Jul 2025): Academic Tutor in Lahore. Tutored peers across AI and programming subjects using adaptive teaching methods and strengthened mentoring and technical communication skills.
+3. Shopify Store (Nov 2024 – Jan 2025): Customer Services, Remote. Resolved customer inquiries, handled orders and returns, and managed shipment updates.
+4. Grasp Solutions Pvt Ltd (Jun 2024 – Sep 2024): Operations & Client Communication, Lahore. Managed high-volume client and taxi-dispatch coordination under time pressure.
+5. SMZ Dispatch Services (Feb 2024 – Apr 2024): Cross-Cultural Communication, Lahore. Coordinated in real time with US-based clients.
+
+=== PROFESSIONAL DEVELOPMENT ===
+- Panaversity Agentic AI Program (Jan 2026 – Present): Agentic AI, Claude Code, tool integration, MCP, foundational agentic patterns, and advanced agent design.
 
 === PROJECTS (ordered by importance) ===
 1. **Personal AI Employee** [Featured, 2026] — Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation, featuring a continuous reasoning loop and MCP-style tool integration. Tech: Claude Code, Flask, Gmail API, Playwright.
 2. **AutoGrader Agent** [2026] — Comprehensive academic evaluation agent with integrated vision analysis for diagrams, dual-similarity plagiarism detection, and automated rubric generation. Generates well-formatted Excel sheets for students and class reports. Tech: Python, Groq LLaMA 3.3, PyMuPDF, openpyxl.
 3. **SHAP-Explained Agentic IDS** [2026] — Hybrid intrusion detection system combining Random Forest classification, SHAP feature explanations, and LangGraph-based verification with autonomous red teaming. Tech: SHAP, LangGraph, Flask, React.
-4. **PhishGuard AI** [2026] — Chrome extension and FastAPI backend that detects phishing emails with heuristic feature extraction, Hugging Face inference support, and Groq LLM risk analysis. Tech: FastAPI, Chrome Extension, Groq, Hugging Face.
+4. **InboxVerity AI** (previously presented as PhishGuard AI) [2026] — Gmail/Outlook Chrome extension and FastAPI backend that extracts open emails, combines heuristic and URL/domain signals with Groq classification, stores scan history, and displays an in-page safety sidebar. Tech: FastAPI, Groq, Chrome Extension, React.
 5. **CareerPilot: AI CTO** [2026] — Autonomous Observe-Analyze-Plan agent that audits repositories, tracks hirability scores, and delivers continuous weekly coaching through an interactive chat interface. Tech: FastAPI, SQLite, GitHub Actions, MCP.
 6. **FireWatch AI** [2026] — Autonomous YOLOv8-powered safety system that detects and segments fire/smoke in real-time and triggers agentic incident response protocols along with RAG implemented chatbot. Tech: FastAPI, YOLOv8l, React, RAG, Gmail API.
 7. **AutoResearch Agent** [2026] — Autonomous research engine that performs multi-source web synthesis and generates professional PDF reports. Tech: LLMs, Groq, Tavily, PDF.
 8. **Parking Detection System** [2026] — Real-time vision system using YOLOv8m and DBSCAN spatial clustering to rank available parking spots based on proximity, density, and accessibility. Includes a HuggingFace API Chatbot. Tech: YOLOv8m, Gradio, OpenCV, Image Processing.
 9. **UrduPlanner Agent** [2026] — Specialized NLP pipeline performing intelligent OCR reconstruction for mangled text and RTL alignment. Tech: OCR, Groq, NLP, Python.
-10. **NexusML: MLOps** — Production-ready inference pipeline featuring DistilBERT benchmarks and a 1TB scaling strategy. Tech: DistilBERT, FastAPI, Docker, Spark.
-11. **Language Recognition** — Logistic regression classifier built from scratch with custom feature engineering to identify languages from text, with interactive inference UI. Tech: Python, Scikit-learn, Jupyter, NLP.
-12. **Solana Trading Agent** — Modular skills-based trading agent for the Solana ecosystem, featuring automated risk management math, price sentinel monitoring, and secure trade logging. Tech: Claude Code, Solana, Web3.
-13. **Jira–Slack Integration** — Advanced n8n workflows for cross-platform issue tracking and automated notifications, optimizing team communication through REST API orchestration. Tech: n8n, Jira, Slack, REST APIs.
+10. **OS Pilot** [2026] — Local-first multi-agent workspace recovery system that diagnoses storage pressure, proposes cleanup plans, and quarantines only human-approved rebuildable artifacts. Tech: React, Tauri, FastAPI, SQLite, Groq.
+11. **ClarityHire** [2026] — Human-in-the-loop resume screening and bias-audit platform with blind screening, explainable hybrid ranking, Fairlearn metrics, live agent traces, and exportable reports. Tech: FastAPI, React, Celery, Redis, Fairlearn.
+12. **PersonaDiff** [2026] — Evidence-first differential web auditing platform that compares isolated browser personas using tamper-evident captures, deterministic metrics, PII redaction, and offline replay. Tech: TypeScript, Playwright, Fastify, React, PostgreSQL.
+13. **AutoReach Hub** [2026] — Privacy-first multi-channel outreach platform with Gemini-generated copy, Microsoft 365 OAuth, SMTP support, contact categories, and WhatsApp deep links. Tech: Python, Flask, Gemini, Microsoft Graph.
+14. **Spatial-FX** [2026] — Real-time browser computer-vision playground with hand tracking, gesture recognition, air painting, cinematic effects, and an invisibility mode. Tech: MediaPipe, Canvas 2D, Web Audio, JavaScript.
+15. **Pokémon TCG AI Battle Agent** [2026] — State-aware game agent evolved across 18 versions, with multi-turn planning, local simulation, and a 91.5% certified local win rate across 294 matches. Tech: Python, heuristics, simulation, Kaggle.
+16. **NexusML: MLOps** — Production-ready inference pipeline featuring DistilBERT benchmarks and a 1TB scaling strategy. Tech: DistilBERT, FastAPI, Docker, Spark.
+17. **Language Recognition** — Logistic regression classifier built from scratch with custom feature engineering to identify languages from text, with interactive inference UI. Tech: Python, Scikit-learn, Jupyter, NLP.
+18. **Solana Trading Agent** — Modular skills-based trading agent for the Solana ecosystem, featuring automated risk management math, price sentinel monitoring, and secure trade logging. Tech: Claude Code, Solana, Web3.
+19. **Jira–Slack Integration** — Advanced n8n workflows for cross-platform issue tracking and automated notifications, optimizing team communication through REST API orchestration. Tech: n8n, Jira, Slack, REST APIs.
+20. **DL Coursework** — Coursework and hands-on experiments covering fundamentals through CNNs, transfer learning, RNNs/LSTMs, and sequence modeling in PyTorch & TensorFlow. Tech: PyTorch, TensorFlow, Python, NumPy.
 
 === SKILLS ===
-AI & ML: LLM Integration (Groq, Ollama), Agentic AI Architecture, Machine Learning, Computer Vision (OpenCV, YOLO), NLP & Text Classification, Scikit-learn.
-Languages & Frameworks: Python (Advanced), React/Vite, C++/C, SQL (SQLite, PostgreSQL), HTML5/CSS3/JavaScript.
-Tools & Automation: Cursor/VS Code, Google Antigravity, n8n Workflow Automation, Git/GitHub, PyMuPDF/Openpyxl, Docker/Postman.
-Currently Learning: Multi-agent Systems, LangChain/LangGraph, FastAPI, LeetCode, Docker.
+AI & ML: LLM Integration (Groq, Gemini, Claude, LLaMA), Agentic AI Architecture, Multi-Agent Systems, LangGraph, Explainable AI (SHAP), Responsible AI (FairLearn), Machine Learning, Computer Vision (OpenCV, YOLO), NLP, Semantic Search, Scikit-learn.
+Languages & Frameworks: Python (Advanced / Production), FastAPI, Flask, React, Vite, C++, SQL (SQLite, PostgreSQL), HTML5/CSS3/JavaScript.
+Tools & Automation: n8n Workflow Automation, MCP (Model Context Protocol) Tooling, Playwright, Git/GitHub, GitHub Actions, PyMuPDF, openpyxl, python-docx, Docker, Postman, Claude Code, Antigravity IDE.
+Languages: Urdu (Native), English (Advanced), Turkish (Basic).
+Interests: Competitive programming, open-source AI projects, agentic AI development, and applied cybersecurity.
 
 === CERTIFICATIONS ===
-Umar holds 6 professional AI certifications:
-1. **AI Fluency for Students** — Anthropic (Certificate of Completion)
-2. **Claude 101** — Anthropic (Certificate of Completion)
-3. **Claude Code 101** — Anthropic (Certificate of Completion)
-4. **AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
-5. **AI Fluency: Framework & Foundations** — Anthropic (Certificate of Completion)
-6. **Applied AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
+Umar holds 13 professional certifications (including AI, Anthropic, Kaggle and Google credentials):
+1. **5-Day AI Agents: Intensive Vibe Coding Course** — Kaggle / Google (Certificate of Completion, July 2026)
+2. **AI Fluency for Students** — Anthropic (Certificate of Completion)
+3. **Claude 101** — Anthropic (Certificate of Completion)
+4. **Claude Code 101** — Anthropic (Certificate of Completion)
+5. **AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
+6. **AI Fluency: Framework & Foundations** — Anthropic (Certificate of Completion)
+7. **Applied AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
+8. **Claude Code in Action** — Anthropic (Certificate of Completion)
+9. **Claude Platform 101** — Anthropic (Certificate of Completion)
+10. **AI Fluency: AI Capabilities & Limitations** — Anthropic (Certificate of Completion)
+11. **Intro to Generative AI** — Google
+12. **Peer Tutoring Certificate** — UMT
+13. **Intro to AI Ethics** — Kaggle
 
 === RESPONSE INSTRUCTIONS ===
 1. Answer visitors' questions about Umar's portfolio, skills, projects, education, experience, and contact.
 2. Keep answers concise (max 3 short sentences).
 3. Use Markdown for emphasis (e.g., **bold** for project names).
 4. Always refer to him as "Umar".
-5. If asked about contact info, share email (momerfarooq223@gmail.com) and mention LinkedIn.
+5. If asked about contact info, share email (momerfarooq223@gmail.com), phone (+92 328 6403551), and mention LinkedIn.
 6. If a query is unrelated to Umar's portfolio/career, respond with exactly:
    "I can only answer questions about Umar's portfolio, projects, skills, education, experience, or contact details."
-7. When listing projects, mention the most relevant ones (don't list all 13 unless asked).
+7. When listing projects, mention the most relevant ones (don't list all 20 unless asked).
 8. Be professional, confident, helpful, and technically precise.
 """
 

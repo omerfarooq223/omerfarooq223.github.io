@@ -1,64 +1,69 @@
-# 👨‍💻 Muhammad Umar Farooq — AI Engineer Portfolio
+# Portfolio Site
 
 <div align="center">
   <img src="https://img.shields.io/badge/Status-Live-success?style=for-the-badge&logo=github" alt="Status" />
-  <img src="https://img.shields.io/badge/Focus-Agentic%20AI-00e5ff?style=for-the-badge" alt="Agentic AI" />
   <img src="https://img.shields.io/badge/Stack-HTML5%20|%20CSS3%20|%20JS-a855f7?style=for-the-badge" alt="Tech Stack" />
 </div>
 
 <p align="center">
-  <strong>🌐 Live Site:</strong> <a href="https://omerfarooq223.github.io">omerfarooq223.github.io</a>
+  <strong>🌐 Live:</strong> <a href="https://omerfarooq223.github.io">omerfarooq223.github.io</a>
 </p>
 
-## ✨ Overview
+## What This Is
 
-Welcome to the repository for my personal portfolio website! This site is designed to showcase my work as an **AI Engineer**, specialized in building **autonomous agentic systems, ML pipelines**, and **intelligent automation**.
+A personal portfolio website built entirely from scratch with vanilla HTML, CSS, and JavaScript — no frameworks, no build tools. Designed to showcase AI/ML projects with a premium, immersive dark-mode aesthetic.
 
-The site features a custom-built, highly dynamic user interface with a premium dark-mode aesthetic, utilizing modern web technologies to create an immersive experience.
+## Site Features
 
-## 🚀 Key Features
+- **2D Canvas Ambient Background** — Lightweight particle flow animation in the hero section, theme-aware and responsive.
+- **AI Chatbot Widget** — Integrated chatbot powered by Groq API & LLaMA 3 via a FastAPI backend, answers questions about the portfolio content.
+- **Project Modals** — Click-to-expand project cards with multi-image carousels, tech stack tags, and GitHub links.
+- **Category Filtering** — Filter projects by tag (Agentic AI, ML/DL, Computer Vision, Automation, etc.) with animated transitions.
+- **Certification Lightbox** — Gallery with lightbox preview for 13 professional certifications stored as optimized WebP.
+- **Light / Dark Mode** — Full dual-theme support with smooth CSS transitions and persistent toggle.
+- **Glassmorphism UI** — Extensive use of CSS custom properties, backdrop-filters, and cyan/purple/pink gradient accents.
+- **Fully Responsive** — Fluid layout built from scratch, renders correctly across all device sizes.
+- **Document Preview Modal** — In-page preview for PDFs and certificate images without navigating away.
 
-- **Interactive 2D Canvas Ambient Flow Background**: A lightweight, responsive ambient particle flow in the hero section.
-- **AI-Powered Portfolio Chatbot**: A custom-built chatbot powered by **Groq API & LLaMA 3**, integrated via a secure FastAPI backend to answer questions about my projects, experience, education, certifications, and more.
-- **Certification Gallery**: Interactive gallery showcasing 6 professional AI certifications with lightbox preview — images stored as optimized WebP.
-- **Glassmorphism & Neon UI Design**: Uses extensive CSS custom properties, backdrop-filters, and vibrant gradients `(Cyan / Purple / Pink)` to deliver a state-of-the-art visual presentation.
-- **Responsive Layout**: Fluid design built from scratch with Vanilla CSS ensuring perfect rendering across all device sizes.
-- **Light/Dark Mode**: Smooth transition between meticulously crafted dark and light themes.
+## Project Structure
 
-## 🏆 Featured Projects
+```
+portfolio-site/
+├── index.html              # Main portfolio page
+├── style.css               # Styles for index.html
+├── main.js                 # Scripts for index.html
+├── all-projects.html       # Dedicated all-projects page
+├── chatbot-widget.js       # AI chatbot widget
+├── images/                 # Project screenshots & assets (WebP)
+├── docs/                   # Certificates & documents
+├── api/
+│   └── chat.py             # FastAPI serverless chatbot endpoint
+├── vercel.json             # Vercel deployment config
+├── CV.pdf                  # Resume
+└── README.md
+```
 
-A selection of the agentic systems and ML pipelines featured on the site:
+## Tech Stack
 
-1. **Personal AI Employee** — Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation.
-2. **AutoGrader Agent** — Academic evaluation agent with vision analysis for diagrams and plagiarism detection.
-3. **SHAP-Explained Agentic IDS** — Hybrid intrusion detection system combining Random Forest, SHAP feature explanations, and LangGraph verification.
-4. **PhishGuard AI** — Chrome extension and FastAPI backend that detects phishing emails with heuristic feature extraction and Groq LLM risk analysis.
-5. **CareerPilot: AI CTO** — Autonomous Observe-Analyze-Plan agent that audits repositories and delivers continuous weekly coaching.
-6. **FireWatch AI** — Autonomous YOLOv8-powered safety system that detects and segments fire/smoke in real-time.
+| Layer | Tools |
+|-------|-------|
+| Structure | HTML5, semantic elements |
+| Styling | Vanilla CSS3 (custom properties, animations, glassmorphism) |
+| Logic | Vanilla JavaScript (DOM manipulation, canvas, fetch API) |
+| Chatbot API | Python, FastAPI, Groq API |
+| Deployment | GitHub Pages (frontend), Vercel (API) |
 
-## 🎓 Certifications
+## Running Locally
 
-| Certificate | Issuer |
-|---|---|
-| AI Fluency for Students | Anthropic |
-| Claude 101 | Anthropic |
-| Claude Code 101 | Anthropic |
-| AI Foundations | OpenAI Academy |
-| AI Fluency: Framework & Foundations | Anthropic |
-| Applied AI Foundations | OpenAI Academy |
+No build step required. Open `index.html` directly in a browser, or serve it locally:
 
-## 🛠️ Technology Stack
+```bash
+python3 -m http.server 8000
+```
 
-### Frontend
-- **HTML5** (Semantic Structure)
-- **Vanilla CSS3** (Custom Variables, Animations, Glassmorphism, BEM methodologies)
-- **Vanilla JavaScript** (DOM Manipulation, API calls, Application logic)
-- **Vanilla-Tilt.js** (3D Card Hover Effects)
+Then visit `http://localhost:8000`.
 
-### Backend Services (For Chatbot)
-- **Python / FastAPI** (Secure Server)
-- **Groq API** (Ultra-fast LLM inference)
-- **Vercel** (Serverless backend deployment)
+> The chatbot requires the Vercel backend to be running. Without it, the chatbot widget will load but won't return responses.
 
 <hr>
 <p align="center">
