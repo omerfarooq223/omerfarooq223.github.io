@@ -2326,6 +2326,25 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    /* Project modals should stay clean and flat; keep page card glow out. */
+    #proj-modal .m-card,
+    #proj-modal .m-card-premium,
+    #proj-modal .m-vid-box-premium,
+    #proj-modal .m-header-premium,
+    #proj-modal .m-footer-premium,
+    #proj-modal .m-media-controls {
+      box-shadow: none !important;
+      filter: none !important;
+    }
+
+    #proj-modal .m-card::before,
+    #proj-modal .m-card::after,
+    #proj-modal .m-card-premium::before,
+    #proj-modal .m-card-premium::after {
+      box-shadow: none !important;
+      filter: none !important;
+    }
+
     #proj-modal.open .m-card {
       transform: scale(1) translateY(0);
     }
@@ -5771,6 +5790,9 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
     }
 
     .project-filter-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       min-height: 42px;
       padding: 0 16px;
       border: 1px solid rgba(255, 255, 255, .12);
@@ -5778,6 +5800,7 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
       background: rgba(255, 255, 255, .045);
       color: var(--muted2);
       cursor: pointer;
+      text-decoration: none;
       font-family: 'IBM Plex Mono', monospace;
       font-size: .68rem;
       font-weight: 700;
@@ -5812,6 +5835,18 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
       text-transform: uppercase;
     }
 
+    #allProjectsLink[hidden] {
+      display: none !important;
+    }
+
+    #showMoreProjects[hidden] {
+      display: none !important;
+    }
+
+    #showLessProjects[hidden] {
+      display: none !important;
+    }
+
     .project-empty {
       display: none;
       grid-column: 1 / -1;
@@ -5820,10 +5855,6 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
       border: 1px dashed rgba(255, 255, 255, .16);
       color: var(--muted2);
       text-align: center;
-    }
-
-    #projects .proj-card.is-filter-hidden {
-      display: none !important;
     }
 
     .proj-card {
@@ -6743,9 +6774,10 @@ html[data-theme="light"] body.portfolio-home #geoBgCanvas { opacity: .72; mix-bl
   overflow: visible !important;
 }
 
-/* Card 2 onwards: No idle border glow, only visible on hover */
+/* Only the first three featured cards keep an idle traveling border. */
 #projects .proj-card .border-glow {
   opacity: 0 !important;
+  animation-play-state: paused !important;
   filter: none !important;
   transition: opacity 0.35s ease, filter 0.35s ease;
 }
@@ -6756,16 +6788,20 @@ html[data-theme="light"] body.portfolio-home #geoBgCanvas { opacity: .72; mix-bl
   filter: drop-shadow(0 0 14px var(--beam, #00e5ff)) drop-shadow(0 0 28px var(--beam, #00e5ff)) !important;
 }
 
-/* Card number one (Featured): Always has glowing border active */
+/* Personal AI Employee, AutoGrader Agent, and SHAP-Explained IDS stay active. */
 #projects #aiemployee-card .border-glow,
-#projects .proj-card-featured .border-glow {
+#projects .proj-card-featured .border-glow,
+#projects .proj-card[data-project="autograder"] .border-glow,
+#projects .proj-card[data-project="shapids"] .border-glow {
   opacity: 1 !important;
   animation-play-state: running !important;
   filter: drop-shadow(0 0 12px var(--beam, #00e5ff)) drop-shadow(0 0 24px var(--beam-fade, rgba(0, 229, 255, 0.5))) !important;
 }
 
 #projects #aiemployee-card:hover .border-glow,
-#projects .proj-card-featured:hover .border-glow {
+#projects .proj-card-featured:hover .border-glow,
+#projects .proj-card[data-project="autograder"]:hover .border-glow,
+#projects .proj-card[data-project="shapids"]:hover .border-glow {
   opacity: 1 !important;
   filter: drop-shadow(0 0 16px var(--beam, #00e5ff)) drop-shadow(0 0 32px var(--beam, #00e5ff)) !important;
 }
@@ -7183,6 +7219,105 @@ html[data-theme="light"] body.portfolio-home .hero-cta .btn-work {
   body.portfolio-home .hero-cta .btn-resume::before {
     animation: none;
   }
+}
+
+/* Deliberate plain-text exceptions for supporting headings and secondary cards. */
+.no-heading-gradient,
+.p-title-large:not(.project-heading-gradient) {
+  color: inherit !important;
+  background: none !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: none !important;
+  animation: none !important;
+}
+
+#skills .sk-grp h3 {
+  color: var(--skill-accent) !important;
+  background: none !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: 0 0 16px color-mix(in srgb, var(--skill-accent) 28%, transparent) !important;
+  animation: none !important;
+}
+
+/* Give each project family its own technology-pill accent. */
+#projects .proj-card.pcc .pill {
+  background: rgba(0, 229, 255, .10);
+  border-color: rgba(0, 229, 255, .32);
+  color: #8eefff;
+}
+
+#projects .proj-card.pcp .pill {
+  background: rgba(168, 85, 247, .11);
+  border-color: rgba(168, 85, 247, .34);
+  color: #d0a8ff;
+}
+
+#projects .proj-card.pca .pill {
+  background: rgba(251, 191, 36, .11);
+  border-color: rgba(251, 191, 36, .34);
+  color: #ffd978;
+}
+
+html[data-theme="light"] #projects .proj-card.pcc .pill {
+  background: rgba(14, 165, 233, .10);
+  border-color: rgba(14, 165, 233, .30);
+  color: #0369a1;
+}
+
+html[data-theme="light"] #projects .proj-card.pcp .pill {
+  background: rgba(124, 58, 237, .10);
+  border-color: rgba(124, 58, 237, .28);
+  color: #6d28d9;
+}
+
+html[data-theme="light"] #projects .proj-card.pca .pill {
+  background: rgba(217, 119, 6, .10);
+  border-color: rgba(217, 119, 6, .28);
+  color: #a16207;
+}
+
+/* Distinct accents for the three always-on featured project cards. */
+#projects #aiemployee-card {
+  --beam: #00e5ff;
+  --beam-fade: rgba(0, 229, 255, .35);
+}
+
+#projects .proj-card[data-project="autograder"] {
+  --beam: #a855f7;
+  --beam-fade: rgba(168, 85, 247, .35);
+}
+
+#projects .proj-card[data-project="shapids"] {
+  --beam: #f59e0b;
+  --beam-fade: rgba(245, 158, 11, .35);
+}
+
+#projects .proj-card[data-project="autograder"] .pill {
+  background: rgba(168, 85, 247, .11);
+  border-color: rgba(168, 85, 247, .34);
+  color: #d0a8ff;
+}
+
+#projects .proj-card[data-project="shapids"] .pill {
+  background: rgba(245, 158, 11, .11);
+  border-color: rgba(245, 158, 11, .34);
+  color: #ffd27a;
+}
+
+html[data-theme="light"] #projects .proj-card[data-project="autograder"] .pill {
+  background: rgba(124, 58, 237, .10);
+  border-color: rgba(124, 58, 237, .28);
+  color: #6d28d9;
+}
+
+html[data-theme="light"] #projects .proj-card[data-project="shapids"] .pill {
+  background: rgba(217, 119, 6, .10);
+  border-color: rgba(217, 119, 6, .28);
+  color: #a16207;
 }
 
 /* About section — technical profile layout */
@@ -8906,6 +9041,27 @@ html[data-theme="light"] #contact .ct-crystal-kicker {
 :where(h1, h2, h3, h4, h5, h6) span:not(.hero-name) {
   text-shadow: 0 0 12px color-mix(in srgb, var(--cyan) 24%, transparent),
     0 0 28px color-mix(in srgb, var(--purple) 18%, transparent);
+}
+
+/* Modal typography is intentionally neutral, including its headings. */
+#proj-modal h1,
+#proj-modal h2,
+#proj-modal h3,
+#proj-modal h4,
+#proj-modal h5,
+#proj-modal h6,
+#proj-modal h1 span,
+#proj-modal h2 span,
+#proj-modal h3 span,
+#proj-modal h4 span,
+#proj-modal h5 span,
+#proj-modal h6 span {
+  color: var(--text) !important;
+  background: none !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+  text-shadow: none !important;
+  animation: none !important;
 }
 
 @keyframes headingGlow {

@@ -142,11 +142,15 @@ let modalMediaSources = [];
         ],
         github: 'https://github.com/omerfarooq223/personal-ai-employee'
       },
-      phishguard: {
-        title: 'PhishGuard AI',
+      inboxverity: {
+        title: 'InboxVerity AI',
         subtitle: 'Chrome Extension / FastAPI / Groq LLM · 2026',
-        media: 'images/phishguard-ai.webp',
-        alt: 'PhishGuard AI preview',
+        media: [
+          'images/inboxverity-dashboard-overview.png',
+          'images/inboxverity-dashboard-analytics.png',
+          'images/inboxverity-dashboard-threat-signals.png'
+        ],
+        alt: 'InboxVerity AI preview',
         tags: ['Cybersecurity', 'FastAPI', 'Groq', 'Hugging Face'],
         overview: [
           'A Chrome extension and FastAPI backend that detects phishing emails with heuristic feature extraction, Hugging Face inference support, and Groq LLM risk analysis.'
@@ -162,7 +166,7 @@ let modalMediaSources = [];
           '<strong>Groq LLM & Hugging Face:</strong> Powers the risk analysis and natural language understanding.',
           '<strong>Chrome Extension API:</strong> Seamlessly integrates with the user browser.'
         ],
-        github: 'https://github.com/omerfarooq223/PhishGuard-AI'
+        github: 'https://github.com/omerfarooq223/InboxVerity-AI'
       },
       parking: {
         title: 'Parking Detection System',
@@ -1185,132 +1189,44 @@ let modalMediaSources = [];
       ebTicker.classList.remove('eb-meta', 'is-out');
     }
 
-    const projectCategoryMap = {
-      aiemployee: 'agentic automation',
-      autograder: 'agentic automation',
-      shapids: 'agentic ml cyber',
-      phishguard: 'agentic cyber',
-      careerpilot: 'agentic automation',
-      firewatch: 'agentic ml automation',
-      autoresearch: 'agentic automation',
-      parking: 'ml',
-      urduplanner: 'agentic ml automation',
-      ospilot: 'agentic automation',
-      clarityhire: 'agentic ml cyber automation',
-      personadiff: 'automation cyber',
-      autoreach: 'agentic automation',
-      nexus: 'ml automation',
-      language: 'ml',
-      solana: 'agentic automation',
-      jira: 'automation',
-      spatialfx: 'ml',
-      pokemon: 'agentic ml',
-      dl: 'ml'
-    };
-
-    function inferProjectKey(card) {
-      if (card.id === 'aiemployee-card') return 'aiemployee';
-      if (card.dataset.project) return card.dataset.project;
-      const href = card.getAttribute('href') || '';
-      if (href.includes('AutoReach')) return 'autoreach';
-      if (href.includes('nexus-ai-pipeline')) return 'nexus';
-      if (href.includes('language-recognition')) return 'language';
-      if (href.includes('solana-trading')) return 'solana';
-      if (href.includes('n8n-jira-slack')) return 'jira';
-      if (href.includes('foggy-glass-handwriter')) return 'spatialfx';
-      if (href.includes('ParallelWeb')) return 'personadiff';
-      if (href.includes('pokemon-tcg-ai-battle-agent')) return 'pokemon';
-      if (href.includes('dl-coursework')) return 'dl';
-      return '';
-    }
-
-    const projectCards = Array.from(document.querySelectorAll('#projects .proj-card'));
-    projectCards.forEach((card) => {
-      const key = inferProjectKey(card);
-      card.dataset.filterTags = projectCategoryMap[key] || '';
-    });
-
-    let moreProjectsLoaded = false;
-
-    function applyProjectFilter(filter) {
-      const isDefault = filter === 'all';
-      let visibleCount = 0;
-      const maxOrder = moreProjectsLoaded ? 13 : 6;
-      
-      projectCards.forEach((card) => {
-        const order = Number(card.style.order || 0);
-        const tags = card.dataset.filterTags || '';
-        const shouldShow = isDefault ? order < maxOrder : tags.split(/\s+/).includes(filter);
-        
-        card.classList.toggle('hidden-project', isDefault && order >= maxOrder);
-        card.classList.toggle('is-filter-hidden', !shouldShow);
-        if (shouldShow) visibleCount++;
+    const showMoreProjectsBtn = document.getElementById('showMoreProjects');
+    const showLessProjectsBtn = document.getElementById('showLessProjects');
+    const allProjectsLink = document.getElementById('allProjectsLink');
+    if (showMoreProjectsBtn) {
+      showMoreProjectsBtn.addEventListener('click', () => {
+        document.querySelectorAll('#projects .project-more-card').forEach(card => {
+          card.classList.remove('hidden-project');
+        });
+        showMoreProjectsBtn.hidden = true;
+        if (showLessProjectsBtn) showLessProjectsBtn.hidden = false;
+        if (allProjectsLink) allProjectsLink.hidden = false;
+        requestAnimationFrame(() => {
+          refreshScrollMetrics();
+          updateScrollLogic();
+        });
       });
-      
-      const empty = document.getElementById('projectEmpty');
-      if (empty) empty.style.display = visibleCount ? 'none' : 'block';
-
-      const countBadge = document.getElementById('projectCountBadge');
-      if (countBadge) {
-        if (isDefault) {
-          countBadge.textContent = moreProjectsLoaded
-            ? `Showing All ${projectCards.length} Projects`
-            : `Showing 6 Featured Projects (${projectCards.length} Total)`;
-        } else {
-          countBadge.textContent = `Showing ${visibleCount} Projects (${filter.toUpperCase()})`;
-        }
-      }
-
-      const toggleBtn = document.getElementById('toggleProjects');
-      const lessBtn = document.getElementById('showLessProjects');
-      if (toggleBtn) {
-        if (!isDefault) {
-          toggleBtn.style.display = 'none';
-          if (lessBtn) lessBtn.style.display = 'none';
-        } else {
-          toggleBtn.style.display = 'inline-flex';
-          const btnSpan = toggleBtn.querySelector('span');
-          if (moreProjectsLoaded) {
-            btnSpan.textContent = 'See All Projects';
-            toggleBtn.href = 'all-projects.html';
-            if (lessBtn) lessBtn.style.display = 'inline-flex';
-          } else {
-            btnSpan.textContent = 'See More Projects';
-            toggleBtn.removeAttribute('href');
-            if (lessBtn) lessBtn.style.display = 'none';
-          }
-        }
-      }
     }
-
-    document.querySelectorAll('.project-filter-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.project-filter-btn').forEach(b => b.classList.remove('is-active'));
-        btn.classList.add('is-active');
-        applyProjectFilter(btn.dataset.filter || 'all');
+    if (showLessProjectsBtn) {
+      showLessProjectsBtn.addEventListener('click', () => {
+        const projectsSection = document.getElementById('projects');
+        const projectsTop = projectsSection
+          ? projectsSection.getBoundingClientRect().top + window.scrollY
+          : 0;
+        document.querySelectorAll('#projects .project-more-card').forEach(card => {
+          card.classList.add('hidden-project');
+        });
+        showLessProjectsBtn.hidden = true;
+        if (showMoreProjectsBtn) showMoreProjectsBtn.hidden = false;
+        requestAnimationFrame(() => {
+          refreshScrollMetrics();
+          window.scrollTo({
+            top: Math.max(projectsTop - getSectionAnchorOffset(), 0),
+            behavior: 'auto'
+          });
+          updateScrollLogic();
+        });
       });
-    });
-
-    document.getElementById('toggleProjects')?.addEventListener('click', function(e) {
-      if (!moreProjectsLoaded && document.querySelector('.project-filter-btn[data-filter="all"]').classList.contains('is-active')) {
-        e.preventDefault();
-        moreProjectsLoaded = true;
-        applyProjectFilter('all');
-      }
-    });
-
-    document.getElementById('showLessProjects')?.addEventListener('click', function(e) {
-      e.preventDefault();
-      moreProjectsLoaded = false;
-      applyProjectFilter('all');
-      
-      const projSec = document.getElementById('projects');
-      if (projSec) {
-        projSec.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-
-    applyProjectFilter('all');
+    }
 
     const showMoreExpBtn = document.getElementById('showMoreExp');
     if (showMoreExpBtn) {

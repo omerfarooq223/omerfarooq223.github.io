@@ -54,20 +54,21 @@
 
   const styles = `
     .portfolio-chatbot-icon {
-      position: fixed;
+      position: fixed !important;
       bottom: 24px;
       right: 24px;
       width: 60px;
       height: 60px;
       background: linear-gradient(135deg, var(--cyan, #00e5ff) 0%, var(--purple, #a855f7) 100%);
       border: none;
-      border-radius: 18px;
+      border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
       z-index: 99999;
+      will-change: transform;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -406,59 +407,6 @@
       chatWindow.classList.add('hidden');
       toggle.classList.remove('hidden');
     });
-
-    const footer = document.querySelector('footer');
-    let ticking = false;
-    let footerTop = Number.POSITIVE_INFINITY;
-    let lastBottom = null;
-
-    function refreshChatbotMetrics() {
-      if (!footer) return;
-      footerTop = footer.getBoundingClientRect().top + window.scrollY;
-    }
-
-    function updateChatbotPosition() {
-      if (!footer) return;
-      const windowHeight = window.innerHeight;
-      const isMobile = window.innerWidth <= 480;
-      const baseBottom = isMobile ? 16 : 24;
-      const footerOverlap = Math.max(0, window.scrollY + windowHeight - footerTop);
-      const targetBottom = baseBottom + footerOverlap;
-
-      if (targetBottom !== lastBottom) {
-        toggle.style.bottom = targetBottom + 'px';
-        lastBottom = targetBottom;
-      }
-
-      if (isMobile) {
-        chatWindow.style.bottom = '0px';
-        chatWindow.style.height = '100%';
-      } else {
-        chatWindow.style.bottom = targetBottom + 'px';
-        chatWindow.style.height = '';
-      }
-      ticking = false;
-    }
-
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateChatbotPosition);
-        ticking = true;
-      }
-    }, { passive: true });
-
-    window.addEventListener('resize', () => {
-      refreshChatbotMetrics();
-      window.requestAnimationFrame(updateChatbotPosition);
-    });
-
-    window.addEventListener('load', () => {
-      refreshChatbotMetrics();
-      updateChatbotPosition();
-    }, { once: true });
-
-    refreshChatbotMetrics();
-    updateChatbotPosition();
 
     async function handleUserInput(message) {
       if (!message || isLoading) return;

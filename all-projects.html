@@ -26,8 +26,76 @@
   <style>
     .all-projects-page {
       min-height: 100vh;
-      background: var(--bg);
+      background-color: #07090c !important;
+      background-image:
+        linear-gradient(180deg, rgba(3, 5, 8, .36), rgba(3, 5, 8, .72)),
+        url('assets/stone-surface.png') !important;
+      background-size: cover, cover;
+      background-position: center, center;
+      background-attachment: fixed, fixed;
       color: var(--text);
+    }
+
+    /* Same subtle architectural line layer as the main portfolio, kept static for performance. */
+    .all-projects-page::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: .25;
+      background:
+        linear-gradient(rgba(93, 210, 230, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(93, 210, 230, .035) 1px, transparent 1px);
+      background-size: 84px 84px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, .8), transparent 72%);
+    }
+
+    .all-projects-page::after {
+      content: '';
+      position: fixed;
+      inset: 14px;
+      z-index: 1;
+      pointer-events: none;
+      border: 1px solid rgba(126, 212, 226, .08);
+    }
+
+    .all-projects-page #nw {
+      z-index: 0 !important;
+    }
+
+    .all-projects-page #geoBgCanvas {
+      z-index: 0;
+      opacity: .86;
+    }
+
+    .all-projects-page > nav,
+    .all-projects-page > .mob,
+    .all-projects-page > main,
+    .all-projects-page > footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    html[data-theme="light"] .all-projects-page {
+      background-color: #d9dee2 !important;
+      background-image:
+        linear-gradient(180deg, rgba(229, 235, 238, .78), rgba(196, 205, 210, .82)),
+        url('assets/stone-surface.png') !important;
+      color: #122027;
+    }
+
+    html[data-theme="light"] .all-projects-page::before {
+      opacity: .12;
+    }
+
+    html[data-theme="light"] .all-projects-page::after {
+      border-color: rgba(19, 92, 108, .16);
+    }
+
+    html[data-theme="light"] .all-projects-page #geoBgCanvas {
+      opacity: .88;
+      mix-blend-mode: normal;
     }
 
     .all-projects-main {
@@ -78,12 +146,12 @@
       align-items: center;
       justify-content: center;
       justify-self: end;
-      min-height: 42px;
-      padding: 0 16px;
-      border: 1px solid var(--border);
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid rgba(53, 215, 255, .58);
       border-radius: 999px;
-      color: var(--muted2);
-      background: var(--themeToggleBg);
+      color: var(--text);
+      background: linear-gradient(135deg, rgba(53, 215, 255, .16), rgba(139, 92, 246, .16));
       text-decoration: none;
       font-family: 'IBM Plex Mono', monospace;
       font-size: .68rem;
@@ -92,12 +160,13 @@
       text-transform: uppercase;
       white-space: nowrap;
       transition: background .2s, border-color .2s, color .2s, transform .2s;
+      box-shadow: 0 0 24px rgba(53, 215, 255, .14), inset 0 1px 0 rgba(255, 255, 255, .16);
     }
 
     .portfolio-back-link:hover {
       color: var(--text);
-      border-color: rgba(0, 229, 255, .45);
-      background: var(--themeToggleBgHover);
+      border-color: rgba(53, 215, 255, .9);
+      background: linear-gradient(135deg, rgba(53, 215, 255, .24), rgba(139, 92, 246, .24));
       transform: translateY(-2px);
     }
 
@@ -537,6 +606,7 @@
   </div>
 
   <script src="main.js"></script>
+  <script src="geometric-background.js"></script>
   <script>
     const allProjects = [
       {
@@ -558,8 +628,8 @@
         stack: ['SHAP', 'LangGraph', 'Flask']
       },
       {
-        id: 'phishguard', n: '004', title: 'PhishGuard AI', tag: 'Cybersecurity', cats: 'agentic cyber',
-        img: 'images/phishguard-ai.webp',
+        id: 'inboxverity', n: '004', title: 'InboxVerity AI', tag: 'Cybersecurity', cats: 'cyber',
+        img: 'images/inboxverity-dashboard-overview.png',
         desc: 'Chrome extension and FastAPI backend for phishing email detection with heuristic and LLM analysis.',
         stack: ['FastAPI', 'Groq', 'Extension']
       },
@@ -669,7 +739,7 @@
         ${project.img ? `<div class="all-card-media"><img src="${project.img}" alt="${project.title} preview" loading="lazy" /></div>` : ''}
         <div class="all-card-meta"><span>${project.n}</span><span class="all-card-tag">${project.tag}</span></div>
         <div class="all-card-content">
-          <h2 class="all-card-title">${project.title}</h2>
+          <h2 class="all-card-title no-heading-gradient">${project.title}</h2>
           <p class="all-card-copy">${project.desc}</p>
           <div class="all-card-stack">${project.stack.map(item => `<span>${item}</span>`).join('')}</div>
         </div>
@@ -682,19 +752,24 @@
       });
     });
 
-    document.querySelectorAll('.filter-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(item => item.classList.remove('is-active'));
-        btn.classList.add('is-active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.all-project-card').forEach((card) => {
-          const show = filter === 'all' || card.dataset.cats.split(/\s+/).includes(filter);
-          card.classList.toggle('is-hidden', !show);
-        });
+    function applyProjectFilter(filter) {
+      const activeFilter = filter || 'all';
+      document.querySelectorAll('.filter-btn').forEach((btn) => {
+        btn.classList.toggle('is-active', btn.dataset.filter === activeFilter);
       });
+      document.querySelectorAll('.all-project-card').forEach((card) => {
+        const categories = (card.dataset.cats || '').split(/\s+/).filter(Boolean);
+        card.classList.toggle('is-hidden', activeFilter !== 'all' && !categories.includes(activeFilter));
+      });
+    }
+
+    document.querySelectorAll('.filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => applyProjectFilter(btn.dataset.filter));
     });
+
+    const requestedFilter = new URLSearchParams(window.location.search).get('filter');
+    applyProjectFilter(['all', 'agentic', 'ml', 'cyber', 'automation'].includes(requestedFilter) ? requestedFilter : 'all');
   </script>
-  <script src="geometric-background.js"></script>
   <script src="chatbot-widget.js"></script>
 </body>
 
