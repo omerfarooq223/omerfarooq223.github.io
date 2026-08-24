@@ -1126,7 +1126,8 @@ let modalMediaSources = [];
       { src: 'docs/Peer_Tutoring_Certificate.webp', caption: 'Peer Tutoring Certificate - UMT' },
       { src: 'docs/certificate-5s66gnoyjedq.webp', caption: 'Claude Code in Action - Anthropic' },
       { src: 'docs/5-Day AI Agents Intensive Vibe Coding Course.webp', caption: '5-Day AI Agents: Intensive Vibe Coding Course - Kaggle / Google' },
-      { src: 'docs/intro-to-ai-ethics.webp', caption: 'Intro to AI Ethics - Kaggle' }
+      { src: 'docs/intro-to-ai-ethics.webp', caption: 'Intro to AI Ethics - Kaggle' },
+      { src: 'docs/ml-explainability.webp', caption: 'Machine Learning Explainability - Kaggle' }
     ];
     function openCertLightbox(idx) {
       const lb = document.getElementById('certLightbox');

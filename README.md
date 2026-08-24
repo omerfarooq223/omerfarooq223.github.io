@@ -3,69 +3,113 @@
 <div align="center">
   <img src="https://img.shields.io/badge/Status-Live-success?style=for-the-badge&logo=github" alt="Status" />
   <img src="https://img.shields.io/badge/Stack-HTML5%20|%20CSS3%20|%20JS-a855f7?style=for-the-badge" alt="Tech Stack" />
+  <img src="https://img.shields.io/badge/Framework-Vanilla-20beff?style=for-the-badge" alt="Vanilla" />
 </div>
 
 <p align="center">
   <strong>🌐 Live:</strong> <a href="https://omerfarooq223.github.io">omerfarooq223.github.io</a>
 </p>
 
-## What This Is
+---
 
-A personal portfolio website built entirely from scratch with vanilla HTML, CSS, and JavaScript — no frameworks, no build tools. Designed to showcase AI/ML projects with a premium, immersive dark-mode aesthetic.
+## Overview
 
-## Site Features
+A portfolio website built entirely from scratch using vanilla HTML, CSS, and JavaScript — no frameworks, no build tools, no bundlers. The design is centered around a dark-mode glassmorphism aesthetic with premium micro-animations and a fully responsive layout.
 
-- **2D Canvas Ambient Background** — Lightweight particle flow animation in the hero section, theme-aware and responsive.
-- **AI Chatbot Widget** — Integrated chatbot powered by Groq API & LLaMA 3 via a FastAPI backend, answers questions about the portfolio content.
-- **Project Modals** — Click-to-expand project cards with multi-image carousels, tech stack tags, and GitHub links.
-- **Category Filtering** — Filter projects by tag (Agentic AI, ML/DL, Computer Vision, Automation, etc.) with animated transitions.
-- **Certification Lightbox** — Gallery with lightbox preview for 13 professional certifications stored as optimized WebP.
-- **Light / Dark Mode** — Full dual-theme support with smooth CSS transitions and persistent toggle.
-- **Glassmorphism UI** — Extensive use of CSS custom properties, backdrop-filters, and cyan/purple/pink gradient accents.
-- **Fully Responsive** — Fluid layout built from scratch, renders correctly across all device sizes.
-- **Document Preview Modal** — In-page preview for PDFs and certificate images without navigating away.
+---
+
+## How It Was Built
+
+### Design Philosophy
+
+The UI was designed from first principles using custom CSS properties as a design token system. The visual language draws from:
+
+- **Glassmorphism** — `backdrop-filter: blur()`, translucent layers, and frosted glass surfaces
+- **Chandelier-crystal effects** — Faceted SVG diamond geometry with specular highlight overlays and layered `box-shadow` / `drop-shadow` to simulate light refraction
+- **Dark-first palette** — Deep navy/slate backgrounds (`#090d16`, `#0f172a`) paired with neon accents in cyan, purple, and pink
+- **Micro-animations** — CSS `transition`, `@keyframes`, and JS-driven reveal-on-scroll for every interactive element
+
+### CSS Architecture
+
+| Technique | Purpose |
+|-----------|---------|
+| CSS custom properties (`--var`) | Global design tokens (colors, spacing, typography) |
+| `clip-path: polygon(...)` | Asymmetrical diamond/faceted shapes for contact icons |
+| `backdrop-filter: blur() saturate() brightness()` | Glass/crystal see-through effect |
+| SVG `linearGradient` fills | Glossy chandelier gradient on social platform icons |
+| `@keyframes` + `animation` | Floating nodes, pulse rings, ambient glow loops |
+| `IntersectionObserver` | Scroll-triggered reveal animations |
+
+### JavaScript Features
+
+- **Canvas particle background** — Lightweight 2D canvas animation in the hero section; theme-aware, resets on resize and theme switch
+- **Project modal system** — Dynamic modal with multi-image carousel, populated from a JS data array; no page reloads
+- **Certificate lightbox** — Gallery built with a `certData[]` array mapped to thumbnail cards; supports keyboard navigation (Escape) and opens in new tab
+- **Show More / Show Less** — Toggle for hidden certificate cards, preserving layout
+- **AI Chatbot widget** — Powered by Groq API (LLaMA 3 model) via a Python FastAPI backend; streamed responses rendered in a floating chat panel
+
+---
 
 ## Project Structure
 
 ```
 portfolio-site/
 ├── index.html              # Main portfolio page
-├── style.css               # Styles for index.html
-├── main.js                 # Scripts for index.html
-├── all-projects.html       # Dedicated all-projects page
-├── chatbot-widget.js       # AI chatbot widget
-├── images/                 # Project screenshots & assets (WebP)
-├── docs/                   # Certificates & documents
+├── style.css               # All styles for index.html (~10,000 lines)
+├── main.js                 # All scripts for index.html
+├── all-projects.html       # Standalone all-projects page
+├── chatbot-widget.js       # Standalone AI chatbot widget
+├── geometric-background.js # Canvas particle animation
+├── images/                 # Project screenshots & assets (WebP optimized)
+├── docs/                   # Certificates & documents (WebP optimized)
+├── assets/                 # Favicon and other static assets
 ├── api/
-│   └── chat.py             # FastAPI serverless chatbot endpoint
-├── vercel.json             # Vercel deployment config
+│   └── chat.py             # FastAPI serverless chatbot endpoint (Vercel)
+├── vercel.json             # Vercel deployment config (serverless functions)
 ├── CV.pdf                  # Resume
 └── README.md
 ```
+
+---
 
 ## Tech Stack
 
 | Layer | Tools |
 |-------|-------|
 | Structure | HTML5, semantic elements |
-| Styling | Vanilla CSS3 (custom properties, animations, glassmorphism) |
-| Logic | Vanilla JavaScript (DOM manipulation, canvas, fetch API) |
-| Chatbot API | Python, FastAPI, Groq API |
-| Deployment | GitHub Pages (frontend), Vercel (API) |
+| Styling | Vanilla CSS3 — custom properties, animations, glassmorphism, SVG gradients |
+| Logic | Vanilla JavaScript — DOM, Canvas API, Fetch API, IntersectionObserver |
+| Chatbot backend | Python 3, FastAPI, Groq API (LLaMA 3.3-70b) |
+| Deployment | GitHub Pages (frontend), Vercel (API serverless function) |
+| Image format | WebP (converted with `cwebp` for optimized file sizes) |
+
+---
 
 ## Running Locally
 
-No build step required. Open `index.html` directly in a browser, or serve it locally:
+No build step required. Serve it with Python or any static file server:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then visit `http://localhost:8000`.
+Then open `http://localhost:8000`.
 
-> The chatbot requires the Vercel backend to be running. Without it, the chatbot widget will load but won't return responses.
+> **Note:** The AI chatbot requires the Vercel-hosted FastAPI backend. Without it, the chat widget loads but API calls will return errors. To run the backend locally:
+> ```bash
+> cd api
+> pip install -r requirements.txt
+> uvicorn chat:app --reload
+> ```
 
-<hr>
-<p align="center">
-  <i>Designed and developed by Muhammad Umar Farooq.</i>
-</p>
+---
+
+## Asset Optimization
+
+All certificate and project images are stored as `.webp` using `cwebp`:
+
+```bash
+cwebp -q 85 input.png -o output.webp
+```
+
+This reduces file sizes by 60–80% compared to PNG/JPEG while maintaining visual quality.

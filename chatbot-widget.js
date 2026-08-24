@@ -55,7 +55,7 @@
   const styles = `
     .portfolio-chatbot-icon {
       position: fixed !important;
-      bottom: 24px;
+      bottom: var(--chatbot-bottom, 24px);
       right: 24px;
       width: 60px;
       height: 60px;
@@ -69,7 +69,7 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
       z-index: 99999;
       will-change: transform;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, bottom .25s ease;
     }
 
     .portfolio-chatbot-icon:hover {
@@ -311,7 +311,7 @@
         border: none !important;
       }
       .portfolio-chatbot-icon {
-        bottom: 16px !important;
+        bottom: var(--chatbot-bottom, 16px) !important;
         right: 16px !important;
         width: 50px !important;
         height: 50px !important;
@@ -372,6 +372,34 @@
     const input = document.getElementById('portfolio-chatbot-input');
     const messagesContainer = document.getElementById('portfolio-chatbot-messages');
     const suggestionsContainer = document.getElementById('portfolio-chatbot-suggestions');
+
+    // Keep the floating launcher above the footer and its back-to-top control.
+    const pageFooter = document.querySelector('body > footer');
+    let footerTicking = false;
+
+    function updateFooterClearance() {
+      footerTicking = false;
+      const baseBottom = window.innerWidth <= 480 ? 16 : 24;
+      if (!pageFooter) {
+        toggle.style.setProperty('--chatbot-bottom', `${baseBottom}px`);
+        return;
+      }
+
+      const footerTop = pageFooter.getBoundingClientRect().top;
+      const visibleFooterHeight = Math.max(0, window.innerHeight - footerTop);
+      const safeBottom = baseBottom + visibleFooterHeight;
+      toggle.style.setProperty('--chatbot-bottom', `${safeBottom}px`);
+    }
+
+    function scheduleFooterClearance() {
+      if (footerTicking) return;
+      footerTicking = true;
+      window.requestAnimationFrame(updateFooterClearance);
+    }
+
+    window.addEventListener('scroll', scheduleFooterClearance, { passive: true });
+    window.addEventListener('resize', scheduleFooterClearance, { passive: true });
+    updateFooterClearance();
 
     const prompts = [
       { text: "What are Umar's latest projects?", featured: true },

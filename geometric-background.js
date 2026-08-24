@@ -21,12 +21,12 @@
 
   // ─── High-Fidelity Cyberpunk Laser Palette ───────────────────────────────────
   const PALETTE = [
-    { hue: 195, hex: '#00d4ff', lightHex: '#0088cc' },
-    { hue: 145, hex: '#00ff77', lightHex: '#00aa44' },
-    { hue: 285, hex: '#c83aff', lightHex: '#9920cc' },
-    { hue: 350, hex: '#ff2d55', lightHex: '#d41138' },
-    { hue: 42, hex: '#ffb300', lightHex: '#d97706' },
-    { hue: 220, hex: '#3b82f6', lightHex: '#1d4ed8' }
+    { hue: 195, hex: '#00d4ff', lightHex: '#3f7f91' },
+    { hue: 145, hex: '#00ff77', lightHex: '#4f8069' },
+    { hue: 285, hex: '#c83aff', lightHex: '#756b91' },
+    { hue: 350, hex: '#ff2d55', lightHex: '#916878' },
+    { hue: 42, hex: '#ffb300', lightHex: '#8f7955' },
+    { hue: 220, hex: '#3b82f6', lightHex: '#587894' }
   ];
 
   // ─── Intelligent Network Graph ───────────────────────────────────────────────
@@ -36,6 +36,8 @@
   let turnElapsedMs = 0;
   let turnStarted = false;
   let lastFrameTime = 0;
+  let lastScrollTime = -Infinity;
+  let scrollStopTimer = 0;
 
   // ─── Interactive Energy Wave & Power Surge System ─────────────────────────────
   let ripples = [];
@@ -431,12 +433,12 @@
       const endpoint = trace.points[trace.points.length - 1];
       const hex = lm ? trace.terminalColor.lightHex : trace.terminalColor.hex;
       const halo = ctx.createRadialGradient(endpoint.x, endpoint.y, 0, endpoint.x, endpoint.y, 14);
-      halo.addColorStop(0, `rgba(255,255,255,${0.82 * trace.terminalGlow})`);
-      halo.addColorStop(0.24, `hsla(${trace.terminalColor.hue},100%,${lm ? 55 : 66}%,${0.62 * trace.terminalGlow})`);
+      halo.addColorStop(0, `rgba(255,255,255,${(lm ? 0.22 : 0.82) * trace.terminalGlow})`);
+      halo.addColorStop(0.24, `hsla(${trace.terminalColor.hue},${lm ? 28 : 100}%,${lm ? 42 : 66}%,${(lm ? 0.18 : 0.62) * trace.terminalGlow})`);
       halo.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = halo;
       ctx.shadowColor = hex;
-      ctx.shadowBlur = 7;
+      ctx.shadowBlur = lm ? 0 : 7;
       ctx.fillRect(endpoint.x - 14, endpoint.y - 14, 28, 28);
       trace.terminalGlow *= Math.pow(0.93, frameScale);
     });
@@ -447,7 +449,9 @@
   function resize() {
     width = window.innerWidth;
     height = window.innerHeight;
-    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    // Decorative detail does not need full retina resolution. This cap cuts
+    // the canvas fill-rate substantially on high-density displays.
+    dpr = Math.min(window.devicePixelRatio || 1, width < 900 ? 1 : 1.25);
 
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
@@ -481,13 +485,13 @@
       const tw = stone.naturalWidth * scale;
       const th = stone.naturalHeight * scale;
       bgCtx.save();
-      bgCtx.globalAlpha = lm ? 0.12 : 0.40;
+      bgCtx.globalAlpha = lm ? 0.055 : 0.40;
       bgCtx.drawImage(stone, (width - tw) / 2, (height - th) / 2, tw, th);
       bgCtx.restore();
     }
 
     bgCtx.save();
-    bgCtx.fillStyle = lm ? 'rgba(235,239,243,0.85)' : 'rgba(4,6,10,0.78)';
+    bgCtx.fillStyle = lm ? 'rgba(242,246,247,0.94)' : 'rgba(4,6,10,0.78)';
     bgCtx.fillRect(0, 0, width, height);
 
     const vignette = bgCtx.createRadialGradient(
@@ -495,8 +499,8 @@
       width * 0.5, height * 0.5, Math.max(width, height) * 0.82
     );
     vignette.addColorStop(0, lm ? 'rgba(255,255,255,0)' : 'rgba(6,9,14,0)');
-    vignette.addColorStop(0.70, lm ? 'rgba(70,85,95,0.06)' : 'rgba(0,0,0,0.52)');
-    vignette.addColorStop(1, lm ? 'rgba(50,65,75,0.18)' : 'rgba(0,0,0,0.88)');
+    vignette.addColorStop(0.70, lm ? 'rgba(77,98,108,0.025)' : 'rgba(0,0,0,0.52)');
+    vignette.addColorStop(1, lm ? 'rgba(61,83,94,0.075)' : 'rgba(0,0,0,0.88)');
     bgCtx.fillStyle = vignette;
     bgCtx.fillRect(0, 0, width, height);
     bgCtx.restore();
@@ -517,10 +521,10 @@
         tracesCtx.lineTo(t.points[i].x, t.points[i].y);
       }
     });
-    tracesCtx.strokeStyle = lm ? 'rgba(45,55,65,0.24)' : 'rgba(0,0,0,0.92)';
-    tracesCtx.lineWidth = lm ? 3.6 : 4.2;
-    tracesCtx.shadowColor = lm ? 'rgba(30,40,50,0.22)' : 'rgba(0,0,0,0.95)';
-    tracesCtx.shadowBlur = 2.2;
+    tracesCtx.strokeStyle = lm ? 'rgba(69,88,98,0.075)' : 'rgba(0,0,0,0.92)';
+    tracesCtx.lineWidth = lm ? 2.4 : 4.2;
+    tracesCtx.shadowColor = lm ? 'transparent' : 'rgba(0,0,0,0.95)';
+    tracesCtx.shadowBlur = lm ? 0 : 2.2;
     tracesCtx.shadowOffsetX = 1.2;
     tracesCtx.shadowOffsetY = 1.6;
     tracesCtx.stroke();
@@ -530,10 +534,10 @@
       const last = t.points[t.points.length - 1];
       const trackGradient = tracesCtx.createLinearGradient(first.x, first.y, last.x, last.y);
       if (lm) {
-        trackGradient.addColorStop(0, 'rgba(70,85,98,0.34)');
-        trackGradient.addColorStop(0.78, 'rgba(90,112,124,0.40)');
-        trackGradient.addColorStop(0.94, 'rgba(170,195,205,0.62)');
-        trackGradient.addColorStop(1, 'rgba(235,248,252,0.88)');
+        trackGradient.addColorStop(0, 'rgba(73,100,111,0.12)');
+        trackGradient.addColorStop(0.78, 'rgba(68,105,117,0.15)');
+        trackGradient.addColorStop(0.94, 'rgba(75,126,141,0.22)');
+        trackGradient.addColorStop(1, 'rgba(68,119,134,0.28)');
       } else {
         trackGradient.addColorStop(0, 'rgba(12,22,30,0.96)');
         trackGradient.addColorStop(0.78, 'rgba(18,37,48,0.94)');
@@ -545,7 +549,7 @@
       tracesCtx.moveTo(first.x, first.y);
       for (let i = 1; i < t.points.length; i++) tracesCtx.lineTo(t.points[i].x, t.points[i].y);
       tracesCtx.strokeStyle = trackGradient;
-      tracesCtx.lineWidth = lm ? 1.6 : 1.8;
+      tracesCtx.lineWidth = lm ? 1.05 : 1.8;
       tracesCtx.shadowColor = 'transparent';
       tracesCtx.stroke();
 
@@ -556,22 +560,22 @@
       const terminalGradient = tracesCtx.createLinearGradient(
         beforeLast.x, beforeLast.y, last.x, last.y
       );
-      terminalGradient.addColorStop(0, lm ? 'rgba(160,185,195,0.24)' : 'rgba(60,125,145,0.18)');
-      terminalGradient.addColorStop(0.58, lm ? 'rgba(220,238,244,0.68)' : 'rgba(95,190,212,0.72)');
-      terminalGradient.addColorStop(1, lm ? 'rgba(255,255,255,0.98)' : 'rgba(165,235,250,1)');
+      terminalGradient.addColorStop(0, lm ? 'rgba(77,111,123,0.08)' : 'rgba(60,125,145,0.18)');
+      terminalGradient.addColorStop(0.58, lm ? 'rgba(70,122,137,0.19)' : 'rgba(95,190,212,0.72)');
+      terminalGradient.addColorStop(1, lm ? 'rgba(60,112,128,0.31)' : 'rgba(165,235,250,1)');
       tracesCtx.beginPath();
       tracesCtx.moveTo(beforeLast.x, beforeLast.y);
       tracesCtx.lineTo(last.x, last.y);
       tracesCtx.strokeStyle = terminalGradient;
-      tracesCtx.lineWidth = lm ? 1.9 : 2.1;
-      tracesCtx.shadowColor = lm ? 'rgba(255,255,255,0.50)' : 'rgba(86,210,236,0.42)';
-      tracesCtx.shadowBlur = 3.5;
+      tracesCtx.lineWidth = lm ? 1.15 : 2.1;
+      tracesCtx.shadowColor = lm ? 'transparent' : 'rgba(86,210,236,0.42)';
+      tracesCtx.shadowBlur = lm ? 0 : 3.5;
       tracesCtx.stroke();
 
       // A quiet endpoint halo keeps the gradient visibly present between
       // animated pulses and gives the alternating pulse a smooth handoff.
       const endpointHalo = tracesCtx.createRadialGradient(last.x, last.y, 0, last.x, last.y, 9);
-      endpointHalo.addColorStop(0, lm ? 'rgba(225,245,250,0.32)' : 'rgba(86,190,216,0.20)');
+      endpointHalo.addColorStop(0, lm ? 'rgba(65,116,131,0.08)' : 'rgba(86,190,216,0.20)');
       endpointHalo.addColorStop(1, 'rgba(0,0,0,0)');
       tracesCtx.fillStyle = endpointHalo;
       tracesCtx.fillRect(last.x - 9, last.y - 9, 18, 18);
@@ -587,6 +591,8 @@
     ctx.save();
     ctx.lineCap = 'round';
     ctx.lineJoin = 'miter';
+    const scrolling = performance.now() - lastScrollTime < 140;
+    ctx.globalAlpha = lm ? 0.46 : 1;
 
     activePulses.forEach((pulse) => {
       const trace = pulse.trace;
@@ -594,7 +600,7 @@
       const trailLength = pulse.trailLength;
       const hex = lm ? pulse.color.lightHex : pulse.color.hex;
 
-      const steps = 18;
+      const steps = scrolling ? 7 : (lm ? 10 : 14);
       const trailPoints = [];
 
       for (let s = 0; s <= steps; s++) {
@@ -621,14 +627,14 @@
         ctx.lineTo(trailPoints[i].pt.x, trailPoints[i].pt.y);
       }
       ctx.strokeStyle = hex;
-      ctx.lineWidth = 2.4 + surgeWidthBoost;
+      ctx.lineWidth = (lm ? 1.25 : 2.4) + surgeWidthBoost;
       ctx.shadowColor = hex;
-      ctx.shadowBlur = 8 + surgeBlurBoost;
+      ctx.shadowBlur = lm ? 0 : ((scrolling ? 3 : 8) + surgeBlurBoost);
       ctx.stroke();
 
       // Pass 2: Intense Pure White Core (Head Half)
       const halfLen = Math.floor(trailPoints.length * 0.55);
-      if (halfLen >= 2) {
+      if (!lm && !scrolling && halfLen >= 2) {
         ctx.beginPath();
         ctx.moveTo(trailPoints[0].pt.x, trailPoints[0].pt.y);
         for (let i = 1; i < halfLen; i++) {
@@ -644,9 +650,9 @@
       const head = trailPoints[0].pt;
 
       const halo = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, 10);
-      halo.addColorStop(0, `rgba(255, 255, 255, ${lm ? 0.95 : 1.0})`);
-      halo.addColorStop(0.35, `hsla(${pulse.color.hue}, 100%, ${lm ? 48 : 65}%, ${lm ? 0.50 : 0.70})`);
-      halo.addColorStop(0.70, `hsla(${pulse.color.hue}, 100%, 55%, ${lm ? 0.08 : 0.12})`);
+      halo.addColorStop(0, `rgba(255, 255, 255, ${lm ? 0.28 : 1.0})`);
+      halo.addColorStop(0.35, `hsla(${pulse.color.hue}, ${lm ? 30 : 100}%, ${lm ? 40 : 65}%, ${lm ? 0.20 : 0.70})`);
+      halo.addColorStop(0.70, `hsla(${pulse.color.hue}, ${lm ? 25 : 100}%, 55%, ${lm ? 0.03 : 0.12})`);
       halo.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = halo;
       ctx.shadowBlur = 0;
@@ -662,7 +668,9 @@
 
     if (document.visibilityState !== 'visible' || rawDelta < 33) return;
 
-    const deltaMs = Math.min(Math.max(rawDelta, 0), 33.33);
+    // Preserve elapsed time when scrolling delays a frame. The previous 33ms
+    // clamp made the lights advance in slow motion whenever rendering was busy.
+    const deltaMs = Math.min(Math.max(rawDelta, 0), 160);
     const frameScale = deltaMs / (1000 / 60);
     lastFrameTime = now;
 
@@ -705,6 +713,19 @@
   });
 
   window.addEventListener('resize', resize, { passive: true });
+
+  window.addEventListener('scroll', () => {
+    lastScrollTime = performance.now();
+    document.body.classList.add('is-scrolling');
+    window.clearTimeout(scrollStopTimer);
+    scrollStopTimer = window.setTimeout(() => {
+      document.body.classList.remove('is-scrolling');
+    }, 150);
+  }, { passive: true });
+
+  document.addEventListener('visibilitychange', () => {
+    lastFrameTime = performance.now();
+  });
 
   window.addEventListener('click', (e) => {
     if (document.visibilityState !== 'visible') return;

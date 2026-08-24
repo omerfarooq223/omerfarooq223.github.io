@@ -22,7 +22,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260824-4" />
   <style>
     .all-projects-page {
       min-height: 100vh;
@@ -94,7 +94,7 @@
     }
 
     html[data-theme="light"] .all-projects-page #geoBgCanvas {
-      opacity: .88;
+      opacity: .48;
       mix-blend-mode: normal;
     }
 
@@ -606,7 +606,7 @@
   </div>
 
   <script src="main.js"></script>
-  <script src="geometric-background.js"></script>
+  <script src="geometric-background.js?v=20260824-1"></script>
   <script>
     const allProjects = [
       {
@@ -770,7 +770,7 @@
     const requestedFilter = new URLSearchParams(window.location.search).get('filter');
     applyProjectFilter(['all', 'agentic', 'ml', 'cyber', 'automation'].includes(requestedFilter) ? requestedFilter : 'all');
   </script>
-  <script src="chatbot-widget.js"></script>
+  <script src="chatbot-widget.js?v=20260824-1"></script>
 </body>
 
 </html>
