@@ -6,59 +6,118 @@ let modalMediaSources = [];
     let modalMediaIndex = 0;
     let modalMediaAutoplay = null;
 
+    function startModalAutoplay() {
+      stopModalAutoplay();
+      if (modalMediaSources.length > 1) {
+        modalMediaAutoplay = setInterval(() => {
+          stepModalMedia(1, false);
+        }, 3600);
+      }
+    }
+
+    function stopModalAutoplay() {
+      if (modalMediaAutoplay) {
+        clearInterval(modalMediaAutoplay);
+        modalMediaAutoplay = null;
+      }
+    }
+
+    function resetModalAutoplay() {
+      stopModalAutoplay();
+      startModalAutoplay();
+    }
+
     function updateModalMedia() {
       const stage = document.getElementById('m-media-stage');
-      const dots = document.getElementById('m-media-dots');
-      const slides = stage ? Array.from(stage.querySelectorAll('.m-media-slide')) : [];
       const mediaBox = stage ? stage.closest('.m-vid-box-premium') : null;
 
       if (!modalMediaSources.length) {
         if (mediaBox) mediaBox.style.display = 'none';
-        slides.forEach(slide => {
-          slide.removeAttribute('src');
-          slide.classList.remove('is-active');
-          slide.style.display = 'none';
-        });
-        if (dots) dots.innerHTML = '';
+        if (stage) stage.innerHTML = '';
+        stopModalAutoplay();
         return;
       }
 
       if (mediaBox) mediaBox.style.display = '';
 
-      if (!slides.length) return;
+      if (stage) {
+        // Ensure index is within bounds
+        if (modalMediaIndex >= modalMediaSources.length) modalMediaIndex = 0;
 
-      const hasMultipleSlides = modalMediaSources.length > 1;
-      const fallbackSource = modalMediaSources[0] || 'images/autograder.webp';
+        const slidesHtml = modalMediaSources.map((src, index) => {
+          const isActive = index === modalMediaIndex;
+          return `<img id="m-media-${index}" class="m-media-slide${isActive ? ' is-active' : ''}" src="${src}" alt="Project preview ${index + 1}" width="1400" height="757" loading="lazy" />`;
+        }).join('');
 
-      slides.forEach((slide, index) => {
-        const source = modalMediaSources[index] || fallbackSource;
-        slide.src = source;
-        slide.classList.toggle('is-active', index === modalMediaIndex || (!hasMultipleSlides && index === 0));
-        slide.style.display = index < modalMediaSources.length ? 'block' : 'none';
-      });
+        const showControls = modalMediaSources.length > 1;
+        const controlsHtml = `
+          <div class="m-media-controls" style="${showControls ? '' : 'display:none;'}">
+            <button type="button" class="m-media-nav m-media-prev" onclick="stepModalMedia(-1)" aria-label="Previous image">‹</button>
+            <div id="m-media-dots" class="m-media-dots">
+              ${showControls ? modalMediaSources.map((_, index) => `<button type="button" class="m-media-dot${index === modalMediaIndex ? ' active' : ''}" aria-label="Show image ${index + 1}" data-index="${index}"></button>`).join('') : ''}
+            </div>
+            <button type="button" class="m-media-nav m-media-next" onclick="stepModalMedia(1)" aria-label="Next image">›</button>
+          </div>`;
 
+        stage.innerHTML = slidesHtml + controlsHtml;
 
+        stage.onmouseenter = stopModalAutoplay;
+        stage.onmouseleave = startModalAutoplay;
 
-      if (dots) {
-        dots.innerHTML = modalMediaSources
-          .map((_, index) => `<button type="button" class="m-media-dot${index === modalMediaIndex ? ' active' : ''}" aria-label="Show image ${index + 1}" data-index="${index}"></button>`)
-          .join('');
-        dots.querySelectorAll('.m-media-dot').forEach(dot => {
-          dot.addEventListener('click', () => {
+        const newDots = stage.querySelectorAll('.m-media-dot');
+        newDots.forEach(dot => {
+          dot.addEventListener('click', (e) => {
+            e.stopPropagation();
             modalMediaIndex = parseInt(dot.dataset.index, 10) || 0;
             updateModalMedia();
+            resetModalAutoplay();
           });
         });
       }
     }
 
-    function stepModalMedia(direction) {
+    function stepModalMedia(direction, userAction = true) {
       if (modalMediaSources.length < 2) return;
       modalMediaIndex = (modalMediaIndex + direction + modalMediaSources.length) % modalMediaSources.length;
       updateModalMedia();
+      if (userAction) {
+        resetModalAutoplay();
+      }
     }
 
     const projectModalData = {
+      gemmaclaim: {
+        title: 'Gemma Claim Verification',
+        subtitle: '🏆 1st Place Winner — AI Hackathon · Gemma Fine-Tuning Competition',
+        media: [
+          'images/gemma-slide1.webp',
+          'images/gemma-slide2.webp',
+          'images/gemma-slide3.webp',
+          'images/gemma-shield.webp'
+        ],
+        alt: 'Claim Verification Presentation Slides and 1st Place Award Shield',
+        tags: ['Gemma 4 12B', '4-bit NF4 QLoRA', 'PEFT', 'PyTorch', 'Dataset Auditing', 'Contrastive Training', 'Deterministic Inference', 'NLP'],
+        overview: [
+          'Hackathon-winning evidence-verification system fine-tuned from <strong>Google Gemma 4 12B</strong> using <strong>4-bit NF4 QLoRA</strong> (with FP16 compute precision). The system performs 3-way claim verification against retrieved evidence passages, categorizing claims into verified truth labels with high reliability.',
+          'The final selected checkpoint achieved <strong>94.40% Accuracy</strong> (472 / 500 correct) and <strong>94.38% Macro-F1</strong> on the 500-example supervised final evaluation benchmark.'
+        ],
+        featuresTitle: 'Technical Methodology & Pipeline',
+        features: [
+          '<strong>Data Auditing Curriculum:</strong> Started from 1,000 noisy labeled examples, audited and pruned down to 935 high-fidelity reliable examples, and reinforced with 150 targeted contrastive examples (1,085 total training curriculum).',
+          '<strong>4-bit NF4 Quantization:</strong> Applied NormalFloat4 quantization to freeze base model weights while training low-rank PEFT adapters with fp16 compute gradients.',
+          '<strong>Supervised Evaluation Benchmark:</strong> Scored 94.40% accuracy and 94.38% Macro-F1 on the 500-example supervised final evaluation.',
+          '<strong>Deterministic Inference:</strong> Configured greedy decoding and temperature calibration to eliminate hallucinations during evidence checking.',
+          '<strong>Robustness Testing:</strong> Evaluated against adversarial label flips and entity swaps to prevent spurious correlation exploitation.'
+        ],
+        stackTitle: 'Technology Stack',
+        stack: [
+          '<strong>Google Gemma 4 12B:</strong> Base language model providing rich semantic reasoning capacity.',
+          '<strong>4-bit NF4 QLoRA & PEFT:</strong> Parameter-efficient fine-tuning via bitsandbytes and Hugging Face PEFT.',
+          '<strong>PyTorch & Transformers:</strong> Core training framework with custom evaluation metrics pipeline.',
+          '<strong>Scikit-learn:</strong> Macro-F1 computation, confusion matrix evaluation, and dataset stratification.'
+        ],
+        github: 'https://github.com/omerfarooq223'
+      },
       autograder: {
         title: 'AutoGrader Agent',
         subtitle: 'AI / Multimodal Vision / Python · 2026',
@@ -486,6 +545,34 @@ let modalMediaSources = [];
         ],
         github: 'https://github.com/omerfarooq223/AutoReach-Hub'
       },
+      documorph: {
+        title: 'DocuMorph: PDF to JSON Agent',
+        subtitle: 'Document AI / Local-First Extraction / TypeScript & Node.js · 2026',
+        media: ['images/documorph-preview.webp', 'images/documorph-upload.webp'],
+        alt: 'DocuMorph PDF to JSON Agent dashboard and extraction preview',
+        tags: ['Document AI', 'TypeScript', 'Node.js', 'pdfjs-dist', 'Tesseract.js', 'Spatial Geometry', 'JSON Grounding', 'Local AI'],
+        overview: [
+          'An intelligent, local-first, and privacy-focused document extraction engine that reads, structures, and converts complex PDFs into clean, validated, and provenance-grounded JSON without data leakage.',
+          'Features coordinate geometry and line proximity for tabular reconstruction, normalized keyword classification with safe generic fallback, bounded OCR fallback via Tesseract.js for scanned pages, and full bounding box provenance tracking.'
+        ],
+        featuresTitle: 'Detailed Features',
+        features: [
+          '<strong>100% Local & Privacy-First:</strong> Runs entirely within local Node.js processes with zero external network transmission of PDF bytes or extracted text.',
+          '<strong>Intelligent Spatial & Tabular Extraction:</strong> Uses coordinate geometry and line alignment to reconstruct complex tabular data into structured arrays of typed objects.',
+          '<strong>Grounded Extraction & Provenance Tracking:</strong> Retains complete page numbers, confidence metrics, source text, and coordinate bounding boxes for every extracted entity.',
+          '<strong>Dual Output Representations:</strong> Generates semantic JSON tailored to supported document types alongside comprehensive hierarchical structural JSON.',
+          '<strong>Conservative Classification:</strong> Employs normalized keyword density scoring with safe generic fallback to eliminate unsupported hallucination.',
+          '<strong>OCR Fallback for Scanned Documents:</strong> Integrated Tesseract.js pipeline with bounded concurrency and per-page timeout protection.'
+        ],
+        stackTitle: 'Technology Stack',
+        stack: [
+          '<strong>TypeScript & Node.js:</strong> Core extraction pipeline, type safety, and async orchestration.',
+          '<strong>pdfjs-dist & pdf-lib:</strong> Low-level PDF byte validation, text coordinate parsing, and geometry extraction.',
+          '<strong>Tesseract.js:</strong> Bounded OCR engine for scanned and image-heavy document pages.',
+          '<strong>jsonrepair & Vitest:</strong> Resilient JSON syntax auto-recovery and multi-layer reliability test suites.'
+        ],
+        github: 'https://github.com/omerfarooq223/DocuMorph'
+      },
       spatialfx: {
         title: 'Spatial-FX',
         subtitle: 'Computer Vision / MediaPipe / Interactive Web · 2026',
@@ -544,8 +631,19 @@ let modalMediaSources = [];
       pokemon: {
         title: 'Pokémon TCG AI Battle Agent',
         subtitle: 'Game AI / State-Aware Planning / Kaggle Competition · 2026',
-        media: [],
-        alt: 'Pokémon TCG AI Battle Agent project details',
+        media: [
+          {
+            type: 'image',
+            src: 'images/pokemon-preview.webp',
+            caption: 'Kaggle Pokémon TCG Battle Agent live gameplay execution, state-aware decision planning, and match board telemetry.'
+          },
+          {
+            type: 'image',
+            src: 'images/pokemon-battle.webp',
+            caption: 'Autonomous combat simulation showing dynamic board evaluation, energy routing, bench optimization, and prize mapping.'
+          }
+        ],
+        alt: 'Pokémon TCG AI Battle Agent gameplay and match simulation preview',
         tags: ['Game AI', 'Planning', 'Heuristics', 'Simulation', 'Benchmarking', 'Kaggle'],
         overview: [
           'A rule-based, state-aware decision engine built for Kaggle\'s Pokémon TCG AI Battle Challenge and evolved through 18 documented agent generations.',
@@ -639,15 +737,7 @@ let modalMediaSources = [];
       }
       const modal = document.getElementById('proj-modal');
       renderProjectModalContent(projectId);
-      if (modalMediaAutoplay) {
-        clearInterval(modalMediaAutoplay);
-        modalMediaAutoplay = null;
-      }
-      if (modalMediaSources.length > 1) {
-        modalMediaAutoplay = setInterval(() => {
-          stepModalMedia(1);
-        }, 2500);
-      }
+      startModalAutoplay();
       if (modal) {
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -658,12 +748,9 @@ let modalMediaSources = [];
 
     function closeModal() {
       const modal = document.getElementById('proj-modal');
+      stopModalAutoplay();
       if (modal) {
         modal.classList.remove('open');
-      }
-      if (modalMediaAutoplay) {
-        clearInterval(modalMediaAutoplay);
-        modalMediaAutoplay = null;
       }
       document.body.style.overflow = '';
     }
@@ -779,6 +866,24 @@ let modalMediaSources = [];
       glow.className = 'border-glow';
       card.insertBefore(glow, card.firstChild);
 
+      const frame = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      frame.setAttribute('class', 'project-card-frame');
+      frame.setAttribute('viewBox', '0 0 100 100');
+      frame.setAttribute('preserveAspectRatio', 'none');
+      frame.setAttribute('aria-hidden', 'true');
+
+      const framePath = 'M3 0 H30 Q32 0 33.2 1.4 L35.6 4 H70.8 Q72.6 4 73.8 2.6 L76 0 H97 Q98.2 0 99 1.2 L100 3 V42.5 L98.2 44.4 Q97.2 45.4 98.2 46.5 L100 48.5 V97 Q100 98.2 99 99 L98 100 H3 Q1.8 100 1 99 L0 98 V59 L1.8 57.2 Q2.8 56.2 1.8 55.1 L0 53 V3 Q0 1.8 1.2 1 Z';
+      const basePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      basePath.setAttribute('class', 'project-card-frame-base');
+      basePath.setAttribute('d', framePath);
+      basePath.setAttribute('pathLength', '1000');
+      const lightPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      lightPath.setAttribute('class', 'project-card-frame-light');
+      lightPath.setAttribute('d', framePath);
+      lightPath.setAttribute('pathLength', '1000');
+      frame.append(basePath, lightPath);
+      card.insertBefore(frame, card.firstChild);
+
       glowObs.observe(card);
     });
 
@@ -790,6 +895,7 @@ let modalMediaSources = [];
     const sectionChapters = [
       { id: 'about', color: 'var(--cyan)' },
       { id: 'education', color: 'var(--amber)' },
+      { id: 'achievements', color: 'var(--gold, #f59e0b)' },
       { id: 'certificates', color: 'var(--purple)' },
       { id: 'experience', color: 'var(--pink)' },
       { id: 'projects', color: '#38bdf8' },
@@ -1114,8 +1220,9 @@ let modalMediaSources = [];
 
     /* ── Certification Lightbox ── */
     const certData = [
-      { src: 'docs/Google Certificate.webp', caption: 'Intro to Generative AI' },
-      { src: 'docs/certificate-fmssrk5frsx3.webp', caption: 'AI Fluency: AI Capabilities & Limitations' },
+      { src: 'docs/datacamp-ai-engineer-associate.webp', caption: 'AI Engineer for Developers Associate - DataCamp' },
+      { src: 'docs/datacamp-working-with-openai-api.webp', caption: 'Working with the OpenAI API - DataCamp' },
+      { src: 'docs/certificate-fmssrk5frsx3.webp', caption: 'AI Fluency: AI Capabilities & Limitations - Anthropic' },
       { src: 'docs/cert-new-2.webp', caption: 'AI Fluency for Students - Anthropic' },
       { src: 'docs/cert-new-1.webp', caption: 'Claude 101 - Anthropic' },
       { src: 'docs/cert-new-3.webp', caption: 'Claude Code 101 - Anthropic' },
@@ -1123,11 +1230,12 @@ let modalMediaSources = [];
       { src: 'docs/cert-s3jn6owcs6f6.webp', caption: 'AI Fluency: Framework & Foundations - Anthropic' },
       { src: 'docs/cert-rn2wppq639.webp', caption: 'Applied AI Foundations - OpenAI Academy' },
       { src: 'docs/cert-claude-platform-101.webp', caption: 'Claude Platform 101 - Anthropic' },
-      { src: 'docs/Peer_Tutoring_Certificate.webp', caption: 'Peer Tutoring Certificate - UMT' },
+      { src: 'docs/intro-to-ai-ethics.webp', caption: 'Intro to AI Ethics - Kaggle' },
       { src: 'docs/certificate-5s66gnoyjedq.webp', caption: 'Claude Code in Action - Anthropic' },
       { src: 'docs/5-Day AI Agents Intensive Vibe Coding Course.webp', caption: '5-Day AI Agents: Intensive Vibe Coding Course - Kaggle / Google' },
-      { src: 'docs/intro-to-ai-ethics.webp', caption: 'Intro to AI Ethics - Kaggle' },
-      { src: 'docs/ml-explainability.webp', caption: 'Machine Learning Explainability - Kaggle' }
+      { src: 'docs/Peer_Tutoring_Certificate.webp', caption: 'Peer Tutoring Certificate - UMT' },
+      { src: 'docs/ml-explainability.webp', caption: 'Machine Learning Explainability - Kaggle' },
+      { src: 'docs/Google Certificate.webp', caption: 'Intro to Generative AI - Google' }
     ];
     function openCertLightbox(idx) {
       const lb = document.getElementById('certLightbox');

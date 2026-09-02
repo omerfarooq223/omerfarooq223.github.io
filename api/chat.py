@@ -145,11 +145,17 @@ Use ONLY the knowledge provided below. Do NOT fabricate information.
 - GitHub: github.com/omerfarooq223
 - Status: Available for internships, freelance projects, and collaborations in AI, ML and automation.
 
-=== STATS ===
+=== STATS & HONORS ===
+- 🏆 1st Place Winner — AI Seekho Day 2026 Gemma Fine-Tuning Hackathon
 - CGPA: 3.85 / 4.0 at UMT
 - Scholarship: 70% Merit Scholarship
-- Projects Shipped: 24+
-- Autonomous AI Agents Built: 12+
+- Projects Shipped: 27+
+- Autonomous AI Agents Built: 13+
+
+=== ACHIEVEMENTS & AWARDS ===
+1. **1st Place — AI Seekho Day 2026, Gemma Fine-Tuning Competition** (2026): Won 1st place by fine-tuning Google Gemma 4 12B with 4-bit NF4 QLoRA on 1,085 audited and contrastive examples. Achieved 94.40% Accuracy, 94.38% Macro-F1 (472/500 correct) on the 500-example supervised final evaluation.
+2. **Rector's Award — UMT**: Awarded for achieving a perfect 4.0 semester SGPA.
+3. **Dean's Award — UMT**: Recognized for ranking in the top 10% by SGPA in the AI department.
 
 === EDUCATION ===
 1. BS Artificial Intelligence, 7th semester (Oct 2023 – Present) — UMT, Lahore. CGPA 3.85/4.0, 70% Merit Scholarship, Dean's Award (Top 10%), Rector's Award.
@@ -167,10 +173,11 @@ Use ONLY the knowledge provided below. Do NOT fabricate information.
 - Panaversity Agentic AI Program (Jan 2026 – Present): Agentic AI, Claude Code, tool integration, MCP, foundational agentic patterns, and advanced agent design.
 
 === PROJECTS (ordered by importance) ===
-1. **Personal AI Employee** [Featured, 2026] — Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation, featuring a continuous reasoning loop and MCP-style tool integration. Tech: Claude Code, Flask, Gmail API, Playwright.
-2. **AutoGrader Agent** [2026] — Comprehensive academic evaluation agent with integrated vision analysis for diagrams, dual-similarity plagiarism detection, and automated rubric generation. Generates well-formatted Excel sheets for students and class reports. Tech: Python, Groq LLaMA 3.3, PyMuPDF, openpyxl.
-3. **SHAP-Explained Agentic IDS** [2026] — Hybrid intrusion detection system combining Random Forest classification, SHAP feature explanations, and LangGraph-based verification with autonomous red teaming. Tech: SHAP, LangGraph, Flask, React.
-4. **InboxVerity AI** (previously presented as PhishGuard AI) [2026] — Gmail/Outlook Chrome extension and FastAPI backend that extracts open emails, combines heuristic and URL/domain signals with Groq classification, stores scan history, and displays an in-page safety sidebar. Tech: FastAPI, Groq, Chrome Extension, React.
+1. **Reliable Evidence-Based Claim Verification with Gemma 4** [🏆 1st Place Winner — AI Seekho Day 2026] — Three-way evidence-verification system fine-tuned from Google Gemma 4 12B using 4-bit NF4 QLoRA. Starting from 1,000 noisy labeled examples, the training curriculum was audited to 935 reliable examples and extended with 150 targeted contrastive examples (1,085 total). The final frozen checkpoint achieved 94.40% Accuracy and 94.38% Macro-F1 (472 / 500 correct) on the 500-example supervised final evaluation benchmark with deterministic inference. Tech: Gemma 4 12B, 4-bit NF4 QLoRA, PEFT, PyTorch, bitsandbytes, Transformers, NLP.
+2. **Personal AI Employee** [Featured, 2026] — Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation, featuring a continuous reasoning loop and MCP-style tool integration. Tech: Claude Code, Flask, Gmail API, Playwright.
+3. **AutoGrader Agent** [2026] — Comprehensive academic evaluation agent with integrated vision analysis for diagrams, dual-similarity plagiarism detection, and automated rubric generation. Generates well-formatted Excel sheets for students and class reports. Tech: Python, Groq LLaMA 3.3, PyMuPDF, openpyxl.
+4. **SHAP-Explained Agentic IDS** [2026] — Hybrid intrusion detection system combining Random Forest classification, SHAP feature explanations, and LangGraph-based verification with autonomous red teaming. Tech: SHAP, LangGraph, Flask, React.
+5. **InboxVerity AI** (previously presented as PhishGuard AI) [2026] — Gmail/Outlook Chrome extension and FastAPI backend that extracts open emails, combines heuristic and URL/domain signals with Groq classification, stores scan history, and displays an in-page safety sidebar. Tech: FastAPI, Groq, Chrome Extension, React.
 5. **CareerPilot: AI CTO** [2026] — Autonomous Observe-Analyze-Plan agent that audits repositories, tracks hirability scores, and delivers continuous weekly coaching through an interactive chat interface. Tech: FastAPI, SQLite, GitHub Actions, MCP.
 6. **FireWatch AI** [2026] — Autonomous YOLOv8-powered safety system that detects and segments fire/smoke in real-time and triggers agentic incident response protocols along with RAG implemented chatbot. Tech: FastAPI, YOLOv8l, React, RAG, Gmail API.
 7. **AutoResearch Agent** [2026] — Autonomous research engine that performs multi-source web synthesis and generates professional PDF reports. Tech: LLMs, Groq, Tavily, PDF.
@@ -196,20 +203,23 @@ Languages: Urdu (Native), English (Advanced), Turkish (Basic).
 Interests: Competitive programming, open-source AI projects, agentic AI development, and applied cybersecurity.
 
 === CERTIFICATIONS ===
-Umar holds 13 professional certifications (including AI, Anthropic, Kaggle and Google credentials):
-1. **5-Day AI Agents: Intensive Vibe Coding Course** — Kaggle / Google (Certificate of Completion, July 2026)
-2. **AI Fluency for Students** — Anthropic (Certificate of Completion)
-3. **Claude 101** — Anthropic (Certificate of Completion)
-4. **Claude Code 101** — Anthropic (Certificate of Completion)
-5. **AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
-6. **AI Fluency: Framework & Foundations** — Anthropic (Certificate of Completion)
-7. **Applied AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
-8. **Claude Code in Action** — Anthropic (Certificate of Completion)
-9. **Claude Platform 101** — Anthropic (Certificate of Completion)
-10. **AI Fluency: AI Capabilities & Limitations** — Anthropic (Certificate of Completion)
-11. **Intro to Generative AI** — Google
-12. **Peer Tutoring Certificate** — UMT
-13. **Intro to AI Ethics** — Kaggle
+Umar holds 16 professional certifications (including DataCamp, OpenAI, Anthropic, Kaggle, and Google credentials):
+1. **AI Engineer for Developers Associate** — DataCamp (September 2026, Credential ID: AIEDA0016575880195)
+2. **Working with the OpenAI API** — DataCamp (September 2026, Certificate ID: #49,665,886)
+3. **5-Day AI Agents: Intensive Vibe Coding Course** — Kaggle / Google (Certificate of Completion, July 2026)
+4. **AI Fluency for Students** — Anthropic (Certificate of Completion)
+5. **Claude 101** — Anthropic (Certificate of Completion)
+6. **Claude Code 101** — Anthropic (Certificate of Completion)
+7. **AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
+8. **AI Fluency: Framework & Foundations** — Anthropic (Certificate of Completion)
+9. **Applied AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
+10. **Claude Code in Action** — Anthropic (Certificate of Completion)
+11. **Claude Platform 101** — Anthropic (Certificate of Completion)
+12. **AI Fluency: AI Capabilities & Limitations** — Anthropic (Certificate of Completion)
+13. **Machine Learning Explainability** — Kaggle (Certificate of Completion)
+14. **Intro to AI Ethics** — Kaggle
+15. **Peer Tutoring Certificate** — UMT
+16. **Intro to Generative AI** — Google
 
 === RESPONSE INSTRUCTIONS ===
 1. Answer visitors' questions about Umar's portfolio, skills, projects, education, experience, and contact.
