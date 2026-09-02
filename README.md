@@ -55,14 +55,26 @@ The UI was designed from first principles using custom CSS properties as a desig
 ```
 portfolio-site/
 ├── index.html              # Main portfolio page
-├── style.css               # All styles for index.html (~10,000 lines)
-├── main.js                 # All scripts for index.html
 ├── all-projects.html       # Standalone all-projects page
+├── main.js                 # Core portfolio scripts
 ├── chatbot-widget.js       # Standalone AI chatbot widget
 ├── geometric-background.js # Canvas particle animation
+├── css/                    # Modular CSS architecture
+│   ├── base.css            # Root tokens, resets & utilities
+│   ├── navigation.css      # Fixed navbar & theme toggle
+│   ├── gateway.css         # Blast door gateway overlay
+│   ├── hero.css            # Hero section & animations
+│   ├── about.css           # Technical story & skills sidebar
+│   ├── experience.css      # Cyber experience & education timeline
+│   ├── projects.css        # Bento grid & project showcase
+│   ├── achievements.css    # Honors, awards & certifications
+│   ├── contact.css         # 3D contact stage & crystal plaque
+│   ├── modals.css          # Project & document lightboxes
+│   ├── responsive.css      # Global media queries
+│   └── overrides.css       # Visual refresh & ambient layers
 ├── images/                 # Project screenshots & assets (WebP optimized)
 ├── docs/                   # Certificates & documents (WebP optimized)
-├── assets/                 # Favicon and other static assets
+├── assets/                 # Favicon and stone surface textures
 ├── api/
 │   └── chat.py             # FastAPI serverless chatbot endpoint (Vercel)
 ├── vercel.json             # Vercel deployment config (serverless functions)

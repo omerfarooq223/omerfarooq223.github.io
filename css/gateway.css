@@ -1,0 +1,629 @@
+/* ═══════════════════════════════════════════════════════════════
+   SEAMLESS BLAST DOOR GATEWAY OVERLAY (DIRECT HERO REVEAL)
+   ═══════════════════════════════════════════════════════════════ */
+#blastDoorGateway {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  overflow: hidden;
+  pointer-events: auto;
+  font-family: 'IBM Plex Mono', monospace;
+  background: transparent;
+  user-select: none;
+}
+
+#blastDoorGateway.is-dismissed {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+/* ── The Two Gateway Door Leaves (Left & Right Split) ── */
+.blast-door-leaf {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50vw;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 44%, rgba(42, 98, 126, 0.2), transparent 31%),
+              radial-gradient(circle at 82% 30%, rgba(104, 75, 170, 0.09), transparent 28%),
+              linear-gradient(145deg, #050b11, #020507 66%, #071018);
+  contain: layout paint style;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  transition: transform 1.55s cubic-bezier(0.22, 0.76, 0.2, 1), box-shadow 1s ease-out;
+  will-change: transform;
+}
+
+.blast-door-leaf::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.28;
+  background: repeating-linear-gradient(0deg, transparent 0 39px, rgba(166, 199, 217, 0.025) 40px),
+              repeating-linear-gradient(90deg, transparent 0 39px, rgba(166, 199, 217, 0.018) 40px);
+  pointer-events: none;
+}
+
+.blast-door-leaf::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  background: radial-gradient(circle, transparent 53%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.blast-door-leaf.left {
+  left: 0;
+  box-shadow: inset -4px 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.blast-door-leaf.right {
+  right: 0;
+  box-shadow: inset 4px 0 20px rgba(0, 0, 0, 0.8);
+}
+
+/* Door Opening States */
+#blastDoorGateway.is-opening .blast-door-leaf.left {
+  transform: translate3d(-101%, 0, 0);
+  box-shadow: inset -4px 0 20px rgba(0, 0, 0, 0.72), 0 0 0 rgba(0, 229, 255, 0);
+}
+
+#blastDoorGateway.is-opening .blast-door-leaf.right {
+  transform: translate3d(101%, 0, 0);
+  box-shadow: inset 4px 0 20px rgba(0, 0, 0, 0.72), 0 0 0 rgba(0, 229, 255, 0);
+}
+
+/* Inner 100vw Gate Canvas for perfect cross-seam registration */
+.gateway-leaf-canvas {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100dvh;
+  min-height: 560px;
+  isolation: isolate;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* During the door translation, keep the detailed HUD as a stable texture.
+   This avoids repainting the duplicated SVG and glow effects on every frame. */
+#blastDoorGateway.is-opening .gateway-leaf-canvas .orbit-cyan,
+#blastDoorGateway.is-opening .gateway-leaf-canvas .orbit-violet,
+#blastDoorGateway.is-opening .gateway-leaf-canvas .core-beam,
+#blastDoorGateway.is-opening .gateway-leaf-canvas .core-beam::after,
+#blastDoorGateway.is-opening .gateway-leaf-canvas .system-mark::before {
+  animation-play-state: paused;
+}
+
+.blast-door-leaf.left .gateway-leaf-canvas {
+  left: 0;
+}
+
+.blast-door-leaf.right .gateway-leaf-canvas {
+  right: 0;
+}
+
+/* Gateway Shell and Stage Panel on each Leaf */
+.gateway-leaf-canvas .gateway-shell {
+  position: absolute;
+  inset: clamp(8px, 1.3vw, 18px);
+  display: grid;
+  grid-template-rows: 50px minmax(0, 1fr) 58px;
+  overflow: hidden;
+  border: 1px solid rgba(204, 224, 235, 0.42);
+  border-radius: 9px;
+  background: rgba(4, 9, 13, 0.72);
+  box-shadow: inset 0 0 0 4px rgba(1, 3, 5, 0.88),
+              inset 0 0 0 6px rgba(128, 154, 170, 0.16),
+              0 0 0 1px #000,
+              0 28px 90px rgba(0, 0, 0, 0.72);
+}
+
+.gateway-leaf-canvas .gateway-shell::before,
+.gateway-leaf-canvas .gateway-shell::after {
+  content: '';
+  position: absolute;
+  z-index: 24;
+  width: 110px;
+  height: 110px;
+  pointer-events: none;
+  border-color: rgba(184, 211, 224, 0.32);
+  border-style: solid;
+}
+
+.gateway-leaf-canvas .gateway-shell::before {
+  top: 5px;
+  left: 5px;
+  border-width: 2px 0 0 2px;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.gateway-leaf-canvas .gateway-shell::after {
+  right: 5px;
+  bottom: 5px;
+  border-width: 0 2px 2px 0;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.gateway-leaf-canvas .topbar,
+.gateway-leaf-canvas .bottombar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 clamp(18px, 2.4vw, 36px);
+  color: rgba(221, 231, 237, 0.88);
+  font-size: clamp(0.62rem, 0.76vw, 0.82rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(26, 37, 47, 0.96), rgba(12, 19, 26, 0.96));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -1px 0 rgba(0, 0, 0, 0.85);
+}
+
+.gateway-leaf-canvas .topbar {
+  justify-content: flex-start;
+  border-bottom: 1px solid rgba(177, 203, 217, 0.2);
+}
+
+.gateway-leaf-canvas .bottombar {
+  justify-content: flex-start;
+  border-top: 1px solid rgba(177, 203, 217, 0.2);
+}
+
+.gateway-leaf-canvas .bottombar span {
+  color: rgba(180, 215, 230, 0.75);
+  font-size: clamp(0.58rem, 0.72vw, 0.76rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.gateway-leaf-canvas .topbar strong {
+  color: var(--cyan, #72ebf4);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-shadow: 0 0 10px rgba(114, 235, 244, 0.5);
+}
+
+.gateway-leaf-canvas .system-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gateway-leaf-canvas .system-mark::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cyan, #72ebf4);
+  box-shadow: 0 0 12px var(--cyan, #72ebf4);
+  animation: statusPulse 1.5s ease-in-out infinite;
+}
+
+.gateway-leaf-canvas .stage-panel {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(126, 158, 177, 0.26);
+  border-radius: 5px;
+  background: linear-gradient(90deg, rgba(9, 16, 23, 0.98), rgba(8, 15, 22, 0.72) 29%, rgba(8, 15, 22, 0.45) 50%, rgba(8, 15, 22, 0.72) 71%, rgba(9, 16, 23, 0.98)),
+              radial-gradient(circle at 50% 50%, rgba(80, 180, 209, 0.12), transparent 42%);
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.42);
+}
+
+.gateway-leaf-canvas .stage-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.13;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255, 255, 255, 0.035) 4px);
+}
+
+.gateway-leaf-canvas .panel-chamfer {
+  position: absolute;
+  z-index: 16;
+  width: 42px;
+  height: 210px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, #75848d, #26323a 35%, #111a20 72%);
+  border: 1px solid rgba(216, 231, 238, 0.3);
+  box-shadow: inset 0 0 0 4px #080d11, 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.gateway-leaf-canvas .panel-chamfer.left {
+  left: -17px;
+  clip-path: polygon(0 0, 65% 0, 100% 12%, 100% 88%, 65% 100%, 0 100%);
+}
+
+.gateway-leaf-canvas .panel-chamfer.right {
+  right: -17px;
+  transform: translateY(-50%) scaleX(-1);
+  clip-path: polygon(0 0, 65% 0, 100% 12%, 100% 88%, 65% 100%, 0 100%);
+}
+
+.gateway-leaf-canvas .power-spine {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: clamp(118px, 13vw, 180px);
+  transform: translateX(-50%);
+  clip-path: polygon(24% 0, 76% 0, 76% 20%, 100% 27%, 100% 73%, 76% 80%, 76% 100%, 24% 100%, 24% 80%, 0 73%, 0 27%, 24% 20%);
+  background: linear-gradient(90deg, #111a20 0 12%, #a4b2b8 13%, #263941 19%, #091014 24%, transparent 25% 75%, #091014 76%, #263941 81%, #a4b2b8 87%, #111a20 88%),
+              linear-gradient(90deg, rgba(86, 227, 238, 0.2), rgba(192, 251, 255, 0.72), rgba(71, 205, 221, 0.2));
+  border-block: 1px solid rgba(255, 255, 255, 0.42);
+  filter: drop-shadow(0 0 18px rgba(94, 230, 239, 0.22));
+}
+
+.gateway-leaf-canvas .power-spine::before,
+.gateway-leaf-canvas .power-spine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #bffaff;
+  box-shadow: 0 0 8px var(--cyan, #72ebf4), 0 0 20px rgba(114, 235, 244, 0.8);
+  opacity: 0.88;
+}
+
+.gateway-leaf-canvas .power-spine::before { left: 31%; }
+.gateway-leaf-canvas .power-spine::after { right: 31%; }
+
+.gateway-leaf-canvas .core-beam {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: #e9ffff;
+  box-shadow: 0 0 5px #fff, 0 0 12px var(--cyan, #72ebf4), 0 0 30px rgba(80, 188, 255, 0.9);
+  animation: beamCharge 2.3s ease-in-out infinite;
+}
+
+.gateway-leaf-canvas .core-beam::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 12px;
+  height: 54px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, transparent, #fff, transparent);
+  filter: blur(2px);
+  animation: beamScan 2.6s linear infinite;
+}
+
+.gateway-leaf-canvas .orbital {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  width: min(52vw, 650px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  opacity: 0.56;
+  pointer-events: none;
+  filter: drop-shadow(0 0 8px rgba(103, 222, 236, 0.12));
+}
+
+.gateway-leaf-canvas .orbit-track {
+  fill: none;
+  stroke: rgba(128, 181, 205, 0.27);
+  stroke-width: 1;
+}
+
+.gateway-leaf-canvas .orbit-cyan {
+  fill: none;
+  stroke: var(--cyan, #72ebf4);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 13;
+  transform-origin: center;
+  animation: rotate 34s linear infinite;
+}
+
+.gateway-leaf-canvas .orbit-violet {
+  fill: none;
+  stroke: var(--violet, #927bf3);
+  stroke-width: 1;
+  stroke-dasharray: 3 19;
+  transform-origin: center;
+  animation: rotateBack 43s linear infinite;
+}
+
+.gateway-leaf-canvas .orbit-node {
+  fill: var(--bright, #d9fdff);
+  filter: drop-shadow(0 0 5px var(--cyan, #72ebf4));
+}
+
+.gateway-leaf-canvas .telemetry-cluster {
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  width: clamp(150px, 23vw, 330px);
+  height: 230px;
+  transform: translateY(-50%);
+  opacity: 0.42;
+  color: var(--cyan, #72ebf4);
+}
+
+.gateway-leaf-canvas .telemetry-cluster.left {
+  left: clamp(30px, 5vw, 80px);
+}
+
+.gateway-leaf-canvas .telemetry-cluster.right {
+  right: clamp(30px, 5vw, 80px);
+  color: var(--violet, #927bf3);
+  transform: translateY(-50%) scaleX(-1);
+}
+
+.gateway-leaf-canvas .telemetry-cluster::before,
+.gateway-leaf-canvas .telemetry-cluster::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 58px;
+  background: radial-gradient(circle, currentColor 0 2px, transparent 2.5px) 0 0 / 13px 13px,
+              linear-gradient(currentColor, currentColor) 58% 50% / 38% 1px no-repeat;
+  mask-image: linear-gradient(90deg, #000, transparent);
+  -webkit-mask-image: linear-gradient(90deg, #000, transparent);
+}
+
+.gateway-leaf-canvas .telemetry-cluster::before { top: 16px; }
+.gateway-leaf-canvas .telemetry-cluster::after { bottom: 16px; transform: scaleY(-1); }
+
+.gateway-leaf-canvas .gateway-content {
+  position: absolute;
+  z-index: 18;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 24px 35px;
+  text-align: center;
+}
+
+.gateway-leaf-canvas .awakening-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: #9eeef5;
+  font-size: clamp(0.72rem, 0.95vw, 0.96rem);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 14px rgba(114, 235, 244, 0.7);
+}
+
+.gateway-leaf-canvas .awakening-row::before,
+.gateway-leaf-canvas .awakening-row::after {
+  content: '';
+  width: 42px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #72ebf4);
+  box-shadow: 0 0 8px #72ebf4;
+}
+.gateway-leaf-canvas .awakening-row::after { transform: scaleX(-1); }
+
+.gateway-leaf-canvas .given-name {
+  margin-bottom: 6px;
+  color: #ffffff;
+  font-size: clamp(0.95rem, 1.4vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 16px rgba(114, 235, 244, 0.5);
+}
+
+.gateway-leaf-canvas .gateway-name {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(2.8rem, 6.8vw, 7.2rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 38%, #94a3b8 58%, #ffffff 82%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.4);
+  filter: drop-shadow(0 6px 4px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 24px rgba(114, 235, 244, 0.45));
+  white-space: nowrap;
+}
+
+.gateway-leaf-canvas .gateway-role {
+  margin-top: 16px;
+  color: #72ebf4;
+  font-size: clamp(0.85rem, 1.25vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 16px rgba(114, 235, 244, 0.65);
+}
+
+.gateway-leaf-canvas .loader {
+  width: min(560px, 72vw);
+  margin-top: clamp(28px, 5vh, 50px);
+}
+
+.gateway-leaf-canvas .loader-copy {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 9px;
+  color: #e2f1f7;
+  font-size: clamp(0.68rem, 0.85vw, 0.88rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(114, 235, 244, 0.4);
+}
+
+.gateway-leaf-canvas .loader-copy span:last-child {
+  color: #72ebf4;
+  font-size: clamp(0.78rem, 0.95vw, 1rem);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(114, 235, 244, 0.6);
+}
+
+.gateway-leaf-canvas .loader-track {
+  position: relative;
+  height: 12px;
+  padding: 2px;
+  border: 1px solid rgba(209, 235, 241, 0.8);
+  background: rgba(2, 7, 10, 0.9);
+  box-shadow: inset 0 0 7px #000, 0 0 14px rgba(114, 235, 244, 0.15);
+  border-radius: 3px;
+}
+
+.gateway-leaf-canvas .loader-fill {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #00b4d8, #72ebf4 75%, #ffffff);
+  box-shadow: 0 0 10px var(--cyan, #72ebf4), 0 0 20px rgba(114, 235, 244, 0.6);
+  border-radius: 2px;
+}
+
+.gateway-leaf-canvas .loader-fill::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 6px;
+  height: 14px;
+  transform: translate(50%, -50%);
+  background: #fff;
+  box-shadow: 0 0 8px 2px #fff, 0 0 16px 4px var(--cyan, #72ebf4);
+  border-radius: 1px;
+}
+
+/* Floating Skip Control */
+.hud-skip-wrap {
+  position: absolute;
+  bottom: clamp(14px, 2.2vw, 24px);
+  right: clamp(16px, 2.5vw, 36px);
+  z-index: 50;
+  pointer-events: auto;
+}
+
+.hud-skip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.64rem, 0.75vw, 0.8rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #bdf8fb;
+  border: 1px solid rgba(114, 235, 244, 0.48);
+  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(28, 52, 62, 0.9), rgba(12, 25, 32, 0.95));
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hud-skip-btn:hover {
+  border-color: #72ebf4;
+  background: rgba(45, 95, 110, 0.6);
+  box-shadow: 0 0 20px rgba(114, 235, 244, 0.35);
+  transform: translateY(-1px);
+}
+
+#blastDoorGateway.is-opening .hud-skip-wrap {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Keyframes for Gateway Elements */
+@keyframes statusPulse {
+  50% { opacity: 0.35; transform: scale(0.72); }
+}
+
+@keyframes beamCharge {
+  50% { opacity: 0.58; filter: brightness(1.5); }
+}
+
+@keyframes beamScan {
+  from { top: -60px; }
+  to { top: calc(100% + 60px); }
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotateBack {
+  to { transform: rotate(-360deg); }
+}
+
+/* Responsive Rules for Gateway Leaves */
+@media (max-width: 760px) {
+  .gateway-leaf-canvas .gateway-shell {
+    inset: 6px;
+    grid-template-rows: 48px minmax(0, 1fr) 54px;
+  }
+  .gateway-leaf-canvas .topbar,
+  .gateway-leaf-canvas .bottombar {
+    padding: 0 14px;
+  }
+  .gateway-leaf-canvas .power-spine {
+    width: 106px;
+    opacity: 0.78;
+  }
+  .gateway-leaf-canvas .orbital {
+    width: min(94vw, 520px);
+  }
+  .gateway-leaf-canvas .telemetry-cluster {
+    opacity: 0.2;
+    width: 38vw;
+  }
+  .gateway-leaf-canvas .telemetry-cluster.left { left: 12px; }
+  .gateway-leaf-canvas .telemetry-cluster.right { right: 12px; }
+  .gateway-leaf-canvas .gateway-content { padding: 48px 16px 28px; }
+  .gateway-leaf-canvas .gateway-name { font-size: clamp(2.1rem, 10.5vw, 4.5rem); }
+  .gateway-leaf-canvas .gateway-role { letter-spacing: 0.13em; }
+  .gateway-leaf-canvas .loader { width: min(520px, 86vw); }
+  .gateway-leaf-canvas .panel-chamfer { display: none; }
+}
+
+@media (max-width: 460px) {
+  .gateway-leaf-canvas .gateway-name { white-space: normal; line-height: 1.04; }
+  .gateway-leaf-canvas .awakening-row::before,
+  .gateway-leaf-canvas .awakening-row::after { width: 17px; }
+  .gateway-leaf-canvas .gateway-role { max-width: 280px; line-height: 1.7; }
+  .gateway-leaf-canvas .loader-copy { align-items: flex-end; }
+}
+
+/* Completion Flash Burst */
+#blastDoorFlash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
+  background: #dffeff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+#blastDoorFlash.flash {
+  opacity: 0.25;
+  transition: opacity 0.05s ease;
+}
+

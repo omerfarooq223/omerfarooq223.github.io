@@ -22,7 +22,18 @@
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20260824-4" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/gateway.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/about.css" />
+  <link rel="stylesheet" href="css/experience.css" />
+  <link rel="stylesheet" href="css/projects.css" />
+  <link rel="stylesheet" href="css/achievements.css" />
+  <link rel="stylesheet" href="css/contact.css" />
+  <link rel="stylesheet" href="css/modals.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/overrides.css" />
   <style>
     .all-projects-page {
       min-height: 100vh;
@@ -610,34 +621,34 @@
   <script>
     const allProjects = [
       {
-        id: 'aiemployee', n: '001', title: 'Personal AI Employee', tag: 'Agentic AI', cats: 'agentic automation',
-        img: 'images/aiemployee-dashboard.webp',
-        desc: 'Human-in-the-loop AI employee for Gmail monitoring, task planning, approval routing, and LinkedIn automation.',
-        stack: ['Claude Code', 'Flask', 'Gmail API']
+        id: 'gemmaclaim', n: '001', title: 'Gemma Claim Verification', tag: 'Gemma Fine-Tuning', cats: 'ml agentic',
+        img: 'images/gemma-slide1.webp',
+        desc: '1st Place Hackathon Winner: three-way claim verification engine fine-tuned from Google Gemma 4 12B using 4-bit NF4 QLoRA on 1,085 audited examples (94.40% Accuracy, 94.38% Macro-F1).',
+        stack: ['Gemma 4 12B', 'QLoRA', 'NF4', 'PyTorch', 'PEFT']
       },
       {
-        id: 'autograder', n: '002', title: 'AutoGrader Agent', tag: 'Agentic AI', cats: 'agentic automation',
+        id: 'aiemployee', n: '002', title: 'Personal AI Employee', tag: 'Agentic AI', cats: 'agentic automation',
+        img: 'images/aiemployee-dashboard.webp',
+        desc: 'Fully autonomous Human-in-the-Loop executive agent for proactive Gmail triage, multi-step task planning, and automated LinkedIn publishing with interactive command dashboard approval controls.',
+        stack: ['Claude Code', 'Flask', 'Gmail API', 'Playwright']
+      },
+      {
+        id: 'autograder', n: '003', title: 'AutoGrader Agent', tag: 'Agentic AI', cats: 'agentic automation',
         img: 'images/autograder.webp',
-        desc: 'Academic evaluation agent with vision analysis, plagiarism checks, rubrics, and reporting automation.',
+        desc: 'Comprehensive academic evaluation agent with vision analysis, dual-similarity plagiarism detection, and automated rubric generation that standardizes student submissions into grading reports.',
         stack: ['Python', 'Groq', 'PyMuPDF']
       },
       {
-        id: 'shapids', n: '003', title: 'SHAP-Explained Agentic IDS', tag: 'Cybersecurity', cats: 'agentic ml cyber',
+        id: 'shapids', n: '004', title: 'SHAP-Explained Agentic IDS', tag: 'Cybersecurity', cats: 'agentic ml cyber',
         img: 'images/shap-ids.webp',
         desc: 'Intrusion detection system combining Random Forest, SHAP explanations, LangGraph verification, and red teaming.',
         stack: ['SHAP', 'LangGraph', 'Flask']
       },
       {
-        id: 'inboxverity', n: '004', title: 'InboxVerity AI', tag: 'Cybersecurity', cats: 'cyber',
+        id: 'inboxverity', n: '005', title: 'InboxVerity AI', tag: 'Cybersecurity', cats: 'cyber',
         img: 'images/inboxverity-dashboard-overview.png',
         desc: 'Chrome extension and FastAPI backend for phishing email detection with heuristic and LLM analysis.',
         stack: ['FastAPI', 'Groq', 'Extension']
-      },
-      {
-        id: 'careerpilot', n: '005', title: 'CareerPilot: AI CTO', tag: 'Agentic AI', cats: 'agentic automation',
-        img: 'images/careerpilot.webp',
-        desc: 'Autonomous career coach that audits repositories, tracks growth, and delivers weekly coaching.',
-        stack: ['FastAPI', 'SQLite', 'MCP']
       },
       {
         id: 'firewatch', n: '006', title: 'FireWatch AI', tag: 'Computer Vision', cats: 'agentic ml automation',
@@ -646,88 +657,100 @@
         stack: ['YOLOv8', 'React', 'RAG']
       },
       {
-        id: 'autoresearch', n: '007', title: 'AutoResearch Agent', tag: 'Agentic AI', cats: 'agentic automation',
+        id: 'careerpilot', n: '007', title: 'CareerPilot: AI CTO', tag: 'Agentic AI', cats: 'agentic automation',
+        img: 'images/careerpilot.webp',
+        desc: 'Autonomous career coach that audits repositories, tracks growth, and delivers weekly coaching.',
+        stack: ['FastAPI', 'SQLite', 'MCP']
+      },
+      {
+        id: 'autoresearch', n: '008', title: 'AutoResearch Agent', tag: 'Agentic AI', cats: 'agentic automation',
         img: 'images/autoresearchagent.webp',
         desc: 'Research engine that performs multi-source synthesis and generates professional PDF reports.',
         stack: ['LLMs', 'Groq', 'Tavily']
       },
       {
-        id: 'parking', n: '008', title: 'Parking Detection System', tag: 'Machine Learning', cats: 'ml',
+        id: 'parking', n: '009', title: 'Parking Detection System', tag: 'Machine Learning', cats: 'ml',
         img: 'images/parkingdetection2.webp',
         desc: 'YOLOv8 and DBSCAN vision system for parking spot detection, ranking, and assistant queries.',
         stack: ['YOLOv8', 'OpenCV', 'Gradio']
       },
       {
-        id: 'urduplanner', n: '009', title: 'UrduPlanner Agent', tag: 'NLP', cats: 'agentic ml automation',
+        id: 'urduplanner', n: '010', title: 'UrduPlanner Agent', tag: 'NLP', cats: 'agentic ml automation',
         img: 'images/urduplanner.webp',
         desc: 'NLP and OCR pipeline for Urdu text reconstruction, RTL alignment, and document automation.',
         stack: ['OCR', 'Groq', 'Python']
       },
       {
-        id: 'ospilot', n: '010', title: 'OS Pilot', tag: 'Agentic AI', cats: 'agentic automation',
+        id: 'ospilot', n: '011', title: 'OS Pilot', tag: 'Agentic AI', cats: 'agentic automation',
         img: 'images/os-pilot-dashboard.webp',
         desc: 'Local-first multi-agent workspace recovery assistant for scanning, planning, quarantine, and restore.',
         stack: ['React', 'Tauri', 'FastAPI']
       },
       {
-        id: 'clarityhire', n: '011', title: 'ClarityHire', tag: 'Responsible AI', cats: 'agentic ml cyber automation',
+        id: 'clarityhire', n: '012', title: 'ClarityHire', tag: 'Responsible AI', cats: 'agentic ml cyber automation',
         img: 'images/clarityhire-dashboard.webp',
         desc: 'Human-in-the-loop resume screening with blind evaluation, explainable scoring, and synthetic demographic bias auditing.',
         stack: ['FastAPI', 'React', 'Celery', 'Fairlearn']
       },
       {
-        id: 'personadiff', n: '012', title: 'PersonaDiff', tag: 'Browser Systems', cats: 'automation cyber',
+        id: 'personadiff', n: '013', title: 'PersonaDiff', tag: 'Browser Systems', cats: 'automation cyber',
         img: 'images/personadiff-analysis.webp',
         desc: 'Evidence-first platform for isolated multi-persona web journeys, explainable diffs, tamper-evident capture, and offline replay.',
         stack: ['Playwright', 'TypeScript', 'Fastify']
       },
       {
-        id: 'autoreach', n: '013', title: 'AutoReach Hub', tag: 'Intelligent Automation', cats: 'agentic automation',
+        id: 'autoreach', n: '014', title: 'AutoReach Hub', tag: 'Intelligent Automation', cats: 'agentic automation',
         img: 'images/autoreach-dashboard.webp',
         desc: 'Smart multi-channel outreach platform with Google Gemini AI copywriting, dynamic variables, Microsoft 365 OAuth2 SSO, and UTF-8 WhatsApp messaging.',
         stack: ['Flask', 'Gemini AI', 'Microsoft 365', 'WhatsApp']
       },
       {
-        id: 'nexus', n: '014', title: 'NexusML: MLOps', tag: 'MLOps', cats: 'ml automation',
+        id: 'documorph', n: '015', title: 'DocuMorph', tag: 'Document AI', cats: 'agentic automation',
+        img: 'images/documorph-preview.webp',
+        desc: 'Local-first intelligent document extraction engine that converts PDFs into clean, validated, and provenance-grounded JSON.',
+        stack: ['TypeScript', 'pdfjs-dist', 'Tesseract.js', 'Node.js']
+      },
+      {
+        id: 'pokemon', n: '016', title: 'Pokémon TCG AI Agent', tag: 'Game AI', cats: 'agentic ml',
+        img: 'images/pokemon-preview.webp',
+        desc: 'State-aware Kaggle battle agent evolved over 18 versions and certified at a 91.5% local win rate across 294 matches.',
+        stack: ['Python', 'Planning', 'Simulation']
+      },
+      {
+        id: 'spatialfx', n: '017', title: 'Spatial-FX', tag: 'Computer Vision', cats: 'ml',
+        img: 'images/spatialfx-preview.webp',
+        desc: 'MediaPipe-powered hand tracking playground with gesture recognition, air painting, cinematic effects, and full-body invisibility.',
+        stack: ['MediaPipe', 'Canvas 2D', 'JavaScript']
+      },
+      {
+        id: 'nexus', n: '018', title: 'NexusML: MLOps', tag: 'MLOps', cats: 'ml automation',
         img: '',
         desc: 'Production-ready inference pipeline featuring DistilBERT benchmarks and a 1TB scaling strategy.',
         stack: ['DistilBERT', 'Docker', 'Spark']
       },
       {
-        id: 'language', n: '015', title: 'Language Recognition', tag: 'Machine Learning', cats: 'ml',
+        id: 'language', n: '019', title: 'Language Recognition', tag: 'Machine Learning', cats: 'ml',
         img: '',
         desc: 'Language classifier built with custom feature engineering, preprocessing, and logistic regression.',
         stack: ['Python', 'Scikit-learn', 'NLP']
       },
       {
-        id: 'solana', n: '016', title: 'Solana Trading Agent', tag: 'Agentic AI', cats: 'agentic automation',
+        id: 'solana', n: '020', title: 'Solana Trading Agent', tag: 'Agentic AI', cats: 'agentic automation',
         img: '',
         desc: 'Skills-based trading agent for Solana with risk math, monitoring, and secure trade logging.',
         stack: ['Claude Code', 'Solana', 'Web3']
       },
       {
-        id: 'jira', n: '017', title: 'Jira-Slack Integration', tag: 'Automation', cats: 'automation',
+        id: 'jira', n: '021', title: 'Jira-Slack Integration', tag: 'Automation', cats: 'automation',
         img: '',
         desc: 'n8n workflows for issue tracking, automated notifications, and REST API orchestration.',
         stack: ['n8n', 'Jira', 'Slack']
       },
       {
-        id: 'dl', n: '018', title: 'DL Coursework', tag: 'Deep Learning', cats: 'ml',
+        id: 'dl', n: '022', title: 'DL Coursework', tag: 'Deep Learning', cats: 'ml',
         img: '',
         desc: 'Neural network experiments from scratch, including CNNs, LSTMs, and sequence models.',
         stack: ['PyTorch', 'TensorFlow', 'NumPy']
-      },
-      {
-        id: 'spatialfx', n: '019', title: 'Spatial-FX', tag: 'Computer Vision', cats: 'ml',
-        img: '',
-        desc: 'MediaPipe-powered hand tracking playground with gesture recognition, air painting, cinematic effects, and full-body invisibility.',
-        stack: ['MediaPipe', 'Canvas 2D', 'JavaScript']
-      },
-      {
-        id: 'pokemon', n: '020', title: 'Pokémon TCG AI Agent', tag: 'Game AI', cats: 'agentic ml',
-        img: '',
-        desc: 'State-aware Kaggle battle agent evolved over 18 versions and certified at a 91.5% local win rate across 294 matches.',
-        stack: ['Python', 'Planning', 'Simulation']
       }
     ];
 

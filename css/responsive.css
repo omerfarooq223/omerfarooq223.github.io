@@ -1,0 +1,141 @@
+    @media(prefers-reduced-motion:reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .ct-glow {
+        animation: none !important;
+      }
+
+      #immersive-canvas {
+        display: none !important;
+      }
+
+      .hero-eyebrow::before {
+        animation: none !important;
+      }
+
+      .scroll-cue .line::after {
+        animation: none !important;
+      }
+
+      .ct-wrap.ct-play {
+        animation: none !important;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .sec.sec-visible::after {
+        transform: scaleX(1) !important;
+      }
+    }
+
+    @media(max-width:800px) {
+      nav {
+        padding: 16px 20px;
+      }
+
+      nav.scrolled {
+        padding: 12px 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .ham {
+        display: flex;
+      }
+
+      .hero {
+        padding: 90px 20px 90px;
+      }
+
+      .hero-eyebrow {
+        gap: 8px;
+        --eb-line-h: 1.55em;
+        font-size: .56rem;
+        letter-spacing: .12em;
+      }
+
+      .scroll-cue {
+        left: 20px;
+      }
+
+      .sec {
+        padding: 72px 20px;
+      }
+
+      .inn {
+        max-width: 100%;
+      }
+
+      .ab-grid {
+        grid-template-columns: 1fr;
+        gap: 44px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .sk-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .exp-hd {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .exp-per {
+        align-self: flex-start;
+      }
+
+      .ct-links {
+        gap: 8px;
+      }
+
+      .cl {
+        padding: 10px 16px;
+        font-size: .74rem;
+      }
+
+      footer {
+        padding: 24px 20px;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      #btt {
+        width: 28px;
+        height: 28px;
+        font-size: .7rem;
+      }
+
+      .p-info {
+        padding: 32px 24px;
+      }
+
+      .p-title-large {
+        font-size: clamp(1.6rem, 7.5vw, 2.2rem);
+      }
+
+      .p-desc-large {
+        max-width: 100%;
+      }
+    }
+

@@ -1,0 +1,520 @@
+:root {
+      --bg: #07080f;
+      --surface: #0c0d18;
+      --cyan: #00e5ff;
+      --purple: #a855f7;
+      --pink: #f472b6;
+      --amber: #fbbf24;
+      --green: #34d399;
+      --text: #eeeef5;
+      --muted: #44455a;
+      --muted2: #8888aa;
+      --cw: 1292px;
+
+      --beam: #00e5ff;
+      --beam-fade: rgba(0, 229, 255, 0.15);
+
+      --card: rgb(13, 14, 28);
+      --border: rgba(255, 255, 255, 0.09);
+      --cardGlow: rgba(0, 229, 255, 0.05);
+      --cardGrad: linear-gradient(165deg, rgb(16, 18, 35) 0%, rgb(13, 14, 28) 45%);
+
+      --navBg: rgba(7, 8, 15, .75);
+      --mobBg: rgba(7, 8, 15, .97);
+      --projCardGradA: rgba(18, 20, 38, .65);
+      --projCardAfterLine: rgba(255, 255, 255, .12);
+      --termBg: rgba(10, 11, 21, 0.65);
+      --termTbBg: rgba(255, 255, 255, 0.03);
+
+      --eduCardBorder: rgba(255, 255, 255, .09);
+      --eduCardGradA: rgba(22, 24, 42, .6);
+      --eduCardGradB: rgba(11, 12, 22, .65);
+      --eduCardGradC: rgba(8, 9, 18, .7);
+      --eduCardShadow: rgba(0, 0, 0, .38);
+      --eduCardInset: rgba(255, 255, 255, .06);
+      --eduCardHoverShadow: rgba(0, 0, 0, .45);
+      --eduCardHoverInset: rgba(255, 255, 255, .08);
+      --eduCardBeforeColor: rgba(160, 162, 190, .65);
+      --eduYearLabel: rgba(136, 138, 170, .85);
+      --eduNoteBorderTop: rgba(255, 255, 255, .05);
+
+      --themeToggleBg: rgba(255, 255, 255, .04);
+      --themeToggleBgHover: rgba(0, 229, 255, .07);
+
+      --fs-body: 16px;
+      --fs-body-lg: 1.08rem;
+      --fs-section-title: clamp(1.75rem, 4vw, 2.95rem);
+    }
+
+/* ── STONE / AMBIENT PORTFOLIO DIRECTION ── */
+body.portfolio-home {
+  --bg: #07090c;
+  background-color: #07090c;
+  background-image:
+    linear-gradient(180deg, rgba(3, 5, 8, .36), rgba(3, 5, 8, .72)),
+    url('../assets/stone-surface.png');
+  background-size: cover, cover;
+  background-position: center, center;
+  background-attachment: fixed, fixed;
+}
+
+body.portfolio-home::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .25;
+  background:
+    linear-gradient(rgba(93, 210, 230, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(93, 210, 230, .035) 1px, transparent 1px);
+  background-size: 84px 84px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.8), transparent 72%);
+}
+
+body.portfolio-home::after {
+  content: '';
+  position: fixed;
+  inset: 14px;
+  z-index: -1;
+  pointer-events: none;
+  border: 1px solid rgba(126, 212, 226, .08);
+}
+
+html[data-theme="light"] body.portfolio-home {
+  background-color: #d9dee2;
+  background-image:
+    linear-gradient(180deg, rgba(229, 235, 238, .78), rgba(196, 205, 210, .82)),
+    url('../assets/stone-surface.png');
+  color: #122027;
+}
+
+html[data-theme="light"] body.portfolio-home::before { opacity: .12; }
+html[data-theme="light"] body.portfolio-home::after { border-color: rgba(19, 92, 108, .16); }
+
+body.portfolio-home section.sec {
+  background: linear-gradient(180deg, rgba(6, 10, 14, .76), rgba(5, 8, 12, .64));
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body.portfolio-home section.sec.surf {
+  background: linear-gradient(180deg, rgba(5, 9, 13, .68), rgba(5, 8, 12, .54));
+}
+
+html[data-theme="light"] body.portfolio-home section.sec,
+html[data-theme="light"] body.portfolio-home section.sec.surf {
+  background: linear-gradient(180deg, rgba(241, 246, 248, .62), rgba(229, 235, 238, .54));
+}
+
+body.portfolio-home .hero {
+  min-height: min(760px, 88vh);
+  justify-content: center;
+  padding-top: 132px;
+  padding-bottom: 110px;
+}
+
+body.portfolio-home .hero-title {
+  font-size: clamp(2.8rem, 7.4vw, 6.4rem);
+  letter-spacing: -.055em;
+  text-wrap: balance;
+  max-width: 1050px;
+}
+
+body.portfolio-home .hero-title .wd {
+  text-shadow: 0 0 28px rgba(88, 207, 224, .14), 1px 0 rgba(255, 90, 170, .16), -1px 0 rgba(82, 221, 240, .16);
+}
+
+body.portfolio-home .hero-sub { max-width: min(78ch, 92vw); color: rgba(218, 229, 232, .70); text-wrap: balance; }
+body.portfolio-home .hero-eyebrow { color: #83e9ef; }
+body.portfolio-home .hero-badges .bdg { background-color: rgba(7, 13, 17, .36); backdrop-filter: blur(8px); }
+
+body.portfolio-home .st {
+  font-size: clamp(1.65rem, 3.5vw, 2.45rem);
+  letter-spacing: -.045em;
+}
+
+body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72) !important; }
+
+@media (max-width: 700px) {
+  body.portfolio-home .hero { min-height: 720px; padding: 108px 24px 76px; }
+  body.portfolio-home .hero-title { font-size: clamp(2.55rem, 14vw, 4.5rem); }
+  body.portfolio-home section.sec { background: rgba(5, 8, 11, .42) !important; }
+}
+
+    html[data-theme="light"] {
+      --bg: #fdfbff;
+      --surface: #f9fafb;
+
+      --cyan: #0ea5e9;
+      --purple: #6366f1;
+      --pink: #ec4899;
+      --amber: #f59e0b;
+      --green: #10b981;
+
+      --text: #020617;
+      --muted: #334155;
+      --muted2: #475569;
+
+      --navBg: rgba(249, 250, 251, 0.92);
+      --mobBg: rgba(249, 250, 251, 0.98);
+
+      --projCardGradA: rgba(255, 255, 255, 0.98);
+      --projCardAfterLine: rgba(148, 163, 184, 0.55);
+
+      --termBg: rgba(255, 255, 255, 0.88);
+      --termTbBg: rgba(15, 23, 42, 0.03);
+
+      --eduCardBorder: rgba(148, 163, 184, 0.45);
+      --eduCardGradA: rgba(255, 255, 255, 0.98);
+      --eduCardGradB: rgba(244, 244, 255, 0.98);
+      --eduCardGradC: rgba(235, 243, 255, 0.98);
+      --eduCardShadow: rgba(15, 23, 42, 0.08);
+      --eduCardInset: rgba(255, 255, 255, 0.90);
+      --eduCardHoverShadow: rgba(15, 23, 42, 0.16);
+      --eduCardHoverInset: rgba(255, 255, 255, 0.96);
+      --eduCardBeforeColor: rgba(100, 116, 139, 0.9);
+      --eduYearLabel: rgba(100, 116, 139, 0.95);
+      --eduNoteBorderTop: rgba(148, 163, 184, 0.4);
+
+      --card: rgb(240, 242, 248);
+      --border: rgba(15, 23, 42, 0.12);
+      --cardGlow: rgba(14, 165, 233, 0.08);
+      --cardGrad: linear-gradient(165deg, rgb(255, 255, 255) 0%, rgb(245, 246, 252) 45%);
+      --themeToggleBg: rgba(15, 23, 42, 0.02);
+      --themeToggleBgHover: rgba(14, 165, 233, 0.14);
+      --beam: #2563eb;
+      --beam-fade: rgba(37, 99, 235, 0.15);
+    }
+
+    html[data-theme="light"] body {
+      background:
+        radial-gradient(900px 520px at 10% -12%, rgba(14, 165, 233, 0.10), transparent 62%),
+        radial-gradient(900px 520px at 90% -10%, rgba(99, 102, 241, 0.09), transparent 62%),
+        var(--bg);
+    }
+
+    html[data-theme="light"] body::before {
+      opacity: .12;
+    }
+
+    html[data-theme="light"] nav {
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      border-bottom-color: rgba(148, 163, 184, 0.35);
+    }
+
+    html[data-theme="light"] .surf {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.52), rgba(249, 250, 251, 0.74));
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+
+    html[data-theme="light"] .btn-a {
+      color: #fff;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      box-shadow: 0 12px 26px rgba(37, 99, 235, 0.25);
+    }
+
+    html[data-theme="light"] .btn-a:hover {
+      box-shadow: 0 18px 36px rgba(124, 58, 237, 0.26);
+    }
+
+    html[data-theme="light"] .proj-card,
+    html[data-theme="light"] .sk-grp,
+    html[data-theme="light"] .stat {
+      border-color: rgba(148, 163, 184, 0.34);
+      box-shadow: 0 8px 26px rgba(15, 23, 42, 0.06);
+    }
+
+    html[data-theme="light"] .proj-card:hover,
+    html[data-theme="light"] .sk-grp:hover,
+    html[data-theme="light"] .stat {
+      cursor: auto !important;
+    }
+
+    html[data-theme="light"] .proj-card:hover,
+    html[data-theme="light"] .sk-grp:hover,
+    html[data-theme="light"] .stat:hover {
+      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+    }
+
+    html[data-theme="light"] .pill {
+      background: rgba(15, 23, 42, 0.04);
+      border-color: rgba(148, 163, 184, 0.35);
+      color: #475569;
+    }
+
+    html[data-theme="light"] .pnum {
+      color: rgba(71, 85, 105, 0.78);
+    }
+
+    html[data-theme="light"] .pfeat {
+      border-color: rgba(245, 158, 11, 0.35);
+      background: rgba(245, 158, 11, 0.12);
+      color: #b45309;
+    }
+
+
+    .ct-card-actions .clp .cl-ico {
+      width: 20px;
+      height: 20px;
+    }
+
+    .ct-card-actions>a.clpk .cl-ico,
+    .ct-card-actions>a.cla .cl-ico,
+    .ct-card-actions>a.clkg .cl-ico {
+      width: 20px;
+      height: 20px;
+    }
+
+    html[data-theme="light"] .ct-glow {
+      background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, .22), transparent 55%);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: var(--fs-body);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    ::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--cyan), var(--purple), var(--pink));
+    }
+
+    @media(pointer:fine) {
+      body {
+        cursor: auto;
+      }
+    }
+
+    #geoBgCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+      contain: strict;
+    }
+
+    body.portfolio-home .hero-wrap,
+    body.portfolio-home section.sec,
+    body.portfolio-home footer {
+      position: relative;
+      z-index: 2;
+      transform: translate3d(0, 0, 0);
+      will-change: auto;
+    }
+
+    section.sec {
+      background: rgba(7, 8, 15, 0.78);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    html[data-theme="light"] section.sec {
+      background: rgba(253, 251, 255, 0.88);
+    }
+
+    section.sec.surf {
+      background: rgba(7, 8, 15, 0.70);
+    }
+
+    html[data-theme="light"] section.sec.surf {
+      background: rgba(253, 251, 255, 0.58);
+    }
+
+    .hero-wrap {
+      background: transparent;
+    }
+
+    .surf {
+      background: transparent;
+    }
+
+    @property --border-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    @keyframes rotateBorder {
+      to {
+        --border-angle: 360deg;
+      }
+    }
+
+    .glow-border {
+      position: relative;
+      z-index: 1;
+      border: none !important;
+    }
+
+    .border-glow {
+      position: absolute;
+      inset: -1.5px;
+      border-radius: inherit;
+      padding: 2px;
+      background: conic-gradient(from var(--border-angle, 0deg),
+          transparent 0deg,
+          transparent 165deg,
+          var(--beam-fade, rgba(0, 229, 255, 0.2)) 205deg,
+          var(--beam, #00e5ff) 265deg,
+          #ffffff 295deg,
+          var(--beam, #00e5ff) 325deg,
+          var(--beam-fade, rgba(0, 229, 255, 0.2)) 348deg,
+          transparent 360deg);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      animation: rotateBorder 4s linear infinite;
+      animation-play-state: paused;
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0;
+      filter: none;
+      transition: opacity 0.35s ease, filter 0.35s ease;
+    }
+
+    .border-glow.is-animating {
+      animation-play-state: running !important;
+    }
+
+    .pcc,
+    .ec-c,
+    .sk-c {
+      --beam: var(--cyan);
+      --beam-fade: rgba(0, 229, 255, 0.35);
+    }
+
+    .pcp,
+    .ec-p,
+    .sk-p {
+      --beam: var(--purple);
+      --beam-fade: rgba(168, 85, 247, 0.35);
+    }
+
+    .sk-pk {
+      --beam: var(--pink);
+      --beam-fade: rgba(244, 114, 182, 0.35);
+    }
+
+    .pca,
+    .ec-a,
+    .sk-a {
+      --beam: var(--amber);
+      --beam-fade: rgba(251, 191, 36, 0.35);
+    }
+
+    .sk-g {
+      --beam: var(--green);
+      --beam-fade: rgba(52, 211, 153, 0.35);
+    }
+
+    .glow-border:hover .border-glow,
+    .proj-card:hover .border-glow {
+      opacity: 1 !important;
+      filter: drop-shadow(0 0 14px var(--beam, #00e5ff)) drop-shadow(0 0 28px var(--beam, #00e5ff)) !important;
+    }
+
+    /* Non-featured cards only glow on hover; featured card rule handled in projects/overrides */
+
+    .glow-border-base {
+      position: absolute;
+      inset: -1.5px;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: rgba(255, 255, 255, 0.08);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes gridDrift {
+      to {
+        background-position: 60px 60px;
+      }
+    }
+
+
+    /* Add a subtle external link or document icon to clickable badges */
+    a.bdg::after {
+      content: "↗";
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.85em;
+      opacity: 0.6;
+      font-weight: 400;
+      margin-left: 2px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    a.bdg:hover {
+      transform: translateY(-3px) scale(1.05);
+      filter: brightness(1.2) drop-shadow(0 4px 10px rgba(255, 255, 255, 0.15));
+    }
+
+    a.bdg:hover::after {
+      opacity: 1;
+      transform: translate(1px, -1px);
+    }
+
+    .ha-link,
+    a[href^="docs/"]:not(.bdg) {
+      text-decoration: none !important;
+      color: inherit;
+      cursor: pointer !important;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+    }
+
+    .ha-link:hover,
+    a[href^="docs/"]:not(.bdg):hover {
+      transform: translateY(-2px);
+      filter: brightness(1.2) drop-shadow(0 4px 10px rgba(255, 255, 255, 0.15));
+    }
+
