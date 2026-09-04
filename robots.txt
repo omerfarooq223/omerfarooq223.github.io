@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Host & Sitemap Specification
+Host: https://omerfarooq223.github.io
+Sitemap: https://omerfarooq223.github.io/sitemap.xml

@@ -1,0 +1,36 @@
+# Muhammad Umar Farooq - AI/ML & Autonomous Systems Engineer
+
+> Autonomous AI & LLM Systems Engineer, 1st-Place Winner of the AI Seekho Day 2026 Google Gemma Fine-Tuning Hackathon. Specializing in autonomous multi-agent architectures, model fine-tuning (QLoRA, PEFT), cybersecurity intelligence, and production-ready ML engineering.
+
+## Profile Summary
+- **Name**: Muhammad Umar Farooq
+- **Role**: AI & Autonomous Systems Engineer
+- **Email**: momerfarooq223@gmail.com
+- **Website**: https://omerfarooq223.github.io/
+- **Projects Catalog**: https://omerfarooq223.github.io/all-projects.html
+- **Curriculum Vitae**: https://omerfarooq223.github.io/CV.pdf
+- **GitHub**: https://github.com/omerfarooq223
+- **LinkedIn**: https://www.linkedin.com/in/omerfarooq223/
+
+## Key Honors & Distinctions
+- **1st Place Winner — AI Seekho Day 2026 Gemma Fine-Tuning Hackathon**: Outperformed competitive teams by fine-tuning Google Gemma 4 12B with 4-bit NF4 QLoRA on a 18k sample instruction dataset, achieving 94.40% verification accuracy with production inference optimizations.
+
+## Featured Technical Projects
+- **Gemma Claim Verification Engine**: Autonomous fact-checking and claim verification engine fine-tuned from Google Gemma 4 12B using 4-bit NF4 QLoRA, sub-50ms token latency, and hallucination reduction heuristics.
+- **Personal AI Employee**: Local-first autonomous executive assistant agent running on custom tool orchestration with local LLMs and persistent task queues.
+- **AutoGrader Agent**: Autonomous multi-agent code grading system evaluating AST correctness, security patterns, and style rubrics.
+- **SHAP Agentic IDS**: Explainable AI network intrusion detection combining gradient boosting with SHAP-driven alert reasoning and automated defensive actions.
+- **InboxVerity AI**: Multi-layered email security agent detecting spear phishing, spoofing, and social engineering attacks via LLM threat signals.
+- **CareerPilot Agent**: Career trajectory planning agent performing semantic skill matching against live tech industry job listings.
+- **Agentic Fire & Hazard Detection**: Vision-based safety detection pipeline integrating YOLO and agentic incident escalation protocols.
+
+## Core Technical Competencies
+- **Autonomous Agents**: LangChain, LangGraph, CrewAI, AutoGen, ReAct pattern, Tool Calling, Vector Stores, Multi-Agent Swarms.
+- **Large Language Models**: Google Gemma, Llama 3, Mistral, HuggingFace Transformers, PEFT, LoRA/QLoRA, Unsloth, Ollama, vLLM, Prompt Engineering.
+- **Machine Learning & Deep Learning**: PyTorch, Scikit-Learn, SHAP, OpenCV, XGBoost, Pandas, NumPy, Data Pipelines.
+- **Backend & Production**: Python, FastAPI, Docker, Git, CI/CD, Static Web Architecture, REST APIs.
+
+## Site Index
+- Main Portfolio: https://omerfarooq223.github.io/
+- Complete Projects Browser: https://omerfarooq223.github.io/all-projects.html
+- Resume / CV (PDF): https://omerfarooq223.github.io/CV.pdf

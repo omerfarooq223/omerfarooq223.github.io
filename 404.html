@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404: Vector Out of Bounds | Muhammad Umar Farooq</title>
+  <meta name="description" content="The requested page coordinate could not be resolved. Return to Muhammad Umar Farooq's AI Engineer portfolio." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <script>
+    (function () {
+      try {
+        const storedTheme = localStorage.getItem('portfolio-theme');
+        document.documentElement.dataset.theme = storedTheme === 'light' ? 'light' : 'dark';
+      } catch (e) { }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #07090c;
+      background-image:
+        linear-gradient(180deg, rgba(3, 5, 8, .5), rgba(3, 5, 8, .85)),
+        url('assets/stone-surface.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text, #e2e8f0);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: .25;
+      background:
+        linear-gradient(rgba(93, 210, 230, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(93, 210, 230, .04) 1px, transparent 1px);
+      background-size: 84px 84px;
+    }
+
+    .error-container {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 60px;
+    }
+
+    .error-card {
+      max-width: 680px;
+      width: 100%;
+      background: rgba(13, 17, 23, 0.75);
+      border: 1px solid rgba(0, 229, 255, 0.28);
+      border-radius: 16px;
+      padding: clamp(28px, 5vw, 48px);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), 0 0 32px rgba(0, 229, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .error-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00e5ff, #a855f7, transparent);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #f87171;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #ef4444;
+      box-shadow: 0 0 8px #ef4444;
+    }
+
+    .error-glitch-num {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(4.5rem, 12vw, 8rem);
+      font-weight: 900;
+      line-height: 1;
+      margin: 0 0 16px;
+      background: linear-gradient(135deg, #ffffff 30%, #00e5ff 70%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.04em;
+    }
+
+    .error-h1 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 700;
+      margin: 0 0 16px;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    .error-desc {
+      color: #94a3b8;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0 auto 32px;
+      max-width: 520px;
+    }
+
+    .diagnostic-panel {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 32px;
+      text-align: left;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: #38bdf8;
+      line-height: 1.6;
+    }
+
+    .diagnostic-panel span.dim {
+      color: #64748b;
+    }
+
+    .actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+
+    .btn-action-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #00e5ff 0%, #0284c7 100%);
+      color: #030712;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-action-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.45);
+    }
+
+    .btn-action-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #e2e8f0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+
+    .btn-action-secondary:hover {
+      background: rgba(0, 229, 255, 0.1);
+      border-color: rgba(0, 229, 255, 0.4);
+      color: #00e5ff;
+      transform: translateY(-2px);
+    }
+
+    html[data-theme="light"] body {
+      background-color: #d9dee2;
+      background-image:
+        linear-gradient(180deg, rgba(229, 235, 238, .85), rgba(196, 205, 210, .88)),
+        url('assets/stone-surface.png');
+      color: #0f172a;
+    }
+
+    html[data-theme="light"] .error-card {
+      background: rgba(255, 255, 255, 0.85);
+      border-color: rgba(2, 132, 199, 0.25);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+    }
+
+    html[data-theme="light"] .error-h1 {
+      color: #0f172a;
+    }
+
+    html[data-theme="light"] .error-desc {
+      color: #475569;
+    }
+
+    html[data-theme="light"] .diagnostic-panel {
+      background: rgba(241, 245, 249, 0.85);
+      border-color: rgba(2, 132, 199, 0.2);
+      color: #0284c7;
+    }
+
+    html[data-theme="light"] .btn-action-secondary {
+      background: rgba(15, 23, 42, 0.05);
+      border-color: rgba(15, 23, 42, 0.15);
+      color: #0f172a;
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px clamp(20px, 4vw, 48px);
+      font-size: 0.82rem;
+      color: #64748b;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+  </style>
+</head>
+
+<body>
+  <nav id="nav">
+    <a class="nav-logo" href="index.html">MUF<span class="dot">.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="all-projects.html">All Projects</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <button id="themeToggle" type="button" aria-label="Toggle theme" aria-pressed="false"
+      onclick="toggleTheme404()">
+      <span id="themeLabel">Theme</span>
+    </button>
+  </nav>
+
+  <main class="error-container">
+    <div class="error-card">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        Status: Coordinate Not Found
+      </div>
+      <div class="error-glitch-num">404</div>
+      <h1 class="error-h1">Vector Coordinate Out of Bounds</h1>
+      <p class="error-desc">
+        The requested pathway or file location does not exist in the active neural index. Please verify your URL or
+        return to the command center.
+      </p>
+
+      <div class="diagnostic-panel">
+        <div><span class="dim">// ROUTE_LOG:</span> UNRESOLVED_ENDPOINT</div>
+        <div><span class="dim">// ARCHITECTURE:</span> Muhammad Umar Farooq Portfolio</div>
+        <div><span class="dim">// RECOMMENDATION:</span> EXECUTE_RETURN_ROUTINE</div>
+      </div>
+
+      <div class="actions-row">
+        <a class="btn-action-primary" href="index.html">
+          <span>←</span> Return to Base
+        </a>
+        <a class="btn-action-secondary" href="all-projects.html">
+          Browse All Projects
+        </a>
+        <a class="btn-action-secondary" href="CV.pdf" target="_blank" rel="noopener noreferrer">
+          View Resume (PDF)
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span>Muhammad Umar Farooq</span>
+    <span>&copy; 2026 · AI & Autonomous Systems Engineer</span>
+  </footer>
+
+  <script>
+    function toggleTheme404() {
+      const current = document.documentElement.dataset.theme;
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme = next;
+      try {
+        localStorage.setItem('portfolio-theme', next);
+      } catch (e) { }
+      const lbl = document.getElementById('themeLabel');
+      if (lbl) lbl.textContent = next === 'light' ? 'Light' : 'Dark';
+    }
+
+    (function () {
+      const stored = document.documentElement.dataset.theme || 'dark';
+      const lbl = document.getElementById('themeLabel');
+      if (lbl) lbl.textContent = stored === 'light' ? 'Light' : 'Dark';
+    })();
+  </script>
+</body>
+
+</html>

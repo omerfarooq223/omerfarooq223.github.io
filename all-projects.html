@@ -6,9 +6,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>All Projects | Muhammad Umar Farooq</title>
   <meta name="description"
-    content="Complete project browser for Muhammad Umar Farooq's AI engineering portfolio." />
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300e5ff'/%3E%3Cstop offset='55%25' stop-color='%23a855f7'/%3E%3Cstop offset='100%25' stop-color='%23f472b6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='%2307080f'/%3E%3Cpath d='M18 48V16h9.2l9 18.1L45.2 16H46v32h-7V31.7l-6.2 12.1h-1.7l-6.2-12.1V48z' fill='url(%23g)'/%3E%3C/svg%3E" />
+    content="Complete project catalog for Muhammad Umar Farooq's AI engineering portfolio, featuring agentic systems, Google Gemma fine-tuning, and machine learning pipelines." />
+  <link rel="canonical" href="https://omerfarooq223.github.io/all-projects.html" />
+  <meta property="og:title" content="All Projects | Muhammad Umar Farooq" />
+  <meta property="og:description"
+    content="Complete project catalog for Muhammad Umar Farooq's AI engineering portfolio, featuring agentic systems, Google Gemma fine-tuning, and machine learning pipelines." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://omerfarooq223.github.io/all-projects.html" />
+  <meta property="og:image" content="https://omerfarooq223.github.io/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Muhammad Umar Farooq - All Projects" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="All Projects | Muhammad Umar Farooq" />
+  <meta name="twitter:description"
+    content="Complete project catalog for Muhammad Umar Farooq's AI engineering portfolio, featuring agentic systems, Google Gemma fine-tuning, and machine learning pipelines." />
+  <meta name="twitter:image" content="https://omerfarooq223.github.io/assets/og-image.jpg" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://omerfarooq223.github.io/all-projects.html#webpage",
+        "url": "https://omerfarooq223.github.io/all-projects.html",
+        "name": "All Projects | Muhammad Umar Farooq",
+        "description": "Complete project catalog for Muhammad Umar Farooq's AI engineering portfolio.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://omerfarooq223.github.io/#website",
+          "name": "Muhammad Umar Farooq | AI Engineer",
+          "url": "https://omerfarooq223.github.io/"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://omerfarooq223.github.io/all-projects.html#breadcrumbs",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://omerfarooq223.github.io/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Projects",
+            "item": "https://omerfarooq223.github.io/#projects"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "All Projects",
+            "item": "https://omerfarooq223.github.io/all-projects.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
   <script>
     (function () {
       try {
@@ -123,6 +181,70 @@
       gap: 28px;
       align-items: end;
       margin-bottom: 26px;
+    }
+
+    .breadcrumb-nav {
+      margin-bottom: 14px;
+    }
+
+    .breadcrumb-list {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+      padding: 6px 14px;
+      margin: 0;
+      background: rgba(13, 17, 23, 0.45);
+      border: 1px solid rgba(0, 229, 255, 0.18);
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .breadcrumb-item a {
+      color: var(--muted2);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+
+    .breadcrumb-item a:hover {
+      color: var(--cyan);
+    }
+
+    .breadcrumb-separator {
+      color: rgba(93, 210, 230, .35);
+      user-select: none;
+    }
+
+    .breadcrumb-item.is-active {
+      color: var(--cyan);
+      font-weight: 700;
+    }
+
+    html[data-theme="light"] .breadcrumb-list {
+      background: rgba(255, 255, 255, 0.65);
+      border-color: rgba(19, 92, 108, 0.18);
+    }
+
+    html[data-theme="light"] .breadcrumb-item a {
+      color: #64748b;
+    }
+
+    html[data-theme="light"] .breadcrumb-item a:hover {
+      color: #0284c7;
+    }
+
+    html[data-theme="light"] .breadcrumb-separator {
+      color: #94a3b8;
+    }
+
+    html[data-theme="light"] .breadcrumb-item.is-active {
+      color: #0284c7;
     }
 
     .all-projects-kicker {
@@ -529,6 +651,15 @@
   <main class="all-projects-main">
     <section class="all-projects-hero">
       <div>
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+          <ol class="breadcrumb-list">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-separator" aria-hidden="true">/</li>
+            <li class="breadcrumb-item"><a href="index.html#projects">Projects</a></li>
+            <li class="breadcrumb-separator" aria-hidden="true">/</li>
+            <li class="breadcrumb-item is-active" aria-current="page">All Projects</li>
+          </ol>
+        </nav>
         <div class="all-projects-kicker">All Projects</div>
         <h1 class="all-projects-title">Project Browser</h1>
         <p class="all-projects-copy">Browse the complete project set in one focused view. Use the filters to narrow the
