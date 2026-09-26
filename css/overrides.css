@@ -5,9 +5,9 @@
       --card: #0d1117;
       --cardGrad: linear-gradient(145deg, rgba(20, 26, 36, .94), rgba(8, 11, 16, .98));
       --border: rgba(218, 230, 255, .12);
-      --text: #f7f8fb;
-      --muted: #667085;
-      --muted2: #a9b2c3;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --muted2: #cbd5e1;
       --cyan: #35d7ff;
       --purple: #8b5cf6;
       --pink: #ff6b9f;
@@ -26,8 +26,8 @@
       --cardGrad: linear-gradient(145deg, rgba(255, 255, 255, .98), rgba(238, 243, 251, .95));
       --border: rgba(19, 31, 55, .12);
       --text: #08111f;
-      --muted: #6b7280;
-      --muted2: #4b5563;
+      --muted: #475569;
+      --muted2: #334155;
       --navBg: rgba(246, 248, 251, .78);
       --mobBg: rgba(246, 248, 251, .98);
     }
@@ -1754,12 +1754,14 @@ html[data-theme="light"] body.portfolio-home .hero-cta .btn-work {
 @media (min-width: 993px) {
   #projects [data-project="inboxverity"],
   #projects [data-project="clarityhire"],
+  #projects [data-project="docustratum"],
   #projects [data-project="firewatch"] {
     padding-bottom: 8px !important;
   }
 
   #projects [data-project="inboxverity"] .p-info,
   #projects [data-project="clarityhire"] .p-info,
+  #projects [data-project="docustratum"] .p-info,
   #projects [data-project="firewatch"] .p-info {
     min-height: 0 !important;
     padding-bottom: 0 !important;
@@ -2151,6 +2153,28 @@ html[data-theme="light"] #contact .ct-monolith-great {
   background-clip: text;
   filter: none;
 }
+
+html[data-theme="light"] #contact .ct-crystal-heading {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  animation: none !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] #contact .gem-body,
+html[data-theme="light"] #contact .sphere-body {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html[data-theme="light"] #contact .gem-body.marble-white-diamond {
+  border-color: rgba(203, 213, 225, 0.85);
+  border-top-color: #ffffff;
+}
+
 
 /* Deliberate beacon pulse for the hero name: shine, dim, repeat. */
 body.portfolio-home .hero-title .hero-name {
@@ -3180,10 +3204,11 @@ html[data-theme="light"] #skills .st .sk-with {
   min-height: 145px !important;
 }
 
-/* Bottom row is now InboxVerity, ClarityHire, FireWatch. */
+/* Visible trio: PersonaDiff, ClarityHire, DocuStratum Studio */
 #projects [data-project="personadiff"] { order: 2 !important; }
 #projects [data-project="clarityhire"] { order: 3 !important; }
-#projects [data-project="firewatch"] { order: 4 !important; }
+#projects [data-project="docustratum"] { order: 4 !important; }
+#projects [data-project="firewatch"] { order: 5 !important; }
 #projects [data-project="ospilot"] { order: 6 !important; }
 #projects [data-project="documorph"] { order: 7 !important; }
 #projects [data-project="autoreach"] { order: 8 !important; }
@@ -3622,12 +3647,14 @@ html[data-theme="light"] #skills .skills-main-title .wi {
 @media (min-width: 993px) {
   #projects .proj-card-trio[data-project="inboxverity"],
   #projects .proj-card-trio[data-project="clarityhire"],
+  #projects .proj-card-trio[data-project="docustratum"],
   #projects .proj-card-trio[data-project="firewatch"] {
     padding-bottom: 8px !important;
   }
 
   #projects .proj-card-trio[data-project="inboxverity"] .p-info,
   #projects .proj-card-trio[data-project="clarityhire"] .p-info,
+  #projects .proj-card-trio[data-project="docustratum"] .p-info,
   #projects .proj-card-trio[data-project="firewatch"] .p-info {
     min-height: 0 !important;
     padding-bottom: 0 !important;
@@ -3960,3 +3987,28 @@ html[data-theme="light"] #projects #gemmaclaim-card .pstk .pill:nth-child(5) {
   background: rgba(254, 243, 199, .96) !important;
   border-color: rgba(217, 119, 6, .42) !important;
 }
+
+/* 4-Line Shimmering Skeleton Loader Utility */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.06) 25%, rgba(114, 235, 244, 0.22) 50%, rgba(255, 255, 255, 0.06) 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+html[data-theme="light"] .skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.06) 25%, rgba(3, 105, 161, 0.22) 50%, rgba(15, 23, 42, 0.06) 75%);
+  background-size: 200% 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer {
+    animation: none;
+    background-position: 50% 0;
+  }
+}
+

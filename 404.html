@@ -8,6 +8,7 @@
   <meta name="description" content="The requested page coordinate could not be resolved. Return to Muhammad Umar Farooq's AI Engineer portfolio." />
   <meta name="robots" content="noindex, follow" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/favicon.svg" />
   <script>
     (function () {
       try {
@@ -21,8 +22,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/base.css?v=20260906-2" />
+  <link rel="stylesheet" href="css/navigation.css?v=20260906-3" />
   <style>
     body {
       min-height: 100vh;
@@ -31,7 +32,7 @@
       background-color: #07090c;
       background-image:
         linear-gradient(180deg, rgba(3, 5, 8, .5), rgba(3, 5, 8, .85)),
-        url('assets/stone-surface.png');
+        url('assets/stone-surface.webp');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -71,9 +72,9 @@
       border: 1px solid rgba(0, 229, 255, 0.28);
       border-radius: 16px;
       padding: clamp(28px, 5vw, 48px);
-      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), 0 0 32px rgba(0, 229, 255, 0.08);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), 0 0 32px rgba(0, 229, 255, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(14px) url(#glass-refraction);
+      -webkit-backdrop-filter: blur(14px);
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -86,7 +87,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent, #00e5ff, #a855f7, transparent);
+      background: linear-gradient(90deg, transparent, #00e5ff, #38bdf8, transparent);
     }
 
     .status-badge {
@@ -120,7 +121,7 @@
       font-weight: 900;
       line-height: 1;
       margin: 0 0 16px;
-      background: linear-gradient(135deg, #ffffff 30%, #00e5ff 70%, #a855f7 100%);
+      background: linear-gradient(135deg, #ffffff 30%, #00e5ff 70%, #38bdf8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: -0.04em;
@@ -216,14 +217,14 @@
       background-color: #d9dee2;
       background-image:
         linear-gradient(180deg, rgba(229, 235, 238, .85), rgba(196, 205, 210, .88)),
-        url('assets/stone-surface.png');
+        url('assets/stone-surface.webp');
       color: #0f172a;
     }
 
     html[data-theme="light"] .error-card {
       background: rgba(255, 255, 255, 0.85);
       border-color: rgba(2, 132, 199, 0.25);
-      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 0.7);
     }
 
     html[data-theme="light"] .error-h1 {
@@ -250,6 +251,8 @@
       position: relative;
       z-index: 2;
       display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
       justify-content: space-between;
       align-items: center;
       padding: 24px clamp(20px, 4vw, 48px);
@@ -257,16 +260,51 @@
       color: #64748b;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
+    footer a:hover {
+      color: #00e5ff;
+    }
   </style>
 </head>
 
 <body>
+  <!-- Optical Refractive Glass Filter -->
+  <svg class="sr-only" aria-hidden="true" style="position: absolute; width: 0; height: 0; pointer-events: none;">
+    <filter id="glass-refraction" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04 0.04" numOctaves="2" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+
   <nav id="nav">
     <a class="nav-logo" href="index.html">MUF<span class="dot">.</span></a>
     <ul class="nav-links">
       <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#projects">Projects</a></li>
-      <li><a href="all-projects.html">All Projects</a></li>
+      <li class="nav-dropdown" id="navProjectsDropdown">
+        <a href="index.html#projects" id="projectsTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="projectsMenu">Projects</a>
+        <div class="nav-dropdown-menu" id="projectsMenu" role="menu" aria-label="Projects Menu">
+          <a href="index.html#projects" class="dropdown-item" role="menuitem">
+            <div class="dd-item-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="dd-item-text">
+              <span class="dd-title">Featured Projects</span>
+              <span class="dd-desc">Explore flagship autonomous &amp; AI systems</span>
+            </div>
+          </a>
+          <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
+          <a href="all-projects.html" class="dropdown-item" role="menuitem">
+            <div class="dd-item-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <div class="dd-item-text">
+              <span class="dd-title">All Projects Archive <span class="dd-arrow" aria-hidden="true">→</span></span>
+              <span class="dd-desc">Full interactive index with search &amp; filters</span>
+            </div>
+          </a>
+        </div>
+      </li>
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
     <button id="themeToggle" type="button" aria-label="Toggle theme" aria-pressed="false"
@@ -275,7 +313,7 @@
     </button>
   </nav>
 
-  <main class="error-container">
+  <main id="main-content" class="error-container">
     <div class="error-card">
       <div class="status-badge">
         <span class="status-dot"></span>
@@ -309,8 +347,14 @@
   </main>
 
   <footer>
-    <span>Muhammad Umar Farooq</span>
-    <span>&copy; 2026 · AI & Autonomous Systems Engineer</span>
+    <div class="footer-brand">
+      <span>Muhammad Umar Farooq</span>
+      <span style="opacity:0.4;" aria-hidden="true">·</span>
+      <a href="privacy.html" class="footer-privacy-link">Privacy &amp; Data Notice</a>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; <span id="copyYear">2026</span> · AI &amp; Autonomous Systems Engineer</span>
+    </div>
   </footer>
 
   <script>
@@ -329,6 +373,8 @@
       const stored = document.documentElement.dataset.theme || 'dark';
       const lbl = document.getElementById('themeLabel');
       if (lbl) lbl.textContent = stored === 'light' ? 'Light' : 'Dark';
+      const cy = document.getElementById('copyYear');
+      if (cy) cy.textContent = new Date().getFullYear();
     })();
   </script>
 </body>

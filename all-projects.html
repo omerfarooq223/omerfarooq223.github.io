@@ -13,7 +13,9 @@
     content="Complete project catalog for Muhammad Umar Farooq's AI engineering portfolio, featuring agentic systems, Google Gemma fine-tuning, and machine learning pipelines." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://omerfarooq223.github.io/all-projects.html" />
-  <meta property="og:image" content="https://omerfarooq223.github.io/assets/og-image.jpg" />
+  <meta property="og:image" content="https://omerfarooq223.github.io/assets/og-image.jpg?v=20260910" />
+  <meta property="og:image:secure_url" content="https://omerfarooq223.github.io/assets/og-image.jpg?v=20260910" />
+  <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Muhammad Umar Farooq - All Projects" />
@@ -21,8 +23,9 @@
   <meta name="twitter:title" content="All Projects | Muhammad Umar Farooq" />
   <meta name="twitter:description"
     content="Complete project catalog for Muhammad Umar Farooq's AI engineering portfolio, featuring agentic systems, Google Gemma fine-tuning, and machine learning pipelines." />
-  <meta name="twitter:image" content="https://omerfarooq223.github.io/assets/og-image.jpg" />
+  <meta name="twitter:image" content="https://omerfarooq223.github.io/assets/og-image.jpg?v=20260910" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/favicon.svg" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -80,8 +83,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/base.css?v=20260906-2" />
+  <link rel="stylesheet" href="css/navigation.css?v=20260906-3" />
   <link rel="stylesheet" href="css/gateway.css" />
   <link rel="stylesheet" href="css/hero.css" />
   <link rel="stylesheet" href="css/about.css" />
@@ -98,7 +101,7 @@
       background-color: #07090c !important;
       background-image:
         linear-gradient(180deg, rgba(3, 5, 8, .36), rgba(3, 5, 8, .72)),
-        url('assets/stone-surface.png') !important;
+        url('assets/stone-surface.webp') !important;
       background-size: cover, cover;
       background-position: center, center;
       background-attachment: fixed, fixed;
@@ -150,7 +153,7 @@
       background-color: #d9dee2 !important;
       background-image:
         linear-gradient(180deg, rgba(229, 235, 238, .78), rgba(196, 205, 210, .82)),
-        url('assets/stone-surface.png') !important;
+        url('assets/stone-surface.webp') !important;
       color: #122027;
     }
 
@@ -618,6 +621,18 @@
 </head>
 
 <body class="all-projects-page">
+  <!-- Optical Refraction Engine SVG Filter -->
+  <svg class="glass-optical-engine" aria-hidden="true" style="position: absolute; width: 0; height: 0; pointer-events: none;">
+    <defs>
+      <filter id="glass-refraction" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.038" numOctaves="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" result="refracted" />
+      </filter>
+    </defs>
+  </svg>
+
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+
   <canvas id="nw" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"
     aria-hidden="true"></canvas>
 
@@ -626,29 +641,57 @@
     <ul class="nav-links">
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#education">Education</a></li>
+      <li><a href="index.html#achievements">Achievements</a></li>
       <li><a href="index.html#certificates">Certificates</a></li>
       <li><a href="index.html#experience">Experience</a></li>
-      <li><a href="index.html#projects">Projects</a></li>
+      <li class="nav-dropdown" id="navProjectsDropdown">
+        <a href="index.html#projects" id="projectsTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="projectsMenu">Projects</a>
+        <div class="nav-dropdown-menu" id="projectsMenu" role="menu" aria-label="Projects Menu">
+          <a href="index.html#projects" class="dropdown-item" role="menuitem">
+            <div class="dd-item-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="dd-item-text">
+              <span class="dd-title">Featured Projects</span>
+              <span class="dd-desc">Explore flagship autonomous &amp; AI systems</span>
+            </div>
+          </a>
+          <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
+          <a href="all-projects.html" class="dropdown-item" role="menuitem">
+            <div class="dd-item-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <div class="dd-item-text">
+              <span class="dd-title">All Projects Archive <span class="dd-badge">Active</span></span>
+              <span class="dd-desc">Full interactive index with search &amp; filters</span>
+            </div>
+          </a>
+        </div>
+      </li>
       <li><a href="index.html#skills">Skills</a></li>
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
     <button id="themeToggle" type="button" aria-label="Toggle theme" aria-pressed="false">
       <span id="themeLabel">Dark</span>
     </button>
-    <div class="ham" id="ham"><span></span><span></span><span></span></div>
+    <button class="ham" id="ham" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mob">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <div class="mob" id="mob">
     <a href="index.html#about">About</a>
     <a href="index.html#education">Education</a>
+    <a href="index.html#achievements">Achievements</a>
     <a href="index.html#certificates">Certificates</a>
     <a href="index.html#experience">Experience</a>
-    <a href="index.html#projects">Projects</a>
+    <a href="index.html#projects">Featured Projects</a>
+    <a href="all-projects.html" style="color: var(--cyan); font-size: 1.5rem;">All Projects Archive →</a>
     <a href="index.html#skills">Skills</a>
     <a href="index.html#contact">Contact</a>
   </div>
 
-  <main class="all-projects-main">
+  <main id="main-content" class="all-projects-main">
     <section class="all-projects-hero">
       <div>
         <nav class="breadcrumb-nav" aria-label="Breadcrumb">
@@ -680,9 +723,15 @@
   </main>
 
   <footer>
-    <span class="fg">Muhammad Umar Farooq</span>
-    <span style="display:flex;align-items:center;gap:12px;">&copy; 2026 · Built with intention.<button id="btt"
-        type="button" aria-label="Back to top">↑</button></span>
+    <div class="footer-brand">
+      <span class="fg">Muhammad Umar Farooq</span>
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <a href="privacy.html" class="footer-privacy-link">Privacy &amp; Data Notice</a>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; <span class="dyn-year">2026</span> · Built with intention.</span>
+      <button id="btt" type="button" aria-label="Back to top">↑</button>
+    </div>
   </footer>
 
   <div id="bar"></div>
@@ -747,8 +796,8 @@
     </div>
   </div>
 
-  <script src="main.js"></script>
-  <script src="geometric-background.js?v=20260824-1"></script>
+  <script src="js/main.js"></script>
+  <script src="js/geometric-background.js?v=20260824-1"></script>
   <script>
     const allProjects = [
       {
@@ -776,109 +825,115 @@
         stack: ['SHAP', 'LangGraph', 'Flask']
       },
       {
-        id: 'inboxverity', n: '005', title: 'InboxVerity AI', tag: 'Cybersecurity', cats: 'cyber',
+        id: 'docustratum', n: '005', title: 'DocuStratum Studio', tag: 'Local-First RAG', cats: 'agentic ml automation cyber',
+        img: 'images/docustratum-dom-capture.webp',
+        desc: 'Deterministic web content ingestion studio and Chrome extension with safe DOM traversal, dual-chunking comparator, 100% local PyTorch neural retrieval, and 1-click live DOM citation jump.',
+        stack: ['Chrome MV3', 'FastAPI', 'PyTorch', 'React 18', 'Groq']
+      },
+      {
+        id: 'inboxverity', n: '006', title: 'InboxVerity AI', tag: 'Cybersecurity', cats: 'cyber',
         img: 'images/inboxverity-dashboard-overview.png',
         desc: 'Chrome extension and FastAPI backend for phishing email detection with heuristic and LLM analysis.',
         stack: ['FastAPI', 'Groq', 'Extension']
       },
       {
-        id: 'firewatch', n: '006', title: 'FireWatch AI', tag: 'Computer Vision', cats: 'agentic ml automation',
+        id: 'firewatch', n: '007', title: 'FireWatch AI', tag: 'Computer Vision', cats: 'agentic ml automation',
         img: 'images/firewatch1.webp',
         desc: 'YOLOv8 fire and smoke detection system with autonomous incident response and RAG assistant.',
         stack: ['YOLOv8', 'React', 'RAG']
       },
       {
-        id: 'careerpilot', n: '007', title: 'CareerPilot: AI CTO', tag: 'Agentic AI', cats: 'agentic automation',
+        id: 'careerpilot', n: '008', title: 'CareerPilot: AI CTO', tag: 'Agentic AI', cats: 'agentic automation',
         img: 'images/careerpilot.webp',
         desc: 'Autonomous career coach that audits repositories, tracks growth, and delivers weekly coaching.',
         stack: ['FastAPI', 'SQLite', 'MCP']
       },
       {
-        id: 'autoresearch', n: '008', title: 'AutoResearch Agent', tag: 'Agentic AI', cats: 'agentic automation',
+        id: 'autoresearch', n: '009', title: 'AutoResearch Agent', tag: 'Agentic AI', cats: 'agentic automation',
         img: 'images/autoresearchagent.webp',
         desc: 'Research engine that performs multi-source synthesis and generates professional PDF reports.',
         stack: ['LLMs', 'Groq', 'Tavily']
       },
       {
-        id: 'parking', n: '009', title: 'Parking Detection System', tag: 'Machine Learning', cats: 'ml',
+        id: 'parking', n: '010', title: 'Parking Detection System', tag: 'Machine Learning', cats: 'ml',
         img: 'images/parkingdetection2.webp',
         desc: 'YOLOv8 and DBSCAN vision system for parking spot detection, ranking, and assistant queries.',
         stack: ['YOLOv8', 'OpenCV', 'Gradio']
       },
       {
-        id: 'urduplanner', n: '010', title: 'UrduPlanner Agent', tag: 'NLP', cats: 'agentic ml automation',
+        id: 'urduplanner', n: '011', title: 'UrduPlanner Agent', tag: 'NLP', cats: 'agentic ml automation',
         img: 'images/urduplanner.webp',
         desc: 'NLP and OCR pipeline for Urdu text reconstruction, RTL alignment, and document automation.',
         stack: ['OCR', 'Groq', 'Python']
       },
       {
-        id: 'ospilot', n: '011', title: 'OS Pilot', tag: 'Agentic AI', cats: 'agentic automation',
+        id: 'ospilot', n: '012', title: 'OS Pilot', tag: 'Agentic AI', cats: 'agentic automation',
         img: 'images/os-pilot-dashboard.webp',
         desc: 'Local-first multi-agent workspace recovery assistant for scanning, planning, quarantine, and restore.',
         stack: ['React', 'Tauri', 'FastAPI']
       },
       {
-        id: 'clarityhire', n: '012', title: 'ClarityHire', tag: 'Responsible AI', cats: 'agentic ml cyber automation',
+        id: 'clarityhire', n: '013', title: 'ClarityHire', tag: 'Responsible AI', cats: 'agentic ml cyber automation',
         img: 'images/clarityhire-dashboard.webp',
         desc: 'Human-in-the-loop resume screening with blind evaluation, explainable scoring, and synthetic demographic bias auditing.',
         stack: ['FastAPI', 'React', 'Celery', 'Fairlearn']
       },
       {
-        id: 'personadiff', n: '013', title: 'PersonaDiff', tag: 'Browser Systems', cats: 'automation cyber',
+        id: 'personadiff', n: '014', title: 'PersonaDiff', tag: 'Browser Systems', cats: 'automation cyber',
         img: 'images/personadiff-analysis.webp',
         desc: 'Evidence-first platform for isolated multi-persona web journeys, explainable diffs, tamper-evident capture, and offline replay.',
         stack: ['Playwright', 'TypeScript', 'Fastify']
       },
       {
-        id: 'autoreach', n: '014', title: 'AutoReach Hub', tag: 'Intelligent Automation', cats: 'agentic automation',
+        id: 'autoreach', n: '015', title: 'AutoReach Hub', tag: 'Intelligent Automation', cats: 'agentic automation',
         img: 'images/autoreach-dashboard.webp',
         desc: 'Smart multi-channel outreach platform with Google Gemini AI copywriting, dynamic variables, Microsoft 365 OAuth2 SSO, and UTF-8 WhatsApp messaging.',
         stack: ['Flask', 'Gemini AI', 'Microsoft 365', 'WhatsApp']
       },
       {
-        id: 'documorph', n: '015', title: 'DocuMorph', tag: 'Document AI', cats: 'agentic automation',
+        id: 'documorph', n: '016', title: 'DocuMorph', tag: 'Document AI', cats: 'agentic automation',
         img: 'images/documorph-preview.webp',
         desc: 'Local-first intelligent document extraction engine that converts PDFs into clean, validated, and provenance-grounded JSON.',
         stack: ['TypeScript', 'pdfjs-dist', 'Tesseract.js', 'Node.js']
       },
       {
-        id: 'pokemon', n: '016', title: 'Pokémon TCG AI Agent', tag: 'Game AI', cats: 'agentic ml',
+        id: 'pokemon', n: '017', title: 'Pokémon TCG AI Agent', tag: 'Game AI', cats: 'agentic ml',
         img: 'images/pokemon-preview.webp',
         desc: 'State-aware Kaggle battle agent evolved over 18 versions and certified at a 91.5% local win rate across 294 matches.',
         stack: ['Python', 'Planning', 'Simulation']
       },
       {
-        id: 'spatialfx', n: '017', title: 'Spatial-FX', tag: 'Computer Vision', cats: 'ml',
+        id: 'spatialfx', n: '018', title: 'Spatial-FX', tag: 'Computer Vision', cats: 'ml',
         img: 'images/spatialfx-preview.webp',
         desc: 'MediaPipe-powered hand tracking playground with gesture recognition, air painting, cinematic effects, and full-body invisibility.',
         stack: ['MediaPipe', 'Canvas 2D', 'JavaScript']
       },
       {
-        id: 'nexus', n: '018', title: 'NexusML: MLOps', tag: 'MLOps', cats: 'ml automation',
+        id: 'nexus', n: '019', title: 'NexusML: MLOps', tag: 'MLOps', cats: 'ml automation',
         img: '',
         desc: 'Production-ready inference pipeline featuring DistilBERT benchmarks and a 1TB scaling strategy.',
         stack: ['DistilBERT', 'Docker', 'Spark']
       },
       {
-        id: 'language', n: '019', title: 'Language Recognition', tag: 'Machine Learning', cats: 'ml',
+        id: 'language', n: '020', title: 'Language Recognition', tag: 'Machine Learning', cats: 'ml',
         img: '',
         desc: 'Language classifier built with custom feature engineering, preprocessing, and logistic regression.',
         stack: ['Python', 'Scikit-learn', 'NLP']
       },
       {
-        id: 'solana', n: '020', title: 'Solana Trading Agent', tag: 'Agentic AI', cats: 'agentic automation',
+        id: 'solana', n: '021', title: 'Solana Trading Agent', tag: 'Agentic AI', cats: 'agentic automation',
         img: '',
         desc: 'Skills-based trading agent for Solana with risk math, monitoring, and secure trade logging.',
         stack: ['Claude Code', 'Solana', 'Web3']
       },
       {
-        id: 'jira', n: '021', title: 'Jira-Slack Integration', tag: 'Automation', cats: 'automation',
+        id: 'jira', n: '022', title: 'Jira-Slack Integration', tag: 'Automation', cats: 'automation',
         img: '',
         desc: 'n8n workflows for issue tracking, automated notifications, and REST API orchestration.',
         stack: ['n8n', 'Jira', 'Slack']
       },
       {
-        id: 'dl', n: '022', title: 'DL Coursework', tag: 'Deep Learning', cats: 'ml',
+        id: 'dl', n: '023', title: 'DL Coursework', tag: 'Deep Learning', cats: 'ml',
         img: '',
         desc: 'Neural network experiments from scratch, including CNNs, LSTMs, and sequence models.',
         stack: ['PyTorch', 'TensorFlow', 'NumPy']
@@ -924,7 +979,7 @@
     const requestedFilter = new URLSearchParams(window.location.search).get('filter');
     applyProjectFilter(['all', 'agentic', 'ml', 'cyber', 'automation'].includes(requestedFilter) ? requestedFilter : 'all');
   </script>
-  <script src="chatbot-widget.js?v=20260824-1"></script>
+  <script src="js/chatbot-widget.js?v=20260824-1"></script>
 </body>
 
 </html>

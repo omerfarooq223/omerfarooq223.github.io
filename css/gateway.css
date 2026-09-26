@@ -513,7 +513,7 @@
 /* Floating Skip Control */
 .hud-skip-wrap {
   position: absolute;
-  bottom: clamp(14px, 2.2vw, 24px);
+  top: clamp(14px, 1.8vw, 24px);
   right: clamp(16px, 2.5vw, 36px);
   z-index: 50;
   pointer-events: auto;
@@ -523,26 +523,38 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 18px;
+  padding: 8px 16px;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: clamp(0.64rem, 0.75vw, 0.8rem);
+  font-size: clamp(0.64rem, 0.74vw, 0.78rem);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #bdf8fb;
-  border: 1px solid rgba(114, 235, 244, 0.48);
+  border: 1px solid rgba(114, 235, 244, 0.45);
   border-radius: 4px;
-  background: linear-gradient(180deg, rgba(28, 52, 62, 0.9), rgba(12, 25, 32, 0.95));
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  background: rgba(8, 16, 24, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-skip-btn svg {
+  color: #72ebf4;
+  transition: transform 0.2s ease;
 }
 
 .hud-skip-btn:hover {
   border-color: #72ebf4;
-  background: rgba(45, 95, 110, 0.6);
-  box-shadow: 0 0 20px rgba(114, 235, 244, 0.35);
+  color: #ffffff;
+  background: rgba(22, 44, 56, 0.9);
+  box-shadow: 0 0 22px rgba(114, 235, 244, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.25);
   transform: translateY(-1px);
+}
+
+.hud-skip-btn:hover svg {
+  transform: translateX(2px);
 }
 
 #blastDoorGateway.is-opening .hud-skip-wrap {

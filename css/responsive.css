@@ -23,15 +23,20 @@
         animation: none !important;
       }
 
-      .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
 
-      .reveal.active {
-        opacity: 1;
-        transform: translateY(0);
+      .reveal,
+      .reveal.active,
+      .sl-l,
+      .sl-r,
+      .stg {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
       }
 
       .sec.sec-visible::after {
@@ -117,7 +122,15 @@
       footer {
         padding: 24px 20px;
         flex-direction: column;
+        gap: 14px;
         text-align: center;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .footer-brand,
+      .footer-meta {
+        justify-content: center;
       }
 
       #btt {

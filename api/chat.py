@@ -7,6 +7,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from groq import Groq
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 app = FastAPI()
 
 # Enable CORS for the portfolio site
@@ -15,9 +21,11 @@ app.add_middleware(
     allow_origins=[
         "https://omerfarooq223.github.io",
         "https://www.omerfarooq223.github.io",
+        "https://omerfarooq223-github-io.vercel.app",
         "http://localhost:8000",
         "http://127.0.0.1:8000",
     ],
+    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?|https://.*\.vercel\.app|https://.*\.github\.io",
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["Content-Type"],
 )
@@ -38,6 +46,7 @@ PORTFOLIO_TOPICS = {
     "os pilot", "ospilot", "workspace recovery", "tauri", "clarityhire",
     "resume screening", "fairlearn", "autoreach", "spatial-fx", "spatial fx",
     "mediapipe", "personadiff", "differential auditing", "pokemon", "tcg",
+    "docustratum", "docustratum studio", "webrag", "local-first rag", "dom capture", "chunking comparator",
     "fastify", "gemini", "browser systems", "responsible ai",
     "yolo", "opencv", "computer vision", "nlp", "react", "docker",
     "personal ai employee", "ai employee vault", "mcp", "gmail", "playwright",
@@ -150,7 +159,7 @@ Use ONLY the knowledge provided below. Do NOT fabricate information.
 - CGPA: 3.85 / 4.0 at UMT
 - Scholarship: 70% Merit Scholarship
 - Projects Shipped: 27+
-- Autonomous AI Agents Built: 13+
+- Autonomous AI Agents Built: 14+
 
 === ACHIEVEMENTS & AWARDS ===
 1. **1st Place — AI Seekho Day 2026, Gemma Fine-Tuning Competition** (2026): Won 1st place by fine-tuning Google Gemma 4 12B with 4-bit NF4 QLoRA on 1,085 audited and contrastive examples. Achieved 94.40% Accuracy, 94.38% Macro-F1 (472/500 correct) on the 500-example supervised final evaluation.
@@ -163,9 +172,9 @@ Use ONLY the knowledge provided below. Do NOT fabricate information.
 3. Matric Science (Jun 2019 – Jun 2021) — Iqra Huffaz Secondary School, Lahore. 1085 Marks, 98.6%, Biology A+, Chemistry A+.
 
 === EXPERIENCE ===
-1. Techohub — Agentic AI Developer Intern (Jun 2026 – Present), hybrid in Lahore. Builds and supports a domain-aware decision-intelligence platform for research, evidence-backed analysis, and structured reports; also supports deployment, client technical assistance, and AI/data solution implementation.
-2. UMT — Peer Tutoring (Mar 2025 – Jul 2025): Academic Tutor in Lahore. Tutored peers across AI and programming subjects using adaptive teaching methods and strengthened mentoring and technical communication skills.
-3. Shopify Store (Nov 2024 – Jan 2025): Customer Services, Remote. Resolved customer inquiries, handled orders and returns, and managed shipment updates.
+1. Techohub — Agentic AI Developer Intern (Jun 2026 – Present), hybrid in Lahore. Focuses on architecting domain-aware decision-intelligence platforms with multi-tenant vector RAG, engineering local-first multimodal desktop agents with on-device LLM inference, and developing applied computer vision and mathematical modeling pipelines for industrial automation.
+2. UMT Tutoring & Online Instruction (Feb 2025 – Sep 2025): Academic Tutor & Course Instructor. Tutored peers across AI and programming at UMT, and designed and delivered an online technical summer course (Jul–Sep 2025) with structured curriculum, live sessions, and coding mentorship.
+3. Shopify Store (Nov 2023 – Jan 2024): Customer Services, Remote. Resolved customer inquiries, handled orders and returns, and managed shipment updates.
 4. Grasp Solutions Pvt Ltd (Jun 2024 – Sep 2024): Operations & Client Communication, Lahore. Managed high-volume client and taxi-dispatch coordination under time pressure.
 5. SMZ Dispatch Services (Feb 2024 – Apr 2024): Cross-Cultural Communication, Lahore. Coordinated in real time with US-based clients.
 
@@ -173,11 +182,12 @@ Use ONLY the knowledge provided below. Do NOT fabricate information.
 - Panaversity Agentic AI Program (Jan 2026 – Present): Agentic AI, Claude Code, tool integration, MCP, foundational agentic patterns, and advanced agent design.
 
 === PROJECTS (ordered by importance) ===
-1. **Reliable Evidence-Based Claim Verification with Gemma 4** [🏆 1st Place Winner — AI Seekho Day 2026] — Three-way evidence-verification system fine-tuned from Google Gemma 4 12B using 4-bit NF4 QLoRA. Starting from 1,000 noisy labeled examples, the training curriculum was audited to 935 reliable examples and extended with 150 targeted contrastive examples (1,085 total). The final frozen checkpoint achieved 94.40% Accuracy and 94.38% Macro-F1 (472 / 500 correct) on the 500-example supervised final evaluation benchmark with deterministic inference. Tech: Gemma 4 12B, 4-bit NF4 QLoRA, PEFT, PyTorch, bitsandbytes, Transformers, NLP.
+1. **Reliable Evidence-Based Claim Verification with Gemma 4** [🏆 1st Place Winner — AI Seekho Day 2026] — Three-way evidence-verification system fine-tuned from Google Gemma 4 12B using 4-bit NF4 QLoRA. Starting from 1,000 noisy labeled examples, the training curriculum was audited to 935 reliable examples and extended with 150 targeted contrastive examples (1,085 total). The final frozen checkpoint achieved 94.40% Accuracy and 94.38% Macro-F1 (472 / 500 correct) on the 500-example supervised final evaluation benchmark with deterministic inference. Tech: Gemma 4 12B, 4-bit NF4 QLoRA, PEFT, PyTorch, bitsandbytes, Transformers, NLP. GitHub: https://github.com/omerfarooq223/gemma-claim-verification
 2. **Personal AI Employee** [Featured, 2026] — Autonomous human-in-the-loop agent for Gmail monitoring and LinkedIn automation, featuring a continuous reasoning loop and MCP-style tool integration. Tech: Claude Code, Flask, Gmail API, Playwright.
 3. **AutoGrader Agent** [2026] — Comprehensive academic evaluation agent with integrated vision analysis for diagrams, dual-similarity plagiarism detection, and automated rubric generation. Generates well-formatted Excel sheets for students and class reports. Tech: Python, Groq LLaMA 3.3, PyMuPDF, openpyxl.
 4. **SHAP-Explained Agentic IDS** [2026] — Hybrid intrusion detection system combining Random Forest classification, SHAP feature explanations, and LangGraph-based verification with autonomous red teaming. Tech: SHAP, LangGraph, Flask, React.
-5. **InboxVerity AI** (previously presented as PhishGuard AI) [2026] — Gmail/Outlook Chrome extension and FastAPI backend that extracts open emails, combines heuristic and URL/domain signals with Groq classification, stores scan history, and displays an in-page safety sidebar. Tech: FastAPI, Groq, Chrome Extension, React.
+5. **DocuStratum Studio** [2026] — Deterministic web content extraction and local-first RAG studio Chrome extension + FastAPI companion service. Features safe DOM traversal, cryptographic provenance (node path, CSS selector, SHA-256 hash), visual dual-chunking comparison (Recursive vs Heading-Aware), 100% on-device neural retrieval using PyTorch all-MiniLM-L6-v2 (~15ms latency), and Groq LLaMA 3.3 70B grounded answers with 1-click live DOM citation jump. Tech: Chrome Manifest V3, React 18, TypeScript, FastAPI, PyTorch, all-MiniLM-L6-v2, Groq, Vite.
+6. **InboxVerity AI** (previously presented as PhishGuard AI) [2026] — Gmail/Outlook Chrome extension and FastAPI backend that extracts open emails, combines heuristic and URL/domain signals with Groq classification, stores scan history, and displays an in-page safety sidebar. Tech: FastAPI, Groq, Chrome Extension, React.
 5. **CareerPilot: AI CTO** [2026] — Autonomous Observe-Analyze-Plan agent that audits repositories, tracks hirability scores, and delivers continuous weekly coaching through an interactive chat interface. Tech: FastAPI, SQLite, GitHub Actions, MCP.
 6. **FireWatch AI** [2026] — Autonomous YOLOv8-powered safety system that detects and segments fire/smoke in real-time and triggers agentic incident response protocols along with RAG implemented chatbot. Tech: FastAPI, YOLOv8l, React, RAG, Gmail API.
 7. **AutoResearch Agent** [2026] — Autonomous research engine that performs multi-source web synthesis and generates professional PDF reports. Tech: LLMs, Groq, Tavily, PDF.
@@ -222,35 +232,63 @@ Umar holds 16 professional certifications (including DataCamp, OpenAI, Anthropic
 16. **Intro to Generative AI** — Google
 
 === RESPONSE INSTRUCTIONS ===
-1. Answer visitors' questions about Umar's portfolio, skills, projects, education, experience, and contact.
-2. Keep answers concise (max 3 short sentences).
-3. Use Markdown for emphasis (e.g., **bold** for project names).
+1. If the user sends a greeting (such as "hello", "hi", "hey"), greet them warmly and introduce yourself as Umar's AI assistant, offering to answer questions about his 14+ AI agents, 27+ projects, tech stack, and background.
+2. Answer visitors' questions about Umar's portfolio, skills, projects, education, experience, and contact.
+3. Keep answers concise, direct, and well-formatted with Markdown (e.g., **bold** for project names and roles).
 4. Always refer to him as "Umar".
 5. If asked about contact info, share email (momerfarooq223@gmail.com), phone (+92 328 6403551), and mention LinkedIn.
-6. If a query is unrelated to Umar's portfolio/career, respond with exactly:
+6. If a query is completely unrelated to Umar's portfolio or career, respond with:
    "I can only answer questions about Umar's portfolio, projects, skills, education, experience, or contact details."
 7. When listing projects, mention the most relevant ones (don't list all 20 unless asked).
 8. Be professional, confident, helpful, and technically precise.
 """
 
-    try:
-        completion = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_message}
-            ],
-            temperature=0.35,
-            max_tokens=200,
-        )
+    # Resilient Groq model selection
+    candidate_models = [
+        "qwen/qwen3.8-27b",
+        "qwen/qwen3.6-27b",
+        "openai/gpt-oss-120b",
+        "openai/gpt-oss-20b",
+        "groq/compound",
+    ]
 
-        answer = completion.choices[0].message.content
-        return {"answer": answer}
-    except Exception:
-        raise HTTPException(
-            status_code=500,
-            detail="The portfolio assistant is temporarily unavailable.",
-        )
+    last_error = None
+    for model_name in candidate_models:
+        try:
+            completion = client.chat.completions.create(
+                model=model_name,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_message}
+                ],
+                temperature=0.35,
+                max_tokens=600,
+            )
+
+            answer = completion.choices[0].message.content or ""
+            # Strip reasoning tokens if model outputs think tags
+            answer = re.sub(r"<think>[\s\S]*?</think>", "", answer).strip()
+            if answer:
+                return {"answer": answer}
+        except Exception as e:
+            last_error = e
+            continue
+
+    raise HTTPException(
+        status_code=500,
+        detail="The portfolio assistant is temporarily unavailable.",
+    )
+
+
+# Serve static files when running the application directly (e.g. local dev)
+try:
+    from fastapi.staticfiles import StaticFiles
+    import os
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    app.mount("/", StaticFiles(directory=base_dir, html=True), name="static")
+except Exception:
+    pass
+
 
 if __name__ == "__main__":
     import uvicorn
