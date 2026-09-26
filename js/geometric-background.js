@@ -8,7 +8,7 @@
   if (!ctx) return;
 
   const stone = new Image();
-  stone.src = 'assets/stone-surface.png';
+  stone.src = 'assets/stone-surface.webp';
   stone.onload = function () {
     invalidateStaticLayers();
   };

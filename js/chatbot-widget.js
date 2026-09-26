@@ -2,37 +2,67 @@
 
 (function () {
   let isLoading = false;
-  const CHAT_API_URL = window.PORTFOLIO_CHAT_API_URL || '/api/chat';
+  const PROD_CHAT_API_URL = 'https://omerfarooq223-github-io.vercel.app/api/chat';
+
+  async function postChat(url, query) {
+    return await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: query })
+    });
+  }
 
   async function generateAgentResponse(query) {
     try {
-      const response = await fetch(CHAT_API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: query })
-      });
-
-      if (!response.ok) {
-        let detail = '';
-        try {
-          const errorData = await response.json();
-          detail = errorData?.detail || '';
-        } catch (_) {
-          // Ignore JSON parse issues and fall back to status-based handling.
+      let endpoint = window.PORTFOLIO_CHAT_API_URL;
+      if (!endpoint) {
+        if (location.hostname.endsWith('github.io') || location.protocol === 'file:') {
+          endpoint = PROD_CHAT_API_URL;
+        } else {
+          endpoint = '/api/chat';
         }
-
-        if (response.status === 429) {
-          return "You're sending messages too quickly. Please wait a few minutes and try again.";
-        }
-
-        throw new Error(detail || `API request failed (${response.status})`);
       }
 
-      const data = await response.json();
-      return data.answer || "I'm sorry, I couldn't generate a response. Please try again.";
+      let response;
+      try {
+        response = await postChat(endpoint, query);
+        // Fallback to production endpoint if local returns 404/405/501 (e.g. running basic static file server)
+        if (!response.ok && [404, 405, 501].includes(response.status) && endpoint !== PROD_CHAT_API_URL) {
+          response = await postChat(PROD_CHAT_API_URL, query);
+        }
+      } catch (netErr) {
+        if (endpoint !== PROD_CHAT_API_URL) {
+          response = await postChat(PROD_CHAT_API_URL, query);
+        } else {
+          throw netErr;
+        }
+      }
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.answer) {
+          return data.answer;
+        }
+      }
+
+      if (response.status === 429) {
+        return "You're sending messages too quickly. Please wait a moment before trying again.";
+      }
+
+      let errorDetail = '';
+      try {
+        const errorData = await response.json();
+        errorDetail = errorData?.detail || '';
+      } catch (_) {}
+
+      if (errorDetail) {
+        return errorDetail;
+      }
+
+      return "I'm having trouble connecting to the AI assistant right now. Please try again in a moment or contact Umar directly at momerfarooq223@gmail.com.";
     } catch (error) {
       console.error('Chatbot API Error:', error);
-      return "I'm having trouble connecting right now. Please try again in a moment.";
+      return "I'm having trouble connecting to the AI assistant right now. Please check your connection or contact Umar directly at momerfarooq223@gmail.com.";
     }
   }
 
@@ -282,13 +312,38 @@
       transform: scale(1.05);
     }
 
-    .reason-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--cyan, #00e5ff);
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 8px;
+    /* 4-Line Shimmering Loading Skeleton */
+    .portfolio-chatbot-skeleton-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      width: 220px;
+      padding: 4px 0;
+    }
+
+    .chatbot-skeleton-line {
+      height: 11px;
+      border-radius: 5px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.06) 25%, rgba(0, 229, 255, 0.22) 50%, rgba(255, 255, 255, 0.06) 75%);
+      background-size: 200% 100%;
+      animation: chatbotShimmer 1.5s infinite linear;
+    }
+
+    @keyframes chatbotShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    html[data-theme="light"] .chatbot-skeleton-line {
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.06) 25%, rgba(3, 105, 161, 0.22) 50%, rgba(15, 23, 42, 0.06) 75%);
+      background-size: 200% 100%;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .chatbot-skeleton-line {
+        animation: none;
+        background-position: 50% 0;
+      }
     }
 
     .hidden { display: none !important; }
@@ -345,7 +400,7 @@
 
       <div class="portfolio-chatbot-input-area">
         <form class="unified-input-bar" id="portfolio-chatbot-form">
-          <input type="text" class="portfolio-chatbot-input" id="portfolio-chatbot-input" placeholder="Ask about a project, skill, or experience..." autocomplete="off" maxlength="1000">
+          <input type="text" class="portfolio-chatbot-input" id="portfolio-chatbot-input" placeholder="Ask about a project, skill, or experience..." aria-label="Ask about a project, skill, or experience" autocomplete="off" maxlength="1000">
           <button type="submit" class="portfolio-chatbot-send-btn" aria-label="Send Message">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>
@@ -453,7 +508,15 @@
 
       const typingDiv = document.createElement('div');
       typingDiv.className = 'portfolio-chatbot-message bot';
-      typingDiv.innerHTML = `<div class="portfolio-chatbot-message-content"><span class="reason-dot"></span> Thinking...</div>`;
+      typingDiv.innerHTML = `
+        <div class="portfolio-chatbot-message-content">
+          <div class="portfolio-chatbot-skeleton-wrap" aria-label="Thinking..." role="status">
+            <div class="chatbot-skeleton-line" style="width: 82%;"></div>
+            <div class="chatbot-skeleton-line" style="width: 100%;"></div>
+            <div class="chatbot-skeleton-line" style="width: 58%;"></div>
+          </div>
+        </div>
+      `;
       messagesContainer.appendChild(typingDiv);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
 

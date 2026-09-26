@@ -1,5 +1,9 @@
 // API URL Config
-window.PORTFOLIO_CHAT_API_URL = window.PORTFOLIO_CHAT_API_URL || '/api/chat';
+window.PORTFOLIO_CHAT_API_URL = window.PORTFOLIO_CHAT_API_URL || (
+  location.hostname.endsWith('github.io') || location.protocol === 'file:'
+    ? 'https://omerfarooq223-github-io.vercel.app/api/chat'
+    : '/api/chat'
+);
 
 // Main Portfolio Logic
 let modalMediaSources = [];
@@ -116,7 +120,7 @@ let modalMediaSources = [];
           '<strong>PyTorch & Transformers:</strong> Core training framework with custom evaluation metrics pipeline.',
           '<strong>Scikit-learn:</strong> Macro-F1 computation, confusion matrix evaluation, and dataset stratification.'
         ],
-        github: 'https://github.com/omerfarooq223'
+        github: 'https://github.com/omerfarooq223/gemma-claim-verification'
       },
       autograder: {
         title: 'AutoGrader Agent',
@@ -628,6 +632,39 @@ let modalMediaSources = [];
         ],
         github: 'https://github.com/omerfarooq223/ParallelWeb'
       },
+      docustratum: {
+        title: 'DocuStratum Studio',
+        subtitle: 'Chrome MV3 Extension / FastAPI Companion / 100% Local RAG · 2026',
+        media: [
+          'images/docustratum-dom-capture.webp',
+          'images/docustratum-block-tree.webp',
+          'images/docustratum-compare-chunks.webp',
+          'images/docustratum-rag-debugger.webp'
+        ],
+        alt: 'DocuStratum Studio live DOM capture, block review, chunking comparator, and RAG debugger',
+        tags: ['Chrome MV3', 'Local-First RAG', 'FastAPI', 'PyTorch', 'TypeScript', 'React 18', 'Semantic DOM', 'Groq'],
+        overview: [
+          'A local-first Chrome extension and companion service engineered to solve the foundational challenge of Retrieval-Augmented Generation (RAG): <strong>unreliable, ungrounded, and leaky web ingestion</strong>.',
+          'DocuStratum Studio replaces heuristic scraping with a deterministic pipeline: safe DOM traversal, cryptographic provenance tracking, parallel visual chunking comparison, 100% on-device neural retrieval (~15ms latency), and grounded generation with one-click live DOM citation jump.'
+        ],
+        featuresTitle: 'Detailed Features',
+        features: [
+          '<strong>Safe DOM Traversal & Sanitization:</strong> Converts live webpages into structured semantic blocks (headings, tables, code, lists) while strictly filtering passwords, auth forms, and hidden tokens.',
+          '<strong>Cryptographic Provenance:</strong> Every extracted block and chunk retains source URL, capture timestamp, CSS selector, DOM node path, and SHA-256 hash.',
+          '<strong>Visual Strategy Comparator:</strong> Interactively inspects and compares Recursive vs. Heading-Aware chunking with token distribution histograms and stable IDs.',
+          '<strong>100% On-Device Neural Retrieval:</strong> Generates 384-dimensional embeddings via local PyTorch <code>all-MiniLM-L6-v2</code> companion service with ~15ms latency and zero data leakage.',
+          '<strong>Grounded Answers & 1-Click DOM Jump:</strong> Groq LLaMA 3.3 70B integration with anti-hallucination guardrails; clicking citation badges scrolls directly to and highlights live DOM nodes.',
+          '<strong>Auditable Portable Packages:</strong> Exports self-contained <code>.zip</code> bundles containing Markdown, JSONL blocks, chunk mappings, and a zero-dependency Python loader.'
+        ],
+        stackTitle: 'Technology Stack',
+        stack: [
+          '<strong>Chrome Manifest V3 & React 18:</strong> Side Panel UI, element picker, live DOM highlighter, and content scripts in TypeScript.',
+          '<strong>FastAPI Companion Service:</strong> Local async REST backend running PyTorch embedding engine and vector search.',
+          '<strong>Neural Retrieval & Embeddings:</strong> <code>all-MiniLM-L6-v2</code> (384d), NumPy cosine similarity, deterministic tie-breaking, and SHA-256 LRU cache.',
+          '<strong>LLM Gateway & Guardrails:</strong> Groq adapter (LLaMA 3.3 70B), strict citation enforcement engine, and anti-hallucination verification.'
+        ],
+        github: 'https://github.com/omerfarooq223/DocuStratum-Studio'
+      },
       pokemon: {
         title: 'Pokémon TCG AI Battle Agent',
         subtitle: 'Game AI / State-Aware Planning / Kaggle Competition · 2026',
@@ -890,6 +927,7 @@ let modalMediaSources = [];
 
     // Caching for unified scroll handler
     const bar = document.getElementById('bar');
+    const supportsScrollTimeline = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('animation-timeline', 'scroll()');
     const nav = document.getElementById('nav');
     const navLinks = Array.from(document.querySelectorAll('.nav-links a, .mob a'));
     const sectionChapters = [
@@ -938,9 +976,9 @@ let modalMediaSources = [];
       const y = window.scrollY;
       const progress = Math.min(Math.max(y / cachedMaxScroll, 0), 1);
 
-      // 1. Progress Bar
-      if (bar) {
-        bar.style.width = (progress * 100) + '%';
+      // 1. Progress Bar (Hardware-accelerated scaleX fallback for browsers lacking animation-timeline support)
+      if (bar && !supportsScrollTimeline) {
+        bar.style.transform = `scaleX(${progress})`;
       }
 
       // 2. Navbar
@@ -976,6 +1014,10 @@ let modalMediaSources = [];
           const targetId = link.getAttribute('href')?.slice(1);
           link.classList.toggle('is-active', targetId === newChapterId);
         });
+        const projDropEl = document.getElementById('navProjectsDropdown');
+        if (projDropEl) {
+          projDropEl.classList.toggle('is-active', newChapterId === 'projects');
+        }
       }
 
       ticking = false;
@@ -1007,7 +1049,8 @@ let modalMediaSources = [];
     document.querySelectorAll('section.sec').forEach(s => secObs.observe(s));
 
     const ctW = document.querySelector('#contact .ct-wrap');
-    if (ctW && !window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    const contactSection = document.getElementById('contact');
+    if (ctW && contactSection && !window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
       const ctObs = new IntersectionObserver(ents => {
         ents.forEach(e => {
           if (e.isIntersecting) {
@@ -1016,22 +1059,83 @@ let modalMediaSources = [];
           }
         });
       }, { threshold: 0.15 });
-      ctObs.observe(document.getElementById('contact'));
+      ctObs.observe(contactSection);
     }
 
     const ham = document.getElementById('ham');
     const mob = document.getElementById('mob');
-    ham.addEventListener('click', () => {
-      ham.classList.toggle('open');
-      mob.classList.toggle('open');
-      document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
-    });
-    mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      ham.classList.remove('open'); mob.classList.remove('open'); document.body.style.overflow = '';
-    }));
+    if (ham && mob) {
+      function setMenuState(open) {
+        ham.classList.toggle('open', open);
+        mob.classList.toggle('open', open);
+        ham.setAttribute('aria-expanded', String(open));
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+
+      ham.addEventListener('click', () => {
+        const isOpen = ham.classList.contains('open');
+        setMenuState(!isOpen);
+      });
+
+      mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        setMenuState(false);
+      }));
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && ham.classList.contains('open')) {
+          setMenuState(false);
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 800 && ham.classList.contains('open')) {
+          setMenuState(false);
+        }
+      });
+    }
+
+    // Projects Navigation Dropdown Interactive Handler
+    const navProjDrop = document.getElementById('navProjectsDropdown');
+    const projTrigger = document.getElementById('projectsTrigger');
+    if (navProjDrop && projTrigger) {
+      function setDropdown(open) {
+        navProjDrop.classList.toggle('is-open', open);
+        projTrigger.setAttribute('aria-expanded', String(open));
+      }
+
+      projTrigger.addEventListener('click', () => {
+        setDropdown(false);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!navProjDrop.contains(e.target)) {
+          setDropdown(false);
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navProjDrop.classList.contains('is-open')) {
+          setDropdown(false);
+          projTrigger.focus();
+        }
+      });
+
+      navProjDrop.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', () => {
+          setDropdown(false);
+        });
+      });
+    }
 
     const btt = document.getElementById('btt');
-    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    if (btt) {
+      btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+
+    // Dynamic copyright year update
+    document.querySelectorAll('.dyn-year').forEach(el => {
+      el.textContent = new Date().getFullYear();
+    });
 
 
     const obs = new IntersectionObserver((entries) => {
@@ -1220,22 +1324,32 @@ let modalMediaSources = [];
 
     /* ── Certification Lightbox ── */
     const certData = [
-      { src: 'docs/datacamp-ai-engineer-associate.webp', caption: 'AI Engineer for Developers Associate - DataCamp' },
-      { src: 'docs/datacamp-working-with-openai-api.webp', caption: 'Working with the OpenAI API - DataCamp' },
-      { src: 'docs/certificate-fmssrk5frsx3.webp', caption: 'AI Fluency: AI Capabilities & Limitations - Anthropic' },
-      { src: 'docs/cert-new-2.webp', caption: 'AI Fluency for Students - Anthropic' },
-      { src: 'docs/cert-new-1.webp', caption: 'Claude 101 - Anthropic' },
-      { src: 'docs/cert-new-3.webp', caption: 'Claude Code 101 - Anthropic' },
-      { src: 'docs/cert-ai-foundations.webp', caption: 'AI Foundations - OpenAI Academy' },
-      { src: 'docs/cert-s3jn6owcs6f6.webp', caption: 'AI Fluency: Framework & Foundations - Anthropic' },
-      { src: 'docs/cert-rn2wppq639.webp', caption: 'Applied AI Foundations - OpenAI Academy' },
-      { src: 'docs/cert-claude-platform-101.webp', caption: 'Claude Platform 101 - Anthropic' },
-      { src: 'docs/intro-to-ai-ethics.webp', caption: 'Intro to AI Ethics - Kaggle' },
-      { src: 'docs/certificate-5s66gnoyjedq.webp', caption: 'Claude Code in Action - Anthropic' },
-      { src: 'docs/5-Day AI Agents Intensive Vibe Coding Course.webp', caption: '5-Day AI Agents: Intensive Vibe Coding Course - Kaggle / Google' },
-      { src: 'docs/Peer_Tutoring_Certificate.webp', caption: 'Peer Tutoring Certificate - UMT' },
-      { src: 'docs/ml-explainability.webp', caption: 'Machine Learning Explainability - Kaggle' },
-      { src: 'docs/Google Certificate.webp', caption: 'Intro to Generative AI - Google' }
+      { src: 'docs/certificates/datacamp-ai-engineer-associate.webp', caption: 'AI Engineer for Developers Associate - DataCamp' },
+      { src: 'docs/certificates/datacamp-working-with-openai-api.webp', caption: 'Working with the OpenAI API - DataCamp' },
+      { src: 'docs/certificates/certificate-fmssrk5frsx3.webp', caption: 'AI Fluency: AI Capabilities & Limitations - Anthropic' },
+      { src: 'docs/certificates/cert-new-2.webp', caption: 'AI Fluency for Students - Anthropic' },
+      { src: 'docs/certificates/cert-new-1.webp', caption: 'Claude 101 - Anthropic' },
+      { src: 'docs/certificates/cert-new-3.webp', caption: 'Claude Code 101 - Anthropic' },
+      { src: 'docs/certificates/cert-ai-foundations.webp', caption: 'AI Foundations - OpenAI Academy' },
+      { src: 'docs/certificates/cert-s3jn6owcs6f6.webp', caption: 'AI Fluency: Framework & Foundations - Anthropic' },
+      { src: 'docs/certificates/cert-rn2wppq639.webp', caption: 'Applied AI Foundations - OpenAI Academy' },
+      { src: 'docs/certificates/cert-claude-platform-101.webp', caption: 'Claude Platform 101 - Anthropic' },
+      { src: 'docs/certificates/intro-to-ai-ethics.webp', caption: 'Intro to AI Ethics - Kaggle' },
+      { src: 'docs/certificates/certificate-5s66gnoyjedq.webp', caption: 'Claude Code in Action - Anthropic' },
+      { src: 'docs/certificates/5-Day AI Agents Intensive Vibe Coding Course.webp', caption: '5-Day AI Agents: Intensive Vibe Coding Course - Kaggle / Google' },
+      { src: 'docs/certificates/Peer_Tutoring_Certificate.webp', caption: 'Peer Tutoring Certificate - UMT' },
+      { src: 'docs/certificates/ml-explainability.webp', caption: 'Machine Learning Explainability - Kaggle' },
+      { src: 'docs/certificates/Google Certificate.webp', caption: 'Intro to Generative AI - Google' },
+      {
+        src: 'docs/certificates/certificate-supervised-learning-scikit-learn.webp',
+        link: 'docs/certificates/certificate-supervised-learning-scikit-learn.pdf',
+        caption: 'Supervised Learning with scikit-learn - DataCamp'
+      },
+      {
+        src: 'docs/certificates/certificate-introduction-to-ai-agents.webp',
+        link: 'docs/certificates/certificate-introduction-to-ai-agents.pdf',
+        caption: 'Introduction to AI Agents - DataCamp'
+      }
     ];
     function openCertLightbox(idx) {
       const lb = document.getElementById('certLightbox');
@@ -1245,7 +1359,7 @@ let modalMediaSources = [];
       if (!lb || !certData[idx]) return;
       img.src = certData[idx].src;
       cap.textContent = certData[idx].caption;
-      if (openBtn) openBtn.href = certData[idx].src;
+      if (openBtn) openBtn.href = certData[idx].link || certData[idx].src;
       lb.classList.add('is-open');
       document.body.style.overflow = 'hidden';
     }
@@ -1353,8 +1467,7 @@ let modalMediaSources = [];
       });
     }
 
-// Document Preview Logic
-// Document Preview Logic
+    // Document Preview Logic
     (function () {
       const docModal = document.getElementById('docModal');
       const docBody = document.getElementById('docBody');
@@ -1414,3 +1527,4 @@ let modalMediaSources = [];
         if (e.key === 'Escape') closePreview();
       });
     })();
+
