@@ -54,12 +54,22 @@ The UI was designed from first principles using custom CSS properties as a desig
 
 ```
 portfolio-site/
-├── index.html              # Main portfolio page
-├── all-projects.html       # Standalone all-projects page
-├── main.js                 # Core portfolio scripts
-├── chatbot-widget.js       # Standalone AI chatbot widget
-├── geometric-background.js # Canvas particle animation
-├── css/                    # Modular CSS architecture
+├── .gitignore
+├── AGENTS.md               # AI agent & developer operational manual
+├── README.md               # Repository overview & showcase
+├── index.html              # Main portfolio showcase
+├── all-projects.html       # Full project catalog page
+├── privacy.html            # Privacy policy documentation
+├── 404.html                # Custom cyber-themed 404 page
+├── CV.pdf                  # Direct resume PDF
+├── llms.txt                # AI crawler & LLM index
+├── robots.txt / sitemap.xml# Search engine optimization indexers
+├── vercel.json             # Vercel serverless deployment config
+├── api/                    # Serverless Python backend
+│   ├── chat.py             # FastAPI streaming chatbot endpoint
+│   └── requirements.txt    # Backend dependencies (fastapi, groq, uvicorn)
+├── assets/                 # Favicon, SVG logos & stone textures
+├── css/                    # Modular stylesheet architecture
 │   ├── base.css            # Root tokens, resets & utilities
 │   ├── navigation.css      # Fixed navbar & theme toggle
 │   ├── gateway.css         # Blast door gateway overlay
@@ -72,15 +82,28 @@ portfolio-site/
 │   ├── modals.css          # Project & document lightboxes
 │   ├── responsive.css      # Global media queries
 │   └── overrides.css       # Visual refresh & ambient layers
+├── docs/                   # Central technical documentation & credentials
+│   ├── DECISIONS.md        # Architecture Decision Records (ADRs)
+│   ├── FLOW.md             # Technical runtime workflows & state diagrams
+│   ├── CI.md               # Testing, linting & verification manual
+│   └── certificates/       # Verification diplomas & awards (WebP)
 ├── images/                 # Project screenshots & assets (WebP optimized)
-├── docs/                   # Certificates & documents (WebP optimized)
-├── assets/                 # Favicon and stone surface textures
-├── api/
-│   └── chat.py             # FastAPI serverless chatbot endpoint (Vercel)
-├── vercel.json             # Vercel deployment config (serverless functions)
-├── CV.pdf                  # Resume
-└── README.md
+└── js/                     # Modular client-side scripts
+    ├── main.js             # Core portfolio scripts & modal engine
+    ├── chatbot-widget.js   # Standalone AI chatbot widget & SSE streaming
+    └── geometric-background.js # Interactive canvas particle system
 ```
+
+---
+
+## Technical Documentation
+
+Detailed architectural and operational documentation is maintained in the [`docs/`](docs/) directory:
+
+- 📋 [**Architecture Decision Records (ADRs)**](docs/DECISIONS.md) — Comprehensive log of architectural decisions, tradeoffs, and design rationale.
+- ⚡ [**Runtime Flow & State Diagrams**](docs/FLOW.md) — Visual event loops, lifecycle hooks, and streaming protocols.
+- 🧪 [**Continuous Integration & Verification Manual**](docs/CI.md) — Static syntax checks, verification commands, and deployment guide.
+- 🤖 [**AI Agent Operational Manual**](AGENTS.md) — Ground-truth guidelines for AI coding assistants and developers.
 
 ---
 
