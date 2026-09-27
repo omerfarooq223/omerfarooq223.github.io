@@ -292,3 +292,37 @@ We chose the **Aesthetic Glassmorphic Plaque with Atmospheric Glow**:
 ### Consequences
 * **Benefits**: Superior social engagement, high-end professional impression, fast load times on social card scrapers.
 * **Trade-offs**: None.
+
+---
+
+## ADR-012: Explicit Vercel Framework Preset (`"framework": null`) for Static Hybrid Hosting
+
+### Status
+**Accepted**
+
+### Context
+Vercel CLI v59+ introduced aggressive backend framework auto-detection. Because the repository contains Python dependencies and a serverless endpoint inside `api/chat.py`, Vercel projects configured with or auto-detected as the "FastAPI" preset attempted to execute the full FastAPI build pipeline, demanding a root or module ASGI entrypoint (`No FastAPI entrypoint found in default locations... Add this to your pyproject.toml: [tool.vercel] entrypoint = "api.chat:app"`). 
+
+Because the portfolio is an ultra-fast zero-build static site with a decoupled serverless API function, running a full FastAPI web server would break static asset resolution (`index.html`, `css/`, `images/`) and cause production deployment builds to fail.
+
+### Options Considered
+1. **Convert Project to Full FastAPI Web App (`pyproject.toml` entrypoint)**:
+   - Make `api/chat.py` mount `StaticFiles(directory=".")` and serve the entire portfolio through FastAPI/Starlette.
+   - *Drawback*: Violates ADR-001 (Zero-Build Vanilla Stack), incurs Python cold starts for static HTML/CSS/JS delivery, and removes GitHub Pages compatibility.
+2. **Dashboard-Only Setting Change**:
+   - Manually toggle "Framework Preset" to "Other" in the Vercel project dashboard.
+   - *Drawback*: Fragile; does not persist across new project creations, forks, or preview environments.
+3. **Explicit `"framework": null` in `vercel.json`**:
+   - Codify `"framework": null` directly in `vercel.json`.
+   - *Advantage*: Disables framework auto-detection across all linked projects, ensuring Vercel serves the root static assets directly while auto-compiling `api/*.py` as isolated Serverless Functions via `@vercel/python`.
+
+### Decision and Rationale
+We chose **`"framework": null` in `vercel.json`**:
+* **Preserves Static Purity**: Serves static HTML/CSS/assets with 0ms build overhead and edge CDN caching directly from root.
+* **Isolated Serverless Python Function**: Allows `api/chat.py` to compile as an on-demand serverless function with `api/requirements.txt`, keeping secrets and backend logic cleanly decoupled.
+* **Hermetic & Git-Tracked**: Guarantees all current and future Vercel deployments (including preview branches) build cleanly without relying on manual dashboard overrides.
+
+### Consequences
+* **Benefits**: Fixes the production build failure permanently across all projects, ensures zero static serving latency, and aligns with ADR-001.
+* **Trade-offs**: None.
+

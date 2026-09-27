@@ -81,6 +81,7 @@ portfolio-site/
 ### C. Backend & API Rules (`api/chat.py`)
 - **Never expose raw API keys**: Secrets (`GROQ_API_KEY`, etc.) must reside exclusively in environment variables (`.env` or Vercel Environment Variables).
 - **Streaming by Default**: Chat responses must stream using `StreamingResponse` (`text/event-stream`) to minimize Time-to-First-Token (TTFT).
+- **Vercel Framework Preset**: Always maintain `"framework": null` in `vercel.json` to prevent Vercel's framework auto-detector from incorrectly classifying the repo as a monolithic FastAPI application instead of a zero-build static site with decoupled serverless functions.
 
 ---
 

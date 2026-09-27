@@ -81,7 +81,7 @@ Every developer or AI agent must complete this checklist before marking work don
 
 ### Serverless Backend Proxy (Vercel)
 - **Function**: `api/chat.py` (FastAPI streaming proxy)
-- **Configuration**: `vercel.json`
+- **Configuration**: `vercel.json` (explicit `"framework": null` to prevent framework auto-detection collisions; rewrites `/api/(.*)` to `/api/$1`)
 - **Environment Variables**:
   - `GROQ_API_KEY`: API key for Groq inference (LLaMA 3.3-70b).
 - **Deployment Process**:
