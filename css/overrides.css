@@ -4012,3 +4012,250 @@ html[data-theme="light"] .skeleton-shimmer {
   }
 }
 
+/* ============================================================
+   Private-Repo Pill & Popover
+   Used on cards whose GitHub repos are locked during peer review.
+   ============================================================ */
+
+/* Pill wrapper — sits in the pstk / all-card-stack row */
+.pill-private-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* The pill itself */
+.pill-private {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid rgba(255, 191, 69, .35);
+  background: rgba(255, 191, 69, .08);
+  color: var(--amber);
+  transition: background .2s, border-color .2s, box-shadow .2s;
+  white-space: nowrap;
+}
+
+.pill-private:hover,
+.pill-private:focus-visible {
+  background: rgba(255, 191, 69, .15);
+  border-color: rgba(255, 191, 69, .55);
+  box-shadow: 0 0 10px rgba(255, 191, 69, .25);
+  outline: none;
+}
+
+.pill-private svg {
+  flex-shrink: 0;
+}
+
+/* Popover panel */
+.private-popover {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  width: 270px;
+  background: rgba(13, 17, 23, .97);
+  border: 1px solid rgba(255, 191, 69, .3);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .55), 0 0 18px rgba(255, 191, 69, .1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s, transform .2s;
+}
+
+.private-popover.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Small arrow pointing down toward the pill */
+.private-popover::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(255, 191, 69, .3);
+}
+
+.private-popover-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+
+.private-popover-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: rgba(255, 191, 69, .12);
+  border: 1px solid rgba(255, 191, 69, .25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: .9rem;
+}
+
+.private-popover-title {
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.private-popover-body {
+  font-size: .68rem;
+  line-height: 1.6;
+  color: var(--muted2);
+}
+
+.private-popover-body strong {
+  color: #f8fafc;
+}
+
+/* Ensure popover isn't clipped by card overflow */
+#gemmaclaim-card .pill-private-wrap,
+.project-showcase-companion .pill-private-wrap {
+  z-index: 10;
+}
+
+/* Light theme adjustments */
+html[data-theme="light"] .private-popover {
+  background: rgba(248, 250, 252, .97);
+  border-color: rgba(180, 120, 0, .3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .12), 0 0 18px rgba(180, 120, 0, .1);
+}
+
+html[data-theme="light"] .private-popover::after {
+  border-top-color: rgba(180, 120, 0, .3);
+}
+
+html[data-theme="light"] .private-popover-body {
+  color: #334155;
+}
+
+html[data-theme="light"] .private-popover-body strong {
+  color: #0f172a;
+}
+
+html[data-theme="light"] .private-popover-title {
+  color: #92400e;
+}
+
+html[data-theme="light"] .private-popover-icon {
+  background: rgba(180, 120, 0, .1);
+  border-color: rgba(180, 120, 0, .25);
+}
+
+/* all-projects page compact private badge */
+.all-card-private-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: .58rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  border: 1px solid rgba(255, 191, 69, .35);
+  background: rgba(255, 191, 69, .08);
+  color: var(--amber);
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+  margin-top: 4px;
+}
+
+.all-card-private-badge:hover {
+  background: rgba(255, 191, 69, .15);
+  border-color: rgba(255, 191, 69, .5);
+}
+
+/* SHAP card: pill is at far-right (margin-left:auto), so anchor popover
+   to the right edge of the pill rather than center it — prevents overflow. */
+.project-showcase-companion .private-popover {
+  left: auto;
+  right: 0;
+  transform: translateY(6px);
+}
+
+.project-showcase-companion .private-popover.is-open {
+  transform: translateY(0);
+}
+
+.project-showcase-companion .private-popover::after {
+  left: auto;
+  right: 12px;
+  transform: none;
+}
+
+/* ── all-projects page: private badge in meta row ── */
+.all-private-badge-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.all-private-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 100px;
+  font-size: .58rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  border: 1px solid rgba(255, 191, 69, .35);
+  background: rgba(255, 191, 69, .08);
+  color: var(--amber);
+  white-space: nowrap;
+  transition: background .2s, border-color .2s;
+}
+
+.all-private-badge-wrap:hover .all-private-badge {
+  background: rgba(255, 191, 69, .15);
+  border-color: rgba(255, 191, 69, .5);
+}
+
+/* Popover opens downward from the meta row badge */
+.all-private-popover {
+  top: calc(100% + 8px);
+  bottom: auto;
+  left: auto;
+  right: 0;
+  transform: translateY(-4px);
+}
+
+.all-private-popover.is-open {
+  transform: translateY(0);
+}
+
+/* Arrow points up toward the badge */
+.all-private-popover::after {
+  top: auto;
+  bottom: 100%;
+  left: auto;
+  right: 12px;
+  transform: none;
+  border-top-color: transparent;
+  border-bottom-color: rgba(255, 191, 69, .3);
+}
+

@@ -804,7 +804,9 @@
         id: 'gemmaclaim', n: '001', title: 'Gemma Claim Verification', tag: 'Gemma Fine-Tuning', cats: 'ml agentic',
         img: 'images/gemma-slide1.webp',
         desc: '1st Place Hackathon Winner: three-way claim verification engine fine-tuned from Google Gemma 4 12B using 4-bit NF4 QLoRA on 1,085 audited examples (94.40% Accuracy, 94.38% Macro-F1).',
-        stack: ['Gemma 4 12B', 'QLoRA', 'NF4', 'PyTorch', 'PEFT']
+        stack: ['Gemma 4 12B', 'QLoRA', 'NF4', 'PyTorch', 'PEFT'],
+        isPrivate: true,
+        privateNote: 'This repository is not publicly available at this time. It will be released in the future.'
       },
       {
         id: 'aiemployee', n: '002', title: 'Personal AI Employee', tag: 'Agentic AI', cats: 'agentic automation',
@@ -946,7 +948,24 @@
         data-cats="${project.cats}" data-project="${project.id}"
         aria-label="Open ${project.title} project details">
         ${project.img ? `<div class="all-card-media"><img src="${project.img}" alt="${project.title} preview" loading="lazy" /></div>` : ''}
-        <div class="all-card-meta"><span>${project.n}</span><span class="all-card-tag">${project.tag}</span></div>
+        <div class="all-card-meta">
+          <span>${project.n}</span>
+          <span class="all-card-tag">${project.tag}</span>
+          ${project.isPrivate ? `
+            <span class="all-private-badge-wrap" data-private-id="${project.id}">
+              <span class="all-private-badge">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm3.1-9H8.9V6a3.1 3.1 0 0 1 6.2 0v2z"/></svg>
+                Private
+              </span>
+              <div class="private-popover all-private-popover" role="tooltip">
+                <div class="private-popover-header">
+                  <div class="private-popover-icon">🔒</div>
+                  <span class="private-popover-title">Repository Private</span>
+                </div>
+                <p class="private-popover-body">${project.privateNote}</p>
+              </div>
+            </span>` : ''}
+        </div>
         <div class="all-card-content">
           <h2 class="all-card-title no-heading-gradient">${project.title}</h2>
           <p class="all-card-copy">${project.desc}</p>
@@ -957,8 +976,26 @@
 
     document.querySelectorAll('.all-project-card').forEach((card) => {
       card.addEventListener('click', (event) => {
+        // Toggle popover when clicking the private badge — don't open modal
+        const badgeWrap = event.target.closest('.all-private-badge-wrap');
+        if (badgeWrap) {
+          const popover = badgeWrap.querySelector('.private-popover');
+          if (popover) {
+            const isOpen = popover.classList.contains('is-open');
+            document.querySelectorAll('.private-popover.is-open').forEach(p => p.classList.remove('is-open'));
+            if (!isOpen) popover.classList.add('is-open');
+          }
+          return;
+        }
         openProjectModal(card.dataset.project || 'autograder', event);
       });
+    });
+
+    // Close popovers on outside click
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.all-private-badge-wrap') && !e.target.closest('.pill-private-wrap')) {
+        document.querySelectorAll('.private-popover.is-open').forEach(p => p.classList.remove('is-open'));
+      }
     });
 
     function applyProjectFilter(filter) {

@@ -16,7 +16,7 @@
 - **1st Place Winner — AI Seekho Day 2026 Gemma Fine-Tuning Hackathon**: Outperformed competitive teams by fine-tuning Google Gemma 4 12B with 4-bit NF4 QLoRA on a 18k sample instruction dataset, achieving 94.40% verification accuracy with production inference optimizations.
 
 ## Featured Technical Projects
-- **Gemma Claim Verification Engine**: Autonomous fact-checking and claim verification engine fine-tuned from Google Gemma 4 12B using 4-bit NF4 QLoRA, sub-50ms token latency, and hallucination reduction heuristics. GitHub: https://github.com/omerfarooq223/gemma-claim-verification
+- **Gemma Claim Verification Engine**: Autonomous fact-checking and claim verification engine fine-tuned from Google Gemma 4 12B using 4-bit NF4 QLoRA, sub-50ms token latency, and hallucination reduction heuristics. (Repository currently private.)
 - **Personal AI Employee**: Local-first autonomous executive assistant agent running on custom tool orchestration with local LLMs and persistent task queues.
 - **AutoGrader Agent**: Autonomous multi-agent code grading system evaluating AST correctness, security patterns, and style rubrics.
 - **SHAP Agentic IDS**: Explainable AI network intrusion detection combining gradient boosting with SHAP-driven alert reasoning and automated defensive actions.

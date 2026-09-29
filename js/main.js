@@ -120,7 +120,8 @@ let modalMediaSources = [];
           '<strong>PyTorch & Transformers:</strong> Core training framework with custom evaluation metrics pipeline.',
           '<strong>Scikit-learn:</strong> Macro-F1 computation, confusion matrix evaluation, and dataset stratification.'
         ],
-        github: 'https://github.com/omerfarooq223/gemma-claim-verification'
+        github: 'https://github.com/omerfarooq223/gemma-claim-verification',
+        isPrivate: true
       },
       autograder: {
         title: 'AutoGrader Agent',
@@ -760,11 +761,47 @@ let modalMediaSources = [];
         `;
       }
       if (githubLink) {
-        githubLink.href = data.github;
+        if (data.isPrivate) {
+          // Hide the GitHub button entirely for private repositories
+          githubLink.style.display = 'none';
+        } else {
+          githubLink.style.display = '';
+          githubLink.href = data.github;
+        }
       }
 
       updateModalMedia();
     }
+
+    // ── Private-Repo Pill Popover ──────────────────────────────────
+    function togglePrivatePopover(btn) {
+      const wrap = btn.closest('.pill-private-wrap');
+      const popover = wrap ? wrap.querySelector('.private-popover') : null;
+      if (!popover) return;
+      const isOpen = popover.classList.contains('is-open');
+      // Close all other open popovers first
+      document.querySelectorAll('.private-popover.is-open').forEach(p => {
+        p.classList.remove('is-open');
+        const b = p.closest('.pill-private-wrap')?.querySelector('.pill-private');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        popover.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // Close popover when clicking anywhere outside
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.pill-private-wrap')) {
+        document.querySelectorAll('.private-popover.is-open').forEach(p => {
+          p.classList.remove('is-open');
+          const b = p.closest('.pill-private-wrap')?.querySelector('.pill-private');
+          if (b) b.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+    // ──────────────────────────────────────────────────────────────
 
     function openProjectModal(projectId = 'autograder', e) {
       if (e) {

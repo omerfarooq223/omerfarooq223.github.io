@@ -2,6 +2,34 @@
 
 This document records the foundational architectural, design, and technical decisions made for the **Muhammad Umar Farooq Portfolio Site**. It provides the concrete context, rationale, alternatives considered, and trade-offs for each decision so any engineer can understand and defend the system.
 
+## ADR-009: Private-Repo Pill + Click-to-Reveal Popover for Papers Under Review
+
+### Status
+**Accepted**
+
+### Context
+Two repositories — **Gemma Claim Verification** and **SHAP-Explained Agentic IDS** — have their GitHub repos kept private while research papers derived from the work undergo peer review. Previously, the project cards linked directly to GitHub, causing visitors to land on a 404 "Repository Not Found" page with no explanation. This erodes trust and leaves the audience confused.
+
+### Options Considered
+1. **Remove the GitHub link silently**: Clean but gives no signal — visitors assume there's no code.
+2. **Replace with a disabled/grayed-out GitHub icon**: Communicates unavailability but with no context.
+3. **Small amber "🔒 Private Repo" pill + click-to-reveal glassmorphic popover**: Communicates status clearly, keeps the card clean, and educates visitors on _why_ on demand.
+4. **Full modal dialog**: Overkill for a two-sentence explanation; disrupts the browsing flow.
+
+### Decision and Rationale
+Option 3 was chosen. A compact amber pill (consistent with the site's warning/amber color token) sits where the GitHub icon button used to be. Clicking it toggles a small glassmorphic popover anchored above the pill, explaining that:
+- The repo is **private** while the paper is **under peer review**
+- It will be made **public upon acceptance**
+
+The popover uses `position: absolute` inside a `pill-private-wrap` container, appears with a fade + lift transition (`opacity`, `transform`), and closes on any outside click. ARIA attributes (`aria-expanded`, `aria-haspopup`, `role="tooltip"`) are included for accessibility. The same pattern is applied to both `index.html` (featured and companion cards) and `all-projects.html` (rendered via JS template literal with the `isPrivate` flag).
+
+### Consequences
+- GitHub link is removed from both affected cards; no dead links remain.
+- Visitors immediately understand the private status and its reason.
+- When repos go public, removing `isPrivate: true` (and the pill markup) restores the standard GitHub icon button.
+
+---
+
 ## ADR-004: WebP Certificate Previews with Original PDF Links
 
 ### Status
