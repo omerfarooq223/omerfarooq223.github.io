@@ -100,3 +100,45 @@ Whenever an implementation alters system behavior, verification commands, or use
 2. Update **`FLOW.md`** if user interactions, loading lifecycles, or state sequences change.
 3. Update **`DECISIONS.md`** with an ADR explaining the technical trade-offs.
 4. Update **`AGENTS.md`** if new permanent constraints or rules are introduced.
+
+## Targeted Scroll and Entrance Verification (2026-10-02)
+
+- Syntax-check client scripts with `node --check` and executable inline scripts in `index.html`.
+- In a fresh session, confirm the gateway first renders 0%, advances monotonically to 100%, and same-session reload skips it. Verify click/Enter/Escape skip behavior.
+- At widths 375, 768, and 1440, inspect dark/light rendering and horizontal overflow. Compare hero bounds to confirm that name cleanup does not change typography or layout.
+- Verify the circuit script remains unchanged when only offscreen CSS work is optimized. During repeated scrolling, its canvas must keep updating with the original pulse, glow, routing, and interaction effects.
+- Check infinite effects in distant sections pause and resume before entering the viewport. Ensure finite reveals and effects already paused by existing hover controls are not resumed by the visibility observer.
+- Check project modal image cycling, Escape and backdrop closing, certificate lightbox closing, project filters, internal anchor targets, and zero uncaught exceptions.
+- For performance comparisons, verify stylesheets/images loaded without failed requests, then use the same viewport, fonts-loaded state, scripted scrolling, and CPU throttle; compare style/paint workload as well as frame intervals. Do not infer a universal FPS guarantee from a single synthetic run.
+
+### Material gateway checks
+
+Inspect a fresh-session gateway at 375×812, 768×900, 1440×900, and 667×375. Verify the nameplate and controls fit, text stays legible, duplicated door leaves align at the center seam, and the gateway has no infinite decorative animations. Check natural 0–100 progress, button/click and keyboard skipping, reduced-motion skipping, returning-session dismissal, and the 1.15-second reveal. Syntax-check executable inline scripts after removing the audio/flash code. Confirm the circuit background script has no diff.
+
+### Social hover and mobile menu checks
+
+At desktop width, hover LinkedIn, GitHub, LeetCode, and Hugging Face in both themes and inspect their faceted silhouettes for rectangular backing edges. At 375 and 768 pixels, verify the menu toggle has a transparent background, no native border, theme-aware visible bars, and a visible keyboard focus outline. Test opening, Escape closing, and closing after selecting a navigation link. Verify zero uncaught browser exceptions and confirm the original circuit script remains unchanged.
+
+### Project-card visibility and accent checks
+
+At 375, 768, and 1440 px in both themes, confirm no horizontal overflow and inspect hero, Projects, and Skills text/gradient contrast. Scroll past the first featured project cards while Projects remains visible: their infinite effects must pause outside the 200 px margin, then resume when revisited. Expand additional projects, confirm far cards pause and approaching cards resume, then collapse and repeat. Check project modal image cycling, Escape/backdrop closing, certificate closing, and catalog filters with zero uncaught exceptions. Confirm `js/geometric-background.js` is unchanged. Update shared stylesheet/script cache versions across the landing page, catalog, and privacy page whenever changing their shared assets.
+
+
+### Gateway color accents
+
+At 375, 768, and 1440 px, inspect the teal nameplate/controls and muted brass opening label. Confirm the name stays off-white, both door leaves align, and no new decorative loops appear. The progress sequence and entry control retain their existing behavior.
+
+
+### Distinct accent colors
+
+Inspect About in both themes: violet story/text/stat accents must be visibly distinct from cyan, green, and gold. Check the Languages & Frameworks, FSc Pre-Medical, and UMT Tutoring & Online Instruction cards use the same restrained violet as “27+ Projects Shipped,” and light-mode text remains legible. Inspect About, Projects, Skills, and Contact heading gradient stops for royal-blue/magenta blends while preserving their existing layout and timing.
+
+
+### Colored trim and stamped gateway badge
+
+Check the MUF badge, Portfolio label, and entry control do not overlap at 375 px. Inspect the paired leaves at desktop/tablet widths for aligned trim and panel reflections. At 667×375, confirm the nameplate and loader fit. Verify the new decoration adds no infinite gateway effects and preserves 0–100 progress and skipping.
+
+
+### Gateway footer placement
+
+At 375×812, 768×900, 1440×900, and 667×375, inspect the gateway bottom strip: label/tag must fit inside it, remain vertically centered, and not overlap. Confirm zero vertical padding, row layout in mobile, and no inherited footer backdrop blur. Both door copies must align before the reveal.

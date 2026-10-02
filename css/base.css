@@ -2,7 +2,8 @@
       --bg: #07080f;
       --surface: #0c0d18;
       --cyan: #00e5ff;
-      --purple: #a855f7;
+      --steel-blue: #68b6cd;
+      --purple: #b6a0df;
       --pink: #f472b6;
       --amber: #fbbf24;
       --green: #34d399;
@@ -147,7 +148,8 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
       --surface: #f9fafb;
 
       --cyan: #0ea5e9;
-      --purple: #6366f1;
+      --steel-blue: #287d99;
+      --purple: #7045a0;
       --pink: #ec4899;
       --amber: #f59e0b;
       --green: #10b981;
@@ -167,7 +169,7 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
 
       --eduCardBorder: rgba(148, 163, 184, 0.45);
       --eduCardGradA: rgba(255, 255, 255, 0.98);
-      --eduCardGradB: rgba(244, 244, 255, 0.98);
+      --eduCardGradB: rgba(244, 252, 255, 0.98);
       --eduCardGradC: rgba(235, 243, 255, 0.98);
       --eduCardShadow: rgba(15, 23, 42, 0.08);
       --eduCardInset: rgba(255, 255, 255, 0.90);
@@ -180,7 +182,7 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
       --card: rgb(240, 242, 248);
       --border: rgba(15, 23, 42, 0.12);
       --cardGlow: rgba(14, 165, 233, 0.08);
-      --cardGrad: linear-gradient(165deg, rgb(255, 255, 255) 0%, rgb(245, 246, 252) 45%);
+      --cardGrad: linear-gradient(165deg, rgb(255, 255, 255) 0%, rgb(245, 250, 252) 45%);
       --themeToggleBg: rgba(15, 23, 42, 0.02);
       --themeToggleBgHover: rgba(14, 165, 233, 0.14);
       --beam: #2563eb;
@@ -190,7 +192,7 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
     html[data-theme="light"] body {
       background:
         radial-gradient(900px 520px at 10% -12%, rgba(14, 165, 233, 0.10), transparent 62%),
-        radial-gradient(900px 520px at 90% -10%, rgba(99, 102, 241, 0.09), transparent 62%),
+        radial-gradient(900px 520px at 90% -10%, rgba(99, 198, 241, 0.09), transparent 62%),
         var(--bg);
     }
 
@@ -212,12 +214,12 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
 
     html[data-theme="light"] .btn-a {
       color: #fff;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      background: linear-gradient(135deg, #2563eb, #22748b);
       box-shadow: 0 12px 26px rgba(37, 99, 235, 0.25);
     }
 
     html[data-theme="light"] .btn-a:hover {
-      box-shadow: 0 18px 36px rgba(124, 58, 237, 0.26);
+      box-shadow: 0 18px 36px rgba(90, 193, 237, 0.26);
     }
 
     html[data-theme="light"] .proj-card,
@@ -269,7 +271,7 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
     }
 
     html[data-theme="light"] .ct-glow {
-      background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, .22), transparent 55%);
+      background: radial-gradient(circle at 50% 0%, rgba(99, 198, 241, .22), transparent 55%);
     }
 
     *,
@@ -300,7 +302,7 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
     }
 
     ::-webkit-scrollbar-thumb {
-      background: linear-gradient(var(--cyan), var(--purple), var(--pink));
+      background: linear-gradient(var(--cyan), var(--steel-blue), var(--pink));
     }
 
     @media(pointer:fine) {
@@ -417,8 +419,8 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
     .pcp,
     .ec-p,
     .sk-p {
-      --beam: var(--purple);
-      --beam-fade: rgba(168, 85, 247, 0.35);
+      --beam: var(--steel-blue);
+      --beam-fade: rgba(94, 201, 247, 0.35);
     }
 
     .sk-pk {
@@ -644,7 +646,7 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
     }
 
     .fg {
-      background: linear-gradient(90deg, var(--cyan, #00e5ff), var(--purple, #a855f7), var(--pink, #ec4899));
+      background: linear-gradient(90deg, var(--cyan, #00e5ff), var(--steel-blue, #5ba9d6), var(--pink, #ec4899));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -656,7 +658,7 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
     #btt {
       width: 32px;
       height: 32px;
-      background: linear-gradient(135deg, var(--cyan, #00e5ff), var(--purple, #a855f7));
+      background: linear-gradient(135deg, var(--cyan, #00e5ff), var(--steel-blue, #5ba9d6));
       border: none;
       border-radius: 50%;
       color: #030712;

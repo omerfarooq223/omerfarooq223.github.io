@@ -124,11 +124,11 @@
     }
 
     .ct-monolith-great {
-      background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #c084fc 100%);
+      background: linear-gradient(135deg, #5ba9d6 0%, #ec4899 50%, #8bc9db 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.55));
+      filter: drop-shadow(0 0 16px rgba(94, 201, 247, 0.55));
       display: inline-block;
     }
 
@@ -827,7 +827,7 @@
 }
 
 #contact .ct-monolith-great {
-  background: linear-gradient(100deg, #b044b9, #ec4e9a);
+  background: linear-gradient(100deg, #4697b9, #ec4e9a);
   background-clip: text;
   -webkit-background-clip: text;
   filter: drop-shadow(0 0 12px rgba(218, 72, 168, .34));
@@ -876,7 +876,7 @@
   background: linear-gradient(135deg,
     rgba(213, 242, 250, .88),
     rgba(64, 196, 224, .48) 34%,
-    rgba(127, 92, 205, .42) 70%,
+    rgba(92, 171, 205, .42) 70%,
     rgba(205, 230, 239, .72));
   clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px);
   box-shadow:
@@ -1027,7 +1027,7 @@ html[data-theme="light"] #contact .ct-crystal-plaque {
   background: linear-gradient(135deg,
     rgba(43, 137, 158, .72),
     rgba(45, 182, 210, .48) 38%,
-    rgba(105, 78, 177, .40) 72%,
+    rgba(78, 147, 177, .40) 72%,
     rgba(50, 106, 125, .62));
 }
 
@@ -1087,3 +1087,29 @@ html[data-theme="light"] #contact .ct-crystal-plaque {
 
 
 
+
+/* Blur the glass inside its clipped face, then cast the glow from outside.
+   Filtering the same layer that owns backdrop-filter exposes its square
+   backing texture when the crystal is transformed on hover. */
+#contact .node-pos-linkedin {
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, .55))
+    drop-shadow(0 0 30px rgba(59, 130, 246, .75));
+}
+#contact .node-pos-github {
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, .52))
+    drop-shadow(0 0 26px rgba(255, 255, 255, .45));
+}
+#contact .node-pos-leetcode {
+  filter: drop-shadow(0 14px 30px rgba(0, 0, 0, .6))
+    drop-shadow(0 0 35px rgba(245, 158, 11, .85));
+}
+#contact .node-pos-hf {
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, .55))
+    drop-shadow(0 0 28px rgba(234, 179, 8, .55));
+}
+#contact .gem-body.glass-blue-diamond,
+#contact .gem-body.marble-white-diamond,
+#contact .gem-body.faceted-amber-diamond,
+#contact .gem-body.hf-dull-diamond {
+  filter: none;
+}

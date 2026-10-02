@@ -83,18 +83,18 @@
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="css/base.css?v=20260906-2" />
-  <link rel="stylesheet" href="css/navigation.css?v=20260906-3" />
+  <link rel="stylesheet" href="css/base.css?v=20261002-distinct" />
+  <link rel="stylesheet" href="css/navigation.css?v=20261002-steel" />
   <link rel="stylesheet" href="css/gateway.css" />
-  <link rel="stylesheet" href="css/hero.css" />
-  <link rel="stylesheet" href="css/about.css" />
-  <link rel="stylesheet" href="css/experience.css" />
-  <link rel="stylesheet" href="css/projects.css" />
-  <link rel="stylesheet" href="css/achievements.css" />
-  <link rel="stylesheet" href="css/contact.css" />
-  <link rel="stylesheet" href="css/modals.css" />
+  <link rel="stylesheet" href="css/hero.css?v=20261002-steel" />
+  <link rel="stylesheet" href="css/about.css?v=20261002-distinct" />
+  <link rel="stylesheet" href="css/experience.css?v=20261002-violet-cards" />
+  <link rel="stylesheet" href="css/projects.css?v=20261002-steel" />
+  <link rel="stylesheet" href="css/achievements.css?v=20261002-steel" />
+  <link rel="stylesheet" href="css/contact.css?v=20261002-crystals" />
+  <link rel="stylesheet" href="css/modals.css?v=20261002-steel" />
   <link rel="stylesheet" href="css/responsive.css" />
-  <link rel="stylesheet" href="css/overrides.css" />
+  <link rel="stylesheet" href="css/overrides.css?v=20261002-scholarship" />
   <style>
     .all-projects-page {
       min-height: 100vh;
@@ -287,7 +287,7 @@
       border: 1px solid rgba(53, 215, 255, .58);
       border-radius: 999px;
       color: var(--text);
-      background: linear-gradient(135deg, rgba(53, 215, 255, .16), rgba(139, 92, 246, .16));
+      background: linear-gradient(135deg, rgba(53, 215, 255, .16), rgba(93, 200, 246, .16));
       text-decoration: none;
       font-family: 'IBM Plex Mono', monospace;
       font-size: .68rem;
@@ -302,7 +302,7 @@
     .portfolio-back-link:hover {
       color: var(--text);
       border-color: rgba(53, 215, 255, .9);
-      background: linear-gradient(135deg, rgba(53, 215, 255, .24), rgba(139, 92, 246, .24));
+      background: linear-gradient(135deg, rgba(53, 215, 255, .24), rgba(93, 200, 246, .24));
       transform: translateY(-2px);
     }
 
@@ -385,7 +385,7 @@
       height: 128px;
       background:
         linear-gradient(135deg, rgba(0, 229, 255, .13), transparent),
-        linear-gradient(315deg, rgba(168, 85, 247, .16), transparent),
+        linear-gradient(315deg, rgba(94, 201, 247, .16), transparent),
         rgba(0, 0, 0, .24);
       overflow: hidden;
     }
@@ -493,9 +493,9 @@
 
     /* Curated Alternating Palette for Stack Pills */
     .all-card-stack span:nth-child(2) {
-      background: rgba(168, 85, 247, 0.08);
-      border-color: rgba(168, 85, 247, 0.5);
-      color: #d8b4fe;
+      background: rgba(94, 201, 247, 0.08);
+      border-color: rgba(94, 201, 247, 0.5);
+      color: #b4e8fe;
     }
 
     .all-card-stack span:nth-child(3) {
@@ -546,9 +546,9 @@
     }
 
     html[data-theme="light"] .all-card-stack span:nth-child(2) {
-      background: rgba(147, 51, 234, 0.07);
-      border-color: rgba(147, 51, 234, 0.45);
-      color: #7e22ce;
+      background: rgba(89, 190, 234, 0.07);
+      border-color: rgba(89, 190, 234, 0.45);
+      color: #4ea8ce;
     }
 
     html[data-theme="light"] .all-card-stack span:nth-child(3) {
@@ -796,7 +796,7 @@
     </div>
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=20261002-projects"></script>
   <script src="js/geometric-background.js?v=20260824-1"></script>
   <script>
     const allProjects = [
@@ -1016,7 +1016,7 @@
     const requestedFilter = new URLSearchParams(window.location.search).get('filter');
     applyProjectFilter(['all', 'agentic', 'ml', 'cyber', 'automation'].includes(requestedFilter) ? requestedFilter : 'all');
   </script>
-  <script src="js/chatbot-widget.js?v=20260824-1"></script>
+  <script src="js/chatbot-widget.js?v=20261002-projects"></script>
 </body>
 
 </html>

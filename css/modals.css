@@ -372,10 +372,10 @@
     }
 
     .mt-p {
-      background: rgba(168, 85, 247, 0.1);
-      border-color: rgba(168, 85, 247, 0.55);
-      color: var(--purple);
-      box-shadow: 0 0 14px rgba(168, 85, 247, 0.25);
+      background: rgba(94, 201, 247, 0.1);
+      border-color: rgba(94, 201, 247, 0.55);
+      color: var(--steel-blue);
+      box-shadow: 0 0 14px rgba(94, 201, 247, 0.25);
     }
 
     .mt-a {
@@ -429,7 +429,7 @@
     }
 
     .m-unified-list.stack li::before {
-      color: var(--purple);
+      color: var(--steel-blue);
     }
 
     .m-btn-github-center {

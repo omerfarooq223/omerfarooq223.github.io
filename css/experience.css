@@ -147,11 +147,14 @@
 
     /* 2. UMT Peer Tutoring: Purple/Violet Neon */
     .exp-card-purple {
-      --exp-card-border: linear-gradient(135deg, #c084fc 0%, #9333ea 40%, #a855f7 100%);
-      --exp-card-glow: rgba(168, 85, 247, 0.35);
-      --exp-card-glow-hover: rgba(192, 132, 252, 0.6);
-      --exp-card-inner-stroke: rgba(168, 85, 247, 0.32);
-      --exp-accent: #c084fc;
+      --exp-card-border: linear-gradient(135deg,
+        color-mix(in srgb, var(--purple) 85%, white) 0%,
+        color-mix(in srgb, var(--purple) 80%, black) 40%,
+        var(--purple) 100%);
+      --exp-card-glow: color-mix(in srgb, var(--purple) 35%, transparent);
+      --exp-card-glow-hover: color-mix(in srgb, var(--purple) 60%, transparent);
+      --exp-card-inner-stroke: color-mix(in srgb, var(--purple) 32%, transparent);
+      --exp-accent: var(--purple);
     }
 
     /* 3. SMZ Dispatch: Amber/Gold Neon */
@@ -401,7 +404,7 @@
 /* Academic background — technical timeline cards */
 #education {
   --edu-cyan: #26d5ef;
-  --edu-purple: #9b63e9;
+  --edu-purple: var(--purple);
   --edu-gold: #e9ad4c;
   min-height: auto !important;
   padding: 66px clamp(28px, 5vw, 80px) 76px !important;
@@ -465,7 +468,7 @@
 }
 
 #education .education-heading span {
-  background: linear-gradient(100deg, #a46cf2, #5b83f4 48%, #31c8e7);
+  background: linear-gradient(100deg, #8bc9db, #68b6cd 48%, #31c8e7);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -667,9 +670,9 @@
 }
 
 #education .edu-entry .edu-bs .bdg.edu-pill-purple {
-  color: #c6adff !important;
-  border-color: rgba(167, 139, 250, .54) !important;
-  background: rgba(139, 92, 246, .14) !important;
+  color: #ade6ff !important;
+  border-color: rgba(139, 217, 250, .54) !important;
+  background: rgba(93, 200, 246, .14) !important;
 }
 
 #education .edu-entry .edu-bs .bdg.edu-pill-pink {
@@ -745,3 +748,7 @@ html[data-theme="light"] #education .edu-dg { color: #42616d !important; }
   #education .edu-card { padding-top: 34px !important; }
 }
 
+
+html[data-theme="light"] #education .education-heading span {
+  background-image: linear-gradient(100deg, #17667b, #287d99 48%, #0e7490);
+}

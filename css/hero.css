@@ -50,7 +50,7 @@
       text-shadow:
         2px 0 rgba(255, 40, 120, 0.22),
         -2px 0 rgba(0, 229, 255, 0.22),
-        0 0 40px rgba(168, 85, 247, 0.15);
+        0 0 40px rgba(94, 201, 247, 0.15);
     }
 
     .hero-eyebrow {
@@ -177,9 +177,9 @@
     }
 
     .bp {
-      background: rgba(168, 85, 247, .07);
-      border-color: rgba(168, 85, 247, .22);
-      color: var(--purple);
+      background: rgba(94, 201, 247, .07);
+      border-color: rgba(94, 201, 247, .22);
+      color: var(--steel-blue);
     }
 
     .ba {
@@ -347,7 +347,7 @@
     }
 
     .mp {
-      color: var(--purple);
+      color: var(--steel-blue);
     }
 
     .mpk {
@@ -472,3 +472,8 @@ html[data-theme="light"] body.portfolio-home .hero-badges .bdg-trophy {
   background: rgba(245, 158, 11, 0.12) !important;
 }
 
+/* A dark text-shadow paints over transparent gradient-clipped glyphs and
+   muddies their fill. The existing outer glow, gradient, font, and pulse remain. */
+body.portfolio-home .hero-title .wd .hero-name {
+  text-shadow: none !important;
+}

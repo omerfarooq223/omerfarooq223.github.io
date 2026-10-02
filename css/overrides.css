@@ -9,7 +9,7 @@
       --muted: #94a3b8;
       --muted2: #cbd5e1;
       --cyan: #35d7ff;
-      --purple: #8b5cf6;
+      --purple: #b6a0df;
       --pink: #ff6b9f;
       --amber: #ffbf45;
       --green: #7ee787;
@@ -35,7 +35,7 @@
     body {
       background:
         linear-gradient(115deg, rgba(53, 215, 255, .09) 0 1px, transparent 1px 34%),
-        linear-gradient(155deg, rgba(139, 92, 246, .10) 0 1px, transparent 1px 38%),
+        linear-gradient(155deg, rgba(93, 200, 246, .10) 0 1px, transparent 1px 38%),
         linear-gradient(180deg, #050608 0%, #080b12 38%, #06070a 100%);
       background-attachment: fixed;
     }
@@ -43,7 +43,7 @@
     html[data-theme="light"] body {
       background:
         linear-gradient(115deg, rgba(14, 165, 233, .12) 0 1px, transparent 1px 34%),
-        linear-gradient(155deg, rgba(124, 58, 237, .10) 0 1px, transparent 1px 38%),
+        linear-gradient(155deg, rgba(90, 193, 237, .10) 0 1px, transparent 1px 38%),
         linear-gradient(180deg, #f6f8fb 0%, #eef4fb 46%, #fafafa 100%);
     }
 
@@ -198,7 +198,7 @@
 
     .btn-a,
     .shimmer-btn {
-      background: linear-gradient(135deg, #35d7ff, #8b5cf6);
+      background: linear-gradient(135deg, #35d7ff, #4b99bd);
       color: #050608;
       box-shadow: 0 18px 44px rgba(53, 215, 255, .18);
     }
@@ -674,9 +674,9 @@
 
     .bdg.bp,
     html[data-theme="light"] .bdg.bp {
-      background: rgba(139, 92, 246, .12);
-      border-color: rgba(139, 92, 246, .34);
-      color: var(--purple);
+      background: rgba(93, 200, 246, .12);
+      border-color: rgba(93, 200, 246, .34);
+      color: var(--steel-blue);
     }
 
     .bdg.ba,
@@ -729,9 +729,9 @@
     .pill.pill-purple,
     html[data-theme="light"] .pcp .pill,
     html[data-theme="light"] .pill.pill-purple {
-      background: rgba(139, 92, 246, .11);
-      border-color: rgba(139, 92, 246, .32);
-      color: var(--purple);
+      background: rgba(93, 200, 246, .11);
+      border-color: rgba(93, 200, 246, .32);
+      color: var(--steel-blue);
     }
 
     .pca .pill,
@@ -988,7 +988,7 @@
     }
 
     #certificates {
-      --chapter-accent: var(--purple);
+      --chapter-accent: var(--steel-blue);
     }
 
     #experience {
@@ -1053,7 +1053,7 @@
     body {
       background:
         radial-gradient(900px 520px at 12% -10%, rgba(53, 215, 255, .09), transparent 62%),
-        radial-gradient(860px 500px at 88% -12%, rgba(139, 92, 246, .08), transparent 64%),
+        radial-gradient(860px 500px at 88% -12%, rgba(93, 200, 246, .08), transparent 64%),
         radial-gradient(680px 520px at 78% 82%, rgba(126, 231, 135, .055), transparent 68%),
         linear-gradient(180deg, #030507 0%, #071016 46%, #050608 100%) !important;
     }
@@ -1061,7 +1061,7 @@
     html[data-theme="light"] body {
       background:
         radial-gradient(900px 520px at 12% -10%, rgba(14, 165, 233, .1), transparent 62%),
-        radial-gradient(860px 500px at 88% -12%, rgba(124, 58, 237, .07), transparent 64%),
+        radial-gradient(860px 500px at 88% -12%, rgba(90, 193, 237, .07), transparent 64%),
         radial-gradient(680px 520px at 78% 82%, rgba(16, 185, 129, .055), transparent 68%),
         linear-gradient(180deg, #f8fbfd 0%, #edf5f9 48%, #fbfcfd 100%) !important;
     }
@@ -1514,7 +1514,7 @@ html[data-theme="light"] body.portfolio-home {
   --muted: #475569;
   --muted2: #334155;
   --cyan: #0369a1;
-  --purple: #5b21b6;
+  --purple: #7045a0;
   --pink: #be185d;
   --amber: #92400e;
   --green: #047857;
@@ -1638,8 +1638,8 @@ body.portfolio-home .hero-badges .bdg {
 }
 
 body.portfolio-home .hero-badges .bc { color: #73e7f5; border-color: rgba(115, 231, 245, .36); }
-body.portfolio-home .hero-badges .ba { color: #7eb7ff; border-color: rgba(126, 183, 255, .34); }
-body.portfolio-home .hero-badges .bp { color: #b799ff; border-color: rgba(183, 153, 255, .34); }
+body.portfolio-home .hero-badges .ba { color: var(--purple); border-color: color-mix(in srgb, var(--purple) 38%, transparent); }
+body.portfolio-home .hero-badges .bp { color: #87c5d5; border-color: rgba(153, 224, 255, .34); }
 body.portfolio-home .hero-badges .bg2 { color: #7ee39b; border-color: rgba(126, 227, 155, .34); }
 body.portfolio-home .hero-badges .br { color: #eacb72; border-color: rgba(234, 203, 114, .38); }
 body.portfolio-home .hero-badges .br::before { content: none; }
@@ -1676,7 +1676,7 @@ body.portfolio-home .hero-cta .btn-resume::before {
     transparent 0 62%,
     rgba(71, 225, 255, .22) 70%,
     #47e1ff 79%,
-    #9b78ff 88%,
+    #78d6ff 88%,
     transparent 96%);
   transform: translate(-50%, -50%) rotate(0deg);
   animation: resumeBorderOrbit 3.2s linear infinite;
@@ -1692,7 +1692,7 @@ body.portfolio-home .hero-cta .btn-resume::after {
 }
 
 body.portfolio-home .hero-cta .btn-work {
-  background: linear-gradient(135deg, #39d7ee, #8067e8) !important;
+  background: linear-gradient(135deg, #39d7ee, #347d96) !important;
   color: #061015 !important;
   border: 1px solid rgba(163, 235, 246, .54);
   box-shadow: 0 12px 30px rgba(68, 177, 220, .18);
@@ -1832,7 +1832,7 @@ html[data-theme="light"] #skills .skills-cyber-card .skills-card-cat {
 #skills .skills-main-title span,
 #skills .skills-main-title .w,
 #skills .skills-main-title .wi {
-  background: linear-gradient(110deg, var(--cyan) 0%, var(--purple) 38%, #ffffff 50%, var(--pink) 68%, var(--amber) 100%) !important;
+  background: linear-gradient(110deg, var(--cyan) 0%, var(--steel-blue) 38%, #ffffff 50%, #9dbac0 68%, var(--amber) 100%) !important;
   background-size: 220% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -1846,7 +1846,7 @@ html[data-theme="light"] #skills .skills-main-title,
 html[data-theme="light"] #skills .skills-main-title span,
 html[data-theme="light"] #skills .skills-main-title .w,
 html[data-theme="light"] #skills .skills-main-title .wi {
-  background: linear-gradient(110deg, #0284c7 0%, #7c3aed 38%, #0f172a 50%, #db2777 68%, #d97706 100%) !important;
+  background: linear-gradient(110deg, #0284c7 0%, #22748b 38%, #0f172a 50%, #526b75 68%, #d97706 100%) !important;
   background-size: 220% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -1862,9 +1862,9 @@ html[data-theme="light"] #skills .skills-main-title .wi {
 }
 
 #projects .proj-card.pcp .pill {
-  background: rgba(168, 85, 247, .11);
-  border-color: rgba(168, 85, 247, .34);
-  color: #d0a8ff;
+  background: rgba(94, 201, 247, .11);
+  border-color: rgba(94, 201, 247, .34);
+  color: #a8e5ff;
 }
 
 #projects .proj-card.pca .pill {
@@ -1880,9 +1880,9 @@ html[data-theme="light"] #projects .proj-card.pcc .pill {
 }
 
 html[data-theme="light"] #projects .proj-card.pcp .pill {
-  background: rgba(124, 58, 237, .10);
-  border-color: rgba(124, 58, 237, .28);
-  color: #6d28d9;
+  background: rgba(90, 193, 237, .10);
+  border-color: rgba(90, 193, 237, .28);
+  color: #17667b;
 }
 
 html[data-theme="light"] #projects .proj-card.pca .pill {
@@ -1898,8 +1898,8 @@ html[data-theme="light"] #projects .proj-card.pca .pill {
 }
 
 #projects .proj-card[data-project="autograder"] {
-  --beam: #a855f7;
-  --beam-fade: rgba(168, 85, 247, .35);
+  --beam: #5ba9d6;
+  --beam-fade: rgba(94, 201, 247, .35);
 }
 
 #projects .proj-card[data-project="shapids"] {
@@ -1908,9 +1908,9 @@ html[data-theme="light"] #projects .proj-card.pca .pill {
 }
 
 #projects .proj-card[data-project="autograder"] .pill {
-  background: rgba(168, 85, 247, .11);
-  border-color: rgba(168, 85, 247, .34);
-  color: #d0a8ff;
+  background: rgba(94, 201, 247, .11);
+  border-color: rgba(94, 201, 247, .34);
+  color: #a8e5ff;
 }
 
 #projects .proj-card[data-project="shapids"] .pill {
@@ -1920,9 +1920,9 @@ html[data-theme="light"] #projects .proj-card.pca .pill {
 }
 
 html[data-theme="light"] #projects .proj-card[data-project="autograder"] .pill {
-  background: rgba(124, 58, 237, .10);
-  border-color: rgba(124, 58, 237, .28);
-  color: #6d28d9;
+  background: rgba(90, 193, 237, .10);
+  border-color: rgba(90, 193, 237, .28);
+  color: #17667b;
 }
 
 html[data-theme="light"] #projects .proj-card[data-project="shapids"] .pill {
@@ -1951,13 +1951,13 @@ html[data-theme="light"] body.portfolio-home .hero-badges .bc {
 }
 
 html[data-theme="light"] body.portfolio-home .hero-badges .ba {
-  color: #1d4ed8 !important;
-  border-color: rgba(37, 99, 235, .42) !important;
+  color: var(--purple) !important;
+  border-color: color-mix(in srgb, var(--purple) 42%, transparent) !important;
 }
 
 html[data-theme="light"] body.portfolio-home .hero-badges .bp {
-  color: #6d28d9 !important;
-  border-color: rgba(109, 40, 217, .38) !important;
+  color: #17667b !important;
+  border-color: rgba(82, 177, 217, .38) !important;
 }
 
 html[data-theme="light"] body.portfolio-home .hero-badges .bg2 {
@@ -1967,7 +1967,7 @@ html[data-theme="light"] body.portfolio-home .hero-badges .bg2 {
 
 html[data-theme="light"] #about {
   --about-cyan: #0e7490;
-  --about-purple: #6d28d9;
+  --about-purple: var(--purple);
   --about-green: #047857;
   --about-gold: #a16207;
 }
@@ -2019,9 +2019,9 @@ html[data-theme="light"] #education .edu-entry .edu-bs .bdg.edu-pill-cyan {
 }
 
 html[data-theme="light"] #education .edu-entry .edu-bs .bdg.edu-pill-purple {
-  color: #6d28d9 !important;
-  border-color: rgba(109, 40, 217, .40) !important;
-  background: rgba(124, 58, 237, .12) !important;
+  color: #17667b !important;
+  border-color: rgba(82, 177, 217, .40) !important;
+  background: rgba(90, 193, 237, .12) !important;
 }
 
 html[data-theme="light"] #education .edu-entry .edu-bs .bdg.edu-pill-pink {
@@ -2040,7 +2040,7 @@ html[data-theme="light"] #skills .sl {
   color: #075985 !important;
 }
 
-html[data-theme="light"] #skills .sk-grp.sk-p { --skill-accent: #6d28d9; }
+html[data-theme="light"] #skills .sk-grp.sk-p { --skill-accent: #17667b; }
 html[data-theme="light"] #skills .sk-grp.sk-a { --skill-accent: #a16207; }
 html[data-theme="light"] #skills .sk-grp.sk-g { --skill-accent: #047857; }
 
@@ -2063,7 +2063,7 @@ html[data-theme="light"] #skills .st .w:nth-child(1) .wi {
 }
 
 html[data-theme="light"] #skills .st .w:nth-child(2) .wi {
-  color: #6d28d9;
+  color: #17667b;
 }
 
 html[data-theme="light"] #contact .ct-glass-pill {
@@ -2082,7 +2082,7 @@ html[data-theme="light"] #contact .ct-crystal-kicker {
 :where(h1, h2, h3, h4, h5, h6),
 :where(h1, h2, h3, h4, h5, h6) span {
   color: transparent !important;
-  background: linear-gradient(110deg, var(--cyan) 0%, var(--purple) 38%, #ffffff 50%, var(--pink) 68%, var(--amber) 100%);
+  background: linear-gradient(110deg, var(--cyan) 0%, var(--steel-blue) 38%, #ffffff 50%, #9dbac0 68%, var(--amber) 100%);
   background-size: 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -2092,7 +2092,7 @@ html[data-theme="light"] #contact .ct-crystal-kicker {
 
 :where(h1, h2, h3, h4, h5, h6) span:not(.hero-name) {
   text-shadow: 0 0 12px color-mix(in srgb, var(--cyan) 24%, transparent),
-    0 0 28px color-mix(in srgb, var(--purple) 18%, transparent);
+    0 0 28px color-mix(in srgb, var(--steel-blue) 18%, transparent);
 }
 
 /* Modal typography is intentionally neutral, including its headings. */
@@ -2148,7 +2148,7 @@ html[data-theme="light"] .projects-archive-banner .banner-title {
 }
 
 html[data-theme="light"] #contact .ct-monolith-great {
-  background: linear-gradient(100deg, #86198f, #be185d);
+  background: linear-gradient(100deg, #17667b, #785d36);
   -webkit-background-clip: text;
   background-clip: text;
   filter: none;
@@ -2299,7 +2299,7 @@ body.portfolio-home .st,
 }
 
 #skills .st .sk-work {
-  color: #a68cf7;
+  color: #8cd7f7;
   background: none;
   -webkit-text-fill-color: currentColor;
 }
@@ -2316,7 +2316,7 @@ html[data-theme="light"] #skills .st .w:nth-child(2) .wi {
 }
 
 html[data-theme="light"] #skills .st .sk-work {
-  color: #6d28d9;
+  color: #17667b;
 }
 
 html[data-theme="light"] #skills .st .sk-with {
@@ -2371,7 +2371,7 @@ html[data-theme="light"] #skills .st .sk-with {
 
 /* Section Title Gradient */
 #projects .project-title-gradient {
-  background: linear-gradient(100deg, #a855f7 0%, #818cf8 45%, #38bdf8 100%) !important;
+  background: linear-gradient(100deg, #5ba9d6 0%, #81d4f8 45%, #38bdf8 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
@@ -2443,7 +2443,7 @@ html[data-theme="light"] #skills .st .sk-with {
   ) !important;
   background:
     radial-gradient(circle at 10% 10%, rgba(34, 211, 238, 0.08) 0%, transparent 55%),
-    radial-gradient(circle at 90% 90%, rgba(168, 85, 247, 0.07) 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(94, 201, 247, 0.07) 0%, transparent 50%),
     linear-gradient(150deg, #090e1a 0%, #050811 100%) !important;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5) !important;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
@@ -2487,8 +2487,8 @@ html[data-theme="light"] #skills .st .sk-with {
   right: 0 !important;
   width: 18px !important;
   height: 18px !important;
-  border-top: 2px solid rgba(168, 85, 247, 0.6) !important;
-  border-right: 2px solid rgba(168, 85, 247, 0.6) !important;
+  border-top: 2px solid rgba(94, 201, 247, 0.6) !important;
+  border-right: 2px solid rgba(94, 201, 247, 0.6) !important;
   border-top-right-radius: 12px !important;
 }
 
@@ -2549,9 +2549,9 @@ html[data-theme="light"] #skills .st .sk-with {
 .hud-edge-ticks-r span {
   width: 8px !important;
   height: 2.5px !important;
-  background: #a855f7 !important;
+  background: #5ba9d6 !important;
   border-radius: 1px !important;
-  box-shadow: 0 0 5px #a855f7 !important;
+  box-shadow: 0 0 5px #5ba9d6 !important;
 }
 
 /* CareerPilot: 3 Diagonal Magenta/Purple Slashes at Bottom-Right */
@@ -2568,9 +2568,9 @@ html[data-theme="light"] #skills .st .sk-with {
 .hud-slashes-magenta span {
   width: 2.5px !important;
   height: 12px !important;
-  background: #d946ef !important;
+  background: #5bc3ef !important;
   transform: skewX(-25deg) !important;
-  box-shadow: 0 0 6px #d946ef !important;
+  box-shadow: 0 0 6px #5bc3ef !important;
 }
 
 /* FireWatch: Amber Hazard Warning Stripes on Right Edge */
@@ -2622,7 +2622,7 @@ html[data-theme="light"] #skills .st .sk-with {
   box-shadow:
     0 24px 60px rgba(0, 0, 0, 0.7),
     0 0 24px rgba(0, 240, 255, 0.4),
-    0 0 48px rgba(168, 85, 247, 0.25) !important;
+    0 0 48px rgba(94, 201, 247, 0.25) !important;
 }
 
 #projects .proj-card:not(.proj-card-featured):hover .border-glow {
@@ -2652,7 +2652,7 @@ html[data-theme="light"] #skills .st .sk-with {
   box-shadow:
     0 24px 64px rgba(0, 0, 0, 0.65),
     0 0 28px rgba(0, 229, 255, 0.35),
-    0 0 54px rgba(168, 85, 247, 0.22) !important;
+    0 0 54px rgba(94, 201, 247, 0.22) !important;
 }
 
 #projects #gemmaclaim-card.proj-card-featured .border-glow {
@@ -2669,7 +2669,7 @@ html[data-theme="light"] #skills .st .sk-with {
   box-shadow:
     0 32px 76px rgba(0, 0, 0, 0.72),
     0 0 36px rgba(0, 229, 255, 0.5),
-    0 0 64px rgba(168, 85, 247, 0.3) !important;
+    0 0 64px rgba(94, 201, 247, 0.3) !important;
 }
 
 #projects #gemmaclaim-card .p-visual {
@@ -2739,7 +2739,7 @@ html[data-theme="light"] #skills .st .sk-with {
   white-space: nowrap !important;
   overflow: visible !important;
   display: block !important;
-  background: linear-gradient(100deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%) !important;
+  background: linear-gradient(100deg, #38bdf8 0%, #81d4f8 50%, #8bc9db 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
@@ -2904,7 +2904,7 @@ html[data-theme="light"] #skills .st .sk-with {
   text-align: left !important;
   margin: 6px 0 8px 0 !important;
   line-height: 1.25 !important;
-  background: linear-gradient(100deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%) !important;
+  background: linear-gradient(100deg, #38bdf8 0%, #81d4f8 50%, #8bc9db 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
@@ -3310,7 +3310,7 @@ html[data-theme="light"] #projects .proj-card {
   padding: 0 18px;
   border: 1px solid rgba(34, 211, 238, .58);
   border-radius: 7px 3px 7px 3px;
-  background: linear-gradient(135deg, rgba(34, 211, 238, .16), rgba(139, 92, 246, .16));
+  background: linear-gradient(135deg, rgba(34, 211, 238, .16), rgba(93, 200, 246, .16));
   color: #e8fbff;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: .82rem;
@@ -3324,7 +3324,7 @@ html[data-theme="light"] #projects .proj-card {
 #projects #aiemployee-card .personal-details-btn:focus-visible {
   transform: translateY(-2px);
   border-color: #67e8f9;
-  background: linear-gradient(135deg, rgba(34, 211, 238, .28), rgba(139, 92, 246, .24));
+  background: linear-gradient(135deg, rgba(34, 211, 238, .28), rgba(93, 200, 246, .24));
   box-shadow: 0 0 18px rgba(34, 211, 238, .22);
   outline: none;
 }
@@ -3540,7 +3540,7 @@ html[data-theme="light"] #projects #gemmaclaim-card .badge-featured-gold {
 #projects #aiemployee-card .p-title-large {
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
-  background: linear-gradient(110deg, var(--cyan) 0%, var(--purple) 34%, #ffffff 50%, var(--pink) 68%, var(--amber) 100%) !important;
+  background: linear-gradient(110deg, var(--cyan) 0%, var(--steel-blue) 34%, #ffffff 50%, #9dbac0 68%, var(--amber) 100%) !important;
   background-size: 240% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -3559,7 +3559,7 @@ html[data-theme="light"] #projects #gemmaclaim-card .badge-featured-gold {
 #projects .proj-card:not(#gemmaclaim-card):not(#aiemployee-card):hover .p-title-large {
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
-  background: linear-gradient(110deg, var(--cyan) 0%, var(--purple) 34%, #ffffff 50%, var(--pink) 68%, var(--amber) 100%) !important;
+  background: linear-gradient(110deg, var(--cyan) 0%, var(--steel-blue) 34%, #ffffff 50%, #9dbac0 68%, var(--amber) 100%) !important;
   background-size: 240% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -3576,7 +3576,7 @@ html[data-theme="light"] #projects #aiemployee-card .p-title-large,
 html[data-theme="light"] #projects .proj-card:not(#gemmaclaim-card):not(#aiemployee-card):hover .p-title-large {
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
-  background: linear-gradient(110deg, #0284c7 0%, #7c3aed 34%, #0f172a 50%, #db2777 68%, #b45309 100%) !important;
+  background: linear-gradient(110deg, #0284c7 0%, #22748b 34%, #0f172a 50%, #526b75 68%, #b45309 100%) !important;
   background-size: 240% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -3597,7 +3597,7 @@ html[data-theme="light"] #projects .proj-card:not(#gemmaclaim-card):not(#aiemplo
   display: inline-block !important;
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
-  background: linear-gradient(110deg, var(--cyan) 0%, var(--purple) 34%, #ffffff 50%, var(--pink) 68%, var(--amber) 100%) !important;
+  background: linear-gradient(110deg, var(--cyan) 0%, var(--steel-blue) 34%, #ffffff 50%, #9dbac0 68%, var(--amber) 100%) !important;
   background-size: 240% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -3605,7 +3605,7 @@ html[data-theme="light"] #projects .proj-card:not(#gemmaclaim-card):not(#aiemplo
 }
 
 html[data-theme="light"] #skills .skills-main-title .wi {
-  background: linear-gradient(110deg, #0284c7 0%, #7c3aed 34%, #0f172a 50%, #db2777 68%, #b45309 100%) !important;
+  background: linear-gradient(110deg, #0284c7 0%, #22748b 34%, #0f172a 50%, #526b75 68%, #b45309 100%) !important;
   background-size: 240% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -3618,13 +3618,13 @@ html[data-theme="light"] #skills .skills-main-title .wi {
 
 @media (min-width: 1121px) {
   #skills .skills-main-title .wi {
-    background: linear-gradient(180deg, var(--cyan) 0%, var(--purple) 34%, #ffffff 50%, var(--pink) 68%, var(--amber) 100%) !important;
+    background: linear-gradient(180deg, var(--cyan) 0%, var(--steel-blue) 34%, #ffffff 50%, #9dbac0 68%, var(--amber) 100%) !important;
     background-size: auto 240% !important;
     animation-name: titleGradientFlowVertical !important;
   }
 
   html[data-theme="light"] #skills .skills-main-title .wi {
-    background: linear-gradient(180deg, #0284c7 0%, #7c3aed 34%, #0f172a 50%, #db2777 68%, #b45309 100%) !important;
+    background: linear-gradient(180deg, #0284c7 0%, #22748b 34%, #0f172a 50%, #526b75 68%, #b45309 100%) !important;
     background-size: auto 240% !important;
   }
 }
@@ -3713,7 +3713,7 @@ html[data-theme="light"] #skills .skills-main-title .wi {
 #skills .skills-main-title .skills-title-gradient {
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
-  background: linear-gradient(100deg, #a855f7 0%, #818cf8 45%, #38bdf8 100%) !important;
+  background: linear-gradient(100deg, #5ba9d6 0%, #81d4f8 45%, #38bdf8 100%) !important;
   background-size: 220% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -3726,7 +3726,7 @@ html[data-theme="light"] #skills .skills-main-title .skills-title-plain {
 }
 
 html[data-theme="light"] #skills .skills-main-title .skills-title-gradient {
-  background: linear-gradient(100deg, #7c3aed 0%, #4f46e5 48%, #0284c7 100%) !important;
+  background: linear-gradient(100deg, #22748b 0%, #226b88 48%, #0284c7 100%) !important;
   background-size: 220% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -3944,7 +3944,7 @@ html[data-theme="light"] #skills .skills-main-title .skills-title-plain {
 html[data-theme="light"] #skills .skills-main-title .skills-title-gradient {
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
-  background: linear-gradient(100deg, #7c3aed 0%, #4f46e5 48%, #0284c7 100%) !important;
+  background: linear-gradient(100deg, #22748b 0%, #226b88 48%, #0284c7 100%) !important;
   background-size: 220% auto !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -3961,10 +3961,10 @@ html[data-theme="light"] #projects #gemmaclaim-card .pstk .pill {
 }
 
 html[data-theme="light"] #projects #gemmaclaim-card .pstk .pill:nth-child(2) {
-  color: #6d28d9 !important;
-  -webkit-text-fill-color: #6d28d9 !important;
-  background: rgba(237, 233, 254, .96) !important;
-  border-color: rgba(124, 58, 237, .42) !important;
+  color: #17667b !important;
+  -webkit-text-fill-color: #17667b !important;
+  background: rgba(233, 248, 254, .96) !important;
+  border-color: rgba(90, 193, 237, .42) !important;
 }
 
 html[data-theme="light"] #projects #gemmaclaim-card .pstk .pill:nth-child(3) {

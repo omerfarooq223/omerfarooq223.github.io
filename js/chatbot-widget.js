@@ -89,7 +89,7 @@
       right: 24px;
       width: 60px;
       height: 60px;
-      background: linear-gradient(135deg, var(--cyan, #00e5ff) 0%, var(--purple, #a855f7) 100%);
+      background: linear-gradient(135deg, var(--cyan, #00e5ff) 0%, var(--steel-blue, #5ba9d6) 100%);
       border: none;
       border-radius: 50%;
       cursor: pointer;
@@ -212,13 +212,13 @@
 
     .portfolio-chatbot-message.bot .portfolio-chatbot-message-content {
       background: var(--surface, #0c0d18);
-      color: var(--text, #eeeef5);
+      color: var(--text, #eef3f5);
       border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
       border-bottom-left-radius: 4px;
     }
 
     .portfolio-chatbot-message.user .portfolio-chatbot-message-content {
-      background: linear-gradient(135deg, var(--cyan, #00e5ff) 0%, var(--purple, #a855f7) 100%);
+      background: linear-gradient(135deg, var(--cyan, #00e5ff) 0%, var(--steel-blue, #5ba9d6) 100%);
       color: white;
       border-bottom-right-radius: 4px;
       align-self: flex-end;

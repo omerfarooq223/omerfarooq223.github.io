@@ -26,7 +26,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, var(--cyan), transparent 45%, var(--purple) 85%, transparent);
+      background: linear-gradient(90deg, var(--cyan), transparent 45%, var(--steel-blue) 85%, transparent);
       transform: scaleX(0);
       transform-origin: left center;
       opacity: .75;
@@ -239,7 +239,7 @@
     }
 
     .hp {
-      color: var(--purple);
+      color: var(--steel-blue);
       font-weight: 500;
     }
 
@@ -330,7 +330,7 @@
 
 
     .ec-p:hover {
-      border-color: rgba(168, 85, 247, .3);
+      border-color: rgba(94, 201, 247, .3);
     }
 
 
@@ -458,7 +458,7 @@
 /* About section — technical profile layout */
 #about {
   --about-cyan: #22d3ee;
-  --about-purple: #a06bff;
+  --about-purple: var(--purple);
   --about-green: #5de77a;
   --about-gold: #f6c63d;
   min-height: auto !important;
@@ -524,7 +524,7 @@
 }
 
 #about .about-heading span {
-  background: linear-gradient(100deg, #a06bff 0%, #497ef6 45%, #18c9e7 100%);
+  background: linear-gradient(100deg, #9edbe1 0%, #68b6cd 45%, #29b6c9 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -577,6 +577,10 @@
 
 #about .story-cyan { --story-accent: var(--about-cyan); }
 #about .story-green { --story-accent: var(--about-green); }
+
+html[data-theme="light"] #about .about-heading span {
+  background-image: linear-gradient(100deg, #17667b 0%, #287d99 45%, #0e7490 100%);
+}
 
 #about .about-story-icon {
   position: relative;
@@ -753,7 +757,11 @@
   font-size: .88rem;
 }
 
-html[data-theme="light"] #about .about-heading { color: #101b21; }
+html[data-theme="light"] #about .about-heading {
+  color: #101b21 !important;
+  -webkit-text-fill-color: currentColor;
+  background: none !important;
+}
 
 html[data-theme="light"] #about .about-story-panel,
 html[data-theme="light"] #about .about-role-card {

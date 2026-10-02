@@ -62,7 +62,7 @@
       left: 0;
       width: 0;
       height: 1px;
-      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      background: linear-gradient(90deg, var(--cyan), var(--steel-blue));
       transition: width .35s;
     }
 
@@ -306,20 +306,35 @@
     }
 
     .ham {
+      appearance: none;
+      -webkit-appearance: none;
       display: none;
       flex-direction: column;
-      gap: 6px;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      padding: 11px;
+      border: 0;
+      border-radius: 4px;
+      background: transparent;
+      color: var(--text);
       cursor: pointer;
       z-index: 800;
-      padding: 2px;
+    }
+
+    .ham:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
     }
 
     .ham span {
       display: block;
       width: 22px;
-      height: 1.5px;
-      background: var(--text);
-      transition: all .3s;
+      height: 2px;
+      background: currentColor;
+      transition: transform .3s, opacity .3s;
     }
 
     .ham.open span:nth-child(1) {

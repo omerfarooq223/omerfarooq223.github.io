@@ -138,3 +138,68 @@ sequenceDiagram
         end
     end
 ```
+
+## Scroll and Entrance Corrections (2026-10-02)
+
+```mermaid
+sequenceDiagram
+    participant Browser
+    participant Gateway
+    participant Visibility as Effects Observer
+    participant Effects as Existing CSS Effects
+    participant Circuits as Original Circuit Canvas
+    Browser->>Gateway: First paint: Preparing portfolio, 0%, scaleX(0)
+    Gateway->>Gateway: Run original entrance timing, progress 0 to 100
+    Gateway->>Gateway: Open doors and remember session completion
+    Browser->>Visibility: Observe hero, sections, and footer
+    Visibility->>Effects: Pause running infinite effects when distant
+    Browser->>Browser: Scroll with existing navigation updates
+    Visibility->>Effects: Resume owned paused effects within 200 px of viewport
+    Circuits->>Circuits: Original pulse, glow, pointer, and click animation continues
+```
+
+The observer pauses only infinite CSS animations it finds running, tracks them per container, and resumes only those it paused. Finite reveal animations and effects authored as paused are excluded. The circuit canvas is not part of this observer and its original code is unchanged. Same-session gateway skipping, skip controls, project modals, image cycling, certificate lightboxes, and filters retain their existing behavior. Name typography and layout are unchanged; the gradient fill is no longer obscured by a dark text-shadow.
+
+## Material Gateway Reveal (2026-10-02)
+
+```mermaid
+sequenceDiagram
+    participant Visitor
+    participant Gateway
+    participant Doors
+    Visitor->>Gateway: Fresh session: display metal panels and nameplate at 0%
+    Gateway->>Gateway: Run progress sequence without decorative loops or audio
+    alt Enter portfolio / click / Enter / Space / Escape
+        Visitor->>Gateway: Skip entrance
+    else Progress reaches 100%
+        Gateway->>Gateway: Complete entrance
+    end
+    Gateway->>Doors: Translate paired leaves outward over 1.15 seconds
+    Gateway->>Gateway: Dismiss overlay and remember completed session
+```
+
+The revised entrance has no scanning beam, rotating rings, telemetry animation, flash burst, or synthetic chime. Reduced-motion and returning visitors continue to skip the entrance. The main portfolio circuit animation runs under its original controls.
+
+## Social Hover and Navigation Rendering (2026-10-02)
+
+The LinkedIn, GitHub, LeetCode, and Hugging Face glass faces are blurred and clipped first; the enclosing link casts the outer glow from that silhouette. Hover continues to lift and scale the original crystal. The mobile menu toggle uses theme-aware bars on a transparent button, morphs to its existing close icon when open, and retains the existing Escape and navigation-link closing behavior. These are presentation corrections; navigation and social-link destinations are unchanged.
+
+## Individual Card Effects (2026-10-02)
+
+```mermaid
+sequenceDiagram
+    participant Visitor
+    participant Section as Section Visibility Observer
+    participant Card as Card Visibility Observer
+    participant Effects as Infinite CSS Effects
+    Visitor->>Section: Projects enters viewport
+    Section->>Effects: Resume only section-owned effects
+    Visitor->>Card: Individual card approaches within 200 px
+    Card->>Effects: Resume only this card's owned pauses
+    Visitor->>Card: Card moves beyond visibility margin
+    Card->>Effects: Pause this card's running infinite effects
+    Visitor->>Card: Expand or collapse additional projects
+    Card->>Card: Request fresh visibility entry for changed cards
+```
+
+Project and skill cards own their animation lifecycle independently of their tall parent sections. Finite reveals and authored paused hover effects are excluded. Repeated visibility entries retain existing owned pauses. The palette uses theme-specific steel-blue accents, darker teal text gradients in light mode, and restrained violet accents for About and Languages & Frameworks; theme switching and original circuit controls remain unchanged.

@@ -41,9 +41,13 @@ The certificates section needs lightweight previews for the card grid while pres
 ### Decision and Rationale
 New certificate cards use optimized WebP previews, while their lightbox "Open in New Tab" actions target the original PDFs stored in `docs/certificates/`. This keeps the grid fast without replacing the source documents with lossy previews.
 
-### Consequences
-Certificate metadata remains in the existing HTML and lightbox data array, with one preview asset and one source document per new certificate.
+In October 2026, three additional verified credentials were added, expanding the verified credentials portfolio from 18 to 21:
+1. **AI Engineer for Data Scientists Associate** (`datacamp-ai-engineer-data-scientists.webp` + `AEDS0019322472877.pdf`)
+2. **Working with Hugging Face** (`certificate-working-with-hugging-face.webp` + `certificate-working-with-hugging-face.pdf`)
+3. **Unsupervised Learning in Python** (`certificate-unsupervised-learning-in-python.webp` + `certificate-unsupervised-learning-in-python.pdf`)
 
+### Consequences
+Certificate metadata remains in the existing HTML and lightbox data array, with one preview asset and one source document per certificate, and the verified credentials counter in `index.html` updated to 21.
 ---
 
 ## ADR-001: Zero-Build Vanilla Stack (HTML5 / CSS3 / ES6 JS)
@@ -354,3 +358,82 @@ We chose **`"framework": null` in `vercel.json`**:
 * **Benefits**: Fixes the production build failure permanently across all projects, ensures zero static serving latency, and aligns with ADR-001.
 * **Trade-offs**: None.
 
+## ADR: Targeted Scroll Optimization Without Redesign (2026-10-02)
+
+**Context:** Scrolling visibly stalled the existing circuit lights. Profiling under 4× CPU throttling showed the canvas movement calculations were small (roughly 0.04 ms per update); repeated style and paint work from infinite CSS effects in distant sections was a significant avoidable cost. An isolated comparison that paused distant effects reduced paint work by about 35%. The final implemented Web Animations pause/resume version reduced traced paint time from 415 ms to 240 ms (about 42%) and style recalculation from 479 ms to 245 ms (about 49%) in a comparable scripted scroll run, with all assets loaded. These are local workload measurements, not an FPS guarantee.
+
+**Options considered:** Replacing the light animation (rejected by the user), slowing or pausing the visible lights (does not preserve the intended experience), or suspending only invisible infinite CSS effects.
+
+**Decision:** Preserve the original circuit script, geometry, colors, pulse directions, speed, click effects, glow, and page layout. Use an IntersectionObserver to pause only running infinite CSS animations on distant sections, the hero, and footer. Resume only animations paused by that observer when their container approaches within 200 px of the viewport. Finite reveal animations and authored paused/hover states remain under their existing controls. Do not add a scroll-frame geometry scan or redesign any visual component.
+
+The gateway now begins at 0% in both markup and fill styling; the same entrance progresses monotonically to 100% using scaleX rather than width, without waiting for external fonts. The hero name retains its font, size, gradient, outer glow, and beacon animation. Its dark text-shadow is removed because shadows paint over transparent gradient-clipped glyphs and muddy the fill.
+
+**Consequences:** Less unnecessary rendering competes with visible content. Offscreen CSS effects resume their saved phase before becoming visible. The user explicitly requires measured, incremental optimization without changing the design or light animation.
+
+## ADR: Restrained Material Gateway (2026-10-02)
+
+**Context:** The user found the entrance's glowing, widely spaced uppercase text and animated HUD graphics artificial. They explicitly authorized a more realistic treatment of this opening screen, while the portfolio's circuit background remains protected from redesign.
+
+**Options considered:** Add richer neon effects; replace the entrance with a flat splash; or keep the mechanical split-door concept and ground it in physical materials.
+
+**Decision:** Keep the two aligned door leaves and progress lifecycle. Replace the gateway-only styling with subtle brushed-metal gradients, recessed panel joints, a narrow mechanical seam, and an inset nameplate with corner fasteners. Use Plus Jakarta Sans, sentence-case labels, restrained weights and spacing, and muted lighting. Remove orbital SVGs, telemetry dots, scanning beam, completion flash, and procedural audio. Keep only progress and the physical door translation (1.15 seconds). Rename the skip control to “Enter portfolio” and replace fictional clearance copy with a plain portfolio label. No bitmap asset, framework, or dependency is added.
+
+**Consequences:** The gateway reads as a physical surface with a clear identity rather than a game HUD. Continuous decorative entrance animation is eliminated. Keyboard/click skipping, same-session dismissal, reduced-motion skipping, and the 0–100 sequence remain. All changes are scoped to `css/gateway.css` and the gateway markup/lifecycle in `index.html`; background circuits and main-page layout remain unchanged.
+
+## ADR: Crystal Hover Compositing and Mobile Menu Defaults (2026-10-02)
+
+**Context:** Desktop hover transforms revealed a rectangular backing edge around the LinkedIn and GitHub crystal icons. The mobile dark-mode navigation toggle appeared as a white block because its button retained native browser background, border, and appearance.
+
+**Diagnosis:** Isolated rendering comparisons showed the crystal artifact disappears when either backdrop-filter or the face's drop-shadow filter is removed. The combination on a transformed clipped layer exposes its rectangular backing texture.
+
+**Decision:** Keep the crystal geometry, facet SVGs, glass blur, placement, and hover motion. Apply the same compositing correction to LinkedIn, GitHub, LeetCode, and Hugging Face (the latter two exhibited top/left rectangular edges in subsequent user screenshots). Move each crystal's existing outer drop-shadow to its enclosing social link and remove only the filter on its clipped face. Explicitly reset mobile toggle appearance, background, and border; use currentColor bars from the existing theme text token, a 44-pixel target, and a visible keyboard focus outline.
+
+**Consequences:** Crystal glows follow the rendered silhouette, and the navigation icon remains legible in dark and light modes. Link destinations and menu event handling are unchanged.
+
+## ADR: Card Visibility Ownership and Steel-Blue Accents (2026-10-02)
+
+**Context:** The user reported harsher scrolling from Projects onward and requested a restrained replacement for abundant purple. Section-level visibility leaves early project-card title and border loops running while later cards remain on screen. The original background light animation and page layout must remain intact.
+
+**Options considered:** Remove visible card animations, replace the background, or narrow the existing visibility optimization to each project and skill card. For color, retain purple-heavy gradients or shift their accent stops to cyan, steel blue, and teal while retaining warm highlights.
+
+**Decision:** Each project/skill card owns its infinite CSS effects. Parent sections exclude these descendants, preventing the section from resuming an offscreen card. The existing 200 px visibility margin, finite reveals, and authored hover states remain. Expanding/collapsing additional projects requests a fresh visibility entry; previously owned pauses are retained until the element returns. No per-scroll card geometry loop is introduced. Replace pervasive purple tokens and literal colors across shared UI styles, inline decoration, and the chatbot with steel-blue/teal equivalents. Use darker replacements for light-mode text and preserve the original circuit script, including its sparse purple light accents.
+
+**Validation:** A fonts-loaded, 1440×900 Chrome comparison under 4× CPU throttling scrolled 900 px through later Projects. The two featured cards changed from three running effects each to zero while offscreen. A final run with reliable asset delivery reduced main-thread task duration from 574 ms to 461 ms (about 20%), style recalculation from 122 ms to 90 ms, and paint from 120 ms to 94 ms. An earlier run measured about 23% less main-thread work. These describe that local synthetic workload, not a guaranteed frame rate on every device.
+
+**Consequences:** Early cards no longer compete with later content. Their effects resume before entering view. Colors become more cohesive without changing card geometry, typography, layout, or visible animation timing. Legacy class names containing “purple” remain selectors for compatibility; their rendered accent is now steel blue.
+
+
+## ADR: Subtle Color on the Material Gateway (2026-10-02)
+
+**Context:** The user approves the realistic opening screen and requests a little color. Its restrained materials and typography should remain.
+
+**Decision:** Add a faint teal reflection and small warm reflection to the metal panels, a cool teal tint to the inset nameplate, and teal accents on the status dot, role, percentage, progress fill, and entry button. Use a muted brass tone for the opening label. Keep the name solid off-white and preserve all geometry, textures, timings, and controls. No decorative animation or extra rendering loop is added.
+
+**Consequences:** Color helps establish identity while the entrance still reads as a physical metal surface. This palette adjustment is confined to the gateway.
+
+
+## ADR: Distinct Violet Accents Without Purple-Blue Headings (2026-10-02)
+
+**Context:** Replacing every purple use with steel blue erased meaningful contrast in About. The user clarified that restrained purple is welcome, and that replacements should be distinct from existing accents. Heading gradients also retained blue/pink combinations that could appear violet.
+
+**Decision:** Restore muted violet for About's contrasting story/text/stat accents and the Languages & Frameworks skill card. At the user's follow-up request, the FSc Pre-Medical and UMT Tutoring & Online Instruction cards also share this theme-aware violet token, including their border/glow accents. The hero's “70% Scholarship” pill also uses this token for its text and border. Use a light violet in dark mode and a darker violet in light mode. Keep large surfaces and primary controls in the existing restrained palette. Remove the royal-blue stops from the About and Education headings, with darker teal gradients for light-mode contrast, and remove the pink/magenta stops from shared heading gradients, using steel/neutral stops instead. Replace the Contact heading's blue-to-magenta blend with teal-to-warm metal. Keep typography, layout, animation timing, and original circuit lights unchanged.
+
+**Consequences:** Accent categories are visibly distinct again without reintroducing abundant purple or violet-blue heading washes.
+
+
+## ADR: Colored Metal Trim and Gateway Identity (2026-10-02)
+
+**Context:** The user requests more color and design on the opening screen after approving its material treatment.
+
+**Decision:** Strengthen teal and warm copper reflections, tint the metal handles, add narrow inset nameplate trim, a stamped MUF badge, small opening-label rules, and a discreet ventilation detail in the desktop footer. Keep the name off-white and the existing plate dimensions, typography, 0–100 loading flow, and door reveal. All added details use static CSS backgrounds/pseudo-elements, with no new animation loops or assets. Mobile hides the ventilation detail to leave room for the footer copy.
+
+**Consequences:** The opening has a clearer identity and richer material color while retaining its restrained mechanical design and existing runtime performance.
+
+
+## ADR: Gateway Footer Placement (2026-10-02)
+
+**Context:** The opening's bottom text sat near the lower frame. Generic portfolio footer rules supplied 24 px vertical padding and mobile column stacking to the gateway's fixed-height strip.
+
+**Decision:** Explicitly scope/reset the gateway footer's vertical padding, height, margins, layout, and backdrop blur. Center its contents vertically within the existing 48 px desktop/40 px mobile row. Separate the plain discipline label from a small brass Portfolio tag, add a teal inset diamond marker, and keep the existing desktop ventilation detail. Preserve gateway geometry and lifecycle.
+
+**Consequences:** Footer contents fit and align predictably without depending on unrelated footer rules, with a clearer visual hierarchy and no extra animation or blur cost.
