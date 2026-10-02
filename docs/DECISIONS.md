@@ -36,18 +36,18 @@ The popover uses `position: absolute` inside a `pill-private-wrap` container, ap
 **Accepted**
 
 ### Context
-The certificates section needs lightweight previews for the card grid while preserving the original documents for visitors who want to inspect or download them.
+The certificates section needs lightweight, high-fidelity visuals for the card grid and interactive lightbox.
 
 ### Decision and Rationale
-New certificate cards use optimized WebP previews, while their lightbox "Open in New Tab" actions target the original PDFs stored in `docs/certificates/`. This keeps the grid fast without replacing the source documents with lossy previews.
+All certificate cards and lightbox views use optimized WebP images (`< 150KB`) directly in `docs/certificates/`. This ensures ultra-fast loading, zero PDF download overhead, and optimal Google Lighthouse performance.
 
-In October 2026, three additional verified credentials were added, expanding the verified credentials portfolio from 18 to 21:
-1. **AI Engineer for Data Scientists Associate** (`datacamp-ai-engineer-data-scientists.webp` + `AEDS0019322472877.pdf`)
-2. **Working with Hugging Face** (`certificate-working-with-hugging-face.webp` + `certificate-working-with-hugging-face.pdf`)
-3. **Unsupervised Learning in Python** (`certificate-unsupervised-learning-in-python.webp` + `certificate-unsupervised-learning-in-python.pdf`)
+In October 2026, three additional verified DataCamp credentials were added, expanding the verified credentials showcase from 18 to 21:
+1. **AI Engineer for Data Scientists Associate** (`datacamp-ai-engineer-data-scientists.webp`)
+2. **Working with Hugging Face** (`certificate-working-with-hugging-face.webp`)
+3. **Unsupervised Learning in Python** (`certificate-unsupervised-learning-in-python.webp`)
 
 ### Consequences
-Certificate metadata remains in the existing HTML and lightbox data array, with one preview asset and one source document per certificate, and the verified credentials counter in `index.html` updated to 21.
+Certificate metadata remains synchronized across `index.html`, `js/main.js` (`certData`), and `api/chat.py` with zero dead links or unused PDF files. Card layout dimensions are cleanly aligned to certificate aspect ratios.
 ---
 
 ## ADR-001: Zero-Build Vanilla Stack (HTML5 / CSS3 / ES6 JS)

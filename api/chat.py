@@ -213,23 +213,28 @@ Languages: Urdu (Native), English (Advanced), Turkish (Basic).
 Interests: Competitive programming, open-source AI projects, agentic AI development, and applied cybersecurity.
 
 === CERTIFICATIONS ===
-Umar holds 16 professional certifications (including DataCamp, OpenAI, Anthropic, Kaggle, and Google credentials):
+Umar holds 21 professional certifications (including DataCamp, OpenAI, Anthropic, Kaggle, and Google credentials):
 1. **AI Engineer for Developers Associate** — DataCamp (September 2026, Credential ID: AIEDA0016575880195)
-2. **Working with the OpenAI API** — DataCamp (September 2026, Certificate ID: #49,665,886)
-3. **5-Day AI Agents: Intensive Vibe Coding Course** — Kaggle / Google (Certificate of Completion, July 2026)
-4. **AI Fluency for Students** — Anthropic (Certificate of Completion)
-5. **Claude 101** — Anthropic (Certificate of Completion)
-6. **Claude Code 101** — Anthropic (Certificate of Completion)
-7. **AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
-8. **AI Fluency: Framework & Foundations** — Anthropic (Certificate of Completion)
-9. **Applied AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
-10. **Claude Code in Action** — Anthropic (Certificate of Completion)
-11. **Claude Platform 101** — Anthropic (Certificate of Completion)
-12. **AI Fluency: AI Capabilities & Limitations** — Anthropic (Certificate of Completion)
-13. **Machine Learning Explainability** — Kaggle (Certificate of Completion)
-14. **Intro to AI Ethics** — Kaggle
-15. **Peer Tutoring Certificate** — UMT
-16. **Intro to Generative AI** — Google
+2. **AI Engineer for Data Scientists Associate** — DataCamp (September 2026, Credential ID: AEDS0019322472877)
+3. **Working with Hugging Face** — DataCamp (September 2026, Certificate ID: #50,074,886)
+4. **Unsupervised Learning in Python** — DataCamp (September 2026, Certificate ID: #49,885,460)
+5. **Supervised Learning with scikit-learn** — DataCamp (September 2026)
+6. **Introduction to AI Agents** — DataCamp (September 2026)
+7. **Working with the OpenAI API** — DataCamp (September 2026, Certificate ID: #49,665,886)
+8. **5-Day AI Agents: Intensive Vibe Coding Course** — Kaggle / Google (Certificate of Completion, July 2026)
+9. **AI Fluency for Students** — Anthropic (Certificate of Completion)
+10. **Claude 101** — Anthropic (Certificate of Completion)
+11. **Claude Code 101** — Anthropic (Certificate of Completion)
+12. **AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
+13. **AI Fluency: Framework & Foundations** — Anthropic (Certificate of Completion)
+14. **Applied AI Foundations** — OpenAI Academy (Course Completion Certificate, issued June 2026)
+15. **Claude Code in Action** — Anthropic (Certificate of Completion)
+16. **Claude Platform 101** — Anthropic (Certificate of Completion)
+17. **AI Fluency: AI Capabilities & Limitations** — Anthropic (Certificate of Completion)
+18. **Machine Learning Explainability** — Kaggle (Certificate of Completion)
+19. **Intro to AI Ethics** — Kaggle
+20. **Peer Tutoring Certificate** — UMT
+21. **Intro to Generative AI** — Google
 
 === RESPONSE INSTRUCTIONS ===
 1. If the user sends a greeting (such as "hello", "hi", "hey"), greet them warmly and introduce yourself as Umar's AI assistant, offering to answer questions about his 14+ AI agents, 27+ projects, tech stack, and background.

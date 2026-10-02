@@ -16,7 +16,7 @@
       content: '';
       width: 20px;
       height: 1px;
-      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      background: linear-gradient(90deg, var(--cyan), var(--steel-blue));
       flex-shrink: 0;
     }
 
@@ -136,7 +136,7 @@
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background: var(--purple);
+      background: var(--steel-blue);
       flex-shrink: 0;
     }
 
@@ -386,7 +386,7 @@
   width: min(230px, 20vw);
   height: 1px;
   border: 0;
-  background: linear-gradient(90deg, rgba(53, 215, 255, .9), rgba(139, 92, 246, .75), transparent);
+  background: linear-gradient(90deg, rgba(53, 215, 255, .9), rgba(93, 200, 246, .75), transparent);
   transform: none;
   box-shadow: none;
 }
@@ -465,7 +465,8 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(185px, 38%) minmax(0, 1fr);
-  min-height: 210px;
+  min-height: 0;
+  align-items: center;
   overflow: hidden;
   color: var(--text);
   border: 1px solid rgba(144, 162, 178, .24) !important;
@@ -477,8 +478,8 @@
   transform: none;
 }
 
-#certificates .cert-card:nth-child(4n + 2) { --cert-accent: #9a72f8; }
-#certificates .cert-card:nth-child(4n + 3) { --cert-accent: #b574ff; }
+#certificates .cert-card:nth-child(4n + 2) { --cert-accent: #72d0f8; }
+#certificates .cert-card:nth-child(4n + 3) { --cert-accent: #74d5ff; }
 #certificates .cert-card:nth-child(4n + 4) { --cert-accent: #ffbf45; }
 
 #certificates .cert-card::before {
@@ -497,21 +498,21 @@
 }
 
 #certificates .cert-card-img-wrap {
-  align-self: stretch;
+  align-self: center;
   aspect-ratio: auto;
-  min-height: 184px;
-  margin: 14px;
+  min-height: 0;
+  margin: 12px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, .13);
   border-radius: 9px;
-  background: #eef0f4;
+  background: rgba(255, 255, 255, .045);
   box-shadow: 0 12px 28px rgba(0, 0, 0, .22);
 }
 
 #certificates .cert-card-img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
 }
 
@@ -521,8 +522,8 @@
   min-width: 0;
   flex-direction: column;
   justify-content: center;
-  margin: 22px 18px 22px 0;
-  padding: 31px 24px 40px;
+  margin: 12px 16px 12px 0;
+  padding: 22px 18px 26px;
   border-left: 2px solid var(--cert-accent);
 }
 
@@ -530,7 +531,7 @@
   content: '◇  CERTIFICATE OF COMPLETION';
   position: absolute;
   top: 1px;
-  left: 24px;
+  left: 18px;
   color: var(--cert-accent);
   font-family: 'IBM Plex Mono', monospace;
   font-size: .61rem;
@@ -539,7 +540,7 @@
 }
 
 #certificates .cert-card:first-child .cert-card-info::before {
-  content: '◇  COMPLETION BADGE';
+  content: '◇  CERTIFICATE OF COMPLETION';
 }
 
 #certificates .cert-card-info::after {
@@ -547,8 +548,8 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  left: 24px;
-  padding-top: 12px;
+  left: 18px;
+  padding-top: 10px;
   color: rgba(206, 215, 224, .62);
   font-family: 'IBM Plex Mono', monospace;
   font-size: .68rem;
@@ -603,7 +604,7 @@
   border-radius: 999px;
   background:
     linear-gradient(rgba(6, 12, 18, .94), rgba(6, 12, 18, .94)) padding-box,
-    linear-gradient(90deg, #35d7ff, #8b5cf6 48%, #ffbf45) border-box;
+    linear-gradient(90deg, #35d7ff, #4b99bd 48%, #ffbf45) border-box;
   box-shadow: 0 12px 32px rgba(0, 0, 0, .24);
 }
 
@@ -612,7 +613,7 @@
   border-color: transparent;
   background:
     linear-gradient(rgba(13, 22, 31, .98), rgba(13, 22, 31, .98)) padding-box,
-    linear-gradient(90deg, #35d7ff, #8b5cf6 48%, #ffbf45) border-box;
+    linear-gradient(90deg, #35d7ff, #4b99bd 48%, #ffbf45) border-box;
   box-shadow: 0 16px 36px rgba(53, 215, 255, .1);
 }
 
@@ -735,8 +736,8 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
   align-items: center;
   justify-content: center;
   align-self: center;
-  color: #a855f7;
-  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.7));
+  color: #5ba9d6;
+  filter: drop-shadow(0 0 10px rgba(94, 201, 247, 0.7));
   user-select: none;
   padding: 0 2px;
   z-index: 2;
@@ -868,40 +869,40 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
 
 /* Purple card theme */
 .achieve-card-v2-purple {
-  --card-accent-color: #c084fc;
-  --card-accent-dim: rgba(168, 85, 247, 0.45);
-  --card-bg-glow: rgba(168, 85, 247, 0.1);
-  --icon-glow: rgba(168, 85, 247, 0.28);
-  --icon-inner-glow: rgba(168, 85, 247, 0.16);
+  --card-accent-color: #8bc9db;
+  --card-accent-dim: rgba(94, 201, 247, 0.45);
+  --card-bg-glow: rgba(94, 201, 247, 0.1);
+  --icon-glow: rgba(94, 201, 247, 0.28);
+  --icon-inner-glow: rgba(94, 201, 247, 0.16);
   --icon-border-grad: linear-gradient(
     135deg,
-    rgba(192, 132, 252, 1) 0%,
-    rgba(168, 85, 247, 0.65) 35%,
-    rgba(168, 85, 247, 0.15) 75%,
-    rgba(168, 85, 247, 0.02) 100%
+    rgba(132, 216, 252, 1) 0%,
+    rgba(94, 201, 247, 0.65) 35%,
+    rgba(94, 201, 247, 0.15) 75%,
+    rgba(94, 201, 247, 0.02) 100%
   );
   --card-border-grad: linear-gradient(
     135deg,
-    rgba(192, 132, 252, 1) 0%,
-    rgba(168, 85, 247, 0.75) 20%,
-    rgba(168, 85, 247, 0.28) 42%,
-    rgba(168, 85, 247, 0.04) 68%,
-    rgba(168, 85, 247, 0.0) 82%,
-    rgba(168, 85, 247, 0.32) 100%
+    rgba(132, 216, 252, 1) 0%,
+    rgba(94, 201, 247, 0.75) 20%,
+    rgba(94, 201, 247, 0.28) 42%,
+    rgba(94, 201, 247, 0.04) 68%,
+    rgba(94, 201, 247, 0.0) 82%,
+    rgba(94, 201, 247, 0.32) 100%
   );
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45), 0 0 24px rgba(168, 85, 247, 0.1);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45), 0 0 24px rgba(94, 201, 247, 0.1);
 }
 .achieve-card-v2-purple:hover {
   transform: translateY(-5px);
   --card-border-grad: linear-gradient(
     135deg,
-    rgba(192, 132, 252, 1) 0%,
-    rgba(168, 85, 247, 0.85) 25%,
-    rgba(168, 85, 247, 0.4) 50%,
-    rgba(168, 85, 247, 0.08) 75%,
-    rgba(168, 85, 247, 0.45) 100%
+    rgba(132, 216, 252, 1) 0%,
+    rgba(94, 201, 247, 0.85) 25%,
+    rgba(94, 201, 247, 0.4) 50%,
+    rgba(94, 201, 247, 0.08) 75%,
+    rgba(94, 201, 247, 0.45) 100%
   );
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55), 0 0 36px rgba(168, 85, 247, 0.25);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55), 0 0 36px rgba(94, 201, 247, 0.25);
 }
 
 /* Teal card theme */
@@ -1047,7 +1048,7 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
 }
 
 .achieve-icon-badge.purple {
-  color: #c084fc;
+  color: #8bc9db;
 }
 
 .achieve-icon-badge.teal {
@@ -1083,9 +1084,9 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
 }
 
 .achieve-pill-badge.purple {
-  background: rgba(168, 85, 247, 0.08);
-  border: 1px solid rgba(168, 85, 247, 0.4);
-  color: #c084fc;
+  background: rgba(94, 201, 247, 0.08);
+  border: 1px solid rgba(94, 201, 247, 0.4);
+  color: #8bc9db;
 }
 
 .achieve-pill-badge.teal {
@@ -1106,7 +1107,7 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
 }
 
 .achieve-inst-badge.purple {
-  color: #c084fc;
+  color: #8bc9db;
 }
 
 .achieve-inst-badge.teal {
@@ -1171,7 +1172,7 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
 }
 
 .achieve-v2-sub.gold { color: #fbbf24; }
-.achieve-v2-sub.purple { color: #c084fc; }
+.achieve-v2-sub.purple { color: #8bc9db; }
 .achieve-v2-sub.teal { color: #2dd4bf; }
 
 .achieve-v2-desc {
@@ -1219,11 +1220,11 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
 }
 
 .achieve-v2-link.purple {
-  color: #c084fc;
+  color: #8bc9db;
 }
 .achieve-v2-link.purple:hover {
-  color: #e9d5ff;
-  text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+  color: #d5f2ff;
+  text-shadow: 0 0 10px rgba(94, 201, 247, 0.5);
 }
 
 .achieve-v2-link.teal {
@@ -1275,8 +1276,8 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
   width: 7px;
   height: 7px;
   border-radius: 1px;
-  background: #c084fc;
-  box-shadow: 0 0 10px #c084fc, 0 0 4px #c084fc;
+  background: #8bc9db;
+  box-shadow: 0 0 10px #8bc9db, 0 0 4px #8bc9db;
 }
 
 .achieve-v2-node-line {
@@ -1403,13 +1404,13 @@ html[data-theme="light"] .achieve-card-v2-gold .achieve-card-inner {
 }
 
 html[data-theme="light"] .achieve-card-v2-purple {
-  --card-border-grad: linear-gradient(135deg, rgba(147, 51, 234, 0.85) 0%, rgba(147, 51, 234, 0.5) 20%, rgba(147, 51, 234, 0.15) 45%, rgba(147, 51, 234, 0.03) 70%, rgba(147, 51, 234, 0.25) 100%);
-  --card-accent-color: #9333ea;
-  --card-accent-dim: rgba(147, 51, 234, 0.45);
+  --card-border-grad: linear-gradient(135deg, rgba(89, 190, 234, 0.85) 0%, rgba(89, 190, 234, 0.5) 20%, rgba(89, 190, 234, 0.15) 45%, rgba(89, 190, 234, 0.03) 70%, rgba(89, 190, 234, 0.25) 100%);
+  --card-accent-color: #277f99;
+  --card-accent-dim: rgba(89, 190, 234, 0.45);
   filter: drop-shadow(0 10px 24px rgba(15, 23, 42, 0.08));
 }
 html[data-theme="light"] .achieve-card-v2-purple .achieve-card-inner {
-  background: radial-gradient(circle at 10% 10%, rgba(147, 51, 234, 0.05) 0%, transparent 60%), #ffffff;
+  background: radial-gradient(circle at 10% 10%, rgba(89, 190, 234, 0.05) 0%, transparent 60%), #ffffff;
 }
 
 html[data-theme="light"] .achieve-card-v2-teal {

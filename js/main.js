@@ -962,6 +962,72 @@ let modalMediaSources = [];
     });
 
 
+    // Infinite CSS effects on distant sections still trigger style/paint work.
+    // Pause only those effects; retain the authored styles and never touch the
+    // circuit canvas, finite entrance/reveal animations, or interaction logic.
+    (function suspendOffscreenEffects() {
+      if (!Element.prototype.getAnimations) return;
+      const pausedByVisibility = new WeakMap();
+      const cardScopes = '#projects .proj-card, #skills .skills-cyber-card';
+      function animationsFor(container) {
+        return container.getAnimations({ subtree: true }).filter(animation => {
+          const element = animation.effect?.target;
+          const card = element instanceof Element ? element.closest(cardScopes) : null;
+          // A nested card owns its effects; the section must not resume them.
+          return !card || card === container;
+        });
+      }
+      const effectsObserver = new IntersectionObserver(entries => {
+        // Read animation lists before changing play states to avoid repeated
+        // style flushes when several section boundaries change together.
+        const updates = entries.map(entry => ({
+          target: entry.target,
+          visible: entry.isIntersecting,
+          animations: entry.isIntersecting ? [] : animationsFor(entry.target)
+        }));
+        updates.forEach(({ target, visible, animations }) => {
+          if (visible) {
+            const paused = pausedByVisibility.get(target);
+            if (paused) {
+              paused.forEach(animation => {
+                if (animation.playState === 'paused') animation.play();
+              });
+              pausedByVisibility.delete(target);
+            }
+            return;
+          }
+          const paused = pausedByVisibility.get(target) || new Set();
+          animations.forEach(animation => {
+            if (animation.playState === 'running' &&
+                animation.effect?.getTiming().iterations === Infinity) {
+              animation.pause();
+              paused.add(animation);
+            }
+          });
+          pausedByVisibility.set(target, paused);
+        });
+      }, { rootMargin: '200px 0px', threshold: 0 });
+      document.querySelectorAll(`.hero-wrap, section.sec, footer, ${cardScopes}`).forEach(element => {
+        effectsObserver.observe(element);
+      });
+      // Expanded cards can gain CSS animations while still below the viewport.
+      // Request a fresh visibility entry only when their hidden state changes.
+      const expandedCardsObserver = new MutationObserver(records => {
+        records.forEach(({ target, oldValue }) => {
+          const wasHidden = (oldValue || '').split(/\s+/).includes('hidden-project');
+          if (wasHidden !== target.classList.contains('hidden-project')) {
+            effectsObserver.unobserve(target);
+            effectsObserver.observe(target);
+          }
+        });
+      });
+      document.querySelectorAll('#projects .project-more-card').forEach(card => {
+        expandedCardsObserver.observe(card, {
+          attributes: true, attributeFilter: ['class'], attributeOldValue: true
+        });
+      });
+    })();
+
     // Caching for unified scroll handler
     const bar = document.getElementById('bar');
     const supportsScrollTimeline = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('animation-timeline', 'scroll()');
@@ -971,7 +1037,7 @@ let modalMediaSources = [];
       { id: 'about', color: 'var(--cyan)' },
       { id: 'education', color: 'var(--amber)' },
       { id: 'achievements', color: 'var(--gold, #f59e0b)' },
-      { id: 'certificates', color: 'var(--purple)' },
+      { id: 'certificates', color: 'var(--steel-blue)' },
       { id: 'experience', color: 'var(--pink)' },
       { id: 'projects', color: '#38bdf8' },
       { id: 'skills', color: 'var(--green)' },
@@ -1229,8 +1295,8 @@ let modalMediaSources = [];
       function palette() {
         const light = document.documentElement.dataset.theme === 'light';
         return light
-          ? ['rgba(3,105,161,.42)', 'rgba(67,56,202,.34)', 'rgba(190,24,93,.30)', 'rgba(180,83,9,.26)']
-          : ['rgba(0,229,255,.22)', 'rgba(168,85,247,.18)', 'rgba(244,114,182,.14)', 'rgba(251,191,36,.10)'];
+          ? ['rgba(3,105,161,.42)', 'rgba(77, 164, 202,.34)', 'rgba(190,24,93,.30)', 'rgba(180,83,9,.26)']
+          : ['rgba(0,229,255,.22)', 'rgba(94, 201, 247,.18)', 'rgba(244,114,182,.14)', 'rgba(251,191,36,.10)'];
       }
 
       function resetBackground() {
@@ -1321,7 +1387,7 @@ let modalMediaSources = [];
         const bg = ctx.createRadialGradient(w * 0.58, h * 0.2, 0, w * 0.58, h * 0.2, Math.max(w, h) * 0.82);
         const light = document.documentElement.dataset.theme === 'light';
         bg.addColorStop(0, light ? 'rgba(3,105,161,.20)' : 'rgba(0,229,255,.078)');
-        bg.addColorStop(0.45, light ? 'rgba(67,56,202,.105)' : 'rgba(168,85,247,.048)');
+        bg.addColorStop(0.45, light ? 'rgba(77, 164, 202,.105)' : 'rgba(94, 201, 247,.048)');
         bg.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.fillStyle = bg;
         ctx.fillRect(0, 0, w, h);
@@ -1362,31 +1428,26 @@ let modalMediaSources = [];
     /* ── Certification Lightbox ── */
     const certData = [
       { src: 'docs/certificates/datacamp-ai-engineer-associate.webp', caption: 'AI Engineer for Developers Associate - DataCamp' },
-      { src: 'docs/certificates/datacamp-working-with-openai-api.webp', caption: 'Working with the OpenAI API - DataCamp' },
-      { src: 'docs/certificates/certificate-fmssrk5frsx3.webp', caption: 'AI Fluency: AI Capabilities & Limitations - Anthropic' },
-      { src: 'docs/certificates/cert-new-2.webp', caption: 'AI Fluency for Students - Anthropic' },
-      { src: 'docs/certificates/cert-new-1.webp', caption: 'Claude 101 - Anthropic' },
-      { src: 'docs/certificates/cert-new-3.webp', caption: 'Claude Code 101 - Anthropic' },
-      { src: 'docs/certificates/cert-ai-foundations.webp', caption: 'AI Foundations - OpenAI Academy' },
-      { src: 'docs/certificates/cert-s3jn6owcs6f6.webp', caption: 'AI Fluency: Framework & Foundations - Anthropic' },
-      { src: 'docs/certificates/cert-rn2wppq639.webp', caption: 'Applied AI Foundations - OpenAI Academy' },
-      { src: 'docs/certificates/cert-claude-platform-101.webp', caption: 'Claude Platform 101 - Anthropic' },
+      { src: 'docs/certificates/datacamp-ai-engineer-data-scientists.webp', caption: 'AI Engineer for Data Scientists Associate - DataCamp' },
       { src: 'docs/certificates/intro-to-ai-ethics.webp', caption: 'Intro to AI Ethics - Kaggle' },
-      { src: 'docs/certificates/certificate-5s66gnoyjedq.webp', caption: 'Claude Code in Action - Anthropic' },
+      { src: 'docs/certificates/certificate-working-with-hugging-face.webp', caption: 'Working with Hugging Face - DataCamp' },
+      { src: 'docs/certificates/datacamp-working-with-openai-api.webp', caption: 'Working with the OpenAI API - DataCamp' },
       { src: 'docs/certificates/5-Day AI Agents Intensive Vibe Coding Course.webp', caption: '5-Day AI Agents: Intensive Vibe Coding Course - Kaggle / Google' },
-      { src: 'docs/certificates/Peer_Tutoring_Certificate.webp', caption: 'Peer Tutoring Certificate - UMT' },
+      { src: 'docs/certificates/certificate-introduction-to-ai-agents.webp', caption: 'Introduction to AI Agents - DataCamp' },
+      { src: 'docs/certificates/certificate-supervised-learning-scikit-learn.webp', caption: 'Supervised Learning with scikit-learn - DataCamp' },
+      { src: 'docs/certificates/certificate-unsupervised-learning-in-python.webp', caption: 'Unsupervised Learning in Python - DataCamp' },
+      { src: 'docs/certificates/certificate-5s66gnoyjedq.webp', caption: 'Claude Code in Action - Anthropic' },
+      { src: 'docs/certificates/cert-claude-platform-101.webp', caption: 'Claude Platform 101 - Anthropic' },
+      { src: 'docs/certificates/cert-new-3.webp', caption: 'Claude Code 101 - Anthropic' },
+      { src: 'docs/certificates/cert-new-1.webp', caption: 'Claude 101 - Anthropic' },
+      { src: 'docs/certificates/cert-ai-foundations.webp', caption: 'AI Foundations - OpenAI Academy' },
+      { src: 'docs/certificates/cert-rn2wppq639.webp', caption: 'Applied AI Foundations - OpenAI Academy' },
       { src: 'docs/certificates/ml-explainability.webp', caption: 'Machine Learning Explainability - Kaggle' },
+      { src: 'docs/certificates/certificate-fmssrk5frsx3.webp', caption: 'AI Fluency: AI Capabilities & Limitations - Anthropic' },
+      { src: 'docs/certificates/cert-s3jn6owcs6f6.webp', caption: 'AI Fluency: Framework & Foundations - Anthropic' },
+      { src: 'docs/certificates/cert-new-2.webp', caption: 'AI Fluency for Students - Anthropic' },
       { src: 'docs/certificates/Google Certificate.webp', caption: 'Intro to Generative AI - Google' },
-      {
-        src: 'docs/certificates/certificate-supervised-learning-scikit-learn.webp',
-        link: 'docs/certificates/certificate-supervised-learning-scikit-learn.pdf',
-        caption: 'Supervised Learning with scikit-learn - DataCamp'
-      },
-      {
-        src: 'docs/certificates/certificate-introduction-to-ai-agents.webp',
-        link: 'docs/certificates/certificate-introduction-to-ai-agents.pdf',
-        caption: 'Introduction to AI Agents - DataCamp'
-      }
+      { src: 'docs/certificates/Peer_Tutoring_Certificate.webp', caption: 'Peer Tutoring Certificate - UMT' }
     ];
     function openCertLightbox(idx) {
       const lb = document.getElementById('certLightbox');
