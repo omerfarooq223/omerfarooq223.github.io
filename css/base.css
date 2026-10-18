@@ -1,4 +1,10 @@
 :root {
+      /* Shared typography: expressive humanist sans + restrained technical labels. */
+      --font-body: 'Commissioner', 'Segoe UI', sans-serif;
+      --font-display: 'Chakra Petch', 'Segoe UI', sans-serif;
+      --font-hero: 'Unbounded', 'Segoe UI', sans-serif;
+      --heading-tracking: .025em;
+      --font-mono: 'Spline Sans Mono', 'Consolas', monospace;
       --bg: #07080f;
       --surface: #0c0d18;
       --cyan: #00e5ff;
@@ -83,6 +89,8 @@ body.portfolio-home::after {
 }
 
 html[data-theme="light"] body.portfolio-home {
+  --bg: #f8fafc;
+  --surface: #ffffff;
   background-color: #d9dee2;
   background-image:
     linear-gradient(180deg, rgba(229, 235, 238, .78), rgba(196, 205, 210, .82)),
@@ -117,7 +125,7 @@ body.portfolio-home .hero {
 
 body.portfolio-home .hero-title {
   font-size: clamp(2.8rem, 7.4vw, 6.4rem);
-  letter-spacing: -.055em;
+  letter-spacing: var(--heading-tracking);
   text-wrap: balance;
   max-width: 1050px;
 }
@@ -132,7 +140,7 @@ body.portfolio-home .hero-badges .bdg { background-color: rgba(7, 13, 17, .36); 
 
 body.portfolio-home .st {
   font-size: clamp(1.65rem, 3.5vw, 2.45rem);
-  letter-spacing: -.045em;
+  letter-spacing: var(--heading-tracking);
 }
 
 body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72) !important; }
@@ -291,7 +299,7 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       font-size: var(--fs-body);
       font-weight: 300;
       line-height: 1.6;
@@ -529,7 +537,7 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
       padding: 12px 20px;
       background: #00e5ff;
       color: #030712;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.9rem;
       font-weight: 700;
       border-radius: 8px;
@@ -650,7 +658,7 @@ body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72)
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-weight: 700;
       font-size: .82rem;
     }

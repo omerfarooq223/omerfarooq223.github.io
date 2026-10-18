@@ -146,7 +146,7 @@
 
     .hero-title {
       font-size: clamp(3.25rem, 7.8vw, 8.3rem);
-      letter-spacing: -.04em;
+      letter-spacing: var(--heading-tracking);
       position: relative;
       z-index: 3;
     }
@@ -334,7 +334,7 @@
       color: var(--muted2);
       cursor: pointer;
       text-decoration: none;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: .68rem;
       font-weight: 700;
       letter-spacing: .08em;
@@ -361,7 +361,7 @@
       color: var(--cyan);
       background: rgba(53, 215, 255, .08);
       text-decoration: none;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: .68rem;
       font-weight: 800;
       letter-spacing: .1em;
@@ -461,7 +461,7 @@
 
     .p-title-large,
     .pnm {
-      letter-spacing: -.03em;
+      letter-spacing: var(--heading-tracking);
     }
 
     .p-desc-large,
@@ -1267,12 +1267,12 @@ body.portfolio-home .hero-sub,
 body.portfolio-home .hero-badges,
 body.portfolio-home .hero-cta { opacity: 1 !important; visibility: visible !important; }
 body.portfolio-home .hero-title .ln .wd { opacity: 1 !important; transform: none !important; animation: none !important; }
-body.portfolio-home .hero-title { font-size: clamp(2.8rem, 7.4vw, 6.4rem); letter-spacing: -.055em; text-wrap: balance; max-width: 1050px; }
+body.portfolio-home .hero-title { font-size: clamp(2.8rem, 7.4vw, 6.4rem); letter-spacing: var(--heading-tracking); text-wrap: balance; max-width: 1050px; }
 body.portfolio-home .hero-title .wd { text-shadow: 0 0 28px rgba(88, 207, 224, .14), 1px 0 rgba(255, 90, 170, .16), -1px 0 rgba(82, 221, 240, .16); }
 body.portfolio-home .hero-sub { max-width: min(78ch, 92vw) !important; color: rgba(218, 229, 232, .70); text-wrap: balance !important; }
 body.portfolio-home .hero-eyebrow { color: #83e9ef; }
 body.portfolio-home .hero-badges .bdg { background-color: rgba(7, 13, 17, .36); backdrop-filter: blur(8px); }
-body.portfolio-home .st { font-size: clamp(1.65rem, 3.5vw, 2.45rem); letter-spacing: -.045em; }
+body.portfolio-home .st { font-size: clamp(1.65rem, 3.5vw, 2.45rem); letter-spacing: var(--heading-tracking); }
 body.portfolio-home .sl { letter-spacing: .34em; color: rgba(149, 227, 236, .72) !important; }
 
 @media (max-width: 700px) {
@@ -1426,11 +1426,11 @@ body.portfolio-home .hero > * {
 
 body.portfolio-home .hero-title {
   max-width: none;
-  font-family: 'Unbounded', sans-serif;
-  font-weight: 900;
+  font-family: var(--font-hero);
+  font-weight: 700;
   font-size: clamp(2.8rem, 8.5vw, 7.5rem);
   line-height: .95;
-  letter-spacing: -.03em;
+  letter-spacing: var(--heading-tracking);
   text-wrap: wrap;
 }
 
@@ -2109,7 +2109,9 @@ html[data-theme="light"] #contact .ct-crystal-kicker {
 #proj-modal h5 span,
 #proj-modal h6 span,
 .banner-title,
-.projects-archive-banner .banner-title {
+.projects-archive-banner .banner-title,
+.pm-title,
+.pm-node.pm-pillar h3 {
   color: var(--text) !important;
   -webkit-text-fill-color: var(--text) !important;
   background: none !important;
@@ -2729,7 +2731,7 @@ html[data-theme="light"] #skills .st .sk-with {
 
 /* GAMMA CLAIM VERIFICATION TITLE IN EXACTLY ONE LINE */
 #projects #gemmaclaim-card .p-title-large {
-  font-family: 'Unbounded', sans-serif !important;
+  font-family: var(--font-display) !important;
   font-size: clamp(1.35rem, 2vw, 2.1rem) !important;
   font-weight: 700 !important;
   line-height: 1.25 !important;
@@ -2899,7 +2901,7 @@ html[data-theme="light"] #skills .st .sk-with {
 }
 
 #projects .proj-card .p-title-large {
-  font-family: 'Unbounded', sans-serif !important;
+  font-family: var(--font-display) !important;
   font-weight: 700 !important;
   text-align: left !important;
   margin: 6px 0 8px 0 !important;
@@ -3312,7 +3314,7 @@ html[data-theme="light"] #projects .proj-card {
   border-radius: 7px 3px 7px 3px;
   background: linear-gradient(135deg, rgba(34, 211, 238, .16), rgba(93, 200, 246, .16));
   color: #e8fbff;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: .82rem;
   font-weight: 700;
   letter-spacing: .025em;
@@ -3345,7 +3347,7 @@ html[data-theme="light"] #projects .proj-card {
   background: linear-gradient(135deg, rgba(251, 191, 36, .18), rgba(120, 53, 15, .08));
   color: #fcd56b !important;
   -webkit-text-fill-color: #fcd56b !important;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .7rem;
   font-weight: 800;
   letter-spacing: .085em;

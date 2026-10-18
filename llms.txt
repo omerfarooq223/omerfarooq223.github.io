@@ -13,7 +13,17 @@
 - **LinkedIn**: https://www.linkedin.com/in/omerfarooq223/
 
 ## Key Honors & Distinctions
-- **1st Place Winner — AI Seekho Day 2026 Gemma Fine-Tuning Hackathon**: Outperformed competitive teams by fine-tuning Google Gemma 4 12B with 4-bit NF4 QLoRA on a 18k sample instruction dataset, achieving 94.40% verification accuracy with production inference optimizations.
+- **1st Place Winner — AI Seekho Day 2026 Gemma Fine-Tuning Hackathon**: Outperformed competitive teams by fine-tuning Google Gemma 4 12B with 4-bit NF4 QLoRA on a curated curriculum of 1,085 audited and contrastive examples, achieving 94.40% verification accuracy and 94.38% macro-F1 with deterministic inference.
+- **Loopverse 3.0 Hackathon Participant**: Competed in Loopverse 3.0 organized by LoopLab (Certificate of Participation).
+- **25 Verified Professional Credentials**: Including DataCamp (AI Engineer for Developers, AI Engineer for Data Scientists, FastAPI, Containerization), OpenAI Academy, Anthropic, Google, and Kaggle.
+- **Rector's & Dean's Awards — UMT**: 4.0 SGPA semester honor and top 10% department ranking with 70% merit scholarship (CGPA: 3.85/4.0).
+
+## Academic Research Papers (ORCID: 0009-0002-3978-7448)
+1. **ASFL-IoT: Risk-Coupled Adaptive Secure Federated Learning for Trust-Aware Internet-of-Things Systems** (Accepted, IEEE ICES&T 2026)
+2. **SHAP-Explained Agentic IDS: Transparent Cyber Defense via LangGraph, Local LLM Reasoning, and Explainable ML** (Under review, 2026)
+3. **Reliable Claim Verification with Google Gemma 4: Contrastive Curriculum Fine-Tuning for Supervised Stance Detection** (Submitted, 2026)
+4. **RepoMetria: Automated Repository Hirability and Code Quality Auditing via Multi-Agent Observe-Analyze-Plan Workflows** (Journal submitted, 1st Author, 2026)
+5. **Post-Compromise Recovery of Persistent Agent State: Dynamic Quarantine and Artifact-Rebuild in Local-First Autonomous Workspaces** (Journal submitted, 1st Author, 2026)
 
 ## Featured Technical Projects
 - **Gemma Claim Verification Engine**: Autonomous fact-checking and claim verification engine fine-tuned from Google Gemma 4 12B using 4-bit NF4 QLoRA, sub-50ms token latency, and hallucination reduction heuristics. (Repository currently private.)

@@ -7,10 +7,10 @@
     }
 
     .st {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-weight: 700;
       font-size: var(--fs-section-title);
-      letter-spacing: -.025em;
+      letter-spacing: var(--heading-tracking);
       line-height: 1.15;
       margin-bottom: 52px;
     }
@@ -288,9 +288,9 @@
     }
 
     .stat-n {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: 2rem;
-      font-weight: 900;
+      font-weight: 700;
       line-height: 1;
       margin-bottom: 6px;
     }
@@ -349,7 +349,7 @@
     }
 
     .edu-sc {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: .95rem;
       font-weight: 700;
       margin-bottom: 4px;
@@ -404,7 +404,7 @@
     }
 
     #education .edu-yr {
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: .58rem;
       letter-spacing: .12em;
       color: var(--eduYearLabel);
@@ -478,7 +478,7 @@
   width: min(610px, 100%);
   margin-bottom: 18px;
   color: #a9eff8;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .82rem;
   font-weight: 600;
   letter-spacing: .38em;
@@ -515,11 +515,11 @@
 #about .about-heading {
   margin: 0 0 26px;
   color: #f7f9fb;
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(2rem, 3.35vw, 3.65rem);
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.04;
-  letter-spacing: -.055em;
+  letter-spacing: var(--heading-tracking);
   white-space: nowrap;
 }
 
@@ -656,7 +656,7 @@ html[data-theme="light"] #about .about-heading span {
 #about .about-role-copy h3 {
   margin: 0 0 11px;
   color: #f5f7f8;
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(1rem, 1.45vw, 1.42rem);
   line-height: 1.3;
 }
@@ -749,7 +749,7 @@ html[data-theme="light"] #about .about-heading span {
   margin-bottom: 7px;
   color: var(--stat-accent) !important;
   font-size: clamp(1.7rem, 2.4vw, 2.45rem);
-  letter-spacing: -.055em;
+  letter-spacing: var(--heading-tracking);
 }
 
 #about .about-stat .stat-d {
@@ -866,7 +866,7 @@ html[data-theme="light"] #about .about-stat .stat-d { color: #4b6069; }
 }
 
 .skills-kicker {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--cyan);
@@ -897,10 +897,10 @@ html[data-theme="light"] #about .about-stat .stat-d { color: #4b6069; }
 }
 
 .skills-main-title {
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(2rem, 2.6vw, 3rem);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--heading-tracking);
   line-height: 1;
   margin: 24px auto auto auto;
   text-align: center;
@@ -1116,21 +1116,21 @@ html[data-theme="light"] #about .about-stat .stat-d { color: #4b6069; }
 }
 
 .skills-card-num {
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-display);
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--accent-color);
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: var(--heading-tracking);
   text-shadow: 0 0 18px var(--accent-glow);
 }
 
 .skills-card-cat {
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(0.72rem, .92vw, 0.94rem);
   font-weight: 700;
   color: var(--accent-color);
-  letter-spacing: -0.025em;
+  letter-spacing: var(--heading-tracking);
   text-transform: uppercase;
   margin: 0;
   line-height: 1.2;
@@ -1153,7 +1153,7 @@ html[data-theme="light"] #about .about-stat .stat-d { color: #4b6069; }
   min-height: 38px;
   padding: 7px 0;
   border-bottom: 1px solid color-mix(in srgb, var(--text) 9%, transparent);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.76rem, .88vw, 0.88rem);
   color: color-mix(in srgb, var(--text) 82%, transparent);
   line-height: 1.4;

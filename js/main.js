@@ -858,6 +858,8 @@ let modalMediaSources = [];
     const themeToggle = document.getElementById('themeToggle');
     const themeLabel = document.getElementById('themeLabel');
     if (themeToggle && themeLabel) {
+      let isThemeTransitioning = false;
+
       const applyTheme = (theme, persist = false) => {
         document.documentElement.dataset.theme = theme;
         themeLabel.textContent = theme === 'light' ? 'Light' : 'Dark';
@@ -872,9 +874,57 @@ let modalMediaSources = [];
       const current = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
       applyTheme(current);
 
-      themeToggle.addEventListener('click', () => {
+      themeToggle.addEventListener('click', (event) => {
         const currentTheme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
-        applyTheme(currentTheme === 'light' ? 'dark' : 'light', true);
+        const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!document.startViewTransition || prefersReduced) {
+          applyTheme(nextTheme, true);
+          return;
+        }
+
+        if (isThemeTransitioning) return;
+        isThemeTransitioning = true;
+
+        const rect = themeToggle.getBoundingClientRect();
+        const x = (event && typeof event.clientX === 'number' && event.clientX > 0)
+          ? event.clientX
+          : (rect.left + rect.width / 2);
+        const y = (event && typeof event.clientY === 'number' && event.clientY > 0)
+          ? event.clientY
+          : (rect.top + rect.height / 2);
+
+        const endRadius = Math.hypot(
+          Math.max(x, window.innerWidth - x),
+          Math.max(y, window.innerHeight - y)
+        );
+
+        const transition = document.startViewTransition(() => {
+          applyTheme(nextTheme, true);
+        });
+
+        transition.ready.then(() => {
+          const animation = document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${endRadius}px at ${x}px ${y}px)`
+              ]
+            },
+            {
+              duration: 546,
+              easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+              pseudoElement: '::view-transition-new(root)'
+            }
+          );
+
+          animation.finished.finally(() => {
+            isThemeTransitioning = false;
+          });
+        }).catch(() => {
+          isThemeTransitioning = false;
+        });
       });
     }
 
@@ -1431,22 +1481,29 @@ let modalMediaSources = [];
       { src: 'docs/certificates/datacamp-ai-engineer-data-scientists.webp', caption: 'AI Engineer for Data Scientists Associate - DataCamp' },
       { src: 'docs/certificates/intro-to-ai-ethics.webp', caption: 'Intro to AI Ethics - Kaggle' },
       { src: 'docs/certificates/certificate-working-with-hugging-face.webp', caption: 'Working with Hugging Face - DataCamp' },
+      { src: 'docs/certificates/loopverse-3-participation.webp', caption: 'Loopverse 3.0 Hackathon - Certificate of Participation - LoopLab' },
+      { src: 'docs/certificates/Google Certificate.webp', caption: 'Intro to Generative AI - Google' },
+      {
+        src: 'docs/certificates/certificate-containerization-virtualization-concepts.webp',
+        caption: 'Containerization and Virtualization Concepts - DataCamp'
+      },
+      { src: 'docs/certificates/ml-explainability.webp', caption: 'Machine Learning Explainability - Kaggle' },
+      { src: 'docs/certificates/cert-ai-foundations.webp', caption: 'AI Foundations - OpenAI Academy' },
+      { src: 'docs/certificates/certificate-5s66gnoyjedq.webp', caption: 'Claude Code in Action - Anthropic' },
       { src: 'docs/certificates/datacamp-working-with-openai-api.webp', caption: 'Working with the OpenAI API - DataCamp' },
       { src: 'docs/certificates/5-Day AI Agents Intensive Vibe Coding Course.webp', caption: '5-Day AI Agents: Intensive Vibe Coding Course - Kaggle / Google' },
-      { src: 'docs/certificates/certificate-introduction-to-ai-agents.webp', caption: 'Introduction to AI Agents - DataCamp' },
-      { src: 'docs/certificates/certificate-supervised-learning-scikit-learn.webp', caption: 'Supervised Learning with scikit-learn - DataCamp' },
-      { src: 'docs/certificates/certificate-unsupervised-learning-in-python.webp', caption: 'Unsupervised Learning in Python - DataCamp' },
-      { src: 'docs/certificates/certificate-5s66gnoyjedq.webp', caption: 'Claude Code in Action - Anthropic' },
-      { src: 'docs/certificates/cert-claude-platform-101.webp', caption: 'Claude Platform 101 - Anthropic' },
-      { src: 'docs/certificates/cert-new-3.webp', caption: 'Claude Code 101 - Anthropic' },
-      { src: 'docs/certificates/cert-new-1.webp', caption: 'Claude 101 - Anthropic' },
-      { src: 'docs/certificates/cert-ai-foundations.webp', caption: 'AI Foundations - OpenAI Academy' },
       { src: 'docs/certificates/cert-rn2wppq639.webp', caption: 'Applied AI Foundations - OpenAI Academy' },
-      { src: 'docs/certificates/ml-explainability.webp', caption: 'Machine Learning Explainability - Kaggle' },
+      { src: 'docs/certificates/cert-claude-platform-101.webp', caption: 'Claude Platform 101 - Anthropic' },
+      { src: 'docs/certificates/certificate-introduction-to-ai-agents.webp', caption: 'Introduction to AI Agents - DataCamp' },
+      { src: 'docs/certificates/cert-new-3.webp', caption: 'Claude Code 101 - Anthropic' },
+      { src: 'docs/certificates/certificate-supervised-learning-scikit-learn.webp', caption: 'Supervised Learning with scikit-learn - DataCamp' },
+      { src: 'docs/certificates/cert-new-1.webp', caption: 'Claude 101 - Anthropic' },
+      { src: 'docs/certificates/certificate-unsupervised-learning-in-python.webp', caption: 'Unsupervised Learning in Python - DataCamp' },
       { src: 'docs/certificates/certificate-fmssrk5frsx3.webp', caption: 'AI Fluency: AI Capabilities & Limitations - Anthropic' },
+      { src: 'docs/certificates/certificate-introduction-to-fastapi.webp', caption: 'Introduction to FastAPI - DataCamp' },
       { src: 'docs/certificates/cert-s3jn6owcs6f6.webp', caption: 'AI Fluency: Framework & Foundations - Anthropic' },
+      { src: 'docs/certificates/certificate-deploying-ai-production-fastapi.webp', caption: 'Deploying AI into Production with FastAPI - DataCamp' },
       { src: 'docs/certificates/cert-new-2.webp', caption: 'AI Fluency for Students - Anthropic' },
-      { src: 'docs/certificates/Google Certificate.webp', caption: 'Intro to Generative AI - Google' },
       { src: 'docs/certificates/Peer_Tutoring_Certificate.webp', caption: 'Peer Tutoring Certificate - UMT' }
     ];
     function openCertLightbox(idx) {
@@ -1625,4 +1682,3 @@ let modalMediaSources = [];
         if (e.key === 'Escape') closePreview();
       });
     })();
-

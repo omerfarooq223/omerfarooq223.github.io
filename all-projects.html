@@ -81,20 +81,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Commissioner:wght@300..900&amp;family=Chakra+Petch:wght@400;500;600;700&amp;family=Unbounded:wght@400..900&amp;family=Spline+Sans+Mono:wght@400..700&amp;display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="css/base.css?v=20261002-distinct" />
-  <link rel="stylesheet" href="css/navigation.css?v=20261002-steel" />
-  <link rel="stylesheet" href="css/gateway.css" />
-  <link rel="stylesheet" href="css/hero.css?v=20261002-steel" />
-  <link rel="stylesheet" href="css/about.css?v=20261002-distinct" />
-  <link rel="stylesheet" href="css/experience.css?v=20261002-violet-cards" />
-  <link rel="stylesheet" href="css/projects.css?v=20261002-steel" />
-  <link rel="stylesheet" href="css/achievements.css?v=20261002-steel" />
-  <link rel="stylesheet" href="css/contact.css?v=20261002-crystals" />
-  <link rel="stylesheet" href="css/modals.css?v=20261002-steel" />
+  <link rel="stylesheet" href="css/base.css?v=20261018-name-font" />
+  <link rel="stylesheet" href="css/navigation.css?v=20261018-chakra-navigation" />
+  <link rel="stylesheet" href="css/gateway.css?v=20261018-type-gateway" />
+  <link rel="stylesheet" href="css/hero.css?v=20261018-name-font" />
+  <link rel="stylesheet" href="css/about.css?v=20261018-chakra-about" />
+  <link rel="stylesheet" href="css/experience.css?v=20261018-chakra-experience" />
+  <link rel="stylesheet" href="css/projects.css?v=20261018-chakra-projects" />
+  <link rel="stylesheet" href="css/achievements.css?v=20261018-epilogue-achievements" />
+  <link rel="stylesheet" href="css/contact.css?v=20261018-chakra-contact" />
+  <link rel="stylesheet" href="css/modals.css?v=20261018-chakra-modals" />
   <link rel="stylesheet" href="css/responsive.css" />
-  <link rel="stylesheet" href="css/overrides.css?v=20261002-scholarship" />
+  <link rel="stylesheet" href="css/overrides.css?v=20261018-name-font" />
   <style>
     .all-projects-page {
       min-height: 100vh;
@@ -203,7 +203,7 @@
       border-radius: 999px;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: .68rem;
       letter-spacing: .06em;
       text-transform: uppercase;
@@ -252,7 +252,7 @@
 
     .all-projects-kicker {
       color: var(--cyan);
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: .72rem;
       font-weight: 700;
       letter-spacing: .16em;
@@ -261,10 +261,10 @@
     }
 
     .all-projects-title {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: clamp(2.35rem, 5vw, 5.85rem);
       line-height: .96;
-      letter-spacing: -.04em;
+      letter-spacing: var(--heading-tracking);
       max-width: 980px;
       margin: 0;
     }
@@ -289,7 +289,7 @@
       color: var(--text);
       background: linear-gradient(135deg, rgba(53, 215, 255, .16), rgba(93, 200, 246, .16));
       text-decoration: none;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: .68rem;
       font-weight: 700;
       letter-spacing: .1em;
@@ -321,7 +321,7 @@
       background: rgba(255, 255, 255, .05);
       color: var(--muted2);
       cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: .68rem;
       font-weight: 700;
       letter-spacing: .08em;
@@ -412,7 +412,7 @@
       gap: 8px;
       padding: 13px 14px 0;
       color: var(--muted2);
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: .58rem;
       font-weight: 700;
       letter-spacing: .1em;
@@ -427,7 +427,7 @@
       background: rgba(0, 229, 255, 0.08);
       border: 1px solid rgba(0, 229, 255, 0.45);
       color: #38bdf8;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: .62rem;
       font-weight: 700;
       letter-spacing: .06em;
@@ -454,10 +454,10 @@
     }
 
     .all-card-title {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: .98rem;
       line-height: 1.2;
-      letter-spacing: -.02em;
+      letter-spacing: var(--heading-tracking);
       margin: 0;
     }
 
@@ -479,7 +479,7 @@
     .all-card-stack span {
       padding: 4px 10px;
       border-radius: 999px;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: .65rem;
       font-weight: 600;
       letter-spacing: .02em;
@@ -618,6 +618,13 @@
       }
     }
   </style>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yzndnh4pa8");
+  </script>
 </head>
 
 <body class="all-projects-page">
@@ -1016,7 +1023,7 @@
     const requestedFilter = new URLSearchParams(window.location.search).get('filter');
     applyProjectFilter(['all', 'agentic', 'ml', 'cyber', 'automation'].includes(requestedFilter) ? requestedFilter : 'all');
   </script>
-  <script src="js/chatbot-widget.js?v=20261002-projects"></script>
+  <script src="js/chatbot-widget.js?v=20261018-light-chatbot"></script>
 </body>
 
 </html>

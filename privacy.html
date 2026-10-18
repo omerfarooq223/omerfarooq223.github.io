@@ -36,250 +36,489 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Unbounded:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Commissioner:wght@300..900&amp;family=Chakra+Petch:wght@400;500;600;700&amp;family=Unbounded:wght@400..900&amp;family=Spline+Sans+Mono:wght@400..700&amp;display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="css/base.css?v=20261002-distinct" />
-  <link rel="stylesheet" href="css/navigation.css?v=20261002-steel" />
+  <link rel="stylesheet" href="css/base.css?v=20261018-name-font" />
+  <link rel="stylesheet" href="css/navigation.css?v=20261018-chakra-navigation" />
   <link rel="stylesheet" href="css/responsive.css?v=20260906-2" />
-  <link rel="stylesheet" href="css/overrides.css?v=20261002-scholarship" />
+  <link rel="stylesheet" href="css/overrides.css?v=20261018-name-font" />
   <style>
-    .legal-page {
+    /* Page-scoped color tokens keep the notice readable in either site theme. */
+    body.legal-page {
+      --legal-accent: #52d8fb;
+      --legal-text: #f7f8fb;
+      --legal-copy: #cbd5e1;
+      --legal-muted: #9aaabb;
+      --legal-surface: #0f1317;
+      --legal-sidebar: #11151a;
+      --legal-table-head: #151a20;
+      --legal-border: rgba(255, 255, 255, 0.16);
+      --legal-active-bg: rgba(82, 216, 251, 0.10);
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
-      background-color: var(--bg, #050608);
-      color: var(--text, #f7f8fb);
+      background: #0b0d10 !important;
+      color: var(--legal-text);
+      color-scheme: dark;
+    }
+
+    html[data-theme="light"] body.legal-page {
+      --legal-accent: #006782;
+      --legal-text: #0f172a;
+      --legal-copy: #334155;
+      --legal-muted: #475569;
+      --legal-surface: #ffffff;
+      --legal-sidebar: #ffffff;
+      --legal-table-head: #eef3f8;
+      --legal-border: rgba(15, 23, 42, 0.19);
+      --legal-active-bg: rgba(0, 103, 130, 0.09);
+      background: #f8fafc !important;
+      color-scheme: light;
+    }
+
+    .legal-page *,
+    .legal-page *::before,
+    .legal-page *::after {
+      box-sizing: border-box;
     }
 
     .legal-container {
-      flex: 1;
-      max-width: 880px;
+      flex: 1 0 auto;
+      max-width: 1240px;
       width: 100%;
+      min-width: 0;
       margin: 0 auto;
-      padding: clamp(140px, 12vw, 165px) 24px 72px;
+      padding: clamp(112px, 11vw, 160px) 24px 72px;
       position: relative;
       z-index: 2;
     }
 
     .legal-header {
-      margin-bottom: 28px;
+      margin-bottom: 36px;
     }
 
     .legal-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.78rem;
-      letter-spacing: 0.02em;
-      color: var(--cyan, #35d7ff);
-      background: rgba(53, 215, 255, 0.08);
-      border: 1px solid rgba(53, 215, 255, 0.22);
       padding: 6px 14px;
-      border-radius: 999px;
       margin-bottom: 16px;
+      border: 1px solid var(--legal-border);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--legal-accent);
+      font: 500 0.78rem var(--font-mono);
+      letter-spacing: 0.02em;
+    }
+
+    .legal-page h1,
+    .legal-page h2,
+    .legal-page h3 {
+      background: none !important;
+      color: var(--legal-text) !important;
+      background-clip: border-box !important;
+      -webkit-background-clip: border-box !important;
+      -webkit-text-fill-color: currentColor !important;
+      text-shadow: none !important;
     }
 
     .legal-title {
-      font-family: 'Unbounded', sans-serif;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin: 0 0 10px;
-      color: var(--text, #f7f8fb);
+      margin: 0 0 12px;
+      font: 700 clamp(1.85rem, 4vw, 2.8rem)/1.24 var(--font-display);
+      overflow-wrap: break-word;
     }
 
     .legal-meta {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--muted2, #94a3b8);
+      max-width: 65ch;
       margin: 0;
+      color: var(--legal-muted);
+      font: 400 0.85rem/1.7 var(--font-mono);
+    }
+
+    /* Give the document the lion's share of the width on larger screens. */
+    .legal-layout {
+      display: grid;
+      grid-template-columns: clamp(172px, 16.5vw, 202px) minmax(0, 1fr);
+      column-gap: 24px;
+      align-items: stretch;
+      position: relative;
+    }
+
+    /* The sidebar reserves its column while the navigation is viewport-pinned. */
+    .legal-sidebar {
+      position: relative;
+      align-self: stretch;
+      min-width: 0;
     }
 
     .legal-toc {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 28px 0 36px;
-      padding: 0;
-      list-style: none;
+      position: sticky; /* No-JavaScript fallback */
+      top: 110px;
+      align-self: start;
+      display: block !important;
+      width: 100%;
+      min-width: 0;
+      max-height: calc(100vh - 135px);
+      max-height: calc(100dvh - 135px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      margin: 0;
+      padding: 18px 12px 18px 14px;
+      border: 1px solid var(--legal-border);
+      border-radius: 6px;
+      background: var(--legal-sidebar);
     }
+
+    /* Fixed positioning avoids a common sticky failure caused by site-level
+       overflow rules; the .legal-sidebar keeps the grid from shifting. */
+    html.has-legal-toc-js .legal-toc { position: relative; top: auto; }
+    html.has-legal-toc-js .legal-toc.is-fixed {
+      position: fixed;
+      top: var(--legal-toc-top, 110px);
+      z-index: 30;
+      max-height: calc(100dvh - var(--legal-toc-top, 110px) - 18px);
+    }
+    html.has-legal-toc-js .legal-toc.is-ended {
+      position: absolute;
+      top: auto;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .legal-toc-title {
+      display: block;
+      margin: 0 0 12px 6px;
+      color: var(--legal-muted);
+      font: 500 0.68rem var(--font-mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .legal-toc-links { min-width: 0; }
 
     .legal-toc a {
-      display: inline-block;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.82rem;
-      color: var(--muted2, #cbd5e1);
+      display: block !important;
+      width: 100%;
+      padding: 10px 10px;
+      border-left: 2px solid var(--legal-border);
+      border-radius: 0 4px 4px 0;
+      background: transparent;
+      color: var(--legal-copy);
+      font: 400 0.76rem/1.5 var(--font-mono);
       text-decoration: none;
-      border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
-      border-radius: 8px;
-      padding: 7px 12px;
-      transition: border-color 0.15s ease, color 0.15s ease;
+      transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+      overflow-wrap: anywhere;
     }
 
-    html[data-theme="light"] .legal-toc a {
-      color: #334155;
-    }
-
+    .legal-toc a[aria-current="location"],
     .legal-toc a:hover,
     .legal-toc a:focus-visible {
-      border-color: var(--cyan, #35d7ff);
-      color: var(--cyan, #35d7ff);
+      border-color: var(--legal-accent);
+      color: var(--legal-accent);
+    }
+
+    .legal-toc a[aria-current="location"] {
+      background: var(--legal-active-bg);
+      font-weight: 600;
+    }
+
+    .legal-toc a:focus-visible {
+      outline: 2px solid var(--legal-accent);
+      outline-offset: -2px;
     }
 
     .legal-card {
-      padding: clamp(28px, 4vw, 44px);
-      margin-bottom: 32px;
+      min-width: 0;
+      margin: 0 0 28px;
+      padding: clamp(24px, 3.4vw, 44px);
+      border: 1px solid var(--legal-border);
+      border-radius: 6px;
+      background: var(--legal-surface);
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
     }
 
     .legal-section {
-      margin-bottom: 40px;
-      padding-bottom: 40px;
-      border-bottom: 1px solid var(--border, rgba(255,255,255,0.08));
-      scroll-margin-top: 130px;
+      margin: 0 0 48px;
+      padding: 0 0 48px;
+      border-bottom: 1px solid var(--legal-border);
+      scroll-margin-top: 128px;
     }
 
     .legal-section:last-of-type {
       margin-bottom: 0;
       padding-bottom: 0;
-      border-bottom: none;
+      border-bottom: 0;
     }
 
     .legal-section h2 {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text, #f7f8fb);
-      margin: 0 0 16px;
       display: flex;
       align-items: baseline;
-      gap: 12px;
       flex-wrap: wrap;
+      gap: 12px;
+      margin: 0 0 16px;
+      font: 600 clamp(1rem, 2vw, 1.2rem)/1.55 var(--font-display);
     }
 
     .legal-index {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--cyan, #35d7ff);
       flex-shrink: 0;
+      color: var(--legal-accent);
+      font: 500 0.85rem var(--font-mono);
+      -webkit-text-fill-color: currentColor;
     }
 
     .legal-section p,
-    .legal-section li {
-      font-size: 0.98rem;
-      line-height: 1.72;
-      color: var(--muted2, #cbd5e1);
-      margin: 0 0 12px;
-    }
-
-    html[data-theme="light"] .legal-section p,
-    html[data-theme="light"] .legal-section li {
-      color: #334155;
+    .legal-section li,
+    .legal-section address {
+      margin: 0 0 16px;
+      color: var(--legal-copy);
+      font: 400 0.98rem/1.78 var(--font-body);
+      overflow-wrap: anywhere;
     }
 
     .legal-section ul {
-      padding-left: 20px;
       margin: 0 0 16px;
+      padding-left: 20px;
     }
 
     .legal-section a {
-      color: var(--cyan, #35d7ff);
+      color: var(--legal-accent);
       text-decoration: underline;
       text-underline-offset: 3px;
+      overflow-wrap: anywhere;
     }
 
-    .legal-subhead {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text, #f7f8fb);
-      margin: 22px 0 6px;
+    .legal-section h3.legal-subhead {
+      margin: 24px 0 8px;
+      font: 700 1rem/1.5 var(--font-body);
     }
 
     .legal-highlight-box {
-      background: rgba(53, 215, 255, 0.05);
-      border-left: 3px solid var(--cyan, #35d7ff);
-      padding: 16px 20px;
-      border-radius: 0 12px 12px 0;
       margin: 18px 0;
+      padding: 16px 20px;
+      border-top: 1px solid var(--legal-border);
+      border-bottom: 1px solid var(--legal-border);
+      border-left: 3px solid var(--legal-accent);
+      background: transparent;
     }
 
     .legal-highlight-box p {
-      margin: 0;
+      margin-bottom: 0;
     }
 
     .legal-table-scroll {
+      max-width: 100%;
       overflow-x: auto;
       margin: 8px 0 20px;
-      border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
-      border-radius: 12px;
+      border: 1px solid var(--legal-border);
+      border-radius: 6px;
+      scrollbar-width: thin;
     }
 
     .legal-table {
       width: 100%;
+      min-width: 680px;
       border-collapse: collapse;
-      min-width: 560px;
       font-size: 0.9rem;
     }
 
     .legal-table th,
     .legal-table td {
-      text-align: left;
       padding: 12px 16px;
+      border-bottom: 1px solid var(--legal-border);
+      color: var(--legal-copy);
+      font-size: 0.9rem;
+      font-weight: 400;
+      line-height: 1.6;
+      text-align: left;
       vertical-align: top;
-      border-bottom: 1px solid var(--border, rgba(255,255,255,0.08));
-      color: var(--muted2, #cbd5e1);
-      line-height: 1.55;
+      overflow-wrap: break-word;
     }
 
-    html[data-theme="light"] .legal-table th,
-    html[data-theme="light"] .legal-table td {
-      color: #334155;
+    .legal-table thead th:first-child,
+    .legal-table tbody th[scope="row"] {
+      min-width: 140px;
+      word-break: normal;
     }
 
     .legal-table thead th {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.04em;
-      color: var(--muted2, #94a3b8);
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--legal-table-head);
+      color: var(--legal-text);
+      font: 600 0.74rem/1.5 var(--font-mono);
+      letter-spacing: 0.02em;
     }
 
+    .legal-table tbody th[scope="row"] {
+      color: var(--legal-text);
+      font-weight: 600;
+    }
+
+    .legal-table tbody tr:last-child th,
     .legal-table tbody tr:last-child td {
-      border-bottom: none;
+      border-bottom: 0;
     }
 
-    .legal-table td:first-child,
-    .legal-table th:first-child {
-      color: var(--text, #f7f8fb);
-      font-weight: 500;
+    .legal-visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .legal-page a:focus-visible,
+    .legal-page button:focus-visible,
+    .legal-table-scroll:focus-visible {
+      outline: 3px solid var(--legal-accent);
+      outline-offset: 3px;
+    }
+
+    .legal-actions {
+      margin-top: 8px;
+      padding-top: 24px;
+      border-top: 1px solid var(--legal-border);
     }
 
     .legal-back-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text, #f7f8fb);
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
-      padding: 10px 20px;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: all 0.2s ease;
       margin-top: 8px;
+      padding: 10px 20px;
+      border: 1px solid var(--legal-border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--legal-text);
+      font: 600 0.88rem var(--font-mono);
+      text-decoration: none;
+      transition: border-color 0.2s ease, color 0.2s ease;
     }
 
-    .legal-back-btn:hover {
-      background: rgba(53, 215, 255, 0.12);
-      border-color: var(--cyan, #35d7ff);
-      color: var(--cyan, #35d7ff);
+    .legal-back-btn:hover,
+    .legal-back-btn:focus-visible {
+      border-color: var(--legal-accent);
+      color: var(--legal-accent);
+    }
+
+    /* At narrower widths, keep a compact one-line table of contents pinned
+       beneath the site's navigation instead of stealing article width. */
+    @media (max-width: 760px) {
+      .legal-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+      }
+
+      .legal-sidebar {
+        align-self: auto;
+      }
+
+      .legal-toc {
+        position: sticky;
+        top: 76px;
+        display: flex !important;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        max-height: none;
+        padding: 9px 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+      }
+
+      .legal-toc-title {
+        flex: 0 0 auto;
+        margin: 0;
+        font-size: 0.66rem;
+        white-space: nowrap;
+      }
+
+      .legal-toc-links {
+        display: flex;
+        flex: 1 1 0;
+        min-width: 0;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+      }
+
+      .legal-toc-links::-webkit-scrollbar { display: none; }
+
+      .legal-toc a {
+        flex: 0 0 auto;
+        width: auto;
+        padding: 8px 10px;
+        border-left: 0;
+        border-bottom: 2px solid transparent;
+        border-radius: 4px 4px 0 0;
+        font-size: 0.74rem;
+        white-space: nowrap;
+        overflow-wrap: normal;
+      }
+
+      .legal-toc a[aria-current="location"],
+      .legal-toc a:hover,
+      .legal-toc a:focus-visible {
+        border-bottom-color: var(--legal-accent);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .legal-container {
+        padding: 104px 16px 48px;
+      }
+
+      .legal-header {
+        margin-bottom: 26px;
+      }
+
+      .legal-card {
+        padding: 22px 16px;
+      }
+
+      .legal-section {
+        margin-bottom: 32px;
+        padding-bottom: 32px;
+        scroll-margin-top: 90px;
+      }
+
+      .legal-section h2 {
+        gap: 8px;
+      }
+
+      .legal-section p,
+      .legal-section li,
+      .legal-section address {
+        font-size: 0.94rem;
+      }
+
+      .legal-toc {
+        padding: 8px 9px;
+        gap: 8px;
+      }
+
+      .legal-toc-title { font-size: 0.59rem; }
+      .legal-toc a { font-size: 0.71rem; padding: 8px 9px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .legal-page *,
+      .legal-page *::before,
+      .legal-page *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
     }
 
     @media print {
+      @page { margin: 16mm; }
 
       #nav,
       .mob,
@@ -290,44 +529,113 @@
         display: none !important;
       }
 
+      html,
+      body.legal-page,
+      html[data-theme="light"] body.legal-page,
+      html[data-theme="dark"] body.legal-page {
+        background: #fff !important;
+        color: #000 !important;
+        color-scheme: light;
+      }
+
       .legal-container {
-        padding: 24px 0;
+        display: block;
         max-width: 100%;
+        padding: 0;
       }
 
-      .legal-page {
-        background: #fff;
-        color: #000;
+      .legal-layout {
+        display: block;
       }
 
+      .legal-sidebar { display: none !important; }
+
+      .legal-header {
+        margin-bottom: 16px;
+      }
+
+      .legal-card,
+      .legal-table thead th,
+      .legal-toc,
+      .legal-highlight-box {
+        background: #fff !important;
+        box-shadow: none !important;
+      }
+
+      .legal-card {
+        border: 0;
+        padding: 0;
+      }
+
+      .legal-badge,
+      .legal-title,
+      .legal-meta,
+      .legal-index,
+      .legal-section h2,
+      .legal-section h3,
       .legal-section p,
       .legal-section li,
+      .legal-section address,
       .legal-table th,
       .legal-table td,
-      .legal-title,
-      .legal-meta {
+      .legal-section a {
         color: #000 !important;
+        -webkit-text-fill-color: #000 !important;
+      }
+
+      .legal-section,
+      .legal-table-scroll,
+      .legal-table th,
+      .legal-table td {
+        border-color: #b8b8b8 !important;
+      }
+
+      .legal-section {
+        margin-bottom: 22px;
+        padding-bottom: 22px;
+      }
+
+      .legal-section h2,
+      .legal-section h3,
+      .legal-table tr {
+        break-inside: avoid;
+      }
+
+      .legal-table-scroll {
+        overflow: visible;
+      }
+
+      .legal-table {
+        min-width: 0;
+        table-layout: fixed;
+        font-size: 9pt;
+      }
+
+      .legal-table th,
+      .legal-table td {
+        padding: 6px;
+        font-size: 9pt;
+        overflow-wrap: anywhere;
+      }
+
+      .legal-section a::after {
+        content: none !important;
       }
     }
   </style>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yzndnh4pa8");
+  </script>
 </head>
 
 <body class="legal-page">
-  <!-- Optical Refraction Engine SVG Filter -->
-  <svg class="glass-optical-engine" aria-hidden="true"
-    style="position: absolute; width: 0; height: 0; pointer-events: none;">
-    <defs>
-      <filter id="glass-refraction" x="0%" y="0%" width="100%" height="100%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.038" numOctaves="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G"
-          result="refracted" />
-      </filter>
-    </defs>
-  </svg>
-
   <a href="#main-content" class="skip-to-content">Skip to content</a>
 
-  <nav id="nav">
+  <nav id="nav" aria-label="Primary navigation">
     <a class="nav-logo" href="index.html">MUF<span class="dot">.</span></a>
     <ul class="nav-links">
       <li><a href="index.html#about">About</a></li>
@@ -382,7 +690,7 @@
     </button>
   </nav>
 
-  <div class="mob" id="mob">
+  <nav class="mob" id="mob" aria-label="Mobile navigation">
     <a href="index.html#about">About</a>
     <a href="index.html#education">Education</a>
     <a href="index.html#achievements">Achievements</a>
@@ -392,82 +700,101 @@
     <a href="all-projects.html" style="color: var(--cyan); font-size: 1.5rem;">All Projects Archive →</a>
     <a href="index.html#skills">Skills</a>
     <a href="index.html#contact">Contact</a>
-  </div>
+  </nav>
 
   <main id="main-content" class="legal-container">
     <header class="legal-header">
       <div class="legal-badge">Privacy &amp; Data Practices</div>
       <h1 class="legal-title">Privacy &amp; Data Notice</h1>
-      <p class="legal-meta">Effective September 2026 — written for exactly what this site does, not boilerplate.</p>
+      <p class="legal-meta">Effective September 2026 · Last updated October 18, 2026</p>
     </header>
 
-    <nav class="legal-toc" aria-label="Sections in this notice">
-      <a href="#overview">Overview</a>
-      <a href="#data">What's collected</a>
-      <a href="#processors">Who processes it</a>
-      <a href="#storage">Cookies &amp; storage</a>
-      <a href="#choices">Your choices</a>
-    </nav>
+    <div class="legal-layout">
+      <aside class="legal-sidebar" aria-label="Page contents">
+        <div class="legal-toc" role="navigation" aria-label="Sections in this notice">
+          <span class="legal-toc-title">On this page</span>
+          <div class="legal-toc-links">
+            <a href="#overview" aria-current="location">Overview</a>
+            <a href="#data">What's collected</a>
+            <a href="#processors">Who processes it</a>
+            <a href="#storage">Cookies &amp; storage</a>
+            <a href="#choices">Your choices</a>
+          </div>
+        </div>
+      </aside>
 
-    <article class="refractive-glass-card legal-card">
-
-      <section class="legal-section" id="overview">
-        <h2><span class="legal-index">01</span>Overview &amp; scope</h2>
+      <article class="legal-card">
+      <section class="legal-section" id="overview" aria-labelledby="overview-heading">
+        <h2 id="overview-heading"><span class="legal-index" aria-hidden="true">01</span>Overview &amp; scope</h2>
         <p>
-          This notice covers what happens to your information when you browse this portfolio, use the contact form,
+          This notice covers what happens to your information when you browse this portfolio, email me,
           or talk to the AI assistant embedded on the site. It applies only to <code>omerfarooq223.github.io</code> —
           not to the GitHub repositories, live project demos, or social profiles it links out to.
         </p>
         <p>
           I built and run this site myself; there's no company or marketing team behind it. I don't run behavioral
-          advertising, sell or rent personal data, or load analytics or tracking scripts of any kind.
+          advertising, and I don't sell or rent personal data. This site does use Microsoft Clarity for website analytics and
+          session recordings, as described below.
         </p>
       </section>
 
-      <section class="legal-section" id="data">
-        <h2><span class="legal-index">02</span>What information is collected</h2>
+      <section class="legal-section" id="data" aria-labelledby="data-heading">
+        <h2 id="data-heading"><span class="legal-index" aria-hidden="true">02</span>What information is collected</h2>
 
-        <div class="legal-table-scroll">
+        <div class="legal-table-scroll" role="region" tabindex="0" aria-label="Information collected from visitors; scroll horizontally to view all columns">
           <table class="legal-table">
+            <caption class="legal-visually-hidden">Information collected from visitors</caption>
             <thead>
               <tr>
-                <th>Source</th>
-                <th>What's collected</th>
-                <th>Why</th>
-                <th>Retention</th>
+                <th scope="col">Source</th>
+                <th scope="col">What's collected</th>
+                <th scope="col">Why</th>
+                <th scope="col">Retention</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Contact form / email</td>
-                <td>Name, email address, message content</td>
+                <th scope="row">Email</th>
+                <td>Email address, name (if provided), message content</td>
                 <td>Replying to your inquiry</td>
-                <td>Kept in my inbox until resolved; deleted on request</td>
+                <td>Kept in my inbox as needed to handle the inquiry; removal can be requested</td>
               </tr>
               <tr>
-                <td>AI assistant</td>
+                <th scope="row">AI assistant</th>
                 <td>Your message text and IP address</td>
                 <td>Generating a relevant answer; blocking abuse</td>
-                <td>Message text isn't stored; IP held in memory up to 10 minutes, then discarded</td>
+                <td>No application chat database; IP rate-limit entries expire after 10 minutes. Providers follow their own policies</td>
               </tr>
               <tr>
-                <td>Hosting logs</td>
+                <th scope="row">Hosting logs</th>
                 <td>IP address, user-agent, timestamp, status code</td>
                 <td>Keeping the site online and secure</td>
                 <td>Set by GitHub Pages' and Vercel's own infrastructure — see below</td>
+              </tr>
+              <tr>
+                <th scope="row">Google Fonts</th>
+                <td>Request details, such as IP address and browser information, when font files are requested</td>
+                <td>Delivering the site's typography</td>
+                <td>Handled by Google under its policies</td>
+              </tr>
+              <tr>
+                <th scope="row">Microsoft Clarity</th>
+                <td>Page visits, clicks, scrolling behavior, device and browser characteristics, approximate geographic location, and website interactions</td>
+                <td>Understanding website usage through heatmaps and session recordings and improving the browsing experience</td>
+                <td>Processed by Microsoft under its privacy practices</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <p class="legal-subhead">Contact form &amp; email</p>
+        <h3 class="legal-subhead">Email</h3>
         <p>
-          When you write to <a href="mailto:momerfarooq223@gmail.com">momerfarooq223@gmail.com</a> or use the contact
-          form, I use what you send strictly to respond — whether that's about an internship, a freelance project, or
+          When you write to <a href="mailto:momerfarooq223@gmail.com">momerfarooq223@gmail.com</a>, I use what you
+          send strictly to respond — whether that's about an internship, a freelance project, or
           a general question. It's never added to a mailing list.
         </p>
 
-        <p class="legal-subhead">AI assistant</p>
+        <h3 class="legal-subhead">AI assistant</h3>
         <p>
           The chatbot on this site calls a backend endpoint (<code>/api/chat</code>) that forwards your message to
           Groq's inference API and streams the reply back. A temporary, in-memory rate limiter records the requesting
@@ -475,88 +802,122 @@
         </p>
         <div class="legal-highlight-box">
           <p>
-            Chat messages are not written to a database — they exist only long enough to generate a reply. The IP
-            record used for rate-limiting expires automatically after 10 minutes.
+            This site's application does not maintain a chat-history database. Messages are still sent to Groq
+            for processing, and infrastructure providers may handle request data under their own policies. The site's
+            in-memory IP rate-limit entries expire after 10 minutes.
           </p>
         </div>
 
-        <p class="legal-subhead">Hosting logs</p>
+        <h3 class="legal-subhead">Hosting logs</h3>
         <p>
           Like almost every website, the infrastructure serving this page — GitHub Pages for the static site, Vercel
           for the chat endpoint — automatically records request-level data such as IP address, user-agent, and status
-          code. I don't have a dashboard of your individual visits; this is standard infrastructure logging, governed
-          by each provider's own policy, covered next.
+          code. These logs are handled according to each hosting provider's privacy and retention policies.
+          Clarity session recordings are described separately below.
+        </p>
+
+        <h3 class="legal-subhead">Website Analytics and Microsoft Clarity</h3>
+        <p>
+          This portfolio uses Microsoft Clarity to understand how visitors interact with the website and improve the
+          browsing experience.
+        </p>
+        <p>
+          Microsoft Clarity may collect information about page visits, clicks, scrolling behavior, device and browser
+          characteristics, approximate geographic location, and website interactions through heatmaps and session
+          recordings.
+        </p>
+        <p>
+          Clarity uses cookies and similar tracking technologies to analyze website usage. Information collected
+          through Clarity is processed by Microsoft in accordance with its privacy practices. For more information,
+          please visit the <a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank"
+            rel="noopener noreferrer">Microsoft Privacy Statement</a>.
         </p>
       </section>
 
-      <section class="legal-section" id="processors">
-        <h2><span class="legal-index">03</span>Who processes it</h2>
+      <section class="legal-section" id="processors" aria-labelledby="processors-heading">
+        <h2 id="processors-heading"><span class="legal-index" aria-hidden="true">03</span>Who processes it</h2>
         <p>
           This site doesn't run on a server I manage — it's deployed the way most modern static sites are, through a
           small number of infrastructure providers. Each sees request-level data as a normal part of serving the page
           or answering a chat message.
         </p>
 
-        <div class="legal-table-scroll">
+        <div class="legal-table-scroll" role="region" tabindex="0" aria-label="Service providers and their roles; scroll horizontally to view all columns">
           <table class="legal-table">
+            <caption class="legal-visually-hidden">Service providers and their roles</caption>
             <thead>
               <tr>
-                <th>Provider</th>
-                <th>Role</th>
-                <th>Their policy</th>
+                <th scope="col">Provider</th>
+                <th scope="col">Role</th>
+                <th scope="col">Their policy</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>GitHub Pages</td>
+                <th scope="row">GitHub Pages</th>
                 <td>Serves the static site and assets over its CDN</td>
                 <td><a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement"
-                    target="_blank" rel="noopener">GitHub Privacy Statement</a></td>
+                    target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a></td>
               </tr>
               <tr>
-                <td>Vercel</td>
+                <th scope="row">Vercel</th>
                 <td>Hosts the serverless function behind <code>/api/chat</code></td>
-                <td><a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Vercel Privacy
+                <td><a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Vercel Privacy
                     Policy</a></td>
               </tr>
               <tr>
-                <td>Groq</td>
+                <th scope="row">Groq</th>
                 <td>Runs the language model that generates the assistant's replies</td>
-                <td><a href="https://groq.com/privacy-policy" target="_blank" rel="noopener">Groq Privacy Policy</a>
+                <td><a href="https://groq.com/privacy-policy" target="_blank" rel="noopener noreferrer">Groq Privacy Policy</a>
                 </td>
+              </tr>
+              <tr>
+                <th scope="row">Google Fonts</th>
+                <td>Delivers web fonts; font requests can disclose basic request information to Google</td>
+                <td><a href="https://policies.google.com/privacy" target="_blank"
+                    rel="noopener noreferrer">Google Privacy Policy</a></td>
+              </tr>
+              <tr>
+                <th scope="row">Microsoft Clarity</th>
+                <td>Provides website analytics, heatmaps, and session recordings</td>
+                <td><a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank"
+                    rel="noopener noreferrer">Microsoft Privacy Statement</a></td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <p>
-          None of these providers are instructed to use your data beyond running the service. I don't layer any
-          analytics, session-replay, or fingerprinting scripts on top of what they already log by default.
+          These providers process different types of information for the purposes described above.
+          Their own privacy statements explain additional handling, retention, and available controls.
         </p>
       </section>
 
-      <section class="legal-section" id="storage">
-        <h2><span class="legal-index">04</span>Cookies &amp; local storage</h2>
-        <p>This site sets zero third-party tracking, analytics, or advertising cookies. The only client-side storage is
-          functional:</p>
+      <section class="legal-section" id="storage" aria-labelledby="storage-heading">
+        <h2 id="storage-heading"><span class="legal-index" aria-hidden="true">04</span>Cookies &amp; local storage</h2>
+        <p>
+          Microsoft Clarity uses cookies and similar tracking technologies for analytics and session recordings. The
+          site's other client-side storage is functional:
+        </p>
 
-        <div class="legal-table-scroll">
+        <div class="legal-table-scroll" role="region" tabindex="0" aria-label="Browser storage used by the site; scroll horizontally to view all columns">
           <table class="legal-table">
+            <caption class="legal-visually-hidden">Browser storage used by the site</caption>
             <thead>
               <tr>
-                <th>Key</th>
-                <th>Storage</th>
-                <th>Purpose</th>
+                <th scope="col">Key</th>
+                <th scope="col">Storage</th>
+                <th scope="col">Purpose</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><code>portfolio-theme</code></td>
+                <th scope="row"><code>portfolio-theme</code></th>
                 <td>localStorage</td>
                 <td>Remembers your dark/light mode choice across visits</td>
               </tr>
               <tr>
-                <td><code>portfolio-entry</code></td>
+                <th scope="row"><code>portfolio-entry</code></th>
                 <td>sessionStorage</td>
                 <td>Skips the entrance animation for the rest of the browser session</td>
               </tr>
@@ -565,16 +926,17 @@
         </div>
 
         <p>
-          Both values are read only by this site's own code, are never transmitted to a server, and can be cleared at
-          any time through your browser's site settings.
+          These two preference values are used locally by the site's scripts; they are not intentionally
+          sent with requests. You can clear them through your browser's site settings.
         </p>
       </section>
 
-      <section class="legal-section" id="choices">
-        <h2><span class="legal-index">05</span>Your choices &amp; contact</h2>
+      <section class="legal-section" id="choices" aria-labelledby="choices-heading">
+        <h2 id="choices-heading"><span class="legal-index" aria-hidden="true">05</span>Your choices &amp; contact</h2>
         <p>
-          If you've sent me a message and want it or your contact details removed, or anything above is unclear,
-          email me directly — I read and answer these personally.
+          To ask about information you have sent, request removal of messages held in my inbox, or raise a
+          privacy concern, email me directly. Requests involving third-party records may also need to be addressed
+          through the relevant provider.
         </p>
         <p>
           <strong>Muhammad Umar Farooq</strong><br>
@@ -583,15 +945,17 @@
           Email: <a href="mailto:momerfarooq223@gmail.com">momerfarooq223@gmail.com</a>
         </p>
         <p>
-          This notice changes when the site's underlying code changes — for example, if I swap the AI provider or add
-          a feature that touches your data. The date above reflects the last update.
+          You can clear the site's local preferences and manage cookies in your browser settings. Blocking
+          analytics technologies may require browser privacy protections or extensions. I will update this notice
+          when material data practices change; the revision date is shown above.
         </p>
       </section>
 
-      <div style="margin-top: 8px; padding-top: 24px; border-top: 1px solid var(--border, rgba(255,255,255,0.08));">
+      <div class="legal-actions">
         <a href="index.html" class="legal-back-btn">← Back to Portfolio</a>
       </div>
-    </article>
+      </article>
+    </div>
   </main>
 
   <footer>
@@ -607,7 +971,103 @@
   </footer>
 
   <script src="js/main.js?v=20261002-projects"></script>
-  <script src="js/chatbot-widget.js?v=20261002-projects"></script>
+  <script src="js/chatbot-widget.js?v=20261018-light-chatbot"></script>
+  <script>
+    (() => {
+      const layout = document.querySelector('.legal-layout');
+      const sidebar = document.querySelector('.legal-sidebar');
+      const toc = document.querySelector('.legal-toc');
+      const tocLinks = document.querySelector('.legal-toc-links');
+      const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+      const sections = links.map((link) => document.getElementById(link.hash.slice(1))).filter(Boolean);
+      if (!layout || !sidebar || !sections.length) return;
+
+      // Desktop supports native sticky without JavaScript. Scripted pinning
+      // also supports mobile and site-level overflow rules that break sticky.
+      document.documentElement.classList.add('has-legal-toc-js');
+      let scheduled = false;
+      let activeId = '';
+
+      const isCompact = () => window.matchMedia('(max-width: 760px)').matches;
+      const getPinTop = () => {
+        const header = document.getElementById('nav');
+        const bottom = header ? header.getBoundingClientRect().bottom : 0;
+        // Support both fixed and scrolling site headers without overlapping them.
+        return Math.max(14, Math.min(150, Math.ceil(bottom + 12)));
+      };
+
+      const setActiveSection = (id) => {
+        if (activeId === id) return;
+        activeId = id;
+        const activeLink = links.find((link) => link.hash === `#${id}`);
+        for (const link of links) {
+          if (link === activeLink) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        }
+        // Only scroll the horizontal tab strip, never the page itself.
+        if (isCompact() && activeLink) {
+          const linkRect = activeLink.getBoundingClientRect();
+          const stripRect = tocLinks.getBoundingClientRect();
+          if (linkRect.left < stripRect.left || linkRect.right > stripRect.right) {
+            tocLinks.scrollLeft += linkRect.left - stripRect.left - 12;
+          }
+        }
+      };
+
+      const update = () => {
+        scheduled = false;
+        const top = getPinTop();
+        document.documentElement.style.setProperty('--legal-toc-top', `${top}px`);
+        const compact = isCompact();
+        const layoutRect = layout.getBoundingClientRect();
+        const sidebarRect = sidebar.getBoundingClientRect();
+
+        // Reserve space so pinning/unpinning never makes the article jump.
+        sidebar.style.minHeight = `${toc.offsetHeight}px`;
+
+        const canPin = sidebarRect.top <= top &&
+          layoutRect.bottom > top + toc.offsetHeight + 12;
+        const reachedEnd = !compact && sidebarRect.bottom <= top + toc.offsetHeight;
+        toc.classList.toggle('is-fixed', canPin && !reachedEnd);
+        toc.classList.toggle('is-ended', reachedEnd);
+        if (canPin && !reachedEnd) {
+          toc.style.left = `${sidebarRect.left}px`;
+          toc.style.width = `${sidebarRect.width}px`;
+        } else {
+          toc.style.removeProperty('left');
+          toc.style.removeProperty('width');
+        }
+
+        const readingLine = top + (compact ? toc.offsetHeight + 28 : 46);
+        let current = sections[0];
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top <= readingLine) current = section;
+        }
+        if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 3) {
+          current = sections[sections.length - 1];
+        }
+        setActiveSection(current.id);
+
+        // Hash links shouldn't end up hidden under the fixed header + toc.
+        const offset = top + (compact ? toc.offsetHeight + 22 : 24);
+        sections.forEach((section) => {
+          section.style.scrollMarginTop = `${offset}px`;
+        });
+      };
+
+      const scheduleUpdate = () => {
+        if (scheduled) return;
+        scheduled = true;
+        requestAnimationFrame(update);
+      };
+
+      window.addEventListener('scroll', scheduleUpdate, { passive: true });
+      window.addEventListener('resize', scheduleUpdate);
+      window.addEventListener('hashchange', scheduleUpdate);
+      window.addEventListener('load', scheduleUpdate);
+      scheduleUpdate();
+    })();
+  </script>
 </body>
 
 </html>

@@ -83,7 +83,6 @@ portfolio-site/
 │   ├── responsive.css      # Global media queries
 │   └── overrides.css       # Visual refresh & ambient layers
 ├── docs/                   # Central technical documentation & credentials
-│   ├── DECISIONS.md        # Architecture Decision Records (ADRs)
 │   ├── FLOW.md             # Technical runtime workflows & state diagrams
 │   ├── CI.md               # Testing, linting & verification manual
 │   └── certificates/       # Verification diplomas & awards (WebP)
@@ -148,3 +147,8 @@ cwebp -q 85 input.png -o output.webp
 ```
 
 This reduces file sizes by 60–80% compared to PNG/JPEG while maintaining visual quality.
+
+
+## Typography
+
+The portfolio uses Unbounded for the hero name and Chakra Petch for other headings, [Commissioner](https://github.com/kosbarts/Commissioner) for body text and [Spline Sans Mono](https://github.com/SorkinType/SplineSansMono) for technical labels. Shared `--font-display`, `--font-body`, and `--font-mono` tokens in `css/base.css` apply across all pages, the project map, modals, gateway, and chatbot. Google Fonts serves all three families with `display=swap` and system fallbacks.

@@ -4,7 +4,7 @@
       align-items: center;
       gap: 12px;
       margin-bottom: 32px;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.72rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -115,7 +115,7 @@
     }
 
     .cert-card-name {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.95rem;
       font-weight: 600;
       color: var(--text);
@@ -397,7 +397,7 @@
   color: #f7f9fb;
   font-size: clamp(2.8rem, 5vw, 5.2rem);
   font-weight: 700;
-  letter-spacing: -.045em;
+  letter-spacing: var(--heading-tracking);
   line-height: 1.03;
   white-space: normal;
   text-shadow: 0 18px 50px rgba(0, 0, 0, .32);
@@ -405,6 +405,24 @@
 
 #certificates .st .w {
   display: inline-block;
+}
+
+#certificates .cert-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+#certificates .cert-header-row .st {
+  margin-bottom: 0;
+}
+
+#certificates .cert-header-row .cert-section-title {
+  margin: 0 0 4px auto;
+  white-space: nowrap;
 }
 
 #certificates .cert-section-title {
@@ -415,7 +433,7 @@
   margin: 0 0 24px;
   padding: 9px 12px;
   color: #f0f4f7;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: .78rem;
   font-weight: 500;
   letter-spacing: 0;
@@ -446,7 +464,7 @@
   margin: 0 0 0 2px;
   padding: 0 8px;
   color: var(--cyan);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .7rem;
   border: 0;
   border-radius: 999px;
@@ -533,10 +551,14 @@
   top: 1px;
   left: 18px;
   color: var(--cert-accent);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .61rem;
   font-weight: 600;
   letter-spacing: .035em;
+}
+
+#certificates .cert-card-info[data-cert-type]::before {
+  content: '◇  ' attr(data-cert-type);
 }
 
 #certificates .cert-card:first-child .cert-card-info::before {
@@ -551,7 +573,7 @@
   left: 18px;
   padding-top: 10px;
   color: rgba(206, 215, 224, .62);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .68rem;
   letter-spacing: .07em;
   border-top: 1px solid rgba(255, 255, 255, .09);
@@ -595,7 +617,7 @@
   gap: 14px;
   padding: 13px 24px;
   color: #f2f5f7;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: .78rem;
   font-weight: 500;
   letter-spacing: 0;
@@ -678,7 +700,7 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.76rem;
   font-weight: 700;
   color: #2dd4bf;
@@ -713,10 +735,10 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
 }
 
 .achieve-v2-main-title {
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(1.85rem, 3.8vw, 2.7rem);
   font-weight: 700;
-  letter-spacing: -.045em;
+  letter-spacing: var(--heading-tracking);
   line-height: 1.15;
   margin: 0;
   color: #f7f9fb;
@@ -1070,7 +1092,7 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
   gap: 6px;
   padding: 5px 12px;
   border-radius: 6px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -1096,7 +1118,7 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
 }
 
 .achieve-inst-badge {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.84rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -1154,7 +1176,7 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
 }
 
 .achieve-v2-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 1.35rem;
   font-weight: 700;
   line-height: 1.25;
@@ -1165,7 +1187,7 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
 }
 
 .achieve-v2-sub {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 12px;
@@ -1192,7 +1214,7 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.84rem;
   font-weight: 600;
   text-decoration: none;
@@ -1373,7 +1395,7 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
 }
 
 .quote-text {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.94rem;
   font-weight: 500;
   color: #cbd5e1;

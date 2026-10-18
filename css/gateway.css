@@ -8,7 +8,7 @@
   z-index: 999999;
   overflow: hidden;
   pointer-events: auto;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   user-select: none;
 }
 #blastDoorGateway.is-dismissed { display: none !important; }
@@ -210,7 +210,7 @@
   letter-spacing: .01em;
 }
 .gateway-leaf-canvas .gateway-name {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(2rem, 5.3vw, 4.5rem);
   font-weight: 700;
   line-height: 1.2;
@@ -240,7 +240,7 @@
 }
 .gateway-leaf-canvas .loader-copy span:last-child {
   color: var(--gateway-accent);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   min-width: 4ch;
   text-align: right;
@@ -274,7 +274,7 @@
   align-items: center;
   gap: 8px;
   padding: 9px 13px;
-  font: 500 .75rem 'Plus Jakarta Sans', sans-serif;
+  font: 500 .75rem var(--font-body);
   color: #c6d0d9;
   border: 1px solid #496872;
   border-radius: 4px;

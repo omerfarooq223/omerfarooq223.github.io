@@ -20,10 +20,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Unbounded:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Commissioner:wght@300..900&amp;family=Chakra+Petch:wght@400;500;600;700&amp;family=Unbounded:wght@400..900&amp;family=Spline+Sans+Mono:wght@400..700&amp;display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="css/base.css?v=20260906-2" />
-  <link rel="stylesheet" href="css/navigation.css?v=20260906-3" />
+  <link rel="stylesheet" href="css/base.css?v=20261018-name-font" />
+  <link rel="stylesheet" href="css/navigation.css?v=20261018-chakra-navigation" />
   <style>
     body {
       min-height: 100vh;
@@ -37,7 +37,7 @@
       background-position: center;
       background-attachment: fixed;
       color: var(--text, #e2e8f0);
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       margin: 0;
       position: relative;
     }
@@ -99,7 +99,7 @@
       background: rgba(239, 68, 68, 0.12);
       border: 1px solid rgba(239, 68, 68, 0.4);
       color: #f87171;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.08em;
@@ -116,24 +116,24 @@
     }
 
     .error-glitch-num {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: clamp(4.5rem, 12vw, 8rem);
-      font-weight: 900;
+      font-weight: 700;
       line-height: 1;
       margin: 0 0 16px;
       background: linear-gradient(135deg, #ffffff 30%, #00e5ff 70%, #38bdf8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -0.04em;
+      letter-spacing: var(--heading-tracking);
     }
 
     .error-h1 {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: clamp(1.25rem, 3vw, 1.75rem);
       font-weight: 700;
       margin: 0 0 16px;
       color: #ffffff;
-      letter-spacing: -0.02em;
+      letter-spacing: var(--heading-tracking);
     }
 
     .error-desc {
@@ -151,7 +151,7 @@
       padding: 14px 18px;
       margin-bottom: 32px;
       text-align: left;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.75rem;
       color: #38bdf8;
       line-height: 1.6;
@@ -176,7 +176,7 @@
       border-radius: 10px;
       background: linear-gradient(135deg, #00e5ff 0%, #0284c7 100%);
       color: #030712;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.82rem;
       font-weight: 700;
       text-decoration: none;
@@ -198,7 +198,7 @@
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.16);
       color: #e2e8f0;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.82rem;
       font-weight: 700;
       text-decoration: none;
@@ -264,9 +264,16 @@
       color: #00e5ff;
     }
   </style>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yzndnh4pa8");
+  </script>
 </head>
 
-<body>
+<body class="error-page">
   <!-- Optical Refractive Glass Filter -->
   <svg class="sr-only" aria-hidden="true" style="position: absolute; width: 0; height: 0; pointer-events: none;">
     <filter id="glass-refraction" x="0%" y="0%" width="100%" height="100%">

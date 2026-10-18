@@ -103,10 +103,10 @@
     }
 
     .m-title-premium {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: clamp(1.65rem, 3.2vw, 2.35rem);
-      font-weight: 800;
-      letter-spacing: -0.05em;
+      font-weight: 700;
+      letter-spacing: var(--heading-tracking);
       margin-bottom: 10px;
       line-height: 1;
     }
@@ -136,9 +136,9 @@
     }
 
     .m-desc-title {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: 1.6rem;
-      font-weight: 800;
+      font-weight: 700;
       margin-bottom: 20px;
       color: var(--text);
       display: flex;
@@ -574,7 +574,7 @@
     }
 
     .doc-modal-title {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: 0.9rem;
       font-weight: 600;
       color: var(--text);
@@ -592,7 +592,7 @@
       padding: 8px 16px;
       border-radius: 8px;
       font-size: 0.75rem;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       cursor: pointer;
       transition: all 0.2s;
       display: flex;

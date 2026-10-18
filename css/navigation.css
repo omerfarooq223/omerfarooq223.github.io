@@ -25,12 +25,12 @@
     }
 
     .nav-logo {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
+      font-family: var(--font-display);
+      font-weight: 700;
       font-size: .95rem;
       color: var(--text);
       text-decoration: none;
-      letter-spacing: -.01em;
+      letter-spacing: var(--heading-tracking);
     }
 
     .nav-logo .dot {
@@ -197,7 +197,7 @@
     }
 
     .dd-title {
-      font-family: 'Plus Jakarta Sans', sans-serif !important;
+      font-family: var(--font-body) !important;
       font-size: 0.82rem !important;
       font-weight: 600 !important;
       color: #f1f5f9 !important;
@@ -214,7 +214,7 @@
     }
 
     .dd-desc {
-      font-family: 'Plus Jakarta Sans', sans-serif !important;
+      font-family: var(--font-body) !important;
       font-size: 0.71rem !important;
       color: #94a3b8 !important;
       letter-spacing: 0 !important;
@@ -305,6 +305,28 @@
       outline-offset: 3px;
     }
 
+    /* Circular View Transition for Theme Switch */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+
+    ::view-transition-old(root) {
+      z-index: 1;
+    }
+
+    ::view-transition-new(root) {
+      z-index: 9999;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none !important;
+      }
+    }
+
     .ham {
       appearance: none;
       -webkit-appearance: none;
@@ -366,7 +388,7 @@
     }
 
     .mob a {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: 1.8rem;
       font-weight: 700;
       color: var(--muted2);
@@ -385,3 +407,10 @@
       z-index: 1;
     }
 
+
+/* The standalone error page keeps its three links readable without a mobile menu. */
+@media (max-width: 600px) {
+  .error-page nav { padding: 16px; gap: 12px; }
+  .error-page .nav-links { gap: 12px; }
+  .error-page .nav-links a { font-size: .64rem; letter-spacing: .04em; }
+}

@@ -109,11 +109,11 @@
     }
 
     .hero-title {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
+      font-family: var(--font-hero);
+      font-weight: 700;
       font-size: clamp(2.8rem, 8.5vw, 7.5rem);
       line-height: .9;
-      letter-spacing: -.03em;
+      letter-spacing: var(--heading-tracking);
     }
 
     .hero-title .ln {
@@ -240,7 +240,7 @@
       padding: 13px 28px;
       background: linear-gradient(135deg, var(--cyan), #0099cc);
       color: #000;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       font-weight: 600;
       font-size: .85rem;
       border: none;
@@ -331,7 +331,7 @@
 
     .mi {
       padding: 16px 30px;
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: .6rem;
       font-weight: 700;
       letter-spacing: .18em;

@@ -113,11 +113,11 @@
     }
 
     .ct-monolith-title {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: clamp(2rem, 3.8vw, 3.4rem);
-      font-weight: 900;
+      font-weight: 700;
       line-height: 1.08;
-      letter-spacing: -0.025em;
+      letter-spacing: var(--heading-tracking);
       color: #ffffff;
       margin: 0 0 18px 0;
       text-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
@@ -155,7 +155,7 @@
       background: rgba(0, 229, 255, 0.06);
       border: 1px solid rgba(34, 211, 238, 0.45);
       color: #67e8f9;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 0.01em;
@@ -242,7 +242,7 @@
     }
 
     .ct-crystal-kicker {
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.18em;
@@ -253,12 +253,12 @@
     }
 
     .ct-crystal-heading {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: clamp(1.4rem, 2.3vw, 1.95rem);
-      font-weight: 800;
+      font-weight: 700;
       color: #ffffff;
       margin: 0 0 10px 0;
-      letter-spacing: -0.02em;
+      letter-spacing: var(--heading-tracking);
     }
 
     .ct-crystal-sub {
@@ -318,7 +318,7 @@
 
     .ct-email-label {
       display: block;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       font-weight: 800;
       font-size: 0.95rem;
       color: #ffffff;
@@ -328,7 +328,7 @@
 
     .ct-email-address {
       display: block;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.78rem;
       color: rgba(255, 255, 255, 0.92);
       margin-top: 2px;
@@ -620,7 +620,7 @@
       background: rgba(15, 23, 42, 0.92);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #f1f5f9;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.72rem;
       font-weight: 700;
       white-space: nowrap;
@@ -819,7 +819,7 @@
 
 #contact .ct-monolith-title {
   max-width: 520px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(2rem, 3.25vw, 3.25rem);
   font-weight: 400;
   line-height: 1.04;

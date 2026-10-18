@@ -22,7 +22,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.76rem;
       letter-spacing: 0.2em;
       color: rgba(203, 213, 225, 0.75);
@@ -49,10 +49,10 @@
 
     /* Editorial Title */
     .exp-editorial-title {
-      font-family: 'Unbounded', sans-serif;
+      font-family: var(--font-display);
       font-size: clamp(2rem, 4vw, 3.2rem);
       font-weight: 700;
-      letter-spacing: -0.03em;
+      letter-spacing: var(--heading-tracking);
       line-height: 1.15;
       margin: 0;
       color: var(--text, #f8fafc);
@@ -194,17 +194,17 @@
     }
 
     .exp-card-company {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       font-size: 1.15rem;
       font-weight: 700;
       color: #ffffff;
       margin: 0;
       line-height: 1.35;
-      letter-spacing: -0.01em;
+      letter-spacing: var(--heading-tracking);
     }
 
     .exp-card-date {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.84rem;
       font-weight: 500;
       color: rgba(226, 232, 240, 0.78);
@@ -212,7 +212,7 @@
     }
 
     .exp-card-role {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.86rem;
       font-style: italic;
       color: rgba(148, 163, 184, 0.9);
@@ -292,7 +292,7 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-top: 1.5px solid rgba(255, 255, 255, 0.4);
       color: #f1f5f9;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body);
       font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 0.08em;
@@ -423,7 +423,7 @@
   width: min(420px, 100%);
   margin-bottom: 14px;
   color: #9bdce8;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .7rem;
   font-weight: 600;
   letter-spacing: .18em;
@@ -459,11 +459,11 @@
 #education .education-heading {
   margin: 0 0 30px;
   color: #f7f8fa;
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(2rem, 3.5vw, 3.55rem);
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: -.055em;
+  letter-spacing: var(--heading-tracking);
   text-transform: uppercase;
 }
 
@@ -611,7 +611,7 @@
 #education .edu-sc {
   margin: 0 0 5px;
   color: #f5f7f9;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(1rem, 1.45vw, 1.28rem);
   font-weight: 700;
   line-height: 1.2;
@@ -631,7 +631,7 @@
   margin: 0;
   padding: 6px 11px;
   color: color-mix(in srgb, var(--edu-accent) 72%, white 12%) !important;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .61rem;
   letter-spacing: .02em;
   line-height: 1;
@@ -650,7 +650,7 @@
 #education .edu-bs .bdg {
   padding: 5px 12px;
   color: color-mix(in srgb, var(--edu-accent) 72%, #e8edf0) !important;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: .65rem;
   font-weight: 500;
   line-height: 1;

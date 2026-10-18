@@ -46,12 +46,12 @@ portfolio-site/
 │   ├── projects.css            # Bento grid, preview badges, hover states
 │   ├── achievements.css        # Honors, hackathons & certification plaques
 │   ├── contact.css             # 3D contact stage, social crystal plaque
+│   ├── project-map.css         # Draggable skill/project map sandbox
 │   ├── modals.css              # Project detail modal & document lightboxes
 │   ├── responsive.css          # Mobile, tablet, and ultra-wide breakpoints
 │   └── overrides.css           # Ambient glow and visual polish overrides
 ├── docs/                       # Technical documentation & certificates
-│   ├── DECISIONS.md            # Architecture Decision Records (ADRs)
-│   ├── FLOW.md                 # Definitive user and technical workflows
+│   ├── FLOW.md                 # Primary system architecture & logical data flows
 │   ├── CI.md                   # Continuous integration, testing & deployment guide
 │   └── certificates/           # Certificate & verification documents (WebP)
 ├── images/                     # Project screenshots & diagrams (WebP)
@@ -95,52 +95,33 @@ Before finalizing any changes or submitting pull requests, every agent or develo
 
 ---
 
-## 5. Mandatory Documentation Update Protocol
+## 5. Documentation Maintenance Protocol
 
-To prevent documentation drift and preserve institutional knowledge across AI sessions and development sprints, every agent and engineer **MUST** adhere to the following documentation protocol:
+1. **Keep AGENTS.md Stable & Focused**:
+   - `AGENTS.md` is strictly the high-level operating manual for permanent architectural invariants, core tech stack constraints, security requirements, and verification protocols.
+   - **Do NOT update or append to `AGENTS.md` for routine styling tweaks, UI adjustments, text edits, or specific user requests.** It is not a changelog or commit log.
+2. **System Flow Documentation (`docs/FLOW.md`, `docs/CI.md`)**:
+   - **`docs/FLOW.md`**: Update only when runtime architectures, lifecycles, or client-server contracts materially change.
+   - **`docs/CI.md`**: Update when build, verification, or syntax check steps change.
 
-1. **Important Instruction Capture (`AGENTS.md`)**:
-   - Whenever any important user instruction, design rule, architectural constraint, or project convention is established, you **MUST immediately update `AGENTS.md`** to record it.
-   - Future agents look to `AGENTS.md` as the ground truth. Undocumented rules will be lost between sessions.
+---
 
-2. **Continuous Post-Implementation Updates (`docs/DECISIONS.md`, `docs/FLOW.md`, `docs/CI.md`)**:
-   - **`docs/DECISIONS.md`**: Whenever a new feature, visual pattern, or architectural choice is made (e.g., adding shimmer skeleton loading, reverting text effects, refactoring modals, repository reorganization), you **MUST add or update an ADR** in `docs/DECISIONS.md` explaining the context, options considered, and decision rationale.
-   - **`docs/FLOW.md`**: Whenever runtime behaviors, lifecycle sequences, event flows, or user interactions change (e.g., chatbot skeleton loading flow, modal autoplay, scroll reveals), you **MUST update `docs/FLOW.md`** and its sequence diagrams.
-   - **`docs/CI.md`**: Whenever verification commands, static test steps, syntax checks, or deployment configurations are modified, you **MUST update `docs/CI.md`** to keep the pipeline and verification instructions accurate.
+## 6. Core Visual & Design Guidelines
 
+### A. Typography Hierarchy
+- **Hero Name**: `--font-hero` (`'Unbounded'`, 700 weight).
+- **Display Headings**: `--font-display` (`'Chakra Petch'`, with positive heading tracking).
+- **Body & General UI**: `--font-body` (`'Commissioner'`).
+- **Code & Compact Metadata**: `--font-mono` (`'Spline Sans Mono'`). Avoid using monospaced fonts on narrative UI or status pills to prevent a generic "AI-generated" appearance.
 
-## 6. Scroll and Entrance Quality
+### B. Color Palette & Accents
+- **Dominant Accents**: Cyan (`#00e5ff`), steel blue (`#68b6cd`), and teal (`#2dd4bf`) on dark slate surfaces.
+- **Restrained Violet**: Semantic accent reserved for category distinction (e.g., About story plaques, academic highlights) without heavy purple surface gradients.
 
-- Preserve the existing design, layout, circuit geometry, light animation, directional patterns, glow treatment, and interaction effects when optimizing scrolling. Profile the actual bottleneck and make targeted changes incrementally; do not replace the animation system or redesign the page. Timing/speed tuning is acceptable when needed.
-- The gateway must render 0% on its first paint and progress monotonically to 100%.
-- Improve name rendering without changing its original sizing, layout, or visual design.
+### C. Theme Transitions
+- Built natively using the CSS View Transitions API (`document.startViewTransition`) paired with an expanding radial `clip-path: circle(...)` centered at trigger coordinates. Zero external animation libraries. Instant theme toggle fallback for `prefers-reduced-motion` or unsupported browsers.
 
-### Gateway visual direction (2026-10-02)
-
-- The user explicitly authorizes refining the opening gateway shown in their screenshot: use realistic, restrained metal surfaces and clean, legible typography instead of floating HUD rings, exaggerated neon, widely spaced uppercase text, and decorative looping motion. Keep this change scoped to the gateway; preserve the portfolio background circuit animation and other page layouts.
-- Retain the 0–100 entrance progress and the mechanical split-door reveal, with keyboard/click skipping and reduced-motion support.
-- The user approves the restrained metal gateway and requests a little color: add subtle teal/steel-blue accents and small warm metal details while preserving its typography, structure, and limited motion.
-
-- Further gateway refinements may add more visible teal/copper metal reflections, restrained branding, and inset trim details. Keep the material aesthetic and clear name, with no decorative animation loops or changes to the circuit background.
-
-### Control rendering (2026-10-02)
-
-- Social crystal hover effects must follow their faceted silhouette without revealing rectangular backing borders or edges. Preserve the existing icon design and placement.
-- Explicitly reset native button appearance on the mobile navigation toggle and use theme-aware bar colors so it remains clear in dark and light modes. Preserve keyboard focus visibility.
-
-### Projects performance and accent palette (2026-10-02)
-
-- Investigate rendering costs within and after Projects; manage decorative effects at individual card visibility rather than keeping all project effects running whenever any part of the long section is visible. Keep existing card layout and the background light animation.
-- Use cyan, steel blue, teal, and occasional warm accents as the dominant palette. Replace purple-heavy gradients and large purple treatments; purple is acceptable only as a restrained accent.
-
-
-### Accent distinction clarification (2026-10-02)
-
-- Reducing purple does not mean eliminating it. Retain a restrained violet accent where categories or text need clear distinction from cyan/teal, especially About. Do not substitute a near-identical cyan/blue for a contrasting accent.
-- Keep broad heading gradients free of purple-to-blue blends; distinct violet may remain on small semantic accents without returning to purple-heavy surfaces.
-
-- The FSc Pre-Medical card (second Academic Background entry) and UMT Tutoring & Online Instruction card must share the same theme-aware violet accent as About's “27+ Projects Shipped” card.
-
-- Gateway header/footer strips must use their own spacing and alignment rather than inherit the main portfolio footer's padding or mobile stacking. Keep the bottom label vertically centered and pair it with a restrained Portfolio tag and material details.
-
-- The hero's “70% Scholarship” pill uses the same theme-aware violet accent, including its text and border.
+### D. Component Conventions
+- **Gateway**: Mechanical split-door portal with 0–100 monotonic progress, realistic metal textures, and keyboard/click skip support.
+- **Project Map**: Draggable, paginated circuit board with cubic Bezier curves, centered transparent navigation controls, and native project modal inspection.
+- **Chatbot Widget**: Floating assistant widget connected to decoupled serverless streaming endpoint (`api/chat.py`).
