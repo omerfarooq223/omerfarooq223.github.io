@@ -99,7 +99,6 @@ portfolio-site/
 
 Detailed architectural and operational documentation is maintained in the [`docs/`](docs/) directory:
 
-- 📋 [**Architecture Decision Records (ADRs)**](docs/DECISIONS.md) — Comprehensive log of architectural decisions, tradeoffs, and design rationale.
 - ⚡ [**Runtime Flow & State Diagrams**](docs/FLOW.md) — Visual event loops, lifecycle hooks, and streaming protocols.
 - 🧪 [**Continuous Integration & Verification Manual**](docs/CI.md) — Static syntax checks, verification commands, and deployment guide.
 - 🤖 [**AI Agent Operational Manual**](AGENTS.md) — Ground-truth guidelines for AI coding assistants and developers.
