@@ -561,3 +561,43 @@ html[data-theme="light"] .pm-page-btn:hover:not([aria-disabled="true"]):not(:dis
 @media (max-width: 480px) {
   .pm-page-status { display: inline-flex; margin-left: 6px; font-size: .72rem; }
 }
+
+@media (max-width: 640px) {
+  .pm-bar { flex-wrap: wrap; gap: 8px; }
+  .pm-bar-end { margin-left: auto; }
+  .pm-reset { min-height: 44px; padding-inline: 10px; }
+  .pm-stage .pm-page-btn { top: 22px; }
+  .pm-stage .pm-page-prev { left: 12px; }
+  .pm-stage .pm-page-next { right: 12px; }
+  .pm-node.pm-pillar { padding: 14px; }
+  .pm-node .pm-grip { display: none; }
+  .pm-inspect-btn { min-height: 44px; padding-inline: 10px; }
+  .pm-sub-pill { min-height: 44px; line-height: 1.5; }
+  .pm-project-sub { margin-top: 0; padding-top: 0; }
+}
+
+@media (max-width: 640px) {
+  #skills .skills-cyber-layout { gap: 20px; }
+  #skills .skills-cyber-layout .skills-sidebar { grid-row: 1; }
+  #skills .skills-cyber-layout .pm-toggle {
+    position: static;
+    grid-row: 2;
+    justify-self: start;
+    min-height: 44px;
+  }
+  #skills .skills-cyber-layout .skills-cards-grid { grid-row: 3; gap: 16px; }
+  #skills .skills-cyber-layout.is-map .pm-toggle { margin-bottom: 16px; }
+}
+
+@media (max-width: 640px) {
+  .pm-project-callout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 8px;
+  }
+  .pm-callout-meta { display: contents; }
+  .pm-callout-label { grid-column: 1; grid-row: 1; align-self: end; }
+  .pm-inspect-btn { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+  .pm-project-title { grid-column: 1; grid-row: 2; margin: 4px 0 6px; }
+  .pm-project-sub { grid-column: 1 / -1; }
+}

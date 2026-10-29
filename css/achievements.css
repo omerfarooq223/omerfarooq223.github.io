@@ -678,11 +678,48 @@ html[data-theme="light"] #certificates .cert-card-info::after { border-color: rg
 
 @media (max-width: 500px) {
   #certificates .sl::after { width: 70px; }
-  #certificates .cert-card { grid-template-columns: 1fr; }
-  #certificates .cert-card-img-wrap { aspect-ratio: 4 / 3; min-height: 0; margin-bottom: 0; }
-  #certificates .cert-card-info { min-height: 170px; margin: 14px; padding-left: 19px; border-left-width: 2px; }
-  #certificates .cert-card-info::before,
-  #certificates .cert-card-info::after { left: 19px; }
+}
+
+/* Phones: scan credentials as compact rows; tap for the full document. */
+@media (max-width: 640px) {
+  #certificates .cert-grid { gap: 10px; }
+  #certificates .cert-card {
+    grid-template-columns: 88px minmax(0, 1fr);
+    padding: 12px;
+    gap: 12px;
+  }
+  #certificates .cert-card-img-wrap {
+    width: 88px;
+    aspect-ratio: 4 / 3;
+    margin: 0;
+  }
+  #certificates .cert-card-img { height: 100%; }
+  #certificates .cert-card-info {
+    min-height: 0;
+    margin: 0;
+    padding: 0 0 0 12px;
+    gap: 5px;
+  }
+  #certificates .cert-card-info::before { display: none; }
+  #certificates .cert-card-info::after {
+    position: static;
+    padding-top: 0;
+    border-top: 0;
+    font-size: .61rem;
+    line-height: 1.4;
+    letter-spacing: .025em;
+  }
+  #certificates .cert-card-name {
+    margin: 0;
+    font-size: .9rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+  #certificates .cert-card-issuer { font-size: .75rem; }
+  #certificates .cert-card:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: -3px;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1521,3 +1558,20 @@ html[data-theme="light"] .achieve-v2-node-line {
   }
 }
 
+
+@media (max-width: 640px) {
+  #achievements .achieve-v2-header { margin-bottom: 24px; }
+  #achievements .achieve-v2-flow { gap: 16px; margin-bottom: 24px; }
+  #achievements .achieve-card-inner { padding: 18px !important; }
+  #achievements .achieve-card-header { display: grid; grid-template-columns: 44px minmax(0, 1fr); min-height: 44px; margin-bottom: 14px; }
+  #achievements .achieve-header-meta { margin-left: 0; flex: 1; gap: 8px; }
+  #achievements .achieve-icon-badge { position: relative; inset: auto; width: 44px; height: 44px; }
+  #achievements .achieve-inst-badge { font-size: .75rem; }
+  #achievements .achieve-pill-badge { overflow-wrap: anywhere; }
+  #achievements .achieve-pill-badge { padding-inline: 8px; font-size: .65rem; }
+  #achievements .achieve-v2-sub { line-height: 1.5; margin-bottom: 8px; }
+  #achievements .achieve-v2-desc { margin-bottom: 0; }
+  #achievements .achieve-v2-action { margin-top: 12px; padding-top: 0; }
+  #achievements .achieve-v2-link { min-height: 44px; }
+  #certificates .cert-header-row .cert-section-title { margin-left: 0; }
+}

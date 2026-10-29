@@ -651,3 +651,63 @@
       }
     }
 
+
+/* Phone previews prioritize the image and readable copy over large badges. */
+@media (max-width: 640px), (max-width: 800px) and (max-height: 500px) {
+  #proj-modal { padding: 12px; }
+  #proj-modal .m-card-premium {
+    max-height: calc(100dvh - 24px) !important;
+    border-radius: 18px;
+  }
+  #proj-modal .m-header-premium {
+    flex-shrink: 0;
+    padding: 20px 62px 16px 16px;
+  }
+  #proj-modal .m-title-premium { font-size: 1.3rem; line-height: 1.25; overflow-wrap: anywhere; }
+  #proj-modal .m-subtitle-premium { font-size: .75rem; line-height: 1.5; gap: 8px; }
+  #proj-modal .m-close { top: 12px; right: 12px; color: var(--text); background: var(--surface); border-color: var(--border); }
+  #proj-modal .m-body-premium { min-height: 0; padding: 0 16px 16px; overscroll-behavior: contain; }
+  #proj-modal .m-vid-box-premium { min-height: 0; max-height: none; margin: 16px 0; }
+  #proj-modal .m-media-stage { aspect-ratio: 16 / 9; background: rgba(0, 0, 0, .12); }
+  #proj-modal .m-vid-box-premium img.m-media-slide { position: absolute; height: 100%; }
+  #proj-modal .m-tag-cloud-premium { width: 100%; gap: 6px; margin-bottom: 16px; }
+  #proj-modal .m-tag-pill { padding: 5px 8px; font-size: .68rem; line-height: 1.4; box-shadow: none; }
+  #proj-modal .m-info-content-premium { width: 100%; }
+  #proj-modal .m-desc-section { margin: 16px 0 20px; padding-left: 12px; border-left-width: 2px; }
+  #proj-modal .m-desc-title { font-size: 1.1rem; margin-bottom: 12px; }
+  #proj-modal .m-pane-static { font-size: .92rem; line-height: 1.6; overflow-wrap: anywhere; }
+  #proj-modal .m-unified-list { margin-block: 12px; }
+  #proj-modal .m-unified-list li { padding-left: 20px; margin-bottom: 12px; font-size: .92rem; line-height: 1.6; }
+  #proj-modal .m-footer-premium { padding: 8px 0 0; }
+  #proj-modal .m-btn-github-center { min-height: 44px; padding: 10px 14px; font-size: .82rem; }
+
+  .cert-lightbox { padding: 12px; }
+  .cert-lightbox-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: min(100%, 700px);
+    max-width: 100%;
+    max-height: calc(100dvh - 24px);
+    padding-top: 52px;
+    overflow-y: auto;
+  }
+  .cert-lightbox-close { top: 0; width: 44px; height: 44px; }
+  .cert-lightbox-img { min-height: 0; flex-shrink: 0; max-height: calc(100dvh - 210px); object-fit: contain; }
+  .cert-lightbox-caption { margin-top: 0; line-height: 1.5; }
+  .cert-lightbox-open { flex-shrink: 0; min-height: 44px; }
+  .cert-lightbox .doc-modal-btn { color: #e5f8ff; background: #162936; border-color: #557786; }
+  .doc-modal { padding: 12px; }
+  .doc-modal-content { height: calc(100dvh - 24px); border-radius: 16px; background: var(--surface); }
+  .doc-modal-content:has(.doc-modal-body > img) { height: auto; max-height: calc(100dvh - 24px); }
+  .doc-modal-body:has(> img) { display: flex; align-items: center; justify-content: center; flex: 0 1 auto; }
+  .doc-modal-body img { display: block; height: auto; max-height: calc(100dvh - 160px); }
+  .doc-modal-header { flex-shrink: 0; flex-wrap: wrap; padding: 12px; gap: 8px; }
+  .doc-modal-title { flex: 1 1 140px; min-width: 0; overflow-wrap: anywhere; line-height: 1.4; }
+  .doc-modal-actions { gap: 8px; }
+  .doc-modal-actions > * { min-height: 44px; }
+  .doc-modal-close { width: 44px; }
+  .doc-modal-body { min-height: 0; }
+  body:has(#proj-modal.open, .cert-lightbox.is-open, .doc-modal.active) .portfolio-chatbot-icon { visibility: hidden; }
+}

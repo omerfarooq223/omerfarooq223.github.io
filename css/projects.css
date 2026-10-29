@@ -1849,3 +1849,74 @@ html[data-theme="light"] .proj-card .badge-hackathon {
   border-color: rgba(217, 119, 6, 0.6);
   color: #b45309;
 }
+
+/* Mobile showcase: retain the full story without desktop-sized media/spacing.
+   Specificity keeps these domain rules above the shared visual overrides. */
+@media (max-width: 640px) {
+  #projects .proj-card:is(#gemmaclaim-card, #aiemployee-card) {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 12px !important;
+  }
+
+  #projects .proj-card:is(#gemmaclaim-card, #aiemployee-card) .p-visual {
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 16 / 9;
+  }
+
+  #projects .proj-card:is(#gemmaclaim-card, #aiemployee-card) .p-info {
+    padding: 16px 6px 8px !important;
+    gap: 10px !important;
+  }
+
+  #projects .proj-card:is(#gemmaclaim-card, #aiemployee-card) .p-title-large {
+    white-space: normal !important;
+    font-size: 1.35rem !important;
+    line-height: 1.25 !important;
+    margin: 0 !important;
+  }
+
+  #projects .proj-card:is(#gemmaclaim-card, #aiemployee-card) .p-desc-large {
+    font-size: .9rem !important;
+    line-height: 1.55 !important;
+    margin: 0 !important;
+  }
+
+  #projects .proj-card:is(#gemmaclaim-card, #aiemployee-card) :is(.p-tags-top, .pstk) {
+    gap: 6px !important;
+    margin: 0 !important;
+  }
+
+  #projects .proj-card:is(#gemmaclaim-card, #aiemployee-card) .badge-featured-gold {
+    margin-bottom: 0 !important;
+  }
+
+  #projects .proj-card:is(#gemmaclaim-card, #aiemployee-card) .tag-bubble {
+    padding: 5px 8px;
+    font-size: .65rem;
+  }
+
+  #projects .proj-card:is(#gemmaclaim-card, #aiemployee-card) .p-actions-row {
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    margin-top: 4px !important;
+  }
+
+  #projects .proj-card:is(#gemmaclaim-card, #aiemployee-card) .shimmer-btn {
+    min-height: 44px !important;
+    padding: 10px 20px !important;
+    font-size: .88rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .all-projects-page .all-projects-main { padding-top: 104px; }
+  .all-projects-page .all-projects-hero { gap: 16px; margin-bottom: 20px; }
+  .all-projects-page .all-projects-title { font-size: clamp(2rem, 9vw, 3rem); line-height: 1.1; }
+  .all-projects-page .all-projects-copy { margin-top: 12px; font-size: .94rem; line-height: 1.6; }
+  .all-projects-page .portfolio-back-link { min-height: 44px; }
+  .all-projects-page .filters { gap: 8px; margin-bottom: 20px; }
+  .all-projects-page .filter-btn { min-height: 44px; }
+  .all-projects-page .all-grid { gap: 16px; }
+}

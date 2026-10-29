@@ -414,3 +414,42 @@
   .error-page .nav-links { gap: 12px; }
   .error-page .nav-links a { font-size: .64rem; letter-spacing: .04em; }
 }
+
+/* Scrollable navigation also works on short phones and in landscape. */
+@media (max-width: 800px) {
+  .mob {
+    height: 100dvh;
+    justify-content: flex-start;
+    gap: 4px;
+    padding: 104px 20px max(24px, env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .mob a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, 360px);
+    min-height: 44px;
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    font-size: 1.2rem !important;
+    line-height: 1.3;
+    text-align: center;
+  }
+  body:has(.mob.open) .portfolio-chatbot-icon { visibility: hidden; }
+}
+
+@media (max-width: 640px) {
+  .error-page .error-container { padding: 96px 16px 32px; }
+  .error-page .error-card { padding: 24px 20px; }
+  .error-page .error-desc { margin-bottom: 20px; font-size: .94rem; }
+  .error-page .diagnostic-panel { margin-bottom: 20px; padding: 12px; overflow-wrap: anywhere; }
+  .error-page .actions-row { gap: 10px; }
+  .error-page .actions-row a { min-height: 44px; }
+  .error-page nav { gap: 8px; }
+  .error-page .nav-links { gap: 8px; }
+  .error-page .nav-logo { display: inline-flex; align-items: center; min-height: 44px; }
+  .error-page #themeToggle { min-height: 44px; padding: 8px 10px; }
+  .error-page .nav-links a { display: flex; align-items: center; min-height: 44px; font-size: .68rem; }
+}

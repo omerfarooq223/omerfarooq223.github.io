@@ -69,14 +69,17 @@
     const width = canvas.clientWidth;
     if (!width) return;
     const columns = width >= 1080 ? 4 : width >= 640 ? 2 : 1;
-    const padding = columns === 4 ? 48 : 44;
+    // Phone cards use the board width, with paging controls above the first row.
+    const compact = window.matchMedia('(max-width: 640px)').matches;
+    const padding = compact ? 16 : columns === 4 ? 48 : 44;
     const minimumGap = columns === 4 ? 48 : 40;
     const availableWidth = (width - padding * 2 - minimumGap * (columns - 1)) / columns;
     const cardWidth = columns === 1 ? availableWidth : Math.min(248, availableWidth);
     const gap = columns === 1 ? 0 : (width - padding * 2 - cardWidth * columns) / (columns - 1);
     canvas.style.setProperty('--pm-card-width', `${cardWidth}px`);
 
-    const topSpace = columns === 4 ? 56 : 32;
+    const topSpace = compact ? 64 : columns === 4 ? 56 : 32;
+    const rowGap = compact ? 28 : 64;
     let rowTop = topSpace;
     for (let row = 0; row < Math.ceil(PILLARS.length / columns); row++) {
       let rowBottom = rowTop;
@@ -86,9 +89,9 @@
         applyPos(id);
         rowBottom = Math.max(rowBottom, y + byId.get(id).offsetHeight);
       });
-      rowTop = rowBottom + 64;
+      rowTop = rowBottom + rowGap;
     }
-    const contentHeight = rowTop - 64 + topSpace;
+    const contentHeight = rowTop - rowGap + topSpace;
     canvas.style.height = `${columns === 4 ? Math.max(480, contentHeight) : contentHeight}px`;
 
     draw();

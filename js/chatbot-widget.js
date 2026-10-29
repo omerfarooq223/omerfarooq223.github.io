@@ -530,17 +530,34 @@
       100% { transform: scale(0.95); opacity: 0.8; }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 640px), (max-width: 800px) and (max-height: 500px) {
       .portfolio-chatbot-window {
         width: 100% !important;
         max-width: 100% !important;
-        height: 100% !important;
-        max-height: 100% !important;
-        bottom: 0 !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        top: 0 !important;
+        bottom: auto !important;
         right: 0 !important;
         border-radius: 0 !important;
         border: none !important;
       }
+      .portfolio-chatbot-header {
+        flex-shrink: 0;
+        padding: max(12px, env(safe-area-inset-top)) 16px 12px;
+      }
+      .portfolio-chatbot-header h2 { min-width: 0; font-size: 14px; gap: 8px; }
+      .portfolio-chatbot-close { flex-shrink: 0; width: 44px; height: 44px; }
+      .portfolio-chatbot-messages { min-height: 0; padding: 16px; gap: 16px; overscroll-behavior: contain; }
+      .portfolio-chatbot-message-content { max-width: 100%; padding: 12px 14px; overflow-wrap: anywhere; }
+      .portfolio-chatbot-input-area {
+        flex-shrink: 0;
+        padding: 12px 16px max(12px, env(safe-area-inset-bottom));
+      }
+      .portfolio-chatbot-input { min-width: 0; font-size: 16px; }
+      .portfolio-chatbot-send-btn { flex-shrink: 0; width: 44px; height: 44px; }
+    }
+    @media (max-width: 480px) {
       .portfolio-chatbot-icon {
         bottom: var(--chatbot-bottom, 16px) !important;
         right: 16px !important;

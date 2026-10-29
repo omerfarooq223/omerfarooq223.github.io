@@ -1039,7 +1039,7 @@ html[data-theme="light"] #contact .ct-crystal-plaque {
   #contact .ct-hub-composition { width: min(680px, 100%); margin-inline: auto; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 800px) {
   #contact { padding: 52px 18px 60px !important; }
   #contact .ct-wrap { padding-inline: 0; }
   #contact .ct-monolith-card { width: 100%; }
@@ -1112,4 +1112,21 @@ html[data-theme="light"] #contact .ct-crystal-plaque {
 #contact .gem-body.faceted-amber-diamond,
 #contact .gem-body.hf-dull-diamond {
   filter: none;
+}
+
+@media (max-width: 800px) {
+  #contact .ct-3d-stage { gap: 28px; }
+  #contact .ct-monolith-glass { padding: 30px 20px 24px; }
+  #contact .ct-monolith-title { font-size: clamp(1.65rem, 7.5vw, 2.4rem); }
+  #contact .ct-monolith-desc { margin-block: 16px; line-height: 1.6; }
+  #contact .ct-crystal-plaque { min-height: 0; padding: 28px 24px; margin-bottom: 8px; }
+  #contact .ct-email-plaque { min-height: 56px; }
+  #contact .ct-hub-composition { gap: 16px 10px; }
+  #contact .gem-body,
+  #contact .gem-body.faceted-amber-diamond,
+  #contact .gem-body.hf-dull-diamond { width: 64px; height: 64px; }
+  #contact .ct-crystal-plaque:hover,
+  #contact .ct-monolith-glass:hover,
+  #contact .ct-node-item:hover,
+  #contact .node-pos-hf:hover { transform: none; }
 }

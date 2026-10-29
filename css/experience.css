@@ -752,3 +752,41 @@ html[data-theme="light"] #education .edu-dg { color: #42616d !important; }
 html[data-theme="light"] #education .education-heading span {
   background-image: linear-gradient(100deg, #17667b, #287d99 48%, #0e7490);
 }
+
+@media (max-width: 640px) {
+  #education .edu-entry { position: relative; grid-template-columns: 1fr; }
+  #education .edu-entry .edu-hex-icon {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    width: 32px;
+    height: 38px;
+    margin: 0;
+  }
+  #education .edu-hex-icon svg { width: 22px; height: 22px; }
+  #education .edu-entry .edu-card { padding: 18px !important; }
+  #education .edu-sc {
+    display: flex;
+    align-items: center;
+    min-height: 38px;
+    margin: 0 0 10px 44px;
+  }
+  #education .edu-card .edu-yr {
+    position: relative;
+    inset: auto;
+    margin-bottom: 12px;
+    font-size: .67rem;
+    line-height: 1.3;
+    white-space: normal;
+  }
+  #education .edu-timeline { gap: 16px; }
+  #experience .exp-header-wrap { margin-bottom: 24px; }
+  #experience .exp-cyber-grid { gap: 16px; grid-auto-rows: auto; }
+  #experience .exp-cyber-card-inner { padding: 22px 18px; gap: 10px; }
+  #experience .exp-card-header { gap: 6px; }
+  #experience .exp-card-company { font-size: 1.05rem; }
+  #experience .exp-card-role { margin: 0; line-height: 1.5; }
+  #experience .exp-card-bullets { gap: 10px; margin-bottom: 0; }
+  #experience .exp-card-bullets li { font-size: .88rem; line-height: 1.5; }
+  #experience .exp-bottom-cta { margin-top: 24px; }
+}
